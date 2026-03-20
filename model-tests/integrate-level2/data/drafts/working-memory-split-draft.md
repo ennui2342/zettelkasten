@@ -1,0 +1,9 @@
+# Working Memory
+
+Working memory is the limited-capacity system that holds information currently in active use. It is not a single store but a multi-component system: Baddeley and Hitch's model identifies a central executive (attentional control), a phonological loop (verbal and auditory information), a visuospatial sketchpad (visual and spatial information), and an episodic buffer that integrates information across systems and with long-term memory.
+
+The defining constraint of working memory is its severe capacity limit. Miller's famous estimate of 7 ± 2 items has been revised downward by more recent work — Nelson Cowan's estimate of approximately 4 chunks is now better supported. Crucially, the unit of capacity is a chunk, not a raw item: a practised chess player can hold a meaningful board position as a small number of chunks, while a novice holding the same positions must encode each piece separately and quickly exceeds capacity.
+
+Information in working memory decays within seconds without active rehearsal. The phonological loop maintains verbal information through subvocal rehearsal — mentally "saying" the items to oneself — which is why articulatory suppression (occupying the loop with an unrelated verbal task) disrupts verbal working memory without affecting visuospatial tasks.
+
+Working memory capacity predicts performance on a wide range of cognitive tasks — reading comprehension, mental arithmetic, reasoning — better than almost any other individual difference measure. The constraint is particularly important for learning: new material must be processed within working memory before it can be consolidated into long-term memory, and information that exceeds working memory capacity cannot be integrated and encoded effectively. Cognitive load theory exploits this constraint to argue for instructional design that minimises irrelevant demands on working memory, leaving capacity for the target learning.

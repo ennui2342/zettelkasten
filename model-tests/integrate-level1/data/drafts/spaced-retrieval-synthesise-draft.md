@@ -1,0 +1,9 @@
+# Spaced Retrieval Practice
+
+Spaced retrieval practice — combining the timing principle of spaced repetition with the encoding mechanism of retrieval practice — produces substantially stronger long-term retention than either technique applied alone. The two strategies are not merely additive; they interact multiplicatively because they exploit the same underlying mechanism from different angles.
+
+Spaced repetition works by timing reviews to arrive when traces are weakened, maximising the difficulty of each retrieval and therefore the consolidation benefit. Retrieval practice works by requiring active reconstruction rather than passive re-exposure. Combining them means that each review session involves both difficult retrieval (because it is timed to the forgetting curve) and generative reconstruction (because retrieval is required). This is the maximally consolidating condition.
+
+Empirical work comparing study strategies confirms this: students who took spaced practice tests outperformed students who used either massed testing or spaced rereading by margins that are substantially larger than the sum of the two separate effects. The conjunction of spacing and active retrieval creates a qualitatively different kind of practice — one in which every session is an effortful reconstruction of a weakened trace.
+
+The implication for learning system design is that spacing schedules and retrieval prompts should not be treated as independent features to be layered on top of each other. They are expressions of the same underlying principle — that effortful reconstruction is what consolidates memory — and they are most powerful when designed together. A system that schedules reviews without requiring genuine retrieval (by showing the answer too early or allowing passive review) loses the consolidation benefit even if the spacing is optimal.

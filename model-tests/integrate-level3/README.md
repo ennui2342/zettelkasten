@@ -1,52 +1,40 @@
-# Model Test: Level 3 — SPLIT or EDIT
+# Model Test: Level 3 — SPLIT/EDIT classification and EDIT/SPLIT execution
 
-## The decision
+## What this tests
 
-Level 3 is the focused binary decision (currently implemented as step 1.5) that fires when:
-- Level 2 returns UPDATE for a note above `NOTE_BODY_LARGE` (8,000 chars)
+Level 3 is the focused binary decision (step 1.5) that fires when step 1 returns UPDATE for a note above `NOTE_BODY_LARGE` (8,000 chars). It chooses between:
 
-It chooses between:
-- **EDIT** — compress the existing note (same topic, just verbose)
+- **EDIT** — compress and update the existing note (single coherent topic)
 - **SPLIT** — divide the note into two separate notes (two genuine threads)
 
-## Known failure mode
+The test harness has two layers:
 
-From the 2026-03-18 benchmark run: when the note is coherent and single-threaded but the incoming draft is about a **different** topic, the current prompt chooses SPLIT because EDIT feels wrong (the topics differ).
+**Layer A** — step 1.5 classification (`fast_llm`, temperature=0)
+Compares `_STEP1_5_PROMPT` (current) against `prompts/step1_5.txt` (candidate). Asserts EDIT or SPLIT per test case.
 
-But splitting a single-threaded note produces two near-identical halves — a persistent duplicate. The confirmed cases: z029 (SPLIT of z001), z042 (SPLIT of z027).
+**Layer B** — step 2 execution (`llm`, temperature=0.3)
+- EDIT cases: runs `_STEP2_EDIT` vs `prompts/step2_edit.txt`. Checks compression and writes full before/after to `results/`.
+- SPLIT cases: runs `_STEP2_SPLIT` vs `prompts/step2_split.txt`. Reports note sizes, combined vs original ratio, and writes full output to `results/`.
 
-**The correct answer** in this case is EDIT: compress the existing note; the draft's different topic is a CREATE decision that should have been caught upstream at level 2.
+## Usage
 
-## Candidate prompt change
-
-The candidate prompt adds explicit guidance:
-
-> Do NOT choose SPLIT because the draft is about a different topic than the note — that alone is not evidence of two threads within the note.
-
-The key framing shift: ask whether the **note** has two separable threads, not whether note and draft are about different topics.
+```bash
+uv run --env-file .env python model-tests/integrate-level3/run.py             # all layers
+uv run --env-file .env python model-tests/integrate-level3/run.py --classify  # Layer A only
+uv run --env-file .env python model-tests/integrate-level3/run.py --edit      # Layer B EDIT only
+uv run --env-file .env python model-tests/integrate-level3/run.py --split     # Layer B SPLIT only
+```
 
 ## Test cases
 
-| # | Label | Target | Draft | Expected |
-|---|-------|--------|-------|----------|
-| 1 | Regression guard | `z20260317-001.md` (21k chars, Multi-Agent LLM Systems) | Same-topic draft | EDIT |
-| 2 | Positive SPLIT | `z20260318-001.md` (z001 final state) | Static vs dynamic orchestration | SPLIT (verify note still has two threads) |
-| 3 | **Failure case** | `z20260318-001.md` (z001) | Project Synapse hierarchical draft | **EDIT** (currently → SPLIT → z029) |
-| 4 | **Failure case** | `z20260318-027.md` (z027) | Agentic AI eval frameworks draft | **EDIT** (currently → SPLIT → z042) |
+| # | Label | Target | Draft topic | Expected |
+|---|-------|--------|-------------|----------|
+| 1 | Regression: focused single-topic note + same-topic draft | `z20260318-059.md` (8.7k, Rubric-Based Evaluation) | Same topic (rubric weight calibration) | EDIT |
+| 2 | Positive SPLIT: note with two genuine threads | `z20260318-001.md` (9.8k, Multi-Agent Architectures + Procedural Memory) | Hierarchical multi-agent systems | SPLIT |
+| 3 | **Failure case**: focused note + different-topic draft | `z20260318-027.md` (8.6k, Evaluation Frameworks) | Hierarchical architectures (different topic) | EDIT |
+| 4 | Same-topic EDIT: evaluation note + eval draft | `z20260318-027.md` (8.6k, Evaluation Frameworks) | Evaluation and benchmarking | EDIT |
 
-Cases 3 and 4 require real Form-phase draft inputs.
-
-## Setup
-
-```bash
-# Step 1: extract real Form-phase drafts from the problematic papers
-uv run --env-file .env python model-tests/integrate-level3/extract_drafts.py
-
-# Step 2: review data/form_drafts/ and fill in draft_body for cases 3 and 4 in run.py
-
-# Step 3: run the comparison
-uv run --env-file .env python model-tests/integrate-level3/run.py
-```
+Cases 3 and 4 use synthetic drafts. Run `extract_drafts.py` to get real Form-phase outputs.
 
 ## Data
 
@@ -54,34 +42,55 @@ uv run --env-file .env python model-tests/integrate-level3/run.py
 
 | File | Title | Size | Source |
 |------|-------|------|--------|
-| `z20260317-001.md` | Multi-Agent LLM Systems: Architecture, Memory… | 21,095 chars | model-tests/edit-split-step15 (2026-03-17 snapshot) |
-| `z20260318-001.md` | Multi-Agent Architectures for Workflow Automation | ~15k chars | benchmark-innovation store (2026-03-18 final state) |
-| `z20260318-027.md` | Evaluation Frameworks for Real-World Agent Deployment | ~14k chars | benchmark-innovation store (2026-03-18 final state) |
+| `z20260318-001.md` | Multi-Agent Architectures for Workflow Automation | 9,770 chars | benchmark-innovation store (2026-03-18 final state) |
+| `z20260318-027.md` | Evaluation Frameworks for Real-World Agent Deployment | 8,597 chars | benchmark-innovation store (2026-03-18 final state) |
+| `z20260318-059.md` | Rubric-Based Evaluation of AI Systems | 8,705 chars | benchmark-innovation store (2026-03-18 final state) |
 
 `data/form_drafts/` is generated by `extract_drafts.py` and is gitignored.
 
-## Interpreting results
+## Design principles validated here
 
-| Outcome | Action |
-|---------|--------|
-| Candidate improves failure cases without breaking case 1 | Promote candidate to `_STEP1_5_PROMPT` in `prompts.py` |
-| Case 2 (positive SPLIT) fails with candidate | Adjust candidate to preserve genuine SPLIT sensitivity |
-| Both prompts produce same results | No regression; candidate may be promoted for its clearer framing |
-| Case 1 (regression) breaks | Do not promote — candidate has introduced a new failure mode |
+**Trust upstream decisions.** Step 2 prompts execute the operation — they do not second-guess whether the draft is relevant or on-topic. Step 1 made the routing decision; step 2 should integrate whatever it was given into the output.
+
+**SPLIT is a partition, not a copy.** The original note's content should be divided between the two output notes. Neither note should contain all of the original. Combined length at ~100–120% of original is healthy; >130% indicates the prompt is duplicating rather than partitioning.
+
+**Draft integration in SPLIT.** Draft content should be integrated into whichever output note it best fits, consistent with the EDIT approach.
 
 ## Baseline
 
-*Run: 2026-03-20 | Model: claude-haiku-4-5-20251001*
+*Run: 2026-03-20 | Fast model: claude-haiku-4-5-20251001 | Full model: claude-opus-4-6*
 
-| # | Case | Expected | Current | Candidate |
+### Layer A — step 1.5 classification
+
+All prompts 4/4 after candidate promotion. Both current and candidate are now identical (candidate was promoted to `_STEP1_5_PROMPT`).
+
+| # | Case | Expected | Result |
+|---|------|----------|--------|
+| 1 | Regression: z059 (rubric eval, no sub-headings) + same-topic draft | EDIT | EDIT ✓ |
+| 2 | Positive SPLIT: z001 (two genuine threads) + architectures draft | SPLIT | SPLIT ✓ |
+| 3 | Failure case: z027 (focused eval) + different-topic draft | EDIT | EDIT ✓ |
+| 4 | Same-topic EDIT: z027 + evaluation benchmarking draft | EDIT | EDIT ✓ |
+
+**Key fix:** Removed draft from classification prompt entirely. SPLIT/EDIT decision is based solely on the note's internal structure. The original failure (case 3: SPLIT when draft was off-topic) is resolved.
+
+### Layer B — step 2 EDIT execution
+
+| # | Case | Original | Current | Candidate |
 |---|------|----------|---------|-----------|
-| 1 | Regression: z059 (rubric eval, no sub-headings) + same-topic draft | EDIT | EDIT ✓ | EDIT ✓ |
-| 2 | Positive SPLIT: z001 (two genuine threads) + architectures draft | SPLIT | SPLIT ✓ | SPLIT ✓ |
-| 3 | **Failure case**: z027 (focused eval) + different-topic (architectures) draft | EDIT | SPLIT ✗ | **EDIT ✓** |
-| 4 | Same-topic EDIT: z027 + evaluation benchmarking draft | EDIT | EDIT ✓ | EDIT ✓ |
+| 1 | z059 + same-topic draft | 8,705 chars | 63% ✓ | 61% ✓ |
+| 3 | z027 + different-topic draft | 8,597 chars | 66% ✓ | 62% ✓ |
+| 4 | z027 + same-topic eval draft | 8,597 chars | 61% ✓ | 60% ✓ |
 
-**Score: Current 3/4 | Candidate 4/4**
+**Key fix:** Changed from "draft is context only — do not add its content" to "integrate new insights from the draft." Trusts that step 1's UPDATE routing means the draft belongs here. Cross-topic draft content (case 3) is woven in as a bridging insight rather than excluded.
 
-**Key finding**: Candidate prompt fixes the core failure scenario (case 3) at conf=0.92. The operative change: explicit instruction that SPLIT should not be chosen solely because the draft introduces a different topic — only when the note itself contains two separable threads.
+Candidate promoted to `_STEP2_EDIT` in `prompts.py`.
 
-**Candidate prompt is ready to promote** to `_STEP1_5_PROMPT` in `prompts.py`.
+### Layer B — step 2 SPLIT execution
+
+| # | Case | Original | Current combined | Candidate combined |
+|---|------|----------|-----------------|-------------------|
+| 2 | z001 (two genuine threads) + architectures draft | 9,770 chars | 14,043 (144%) ✗ | 11,590 (119%) ✓ |
+
+**Key fix:** Rewrote the SPLIT prompt to partition the original note's two threads rather than keep note 1 intact and derive note 2 from the draft. The original prompt's "the second is the newly separated topic" was being read as "create note 2 from the draft content." The fix makes explicit that both notes are partitions of the original, and that the draft should be integrated into whichever note it belongs to.
+
+Candidate promoted to `_STEP2_SPLIT` in `prompts.py`.

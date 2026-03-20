@@ -1,25 +1,20 @@
 #!/usr/bin/env python3
-"""Model test: Level 3 decision — SPLIT or EDIT for large UPDATE targets.
+"""Model test: Level 3 — SPLIT/EDIT classification and EDIT execution.
 
-Level 3 is the focused binary decision that fires when:
-  - Step 1 returns UPDATE for a note above NOTE_BODY_LARGE (8,000 chars), AND
-  - The note has already been routed here by the level 2 CREATE/UPDATE node.
+Two test layers:
 
-Known failure mode (2026-03-18 benchmark): when the note is coherent and
-single-threaded but the draft is about a different topic, the current prompt
-chooses SPLIT because EDIT feels wrong (topics differ). But SPLIT on a
-single-threaded note produces two near-identical halves — a duplicate.
+  Layer A — step1.5 classification (fast_llm, temperature=0)
+    Compares current _STEP1_5_PROMPT against candidate (prompts/step1_5.txt).
+    Asserts EDIT or SPLIT per test case.
 
-The correct answer in that case is EDIT: compress the existing note; the
-draft's different topic is for level 2 to handle (it should have been CREATE).
-
-This test compares the current _STEP1_5_PROMPT against a candidate prompt
-that adds explicit guidance on the single-thread case.
+  Layer B — step2 EDIT execution (llm, temperature=0.3)
+    For EDIT cases: runs current _STEP2_EDIT and candidate (prompts/step2_edit.txt).
+    Checks compression happened (output < input) and writes full before/after
+    to results/ for manual content review.
 
 Usage:
-  uv run --env-file .env python model-tests/integrate-level3/run.py
-
-Populate TEST_CASES with real Form-phase drafts using extract_drafts.py.
+  uv run --env-file .env python model-tests/integrate-level3/run.py           # both layers
+  uv run --env-file .env python model-tests/integrate-level3/run.py --classify # layer A only
 """
 from __future__ import annotations
 
@@ -34,7 +29,10 @@ DATA_DIR = HERE / "data"
 ROOT = HERE.parent.parent
 
 import sys
+import argparse
 sys.path.insert(0, str(ROOT / "src"))
+
+RESULTS_DIR = HERE / "results"
 
 # ---------------------------------------------------------------------------
 # Candidate prompt — level 3 refinement
@@ -260,71 +258,265 @@ def run_candidate(note, draft, llm) -> dict:
     return result
 
 
+_CANDIDATE_STEP2_EDIT = (HERE / "prompts" / "step2_edit.txt").read_text(encoding="utf-8")
+_CANDIDATE_STEP2_SPLIT = (HERE / "prompts" / "step2_split.txt").read_text(encoding="utf-8")
+
+
+def _parse_title_body(raw: str) -> tuple[str, str]:
+    raw = raw.strip()
+    for line in raw.splitlines():
+        if line.startswith("## "):
+            title = line[3:].strip()
+            rest = raw[raw.index(line) + len(line):]
+            return title, rest.strip()
+    return "", raw
+
+
+def run_step2_current(note, draft, llm) -> tuple[str, str]:
+    """Run current _STEP2_EDIT from prompts.py."""
+    from zettelkasten.prompts import STEP2_PROMPTS
+    template = STEP2_PROMPTS["EDIT"]
+    targets_text = f"id: {note.id}\n## {note.title}\n\n{note.body}"
+    draft_text = f"## {draft.title}\n\n{draft.body}"
+    prompt = template.format(targets=targets_text, draft=draft_text)
+    raw = llm.complete(prompt, max_tokens=2048, temperature=0.3)
+    return _parse_title_body(raw)
+
+
+def run_step2_candidate(note, draft, llm) -> tuple[str, str]:
+    """Run candidate step2_edit.txt — compress-and-update."""
+    targets_text = f"id: {note.id}\n## {note.title}\n\n{note.body}"
+    draft_text = f"## {draft.title}\n\n{draft.body}"
+    prompt = _CANDIDATE_STEP2_EDIT.format(targets=targets_text, draft=draft_text)
+    raw = llm.complete(prompt, max_tokens=2048, temperature=0.3)
+    return _parse_title_body(raw)
+
+
+def _parse_split(raw: str) -> tuple[str, str, str, str]:
+    parts = re.split(r"\n---SPLIT---\n", raw, maxsplit=1)
+    if len(parts) == 2:
+        t1, b1 = _parse_title_body(parts[0].strip())
+        t2, b2 = _parse_title_body(parts[1].strip())
+        return t1, b1, t2, b2
+    t1, b1 = _parse_title_body(raw)
+    return t1, b1, "(PARSE ERROR — no ---SPLIT--- delimiter found)", ""
+
+
+def run_step2_split_current(note, draft, llm) -> tuple[str, str, str, str]:
+    """Run current _STEP2_SPLIT from prompts.py."""
+    from zettelkasten.prompts import STEP2_PROMPTS
+    template = STEP2_PROMPTS["SPLIT"]
+    targets_text = f"id: {note.id}\n## {note.title}\n\n{note.body}"
+    draft_text = f"## {draft.title}\n\n{draft.body}"
+    prompt = template.format(targets=targets_text, draft=draft_text)
+    raw = llm.complete(prompt, max_tokens=4096, temperature=0.3)
+    return _parse_split(raw)
+
+
+def run_step2_split_candidate(note, draft, llm) -> tuple[str, str, str, str]:
+    """Run candidate step2_split.txt."""
+    targets_text = f"id: {note.id}\n## {note.title}\n\n{note.body}"
+    draft_text = f"## {draft.title}\n\n{draft.body}"
+    prompt = _CANDIDATE_STEP2_SPLIT.format(targets=targets_text, draft=draft_text)
+    raw = llm.complete(prompt, max_tokens=4096, temperature=0.3)
+    return _parse_split(raw)
+
+
+def write_result_split(case_num: int, label: str, note, draft,
+                       curr_t1: str, curr_b1: str, curr_t2: str, curr_b2: str,
+                       cand_t1: str, cand_b1: str, cand_t2: str, cand_b2: str) -> None:
+    RESULTS_DIR.mkdir(exist_ok=True)
+    path = RESULTS_DIR / f"case{case_num:02d}.md"
+    orig_len = len(note.body)
+    with path.open("w", encoding="utf-8") as f:
+        f.write(f"# Case {case_num}: {label}\n\n")
+        f.write(f"**Draft:** {draft.title}\n\n---\n\n")
+        f.write(f"## Original ({orig_len:,} chars)\n\n## {note.title}\n\n{note.body}\n\n---\n\n")
+        f.write(f"## Current _STEP2_SPLIT\n\n")
+        f.write(f"### Note 1 ({len(curr_b1):,} chars)\n\n## {curr_t1}\n\n{curr_b1}\n\n")
+        f.write(f"### Note 2 ({len(curr_b2):,} chars)\n\n## {curr_t2}\n\n{curr_b2}\n\n---\n\n")
+        f.write(f"## Candidate step2_split.txt\n\n")
+        f.write(f"### Note 1 ({len(cand_b1):,} chars)\n\n## {cand_t1}\n\n{cand_b1}\n\n")
+        f.write(f"### Note 2 ({len(cand_b2):,} chars)\n\n## {cand_t2}\n\n{cand_b2}\n\n")
+    print(f"  Results : {path.relative_to(ROOT)}")
+
+
+def write_result(case_num: int, label: str, note, draft, curr_title: str, curr_body: str, cand_title: str, cand_body: str) -> None:
+    RESULTS_DIR.mkdir(exist_ok=True)
+    slug = f"case{case_num:02d}"
+    path = RESULTS_DIR / f"{slug}.md"
+    original_len = len(note.body)
+    curr_len = len(curr_body)
+    cand_len = len(cand_body)
+    with path.open("w", encoding="utf-8") as f:
+        f.write(f"# Case {case_num}: {label}\n\n")
+        f.write(f"**Draft:** {draft.title}\n\n")
+        f.write(f"---\n\n")
+        f.write(f"## Original ({original_len:,} chars)\n\n")
+        f.write(f"## {note.title}\n\n{note.body}\n\n")
+        f.write(f"---\n\n")
+        f.write(f"## Current _STEP2_EDIT ({curr_len:,} chars, {curr_len/original_len:.0%} of original)\n\n")
+        f.write(f"## {curr_title}\n\n{curr_body}\n\n")
+        f.write(f"---\n\n")
+        f.write(f"## Candidate step2_edit.txt ({cand_len:,} chars, {cand_len/original_len:.0%} of original)\n\n")
+        f.write(f"## {cand_title}\n\n{cand_body}\n\n")
+    print(f"  Results : {path.relative_to(ROOT)}")
+
+
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 
 def main() -> None:
-    from zettelkasten.config import load_config, build_fast_llm
+    from zettelkasten.config import load_config, build_fast_llm, build_llm
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--classify", action="store_true", help="Layer A only")
+    parser.add_argument("--edit", action="store_true", help="Layer B EDIT only (skip A and SPLIT)")
+    parser.add_argument("--split", action="store_true", help="Layer B SPLIT only (skip A and EDIT)")
+    args = parser.parse_args()
+
+    run_a     = not (args.edit or args.split)
+    run_edit  = not (args.classify or args.split)
+    run_split = not (args.classify or args.edit)
 
     cfg = load_config(ROOT / "zettelkasten.toml")
-    llm = build_fast_llm(cfg)
+    fast_llm = build_fast_llm(cfg)
+    llm = build_llm(cfg) if (run_edit or run_split) else None
 
-    model = cfg["llm"].get("fast_model", "unknown")
-    print(f"Model: {model}")
+    fast_model = cfg["llm"].get("fast_model", "unknown")
+    full_model = cfg["llm"].get("model", "unknown")
+    print(f"Fast model: {fast_model}")
+    if run_edit or run_split:
+        print(f"Full model: {full_model}")
     print(f"Date:  {datetime.now(tz=timezone.utc).strftime('%Y-%m-%d')}")
     print()
-    print("=" * 72)
-    print("Current step1.5 prompt  vs  Candidate level-3 prompt")
-    print("=" * 72)
 
-    current_score = 0
-    candidate_score = 0
-    n = len(TEST_CASES)
-
+    # Always load all cases (cheap) so B-only modes have their case lists
+    edit_cases: list[tuple[int, dict, object, object]] = []
+    split_cases: list[tuple[int, dict, object, object]] = []
     for i, tc in enumerate(TEST_CASES, 1):
         note = load_note(tc["target_file"])
         draft = make_draft(tc["draft_title"], tc["draft_body"])
-        expected = tc["expected"]
+        if tc["expected"] == "EDIT":
+            edit_cases.append((i, tc, note, draft))
+        elif tc["expected"] == "SPLIT":
+            split_cases.append((i, tc, note, draft))
 
-        print(f"\nCase {i}/{n}: {tc['label']}")
-        print(f"  Target  : {note.title[:65]}  [{len(note.body):,} chars]")
-        print(f"  Draft   : {draft.title[:65]}")
-        print(f"  Expected: {expected}")
-        if tc.get("note"):
-            print(f"  Context : {tc['note'][:90]}")
+    # ---- Layer A: classification ----
+    if run_a:
+        print("=" * 72)
+        print("Layer A — step1.5 classification")
+        print("=" * 72)
 
-        print(f"  Running current prompt...")
-        curr = run_current(note, draft, llm)
-        print(f"  Running candidate prompt...")
-        cand = run_candidate(note, draft, llm)
+        current_score = 0
+        candidate_score = 0
+        n = len(TEST_CASES)
 
-        curr_op   = curr.get("operation", "?")
-        cand_op   = cand.get("operation", "?")
-        curr_conf = curr.get("confidence", 0)
-        cand_conf = cand.get("confidence", 0)
-        curr_ok   = curr_op == expected
-        cand_ok   = cand_op == expected
+        for i, tc in enumerate(TEST_CASES, 1):
+            note = load_note(tc["target_file"])
+            draft = make_draft(tc["draft_title"], tc["draft_body"])
+            expected = tc["expected"]
 
-        if curr_ok:
-            current_score += 1
-        if cand_ok:
-            candidate_score += 1
+            print(f"\nCase {i}/{n}: {tc['label']}")
+            print(f"  Target  : {note.title[:65]}  [{len(note.body):,} chars]")
+            print(f"  Draft   : {draft.title[:65]}")
+            print(f"  Expected: {expected}")
+            if tc.get("note"):
+                print(f"  Context : {tc['note'][:90]}")
 
-        print(f"  Current  : {curr_op:<6} conf={curr_conf:.2f}  {'✓' if curr_ok else '✗'}  {curr.get('reasoning', '')[:65]}")
-        print(f"  Candidate: {cand_op:<6} conf={cand_conf:.2f}  {'✓' if cand_ok else '✗'}  {cand.get('reasoning', '')[:65]}")
+            print(f"  Running current prompt...")
+            curr = run_current(note, draft, fast_llm)
+            print(f"  Running candidate prompt...")
+            cand = run_candidate(note, draft, fast_llm)
+
+            curr_op   = curr.get("operation", "?")
+            cand_op   = cand.get("operation", "?")
+            curr_conf = curr.get("confidence", 0)
+            cand_conf = cand.get("confidence", 0)
+            curr_ok   = curr_op == expected
+            cand_ok   = cand_op == expected
+
+            if curr_ok:
+                current_score += 1
+            if cand_ok:
+                candidate_score += 1
+
+            print(f"  Current  : {curr_op:<6} conf={curr_conf:.2f}  {'✓' if curr_ok else '✗'}  {curr.get('reasoning', '')[:65]}")
+            print(f"  Candidate: {cand_op:<6} conf={cand_conf:.2f}  {'✓' if cand_ok else '✗'}  {cand.get('reasoning', '')[:65]}")
+
+        print()
+        print("=" * 72)
+        print(f"Current  : {current_score}/{n} correct")
+        print(f"Candidate: {candidate_score}/{n} correct")
+        print()
+        if candidate_score > current_score:
+            print("Candidate prompt improves on current. Consider promoting to _STEP1_5_PROMPT.")
+        elif candidate_score == current_score == n:
+            print("Both prompts correct on all cases. Candidate may be promoted for its clearer framing.")
+        else:
+            print("Review failures above before making changes.")
+        print("=" * 72)
+
+    # ---- Layer B: step2 EDIT execution ----
+    if run_edit and edit_cases:
+        print()
+        print("=" * 72)
+        print("Layer B — step2 EDIT execution (compress-and-update)")
+        print("=" * 72)
+
+        for i, tc, note, draft in edit_cases:
+            print(f"\nCase {i}: {tc['label']}")
+            print(f"  Original: {len(note.body):,} chars")
+
+            print(f"  Running current _STEP2_EDIT...")
+            curr_title, curr_body = run_step2_current(note, draft, llm)
+            curr_ratio = len(curr_body) / len(note.body) if note.body else 1.0
+            curr_compressed = len(curr_body) < len(note.body)
+            print(f"  Current  : {len(curr_body):,} chars ({curr_ratio:.0%})  {'✓ compressed' if curr_compressed else '✗ not shorter'}")
+
+            print(f"  Running candidate step2_edit.txt...")
+            cand_title, cand_body = run_step2_candidate(note, draft, llm)
+            cand_ratio = len(cand_body) / len(note.body) if note.body else 1.0
+            cand_compressed = len(cand_body) < len(note.body)
+            print(f"  Candidate: {len(cand_body):,} chars ({cand_ratio:.0%})  {'✓ compressed' if cand_compressed else '✗ not shorter'}")
+
+            write_result(i, tc["label"], note, draft, curr_title, curr_body, cand_title, cand_body)
+
+    # ---- Layer B: step2 SPLIT execution ----
+    if run_split and split_cases:
+        print()
+        print("=" * 72)
+        print("Layer B — step2 SPLIT execution")
+        print("=" * 72)
+
+        for i, tc, note, draft in split_cases:
+            orig_len = len(note.body)
+            print(f"\nCase {i}: {tc['label']}")
+            print(f"  Original: {orig_len:,} chars")
+
+            print(f"  Running current _STEP2_SPLIT...")
+            curr_t1, curr_b1, curr_t2, curr_b2 = run_step2_split_current(note, draft, llm)
+            curr_ok = bool(curr_b1) and bool(curr_b2)
+            curr_combined = len(curr_b1) + len(curr_b2)
+            curr_bloat = curr_combined / orig_len if orig_len else 1.0
+            print(f"  Current  : note1={len(curr_b1):,}  note2={len(curr_b2):,}  combined={curr_combined:,} ({curr_bloat:.0%})  {'✓' if curr_ok else '✗ parse failed'}")
+
+            print(f"  Running candidate step2_split.txt...")
+            cand_t1, cand_b1, cand_t2, cand_b2 = run_step2_split_candidate(note, draft, llm)
+            cand_ok = bool(cand_b1) and bool(cand_b2)
+            cand_combined = len(cand_b1) + len(cand_b2)
+            cand_bloat = cand_combined / orig_len if orig_len else 1.0
+            print(f"  Candidate: note1={len(cand_b1):,}  note2={len(cand_b2):,}  combined={cand_combined:,} ({cand_bloat:.0%})  {'✓' if cand_ok else '✗ parse failed'}")
+
+            write_result_split(i, tc["label"], note, draft,
+                               curr_t1, curr_b1, curr_t2, curr_b2,
+                               cand_t1, cand_b1, cand_t2, cand_b2)
 
     print()
     print("=" * 72)
-    print(f"Current  : {current_score}/{n} correct")
-    print(f"Candidate: {candidate_score}/{n} correct")
-    print()
-    if candidate_score > current_score:
-        print("Candidate prompt improves on current. Consider promoting to _STEP1_5_PROMPT.")
-    elif candidate_score == current_score == n:
-        print("Both prompts correct on all cases. Candidate may be promoted for its clearer framing.")
-    else:
-        print("Review failures above before making changes.")
+    print(f"Results written to {RESULTS_DIR.relative_to(ROOT)}/")
+    print("Review before/after content manually to assess output quality.")
     print("=" * 72)
 
 

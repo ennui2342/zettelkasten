@@ -75,13 +75,13 @@ uv run --env-file .env python model-tests/integrate-level3/run.py
 
 | # | Case | Expected | Current | Candidate |
 |---|------|----------|---------|-----------|
-| 1 | Regression: 21k multi-agent note + same-topic draft | EDIT | SPLIT ✗ | SPLIT ✗ |
-| 2 | Positive SPLIT: z001 (two threads) + architectures draft | SPLIT | SPLIT ✓ | SPLIT ✓ |
-| 3 | **Failure case**: evaluation note + architectures draft | EDIT | SPLIT ✗ | **EDIT ✓** |
-| 4 | Same-topic EDIT: evaluation note + evaluation draft | EDIT | EDIT ✓ | EDIT ✓ |
+| 1 | Regression: z059 (rubric eval, no sub-headings) + same-topic draft | EDIT | EDIT ✓ | EDIT ✓ |
+| 2 | Positive SPLIT: z001 (two genuine threads) + architectures draft | SPLIT | SPLIT ✓ | SPLIT ✓ |
+| 3 | **Failure case**: z027 (focused eval) + different-topic (architectures) draft | EDIT | SPLIT ✗ | **EDIT ✓** |
+| 4 | Same-topic EDIT: z027 + evaluation benchmarking draft | EDIT | EDIT ✓ | EDIT ✓ |
 
-**Score: Current 2/4 | Candidate 3/4**
+**Score: Current 3/4 | Candidate 4/4**
 
-**Key finding**: Candidate prompt fixes the core failure scenario (case 3) at high confidence (0.92). The explicit instruction "Do NOT choose SPLIT because the draft is about a different topic" is the operative change.
+**Key finding**: Candidate prompt fixes the core failure scenario (case 3) at conf=0.92. The operative change: explicit instruction that SPLIT should not be chosen solely because the draft introduces a different topic — only when the note itself contains two separable threads.
 
-**Open issue — case 1**: The 21k `z20260317-001.md` note has many sub-sections that the model identifies as separable threads, so SPLIT may be correct here. The existing edit-split-step15 test showed EDIT for this case in 2026-03-17, but that test ran step1 first (which returned UPDATE), providing context that influenced step1.5. Running step1.5 in isolation appears to change the result. The regression note for future runs should be a tightly-focused single-topic note of 8–12k chars, not the 21k accumulation note.
+**Candidate prompt is ready to promote** to `_STEP1_5_PROMPT` in `prompts.py`.

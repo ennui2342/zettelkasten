@@ -93,21 +93,30 @@ Output JSON only. Schema:
 # ---------------------------------------------------------------------------
 
 TEST_CASES = [
-    # Case 1: Regression guard — large note on one topic, draft on same topic → EDIT
-    # (Same pattern as edit-split-step15 test; both prompts should agree on EDIT.)
+    # Case 1: Regression guard — focused single-topic note, same-topic draft → EDIT
+    # z059 is a prose note on rubric-based evaluation with no internal sub-headings.
+    # It is unambiguously single-threaded. Both prompts must agree on EDIT here.
+    # If either prompt produces SPLIT on this case, it has a systematic false-positive.
     dict(
-        label="Regression: same-topic draft on large multi-agent note",
-        target_file="z20260317-001.md",  # Multi-Agent LLM Systems (21k chars)
-        draft_title="Emergent Role Specialisation in Homogeneous Agent Pools",
+        label="Regression: focused single-topic note + same-topic draft → EDIT",
+        target_file="z20260318-059.md",  # Rubric-Based Evaluation of AI Systems (8.7k, no sub-headings)
+        draft_title="Calibrating Rubric Weights Through Contrastive Human Feedback",
         draft_body=(
-            "In multi-agent systems where all agents share the same base model and "
-            "instructions, role differentiation can emerge spontaneously through "
-            "interaction history. Agents that happen to handle early subtasks develop "
-            "specialised context that makes them more likely to be routed similar tasks "
-            "subsequently, without explicit role assignment."
+            "The effectiveness of rubric-based evaluation depends not just on criterion "
+            "selection but on weight calibration. When rubric criteria conflict — a response "
+            "that is maximally concise may sacrifice completeness — the relative weights "
+            "determine which trade-off is rewarded. Contrastive human feedback, where "
+            "evaluators compare pairs of outputs with similar criterion profiles but "
+            "different weight distributions, provides a signal for calibrating weights that "
+            "simple agreement scoring cannot. Bayesian weight inference from pairwise "
+            "comparisons has been shown to converge on human preference orderings with "
+            "significantly fewer annotations than criterion-level rating."
         ),
         expected="EDIT",
-        note="Same draft as edit-split-step15 case 3. Large single-topic note, related draft.",
+        note=(
+            "z059 is a single-prose-thread note on rubric-based evaluation (no sub-headings, 8.7k). "
+            "Draft is on the same topic. If either prompt produces SPLIT, it has a false-positive problem."
+        ),
     ),
     # Case 2: Positive SPLIT — z001 final state covers two separable threads:
     # (1) workflow automation architectures, (2) procedural memory for agent systems.

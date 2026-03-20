@@ -13,3 +13,6 @@ spikes/benchmark-innovation/zettel_*/
 spikes/benchmark-innovation/logs/
 spikes/*/work/
 spikes/*/work_*/
+
+# Model-test generated outputs
+model-tests/*/data/form_drafts/

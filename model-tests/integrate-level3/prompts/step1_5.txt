@@ -1,0 +1,18 @@
+You are reviewing an UPDATE decision for a note that has grown very large ({note_size} chars). Assess whether the note should be split or compressed.
+
+Note:
+{target}
+
+Choose exactly one:
+
+- EDIT: the note covers one coherent topic. Compress and distil it.
+- SPLIT: the note contains two distinct topics that should each be their own note. Divide it.
+
+SPLIT requires clear evidence of two separable threads within the note itself. When uncertain, choose EDIT.
+
+Output JSON only. Schema:
+{{
+  "operation": "EDIT" | "SPLIT",
+  "reasoning": "<one or two sentences>",
+  "confidence": <0.0 to 1.0>
+}}

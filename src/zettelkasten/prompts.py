@@ -123,41 +123,24 @@ Output JSON only. Schema:
 
 _STEP1_5_PROMPT = """\
 You are reviewing an UPDATE decision for a note that has grown very large \
-({note_size} chars). The question is whether the note itself should be \
-split or compressed.
+({note_size} chars). Assess whether the note should be split or compressed.
 
-Large note:
+Note:
 {target}
-
-Draft note (the content that triggered UPDATE — provided as context):
-{draft}
-
-Your task: assess the note's internal structure, not the relationship \
-between note and draft.
 
 Choose exactly one:
 
-- EDIT: rewrite the existing note to be more concise. Choose EDIT when:
-  - The note covers a single coherent topic that has grown verbose, OR
-  - The note covers a single coherent topic but the draft introduces a \
-different topic (EDIT compresses the note; the draft's topic is a separate \
-CREATE decision).
-  EDIT is the conservative choice. Prefer it when uncertain.
+- EDIT: the note covers one coherent topic. Compress and distil it.
+- SPLIT: the note contains two distinct topics that should each be their \
+own note. Divide it.
 
-- SPLIT: divide the note into two separate notes. Choose SPLIT ONLY when:
-  - The note itself demonstrably contains two separable threads, each of \
-which would stand alone as an independent note.
-  Do NOT choose SPLIT because the draft is about a different topic than the \
-note — that alone is not evidence of two threads within the note.
-
-Ask yourself: "Does this note contain two distinct topics that should each \
-be their own note?" If yes → SPLIT. If the note is on one topic (even if \
-verbose) → EDIT.
+SPLIT requires clear evidence of two separable threads within the note \
+itself. When uncertain, choose EDIT.
 
 Output JSON only. Schema:
 {{
   "operation": "EDIT" | "SPLIT",
-  "reasoning": "<one or two sentences about whether the NOTE has separable threads>",
+  "reasoning": "<one or two sentences>",
   "confidence": <0.0 to 1.0>
 }}"""
 

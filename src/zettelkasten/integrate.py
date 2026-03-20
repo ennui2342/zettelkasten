@@ -209,13 +209,15 @@ def _step1_5_classify(
     draft: ZettelNote,
     llm: LLMProvider,
 ) -> dict:
-    """Step 1.5: focused EDIT/SPLIT decision for a large UPDATE target."""
+    """Step 1.5: focused EDIT/SPLIT decision for a large UPDATE target.
+
+    Only the target note is assessed — the draft is the trigger for this
+    call but is not shown to the model here. It is passed through to step 2.
+    """
     target_text = f"id: {target.id}\n## {target.title}\n\n{target.body}"
-    draft_text = f"## {draft.title}\n\n{draft.body}"
     prompt = _STEP1_5_PROMPT.format(
         note_size=len(target.body),
         target=target_text,
-        draft=draft_text,
     )
     raw = llm.complete(prompt, max_tokens=256, temperature=0.0)
     result = _parse_decision(raw)

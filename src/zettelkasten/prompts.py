@@ -123,28 +123,41 @@ Output JSON only. Schema:
 
 _STEP1_5_PROMPT = """\
 You are reviewing an UPDATE decision for a note that has grown very large \
-({note_size} chars). Updating it further risks exceeding output limits.
+({note_size} chars). The question is whether the note itself should be \
+split or compressed.
 
 Large note:
 {target}
 
-Draft note (the new content that triggered UPDATE):
+Draft note (the content that triggered UPDATE — provided as context):
 {draft}
+
+Your task: assess the note's internal structure, not the relationship \
+between note and draft.
 
 Choose exactly one:
 
-- EDIT: the note covers one coherent topic but has grown verbose through \
-repeated updates. Rewrite it to compress and distil — same topic, no new \
-content from the draft. Choose EDIT when the note is a single topic that \
-needs tightening.
-- SPLIT: the note conflates two distinct topics that should be separate notes. \
-The draft clarifies which topics are distinct. Choose SPLIT only if the note \
-genuinely covers two separate concepts.
+- EDIT: rewrite the existing note to be more concise. Choose EDIT when:
+  - The note covers a single coherent topic that has grown verbose, OR
+  - The note covers a single coherent topic but the draft introduces a \
+different topic (EDIT compresses the note; the draft's topic is a separate \
+CREATE decision).
+  EDIT is the conservative choice. Prefer it when uncertain.
+
+- SPLIT: divide the note into two separate notes. Choose SPLIT ONLY when:
+  - The note itself demonstrably contains two separable threads, each of \
+which would stand alone as an independent note.
+  Do NOT choose SPLIT because the draft is about a different topic than the \
+note — that alone is not evidence of two threads within the note.
+
+Ask yourself: "Does this note contain two distinct topics that should each \
+be their own note?" If yes → SPLIT. If the note is on one topic (even if \
+verbose) → EDIT.
 
 Output JSON only. Schema:
 {{
   "operation": "EDIT" | "SPLIT",
-  "reasoning": "<one or two sentences>",
+  "reasoning": "<one or two sentences about whether the NOTE has separable threads>",
   "confidence": <0.0 to 1.0>
 }}"""
 

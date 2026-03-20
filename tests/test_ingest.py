@@ -34,39 +34,66 @@ Sleep strengthens memory by consolidating neural pathways formed during waking h
 
 
 def _pipeline_llm(operation: str = "CREATE", target_ids: list[str] | None = None) -> MockLLM:
-    """MockLLM that handles all prompt types in the ingest pipeline."""
+    """MockLLM that handles all prompt types in the ingest pipeline.
+
+    The integrate phase now uses two classify calls (L1 then L2).
+    L1 prompt contains '- INTEGRATE:'; L2 prompt contains '- UPDATE:'.
+    """
     target_ids = target_ids or []
     target_json = ", ".join(f'"{t}"' for t in target_ids)
+
+    # Map caller's operation to L1 and L2 responses.
+    # SYNTHESISE and NOTHING are decided at L1; everything else routes through L2.
+    _L1_OP = "SYNTHESISE" if operation == "SYNTHESISE" else (
+        "NOTHING" if operation == "NOTHING" else "INTEGRATE"
+    )
+    # L2 operation (only reached when L1=INTEGRATE):
+    # STUB is parked — treated as CREATE; SPLIT/EDIT reach L2 as UPDATE.
+    _L2_OP = {
+        "CREATE": "CREATE", "UPDATE": "UPDATE", "NOTHING": "NOTHING",
+        "SPLIT": "UPDATE", "EDIT": "UPDATE",
+    }.get(operation, "CREATE")
 
     def respond(prompt: str, **kw) -> str:
         # Form phase: asks about "topic areas"
         if "topic areas" in prompt or "broad topic" in prompt:
             return _FORM_OUTPUT
-        # Gather MuGI: asks for pseudo_notes
+        # Gather MuGI
         if "pseudo_notes" in prompt:
             return '{"pseudo_notes": ["memory", "consolidation", "sleep"]}'
-        # Gather step-back: asks for abstraction
+        # Gather step-back
         if "abstraction" in prompt:
             return '{"abstraction": "Biological processes that consolidate learning during rest."}'
-        # Gather HyDE: asks for hypotheticals
+        # Gather HyDE
         if "hypotheticals" in prompt:
             return '{"hypotheticals": ["sleep strengthens memory", "rest aids recall", "downtime consolidates"]}'
-        # Integrate step 1: Output JSON only
-        if "Output JSON only" in prompt:
+        # Integrate L1 (SYNTHESISE / INTEGRATE / NOTHING)
+        if "- INTEGRATE:" in prompt:
             return (
-                f'{{"operation": "{operation}", '
+                f'{{"operation": "{_L1_OP}", '
                 f'"target_note_ids": [{target_json}], '
                 f'"reasoning": "Test decision.", '
                 f'"confidence": 0.9}}'
             )
-        # Integrate step 2 — SPLIT needs two sections
+        # Integrate L2 (CREATE / UPDATE / NOTHING) and step1.5 (EDIT / SPLIT)
+        if "Output JSON only" in prompt:
+            l2_op = _L2_OP if "- UPDATE:" in prompt else (
+                "EDIT" if operation == "EDIT" else "SPLIT" if operation == "SPLIT" else _L2_OP
+            )
+            return (
+                f'{{"operation": "{l2_op}", '
+                f'"target_note_ids": [{target_json}], '
+                f'"reasoning": "Test decision.", '
+                f'"confidence": 0.9}}'
+            )
+        # Step 2 — SPLIT needs two sections
         if operation == "SPLIT" and "---SPLIT---" not in prompt:
             return (
                 "## Memory Consolidation\n\nSleep strengthens memory.\n"
                 "\n---SPLIT---\n\n"
                 "## Sleep Architecture\n\nSlow-wave sleep drives consolidation."
             )
-        # Integrate step 2: produce ## Title\n\nBody
+        # Step 2: produce ## Title\n\nBody
         return _STEP2_OUTPUT
 
     return MockLLM(respond)
@@ -221,15 +248,17 @@ def test_ingest_nothing_does_not_write_note(tmp_path):
 
 
 # ---------------------------------------------------------------------------
-# ingest_text — STUB operation
+# ingest_text — new isolated topic (formerly STUB, now CREATE)
 # ---------------------------------------------------------------------------
 
 
-def test_ingest_stub_writes_stub_note(tmp_path):
+def test_ingest_isolated_topic_writes_note(tmp_path):
+    """Isolated new topics are handled as CREATE in the levelled decision tree.
+    STUB has been removed from the pipeline routing."""
     store = ZettelkastenStore(tmp_path / "notes", tmp_path / "index.db")
-    results = store.ingest_text("Obscure topic text.", _pipeline_llm("STUB"), _EMBED)
-    stub_results = [r for r in results if r.operation == "STUB"]
-    assert len(stub_results) == 1
+    results = store.ingest_text("Obscure topic text.", _pipeline_llm("CREATE"), _EMBED)
+    create_results = [r for r in results if r.operation == "CREATE"]
+    assert len(create_results) == 1
     md_files = list((tmp_path / "notes").glob("*.md"))
     assert len(md_files) == 1
 

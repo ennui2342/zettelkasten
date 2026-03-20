@@ -17,7 +17,7 @@ import re
 from dataclasses import dataclass, field
 
 from .note import ZettelNote
-from .prompts import _STEP1_PROMPT, _STEP1_5_PROMPT, STEP2_PROMPTS
+from .prompts import _STEP1_L1_PROMPT, _STEP1_L2_PROMPT, _STEP1_5_PROMPT, STEP2_PROMPTS
 from .providers import LLMProvider
 
 log = logging.getLogger("zettelkasten")
@@ -76,14 +76,15 @@ def integrate_phase(
     llm: LLMProvider,
     fast_llm: LLMProvider | None = None,
 ) -> IntegrationResult:
-    """Two-step integration of *draft* against *cluster*.
+    """Three-level integration of *draft* against *cluster*.
 
-    Step 1 classifies the operation.  Step 2 executes it (for ingestion-time
-    operations only).  Returns an :class:`IntegrationResult` the caller can
-    use to write/update notes.
+    L1 classifies SYNTHESISE / INTEGRATE / NOTHING.
+    L2 classifies CREATE / UPDATE / NOTHING (only reached from INTEGRATE).
+    Step 1.5 refines UPDATE on large notes to EDIT or SPLIT.
+    Step 2 executes the final operation.
 
-    *fast_llm* is used for step 1 (cheap classification).  Falls back to
-    *llm* if not provided.
+    *fast_llm* is used for all classify calls.  Falls back to *llm* if not
+    provided.
     """
     _fast = fast_llm or llm
     log.info(
@@ -92,41 +93,60 @@ def integrate_phase(
         len(cluster),
     )
 
-    # ---- Step 1: classify ----
-    decision = _step1_classify(draft, cluster, _fast)
-    op = decision["operation"]
-    target_ids = decision.get("target_note_ids") or []
-    reasoning = decision.get("reasoning", "")
-    confidence = float(decision.get("confidence", 0.0))
+    # ---- L1: SYNTHESISE / INTEGRATE / NOTHING ----
+    l1 = _step1_l1_classify(draft, cluster, _fast)
+    l1_op = l1.get("operation", "INTEGRATE")
+    if l1_op not in ("SYNTHESISE", "INTEGRATE", "NOTHING"):
+        l1_op = "INTEGRATE"
+    l1_target_ids = l1.get("target_note_ids") or []
+    reasoning = l1.get("reasoning", "")
+    confidence = float(l1.get("confidence", 0.0))
 
     log.info(
-        "integrate.step1 operation=%s confidence=%.2f targets=%s reasoning=%r",
-        op,
-        confidence,
-        target_ids,
-        reasoning,
+        "integrate.step1_l1 operation=%s confidence=%.2f targets=%s reasoning=%r",
+        l1_op, confidence, l1_target_ids, reasoning,
     )
 
-    # ---- NOTHING ----
-    if op == "NOTHING":
+    if l1_op == "NOTHING":
         log.info("integrate.complete operation=NOTHING")
+        return IntegrationResult(operation="NOTHING", reasoning=reasoning, confidence=confidence)
+
+    if l1_op == "SYNTHESISE":
+        target_notes = [n for n in cluster if n.id in l1_target_ids]
+        title, body = _step2_execute("SYNTHESISE", draft, target_notes, llm)
+        log.debug("integrate.step2 operation=SYNTHESISE title=%r body_len=%d", title, len(body))
+        log.info("integrate.complete operation=SYNTHESISE title=%r", title)
         return IntegrationResult(
-            operation="NOTHING",
+            operation="SYNTHESISE",
             reasoning=reasoning,
             confidence=confidence,
+            target_ids=l1_target_ids,
+            note_title=title,
+            note_body=body,
         )
 
-    # ---- Step 2: execute ----
-    if op not in _EXECUTABLE_OPS:
-        # Unknown operation — treat as NOTHING
-        log.warning("integrate.unknown_operation op=%r — treating as NOTHING", op)
-        return IntegrationResult(
-            operation="NOTHING",
-            reasoning=f"Unknown operation {op!r}",
-            confidence=0.0,
-        )
+    # ---- L2: CREATE / UPDATE / NOTHING ----
+    # Cluster for L2 is filtered to the notes L1 identified as most relevant.
+    filtered_cluster = [n for n in cluster if n.id in l1_target_ids]
+    l2 = _step1_l2_classify(draft, filtered_cluster, _fast)
+    l2_op = l2.get("operation", "CREATE")
+    if l2_op not in ("CREATE", "UPDATE", "NOTHING"):
+        l2_op = "CREATE"
+    l2_target_ids = l2.get("target_note_ids") or []
+    reasoning = l2.get("reasoning", reasoning)
+    confidence = float(l2.get("confidence", confidence))
 
-    target_notes = [n for n in cluster if n.id in target_ids]
+    log.info(
+        "integrate.step1_l2 operation=%s confidence=%.2f targets=%s reasoning=%r",
+        l2_op, confidence, l2_target_ids, reasoning,
+    )
+
+    if l2_op == "NOTHING":
+        log.info("integrate.complete operation=NOTHING")
+        return IntegrationResult(operation="NOTHING", reasoning=reasoning, confidence=confidence)
+
+    target_notes = [n for n in filtered_cluster if n.id in l2_target_ids]
+    op = l2_op
 
     # ---- Step 1.5: refine UPDATE on large notes ----
     if op == "UPDATE" and target_notes:
@@ -135,15 +155,12 @@ def integrate_phase(
         )
         if large_target is not None:
             step15 = _step1_5_classify(large_target, draft, _fast)
-            op = step15["operation"]  # EDIT or SPLIT
-            # keep original reasoning/confidence unless step 1.5 has its own
+            op = step15["operation"]
             reasoning = step15.get("reasoning", reasoning)
             confidence = float(step15.get("confidence", confidence))
             log.info(
                 "integrate.step1_5 operation=%s confidence=%.2f reasoning=%r",
-                op,
-                confidence,
-                reasoning,
+                op, confidence, reasoning,
             )
 
     if op == "SPLIT":
@@ -153,7 +170,7 @@ def integrate_phase(
             operation=op,
             reasoning=reasoning,
             confidence=confidence,
-            target_ids=target_ids,
+            target_ids=l2_target_ids,
             note_title=title,
             note_body=body,
             split_title=split_title,
@@ -161,20 +178,14 @@ def integrate_phase(
         )
 
     title, body = _step2_execute(op, draft, target_notes, llm)
-
-    log.debug(
-        "integrate.step2 operation=%s title=%r body_len=%d",
-        op,
-        title,
-        len(body),
-    )
+    log.debug("integrate.step2 operation=%s title=%r body_len=%d", op, title, len(body))
     log.info("integrate.complete operation=%s title=%r", op, title)
 
     return IntegrationResult(
         operation=op,
         reasoning=reasoning,
         confidence=confidence,
-        target_ids=target_ids,
+        target_ids=l2_target_ids,
         note_title=title,
         note_body=body,
     )
@@ -185,21 +196,34 @@ def integrate_phase(
 # ---------------------------------------------------------------------------
 
 
-def _step1_classify(
+def _format_cluster(notes: list[ZettelNote]) -> str:
+    if not notes:
+        return "(empty — no existing notes in cluster)"
+    return "\n\n---\n\n".join(
+        f"id: {n.id}\n## {n.title}\n\n{n.body}" for n in notes
+    )
+
+
+def _step1_l1_classify(
     draft: ZettelNote,
     cluster: list[ZettelNote],
     llm: LLMProvider,
 ) -> dict:
-    if cluster:
-        cluster_text = "\n\n---\n\n".join(
-            f"id: {n.id}\n## {n.title}\n\n{n.body}"
-            for n in cluster
-        )
-    else:
-        cluster_text = "(empty — no existing notes in cluster)"
-
+    """L1: classify draft as SYNTHESISE / INTEGRATE / NOTHING."""
     draft_text = f"## {draft.title}\n\n{draft.body}"
-    prompt = _STEP1_PROMPT.format(draft=draft_text, cluster=cluster_text)
+    prompt = _STEP1_L1_PROMPT.format(draft=draft_text, cluster=_format_cluster(cluster))
+    raw = llm.complete(prompt, max_tokens=512, temperature=0.0)
+    return _parse_decision(raw)
+
+
+def _step1_l2_classify(
+    draft: ZettelNote,
+    cluster: list[ZettelNote],
+    llm: LLMProvider,
+) -> dict:
+    """L2: classify draft as CREATE / UPDATE / NOTHING against filtered cluster."""
+    draft_text = f"## {draft.title}\n\n{draft.body}"
+    prompt = _STEP1_L2_PROMPT.format(draft=draft_text, cluster=_format_cluster(cluster))
     raw = llm.complete(prompt, max_tokens=512, temperature=0.0)
     return _parse_decision(raw)
 

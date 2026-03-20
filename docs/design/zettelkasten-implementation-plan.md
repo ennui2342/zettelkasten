@@ -130,27 +130,29 @@ All spikes are complete. Full detail in `docs/design/spikes/`.
 
 ### Integration
 
-Three-step (step 1.5 fires only when UPDATE targets a large note):
+Four-step levelled decision tree (step 1.5 fires only when L2 returns UPDATE on a large note):
 
-- **Step 1 — Classify** (fast LLM, temperature=0, max_tokens=512): returns `{operation, target_note_ids, reasoning, confidence}` as JSON
-- **Step 1.5 — Large-note refinement** (fast LLM, temperature=0, max_tokens=256): if step 1 returns UPDATE and the target note exceeds `NOTE_BODY_LARGE` (8 000 chars), a focused call asks EDIT or SPLIT. Default on parse failure: EDIT.
-- **Step 2 — Execute** (main LLM, temperature=0.3, operation-specific max_tokens): rewrites or creates note content
+- **L1 — SYNTHESISE/INTEGRATE/NOTHING** (fast LLM, temperature=0, max_tokens=512): sees the full k20 cluster. Returns `{operation, target_note_ids, reasoning, confidence}`. Routes SYNTHESISE directly to step 2; passes INTEGRATE with filtered cluster to L2; exits on NOTHING.
+- **L2 — CREATE/UPDATE/NOTHING** (fast LLM, temperature=0, max_tokens=512): sees only the notes from L1's `target_note_ids`. Decides the concrete write operation. Exits on NOTHING.
+- **Step 1.5 — Large-note refinement** (fast LLM, temperature=0, max_tokens=256): fires only when L2 returns UPDATE and the target note exceeds `NOTE_BODY_LARGE` (8 000 chars). Asks EDIT or SPLIT. Default on parse failure: EDIT.
+- **Step 2 — Execute** (main LLM, temperature=0.3, operation-specific max_tokens): rewrites or creates note content.
 
 Operations:
 
-| Operation | When | max_tokens | Notes |
-|-----------|------|-----------|-------|
-| `CREATE` | New topic not in cluster | 2048 | |
-| `UPDATE` | Draft extends existing note (note below size ceiling) | 4096 | |
-| `EDIT` | Existing note >8 000 chars; compress without adding content | 2048 | Via step 1.5 only; no co-activations added |
-| `STUB` | New topic, sparse neighbourhood | 2048 | |
-| `SYNTHESISE` | Draft reveals bridging principle | 4096 | |
-| `NOTHING` | Draft fully covered | — (no-op) | |
-| `SPLIT` | Note conflates two topics | 4096 | Via step 1.5 only |
+| Operation | Decided at | When | max_tokens |
+|-----------|------------|------|-----------|
+| `SYNTHESISE` | L1 | Draft reveals bridging principle between cluster notes | 4096 |
+| `CREATE` | L2 | Draft introduces topic not in filtered cluster | 2048 |
+| `UPDATE` | L2 | Draft extends an existing note (note below size ceiling) | 4096 |
+| `EDIT` | Step 1.5 | L2 UPDATE target >8 000 chars; compress | 2048 |
+| `SPLIT` | Step 1.5 | L2 UPDATE target >8 000 chars; conflates two topics | 4096 |
+| `NOTHING` | L1 or L2 | Draft fully covered | — (no-op) |
+
+STUB has been removed from the pipeline. Isolated new topics are handled as CREATE. See `architecture-decisions.md` for rationale.
 
 SPLIT executes at ingestion via step 1.5 when an UPDATE target exceeds the size ceiling and genuinely conflates two distinct topics. MERGE has been deprecated — see §4 and `architecture-decisions.md §7a`.
 
-**EDIT rationale:** notes grow unboundedly through repeated UPDATEs. A note at 21 000 chars fed to a `max_tokens=4096` UPDATE call is silently truncated. EDIT intercepts this: step 1.5 presents the large note with the draft as context and asks the LLM to choose between compression (EDIT) and structural division (SPLIT). EDIT is conservative — it keeps the topic intact, just tighter. SPLIT is chosen only when the draft genuinely clarifies that two distinct topics are conflated.
+**EDIT rationale:** notes grow unboundedly through repeated UPDATEs. A note at 21 000 chars fed to a `max_tokens=4096` UPDATE call is silently truncated. EDIT intercepts this: step 1.5 presents the large note and asks the LLM to choose between compression (EDIT) and structural division (SPLIT). EDIT is conservative — it keeps the topic intact, just tighter. SPLIT is chosen only when the draft genuinely clarifies that two distinct topics are conflated.
 
 **See Also wikilinks:** the LLM uses `[[id|title]]` syntax spontaneously in step 2 prompts to express connections. The library parses and stores these.
 
@@ -221,8 +223,8 @@ If needed: runs on a sleep cycle (nightly or weekly). SPLIT pass: flag notes by 
 | Providers | AnthropicLLM, VoyageEmbed, LLMProvider/EmbedProvider protocols | ✓ Complete |
 | Form phase | form.py — single-shot fuzzy extraction | ✓ Complete |
 | Gather phase | gather.py — 5-signal fusion, parallel LLM calls | ✓ Complete |
-| Integrate phase | integrate.py — two-step, 6 ops (MERGE deprecated), See Also wikilinks | ✓ Complete |
-| Store pipeline | store.ingest_text — Form→Gather→Integrate, STUB promotion, SPLIT via step 1.5 | ✓ Complete |
+| Integrate phase | integrate.py — levelled L1/L2/step1.5/step2, STUB removed, MERGE deprecated | ✓ Complete |
+| Store pipeline | store.ingest_text — Form→Gather→Integrate, SPLIT via step 1.5 | ✓ Complete |
 | CLI | cli.py — init, ingest, search, serve, rebuild-index, rewrite-notes | ✓ Complete |
 | Server | server.py — HTTP ingest server for Chrome extension | ✓ Complete |
 | Chrome extension | chrome-extension/ — Manifest V3, port-persisted popup | ✓ Complete |

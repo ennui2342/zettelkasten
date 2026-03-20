@@ -72,6 +72,89 @@ _FORM_PROMPT = (
 # ---------------------------------------------------------------------------
 # Integrate: Step 1 — classify
 # ---------------------------------------------------------------------------
+# Integrate: Step 1 L1 — SYNTHESISE / INTEGRATE / NOTHING
+# ---------------------------------------------------------------------------
+
+_STEP1_L1_PROMPT = """\
+You maintain a knowledge base of topic notes. You have a draft note and a \
+cluster of related existing notes.
+
+Draft note:
+{draft}
+
+Existing notes in cluster:
+{cluster}
+
+Decide how this draft relates to the existing cluster.
+
+Choose exactly one:
+
+- INTEGRATE: the draft is an elaboration of the notes in the cluster. It adds \
+to, extends, fills a gap, or enhances the insights of existing notes and \
+should be integrated.
+- SYNTHESISE: the draft reveals a connection between the notes in the cluster \
+that produces a new insight none of the notes articulate on their own. The \
+connection must earn its existence — use SYNTHESISE only when the relationship \
+itself is the knowledge, not merely because two things are related.
+- NOTHING: the draft is already fully covered by the existing cluster and adds \
+nothing new.
+
+In target_note_ids, list the notes the draft most directly interacts with. \
+For SYNTHESISE, list the notes being bridged. For INTEGRATE or NOTHING, list \
+the most relevant notes.
+
+Output JSON only. Schema:
+{{
+  "operation": "INTEGRATE" | "SYNTHESISE" | "NOTHING",
+  "target_note_ids": ["<id>", ...],
+  "reasoning": "<one or two sentences>",
+  "confidence": <0.0 to 1.0>
+}}"""
+
+# ---------------------------------------------------------------------------
+# Integrate: Step 1 L2 — CREATE / UPDATE / NOTHING
+# ---------------------------------------------------------------------------
+
+_STEP1_L2_PROMPT = """\
+You maintain a knowledge base of topic notes. You have a draft note and a \
+cluster of closely related existing notes.
+
+Draft note:
+{draft}
+
+Existing notes in cluster:
+{cluster}
+
+Decide what to do with this draft.
+
+Choose exactly one:
+
+- UPDATE: the draft adds new content to an existing note in the cluster — it \
+extends, refines, or fills a gap in a note already about this topic. Select \
+the single best target note.
+- CREATE: the draft introduces a topic not sufficiently covered by any note in \
+the cluster. A new note is needed.
+- NOTHING: the draft is already fully covered by the cluster notes. No new \
+note is needed and no update is warranted.
+
+UPDATE requires the draft to be on the same topic as an existing note — not \
+merely related or adjacent. When in doubt between UPDATE and CREATE, \
+prefer CREATE.
+
+In target_note_ids, for UPDATE provide the single best target note ID. For \
+CREATE and NOTHING, list the most relevant cluster notes.
+
+Output JSON only. Schema:
+{{
+  "operation": "UPDATE" | "CREATE" | "NOTHING",
+  "target_note_ids": ["<id>"],
+  "reasoning": "<one or two sentences>",
+  "confidence": <0.0 to 1.0>
+}}"""
+
+# ---------------------------------------------------------------------------
+# Integrate: Step 1 (legacy single-pass classifier — kept for reference)
+# ---------------------------------------------------------------------------
 
 _STEP1_PROMPT = """\
 You maintain a knowledge base of topic notes. You have a draft note and a \

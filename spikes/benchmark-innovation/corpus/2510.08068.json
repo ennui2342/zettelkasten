@@ -1,0 +1,16 @@
+{
+  "arxiv_id": "2510.08068",
+  "title": "An Adaptive Multi Agent Bitcoin Trading System",
+  "abstract": "This paper presents a Multi Agent Bitcoin Trading system that utilizes Large Language Models (LLMs) for alpha generation and portfolio management in the cryptocurrencies market. Unlike equities, cryptocurrencies exhibit extreme volatility and are heavily influenced by rapidly shifting market sentiments and regulatory announcements, making them difficult to model using static regression models or neural networks trained solely on historical data. The proposed framework overcomes this by structuring LLMs into specialised agents for technical analysis, sentiment evaluation, decision-making, and performance reflection. The agents improve over time via a novel verbal feedback mechanism where a Reflect agent provides daily and weekly natural-language critiques of trading decisions. These textual evaluations are then injected into future prompts of the agents, allowing them to adjust allocation logic without weight updates or finetuning. Back-testing on Bitcoin price data from July 2024 to April 2025 shows consistent outperformance across market regimes: the Quantitative agent delivered over 30\\% higher returns in bullish phases and 15\\% overall gains versus buy-and-hold, while the sentiment-driven agent turned sideways markets from a small loss into a gain of over 100\\%. Adding weekly feedback further improved total performance by 31\\% and reduced bearish losses by 10\\%. The results demonstrate that verbal feedback represents a new, scalable, and low-cost approach of tuning LLMs for financial goals.",
+  "authors": [
+    "Aadi Singhi"
+  ],
+  "published": "2025-10-09T10:55:52Z",
+  "primary_category": "q-fin.PM",
+  "categories": [
+    "q-fin.PM",
+    "cs.AI",
+    "q-fin.CP"
+  ],
+  "url": "https://arxiv.org/abs/2510.08068"
+}

@@ -1,0 +1,16 @@
+{
+  "arxiv_id": "2510.25793",
+  "title": "Optimal Information Combining for Multi-Agent Systems Using Adaptive Bias Learning",
+  "abstract": "Modern multi-agent systems ranging from sensor networks monitoring critical infrastructure to crowdsourcing platforms aggregating human intelligence can suffer significant performance degradation due to systematic biases that vary with environmental conditions. Current approaches either ignore these biases, leading to suboptimal decisions, or require expensive calibration procedures that are often infeasible in practice. This performance gap has real consequences: inaccurate environmental monitoring, unreliable financial predictions, and flawed aggregation of human judgments. This paper addresses the fundamental question: when can we learn and correct for these unknown biases to recover near-optimal performance, and when is such learning futile? We develop a theoretical framework that decomposes biases into learnable systematic components and irreducible stochastic components, introducing the concept of learnability ratio as the fraction of bias variance predictable from observable covariates. This ratio determines whether bias learning is worthwhile for a given system. We prove that the achievable performance improvement is fundamentally bounded by this learnability ratio, providing system designers with quantitative guidance on when to invest in bias learning versus simpler approaches. We present the Adaptive Bias Learning and Optimal Combining (ABLOC) algorithm, which iteratively learns bias-correcting transformations while optimizing combination weights through closedform solutions, guaranteeing convergence to these theoretical bounds. Experimental validation demonstrates that systems with high learnability ratios can recover significant performance (we achieved 40%-70% of theoretical maximum improvement in our examples), while those with low learnability show minimal benefit, validating our diagnostic criteria for practical deployment decisions.",
+  "authors": [
+    "Siavash M. Alamouti",
+    "Fay Arjomandi"
+  ],
+  "published": "2025-10-28T21:52:33Z",
+  "primary_category": "cs.LG",
+  "categories": [
+    "cs.LG",
+    "cs.IT"
+  ],
+  "url": "https://arxiv.org/abs/2510.25793"
+}

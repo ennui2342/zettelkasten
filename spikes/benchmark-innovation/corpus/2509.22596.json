@@ -1,0 +1,23 @@
+{
+  "arxiv_id": "2509.22596",
+  "title": "Effective Policy Learning for Multi-Agent Online Coordination Beyond Submodular Objectives",
+  "abstract": "In this paper, we present two effective policy learning algorithms for multi-agent online coordination(MA-OC) problem. The first one, \\texttt{MA-SPL}, not only can achieve the optimal $(1-\\frac{c}{e})$-approximation guarantee for the MA-OC problem with submodular objectives but also can handle the unexplored $α$-weakly DR-submodular and $(γ,β)$-weakly submodular scenarios, where $c$ is the curvature of the investigated submodular functions, $α$ denotes the diminishing-return(DR) ratio and the tuple $(γ,β)$ represents the submodularity ratios. Subsequently, in order to reduce the reliance on the unknown parameters $α,γ,β$ inherent in the \\texttt{MA-SPL} algorithm, we further introduce the second online algorithm named \\texttt{MA-MPL}. This \\texttt{MA-MPL} algorithm is entirely \\emph{parameter-free} and simultaneously can maintain the same approximation ratio as the first \\texttt{MA-SPL} algorithm. The core of our \\texttt{MA-SPL} and \\texttt{MA-MPL} algorithms is a novel continuous-relaxation technique termed as \\emph{policy-based continuous extension}. Compared with the well-established \\emph{multi-linear extension}, a notable advantage of this new \\emph{policy-based continuous extension} is its ability to provide a lossless rounding scheme for any set function, thereby enabling us to tackle the challenging weakly submodular objectives. Finally, extensive simulations are conducted to validate the effectiveness of our proposed algorithms.",
+  "authors": [
+    "Qixin Zhang",
+    "Yan Sun",
+    "Can Jin",
+    "Xikun Zhang",
+    "Yao Shu",
+    "Puning Zhao",
+    "Li Shen",
+    "Dacheng Tao"
+  ],
+  "published": "2025-09-26T17:16:34Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.LG",
+    "math.OC"
+  ],
+  "url": "https://arxiv.org/abs/2509.22596"
+}

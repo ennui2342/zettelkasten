@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2510.02087",
+  "title": "Cooperative Guidance for Aerial Defense in Multiagent Systems",
+  "abstract": "This paper addresses a critical aerial defense challenge in contested airspace, involving three autonomous aerial vehicles -- a hostile drone (the pursuer), a high-value drone (the evader), and a protective drone (the defender). We present a cooperative guidance framework for the evader-defender team that guarantees interception of the pursuer before it can capture the evader, even under highly dynamic and uncertain engagement conditions. Unlike traditional heuristic, optimal control, or differential game-based methods, we approach the problem within a time-constrained guidance framework, leveraging true proportional navigation based approach that ensures robust and guaranteed solutions to the aerial defense problem. The proposed strategy is computationally lightweight, scalable to a large number of agent configurations, and does not require knowledge of the pursuer's strategy or control laws. From arbitrary initial geometries, our method guarantees that key engagement errors are driven to zero within a fixed time, leading to a successful mission. Extensive simulations across diverse and adversarial scenarios confirm the effectiveness of the proposed strategy and its relevance for real-time autonomous defense in contested airspace environments.",
+  "authors": [
+    "Shivam Bajpai",
+    "Abhinav Sinha",
+    "Shashi Ranjan Kumar"
+  ],
+  "published": "2025-10-02T14:54:08Z",
+  "primary_category": "eess.SY",
+  "categories": [
+    "eess.SY",
+    "cs.MA",
+    "cs.RO",
+    "math.DS"
+  ],
+  "url": "https://arxiv.org/abs/2510.02087"
+}

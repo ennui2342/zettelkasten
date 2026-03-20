@@ -1,0 +1,23 @@
+{
+  "arxiv_id": "2601.16993",
+  "title": "BibAgent: An Agentic Framework for Traceable Miscitation Detection in Scientific Literature",
+  "abstract": "Citations are the bedrock of scientific authority, yet their integrity is compromised by widespread miscitations: ranging from nuanced distortions to fabricated references. Systematic citation verification is currently unfeasible; manual review cannot scale to modern publishing volumes, while existing automated tools are restricted by abstract-only analysis or small-scale, domain-specific datasets in part due to the \"paywall barrier\" of full-text access. We introduce BibAgent, a scalable, end-to-end agentic framework for automated citation verification. BibAgent integrates retrieval, reasoning, and adaptive evidence aggregation, applying distinct strategies for accessible and paywalled sources. For paywalled references, it leverages a novel Evidence Committee mechanism that infers citation validity via downstream citation consensus. To support systematic evaluation, we contribute a 5-category Miscitation Taxonomy and MisciteBench, a massive cross-disciplinary benchmark comprising 6,350 miscitation samples spanning 254 fields. Our results demonstrate that BibAgent outperforms state-of-the-art Large Language Model (LLM) baselines in citation verification accuracy and interpretability, providing scalable, transparent detection of citation misalignments across the scientific literature.",
+  "authors": [
+    "Peiran Li",
+    "Fangzhou Lin",
+    "Shuo Xing",
+    "Xiang Zheng",
+    "Xi Hong",
+    "Siyuan Yang",
+    "Jiashuo Sun",
+    "Zhengzhong Tu",
+    "Chaoqun Ni"
+  ],
+  "published": "2026-01-12T16:30:45Z",
+  "primary_category": "cs.DL",
+  "categories": [
+    "cs.DL",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2601.16993"
+}

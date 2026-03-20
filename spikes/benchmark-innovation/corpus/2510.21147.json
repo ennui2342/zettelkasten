@@ -1,0 +1,22 @@
+{
+  "arxiv_id": "2510.21147",
+  "title": "Hierarchical AI Multi-Agent Fundamental Investing: Evidence from China's A-Share Market",
+  "abstract": "We present a multi-agent, AI-driven framework for fundamental investing that integrates macro indicators, industry-level and firm-specific information to construct optimized equity portfolios. The architecture comprises: (i) a Macro agent that dynamically screens and weights sectors based on evolving economic indicators and industry performance; (ii) four firm-level agents -- Fundamental, Technical, Report, and News -- that conduct in-depth analyses of individual firms to ensure both breadth and depth of coverage; (iii) a Portfolio agent that uses reinforcement learning to combine the agent outputs into a unified policy to generate the trading strategy; and (iv) a Risk Control agent that adjusts portfolio positions in response to market volatility. We evaluate the system on the constituents by the CSI 300 Index of China's A-share market and find that it consistently outperforms standard benchmarks and a state-of-the-art multi-agent trading system on risk-adjusted returns and drawdown control. Our core contribution is a hierarchical multi-agent design that links top-down macro screening with bottom-up fundamental analysis, offering a robust and extensible approach to factor-based portfolio construction.",
+  "authors": [
+    "Chujun He",
+    "Zhonghao Huang",
+    "Xiangguo Li",
+    "Ye Luo",
+    "Kewei Ma",
+    "Yuxuan Xiong",
+    "Xiaowei Zhang",
+    "Mingyang Zhao"
+  ],
+  "published": "2025-10-24T04:38:37Z",
+  "primary_category": "q-fin.PM",
+  "categories": [
+    "q-fin.PM",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2510.21147"
+}

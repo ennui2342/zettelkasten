@@ -1,0 +1,20 @@
+{
+  "arxiv_id": "2509.11508",
+  "title": "SafeDiver: Cooperative AUV-USV Assisted Diver Communication via Multi-agent Reinforcement Learning Approach",
+  "abstract": "As underwater human activities are increasing, the demand for underwater communication service presents a significant challenge. Existing underwater diver communication methods face hurdles due to inherent disadvantages and complex underwater environments. To address this issue, we propose a scheme that utilizes maritime unmanned systems to assist divers with reliable and high-speed communication. Multiple AUVs are equipped with optical and acoustic multimodal communication devices as relay nodes, providing adaptive communication services based on changes in the diver's activity area. By using a multi-agent reinforcement learning (MARL) approach to control the cooperative movement of AUVs, high-speed and reliable data transmission between divers can be achieved. At the same time, utilizing the advantages of on-demand deployment and wide coverage of unmanned surface vehicles (USVs) as surface relay nodes to coordinate and forward information from AUVs, and controlling AUVs to adaptively select relay USV nodes for data transmission, high-quality communication between divers and surface platform can be achieved. Through simulation verification, the proposed scheme can effectively achieve reliable and high-speed communication for divers.",
+  "authors": [
+    "Tinglong Deng",
+    "Hang Tao",
+    "Xinxiang Wang",
+    "Yinyan Wang",
+    "Hanjiang Luo"
+  ],
+  "published": "2025-09-15T01:44:28Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.LG",
+    "cs.RO"
+  ],
+  "url": "https://arxiv.org/abs/2509.11508"
+}

@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2510.10824",
+  "title": "Agentic RAG for Software Testing with Hybrid Vector-Graph and Multi-Agent Orchestration",
+  "abstract": "We present an approach to software testing automation using Agentic Retrieval-Augmented Generation (RAG) systems for Quality Engineering (QE) artifact creation. We combine autonomous AI agents with hybrid vector-graph knowledge systems to automate test plan, case, and QE metric generation. Our approach addresses traditional software testing limitations by leveraging LLMs such as Gemini and Mistral, multi-agent orchestration, and enhanced contextualization. The system achieves remarkable accuracy improvements from 65% to 94.8% while ensuring comprehensive document traceability throughout the quality engineering lifecycle. Experimental validation of enterprise Corporate Systems Engineering and SAP migration projects demonstrates an 85% reduction in testing timeline, an 85% improvement in test suite efficiency, and projected 35% cost savings, resulting in a 2-month acceleration of go-live.",
+  "authors": [
+    "Mohanakrishnan Hariharan",
+    "Satish Arvapalli",
+    "Seshu Barma",
+    "Evangeline Sheela"
+  ],
+  "published": "2025-10-12T22:25:15Z",
+  "primary_category": "cs.SE",
+  "categories": [
+    "cs.SE",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2510.10824"
+}

@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2602.21515",
+  "title": "Training Generalizable Collaborative Agents via Strategic Risk Aversion",
+  "abstract": "Many emerging agentic paradigms require agents to collaborate with one another (or people) to achieve shared goals. Unfortunately, existing approaches to learning policies for such collaborative problems produce brittle solutions that fail when paired with new partners. We attribute these failures to a combination of free-riding during training and a lack of strategic robustness. To address these problems, we study the concept of strategic risk aversion and interpret it as a principled inductive bias for generalizable cooperation with unseen partners. While strategically risk-averse players are robust to deviations in their partner's behavior by design, we show that, in collaborative games, they also (1) can have better equilibrium outcomes than those at classical game-theoretic concepts like Nash, and (2) exhibit less or no free-riding. Inspired by these insights, we develop a multi-agent reinforcement learning (MARL) algorithm that integrates strategic risk aversion into standard policy optimization methods. Our empirical results across collaborative benchmarks (including an LLM collaboration task) validate our theory and demonstrate that our approach consistently achieves reliable collaboration with heterogeneous and previously unseen partners across collaborative tasks.",
+  "authors": [
+    "Chengrui Qu",
+    "Yizhou Zhang",
+    "Nicolas Lanzetti",
+    "Eric Mazumdar"
+  ],
+  "published": "2026-02-25T03:06:59Z",
+  "primary_category": "cs.LG",
+  "categories": [
+    "cs.LG",
+    "cs.AI",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2602.21515"
+}

@@ -1,0 +1,22 @@
+{
+  "arxiv_id": "2602.07777",
+  "title": "Talk, Judge, Cooperate: Gossip-Driven Indirect Reciprocity in Self-Interested LLM Agents",
+  "abstract": "Indirect reciprocity, which means helping those who help others, is difficult to sustain among decentralized, self-interested LLM agents without reliable reputation systems. We introduce Agentic Linguistic Gossip Network (ALIGN), an automated framework where agents strategically share open-ended gossip using hierarchical tones to evaluate trustworthiness and coordinate social norms. We demonstrate that ALIGN consistently improves indirect reciprocity and resists malicious entrants by identifying and ostracizing defectors without changing intrinsic incentives. Notably, we find that stronger reasoning capabilities in LLMs lead to more incentive-aligned cooperation, whereas chat models often over-cooperate even when strategically suboptimal. These results suggest that leveraging LLM reasoning through decentralized gossip is a promising path for maintaining social welfare in agentic ecosystems. Our code is available at https://github.com/shuhui-zhu/ALIGN.",
+  "authors": [
+    "Shuhui Zhu",
+    "Yue Lin",
+    "Shriya Kaistha",
+    "Wenhao Li",
+    "Baoxiang Wang",
+    "Hongyuan Zha",
+    "Gillian K. Hadfield",
+    "Pascal Poupart"
+  ],
+  "published": "2026-02-08T02:25:32Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.GT"
+  ],
+  "url": "https://arxiv.org/abs/2602.07777"
+}

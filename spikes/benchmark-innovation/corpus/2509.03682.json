@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2509.03682",
+  "title": "A Comprehensive Review of Multi-Agent Reinforcement Learning in Video Games",
+  "abstract": "Recent advancements in multi-agent reinforcement learning (MARL) have demonstrated its application potential in modern games. Beginning with foundational work and progressing to landmark achievements such as AlphaStar in StarCraft II and OpenAI Five in Dota 2, MARL has proven capable of achieving superhuman performance across diverse game environments through techniques like self-play, supervised learning, and deep reinforcement learning. With its growing impact, a comprehensive review has become increasingly important in this field. This paper aims to provide a thorough examination of MARL's application from turn-based two-agent games to real-time multi-agent video games including popular genres such as Sports games, First-Person Shooter (FPS) games, Real-Time Strategy (RTS) games and Multiplayer Online Battle Arena (MOBA) games. We further analyze critical challenges posed by MARL in video games, including nonstationary, partial observability, sparse rewards, team coordination, and scalability, and highlight successful implementations in games like Rocket League, Minecraft, Quake III Arena, StarCraft II, Dota 2, Honor of Kings, etc. This paper offers insights into MARL in video game AI systems, proposes a novel method to estimate game complexity, and suggests future research directions to advance MARL and its applications in game development, inspiring further innovation in this rapidly evolving field.",
+  "authors": [
+    "Zhengyang Li",
+    "Qijin Ji",
+    "Xinghong Ling",
+    "Quan Liu"
+  ],
+  "published": "2025-09-03T20:05:58Z",
+  "primary_category": "cs.LG",
+  "categories": [
+    "cs.LG"
+  ],
+  "url": "https://arxiv.org/abs/2509.03682"
+}

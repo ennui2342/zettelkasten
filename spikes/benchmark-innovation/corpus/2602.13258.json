@@ -1,0 +1,16 @@
+{
+  "arxiv_id": "2602.13258",
+  "title": "MAPLE: A Sub-Agent Architecture for Memory, Learning, and Personalization in Agentic AI Systems",
+  "abstract": "Large language model (LLM) agents have emerged as powerful tools for complex tasks, yet their ability to adapt to individual users remains fundamentally limited. We argue this limitation stems from a critical architectural conflation: current systems treat memory, learning, and personalization as a unified capability rather than three distinct mechanisms requiring different infrastructure, operating on different timescales, and benefiting from independent optimization. We propose MAPLE (Memory-Adaptive Personalized LEarning), a principled decomposition where Memory handles storage and retrieval infrastructure; Learning extracts intelligence from accumulated interactions asynchronously; and Personalization applies learned knowledge in real-time within finite context budgets. Each component operates as a dedicated sub-agent with specialized tooling and well-defined interfaces. Experimental evaluation on the MAPLE-Personas benchmark demonstrates that our decomposition achieves a 14.6% improvement in personalization score compared to a stateless baseline (p < 0.01, Cohen's d = 0.95) and increases trait incorporation rate from 45% to 75% -- enabling agents that genuinely learn and adapt.",
+  "authors": [
+    "Deepak Babu Piskala"
+  ],
+  "published": "2026-02-03T03:46:39Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.CL",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2602.13258"
+}

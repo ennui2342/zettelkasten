@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2509.10018",
+  "title": "GAMA: A General Anonymizing Multi-Agent System for Privacy Preservation Enhanced by Domain Rules and Disproof Mechanism",
+  "abstract": "With the rapid advancement of Large Language Models (LLMs), LLM-based agents exhibit exceptional abilities in understanding and generating natural language, enabling human-like collaboration and information transmission in LLM-based Multi-Agent Systems (MAS). High-performance LLMs are often hosted on web servers in public cloud environments. When tasks involve private data, MAS cannot securely utilize these LLMs without implementing the agentic privacy-preserving mechanism. To address this challenge, we propose a General Anonymizing Multi-Agent System (GAMA), which divides the agents' workspace into private and public spaces, ensuring privacy through a structured anonymization mechanism. In the private space, agents handle sensitive data, while in the public web space, only anonymized data is utilized. GAMA incorporates two key modules to mitigate semantic loss caused by anonymization: Domain-Rule-based Knowledge Enhancement (DRKE) and Disproof-based Logic Enhancement (DLE). We evaluate GAMA on two general question-answering datasets, a public privacy leakage benchmark, and two customized question-answering datasets related to privacy. The results demonstrate that GAMA outperforms existing baselines on the evaluated datasets in terms of both task accuracy and privacy preservation metrics.",
+  "authors": [
+    "Hailong Yang",
+    "Renhuo Zhao",
+    "Guanjin Wang",
+    "Zhaohong Deng"
+  ],
+  "published": "2025-09-12T07:22:49Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2509.10018"
+}

@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2601.09746",
+  "title": "Multi-Agent Cooperative Learning for Robust Vision-Language Alignment under OOD Concepts",
+  "abstract": "This paper introduces a novel Multi-Agent Cooperative Learning (MACL) framework to address cross-modal alignment collapse in vision-language models when handling out-of-distribution (OOD) concepts. Four core agents, including image, text, name, and coordination agents, collaboratively mitigate modality imbalance through structured message passing. The proposed framework enables multi-agent feature space name learning, incorporates a context exchange enhanced few-shot learning algorithm, and adopts an adaptive dynamic balancing mechanism to regulate inter-agent contributions. Experiments on the VISTA-Beyond dataset demonstrate that MACL significantly improves performance in both few-shot and zero-shot settings, achieving 1-5% precision gains across diverse visual domains.",
+  "authors": [
+    "Philip Xu",
+    "Isabel Wagner",
+    "Eerke Boiten"
+  ],
+  "published": "2026-01-11T20:36:47Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI",
+    "cs.CV",
+    "cs.LG"
+  ],
+  "url": "https://arxiv.org/abs/2601.09746"
+}

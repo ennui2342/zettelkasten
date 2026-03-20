@@ -1,0 +1,23 @@
+{
+  "arxiv_id": "2602.13318",
+  "title": "DECKBench: Benchmarking Multi-Agent Frameworks for Academic Slide Generation and Editing",
+  "abstract": "Automatically generating and iteratively editing academic slide decks requires more than document summarization. It demands faithful content selection, coherent slide organization, layout-aware rendering, and robust multi-turn instruction following. However, existing benchmarks and evaluation protocols do not adequately measure these challenges. To address this gap, we introduce the Deck Edits and Compliance Kit Benchmark (DECKBench), an evaluation framework for multi-agent slide generation and editing. DECKBench is built on a curated dataset of paper to slide pairs augmented with realistic, simulated editing instructions. Our evaluation protocol systematically assesses slide-level and deck-level fidelity, coherence, layout quality, and multi-turn instruction following. We further implement a modular multi-agent baseline system that decomposes the slide generation and editing task into paper parsing and summarization, slide planning, HTML creation, and iterative editing. Experimental results demonstrate that the proposed benchmark highlights strengths, exposes failure modes, and provides actionable insights for improving multi-agent slide generation and editing systems. Overall, this work establishes a standardized foundation for reproducible and comparable evaluation of academic presentation generation and editing. Code and data are publicly available at https://github.com/morgan-heisler/DeckBench .",
+  "authors": [
+    "Daesik Jang",
+    "Morgan Lindsay Heisler",
+    "Linzi Xing",
+    "Yifei Li",
+    "Edward Wang",
+    "Ying Xiong",
+    "Yong Zhang",
+    "Zhenan Fan"
+  ],
+  "published": "2026-02-10T19:49:06Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.CV",
+    "cs.LG"
+  ],
+  "url": "https://arxiv.org/abs/2602.13318"
+}

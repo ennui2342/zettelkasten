@@ -1,0 +1,16 @@
+{
+  "arxiv_id": "2510.04488",
+  "title": "Multi-Agent Collaborative Intelligence: Dual-Dial Control for Reliable LLM Reasoning",
+  "abstract": "Multi-agent debate often wastes compute by using a fixed adversarial stance, aggregating without deliberation, or stopping on heuristics. We introduce MACI, an active controller with two independent dials that decouple information from behavior: an information dial that gates evidence by quality, and a behavior dial that schedules contentiousness from exploration to consolidation. A moderator tracks disagreement, overlap, evidence quality, and argument quality, and halts when gains plateau. We provide theory-lite guarantees for nonincreasing dispersion and provable termination, with a budget-feasible scheduler. Across clinical diagnosis and news-bias tasks, MACI improves accuracy and calibration while reducing tokens, and converts residual uncertainty into precision RAG plans that specify what to retrieve next. We use a cross-family LLM judge (CRIT) as a conservative soft weight and stop signal, validated for order invariance and judge-swap stability; stability depends on using high-capability judges. MACI turns debate into a budget-aware, measurable, and provably terminating controller.",
+  "authors": [
+    "Edward Y. Chang",
+    "Ethan Y. Chang"
+  ],
+  "published": "2025-10-06T04:52:17Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.IT"
+  ],
+  "url": "https://arxiv.org/abs/2510.04488"
+}

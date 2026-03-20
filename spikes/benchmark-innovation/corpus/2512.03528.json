@@ -1,0 +1,21 @@
+{
+  "arxiv_id": "2512.03528",
+  "title": "Multi-Agent Reinforcement Learning with Communication-Constrained Priors",
+  "abstract": "Communication is one of the effective means to improve the learning of cooperative policy in multi-agent systems. However, in most real-world scenarios, lossy communication is a prevalent issue. Existing multi-agent reinforcement learning with communication, due to their limited scalability and robustness, struggles to apply to complex and dynamic real-world environments. To address these challenges, we propose a generalized communication-constrained model to uniformly characterize communication conditions across different scenarios. Based on this, we utilize it as a learning prior to distinguish between lossy and lossless messages for specific scenarios. Additionally, we decouple the impact of lossy and lossless messages on distributed decision-making, drawing on a dual mutual information estimatior, and introduce a communication-constrained multi-agent reinforcement learning framework, quantifying the impact of communication messages into the global reward. Finally, we validate the effectiveness of our approach across several communication-constrained benchmarks.",
+  "authors": [
+    "Guang Yang",
+    "Tianpei Yang",
+    "Jingwen Qiao",
+    "Yanqing Wu",
+    "Jing Huo",
+    "Xingguo Chen",
+    "Yang Gao"
+  ],
+  "published": "2025-12-03T07:35:07Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2512.03528"
+}

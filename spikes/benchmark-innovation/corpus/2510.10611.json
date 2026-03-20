@@ -1,0 +1,22 @@
+{
+  "arxiv_id": "2510.10611",
+  "title": "HyperAgent: Leveraging Hypergraphs for Topology Optimization in Multi-Agent Communication",
+  "abstract": "Recent advances in large language model-powered multi-agent systems have demonstrated remarkable collective intelligence through effective communication. However, existing approaches face two primary challenges: (i) \\textit{Ineffective group collaboration modeling}, as they rely on pairwise edge representations in graph structures, limiting their ability to capture relationships among multiple agents; and (ii) \\textit{Limited task-adaptiveness in communication topology design}, leading to excessive communication cost for simple tasks and insufficient coordination for complex scenarios. These issues restrict the scalability and practical deployment of adaptive collaboration frameworks. To address these challenges, we propose \\textbf{HyperAgent}, a hypergraph-based framework that optimizes communication topologies and effectively captures group collaboration patterns using direct hyperedge representations. Unlike edge-based approaches, HyperAgent uses hyperedges to link multiple agents within the same subtask and employs hypergraph convolutional layers to achieve one-step information aggregation in collaboration groups. Additionally, it incorporates a variational autoencoder framework with sparsity regularization to dynamically adjust hypergraph topologies based on task complexity. Experiments highlight the superiority of HyperAgent in both performance and efficiency. For instance, on GSM8K, HyperAgent achieves 95.07\\% accuracy while reducing token consumption by 25.33\\%, demonstrating the potential of hypergraph-based optimization for multi-agent communication.",
+  "authors": [
+    "Heng Zhang",
+    "Yuling Shi",
+    "Xiaodong Gu",
+    "Zijian Zhang",
+    "Haochen You",
+    "Lubin Gan",
+    "Yilei Yuan",
+    "Jin Huang"
+  ],
+  "published": "2025-10-12T13:47:42Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.GR"
+  ],
+  "url": "https://arxiv.org/abs/2510.10611"
+}

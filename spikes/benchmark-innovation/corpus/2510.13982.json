@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2510.13982",
+  "title": "Static Sandboxes Are Inadequate: Modeling Societal Complexity Requires Open-Ended Co-Evolution in LLM-Based Multi-Agent Simulations",
+  "abstract": "What if artificial agents could not just communicate, but also evolve, adapt, and reshape their worlds in ways we cannot fully predict? With llm now powering multi-agent systems and social simulations, we are witnessing new possibilities for modeling open-ended, ever-changing environments. Yet, most current simulations remain constrained within static sandboxes, characterized by predefined tasks, limited dynamics, and rigid evaluation criteria. These limitations prevent them from capturing the complexity of real-world societies. In this paper, we argue that static, task-specific benchmarks are fundamentally inadequate and must be rethought. We critically review emerging architectures that blend llm with multi-agent dynamics, highlight key hurdles such as balancing stability and diversity, evaluating unexpected behaviors, and scaling to greater complexity, and introduce a fresh taxonomy for this rapidly evolving field. Finally, we present a research roadmap centered on open-endedness, continuous co-evolution, and the development of resilient, socially aligned AI ecosystems. We call on the community to move beyond static paradigms and help shape the next generation of adaptive, socially-aware multi-agent simulations.",
+  "authors": [
+    "Jinkun Chen",
+    "Sher Badshah",
+    "Xuemin Yu",
+    "Sijia Han"
+  ],
+  "published": "2025-10-15T18:05:06Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2510.13982"
+}

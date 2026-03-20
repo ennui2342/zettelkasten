@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2512.05447",
+  "title": "Distributed scalable coupled policy algorithm for networked multi-agent reinforcement learning",
+  "abstract": "This paper studies networked multi-agent reinforcement learning (NMARL) with interdependent rewards and coupled policies. In this setting, each agent's reward depends on its own state-action pair as well as those of its direct neighbors, and each agent's policy is parameterized by its local parameters together with those of its $κ_{p}$-hop neighbors, with $κ_{p}\\geq 1$ denoting the coupled radius. The objective of the agents is to collaboratively optimize their policies to maximize the discounted average cumulative reward. To address the challenge of interdependent policies in collaborative optimization, we introduce a novel concept termed the neighbors' averaged $Q$-function and derive a new expression for the coupled policy gradient. Based on these theoretical foundations, we develop a distributed scalable coupled policy (DSCP) algorithm, where each agent relies only on the state-action pairs of its $κ_{p}$-hop neighbors and the rewards of its $(κ_{p}+1)$-hop neighbors. Specially, in the DSCP algorithm, we employ a geometric 2-horizon sampling method that does not require storing a full $Q$-table to obtain an unbiased estimate of the coupled policy gradient. Moreover, each agent interacts exclusively with its direct neighbors to obtain accurate policy parameters, while maintaining local estimates of other agents' parameters to execute its local policy and collect samples for optimization. These estimates and policy parameters are updated via a push-sum protocol, enabling distributed coordination of policy updates across the network. We prove that the joint policy produced by the proposed algorithm converges to a first-order stationary point of the objective function. Finally, the effectiveness of DSCP algorithm is demonstrated through simulations in a robot path planning environment, showing clear improvement over state-of-the-art methods.",
+  "authors": [
+    "Pengcheng Dai",
+    "Dongming Wang",
+    "Wenwu Yu",
+    "Wei Ren"
+  ],
+  "published": "2025-12-05T05:51:14Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2512.05447"
+}

@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2511.15825",
+  "title": "IMACT-CXR - An Interactive Multi-Agent Conversational Tutoring System for Chest X-Ray Interpretation",
+  "abstract": "IMACT-CXR is an interactive multi-agent conversational tutor that helps trainees interpret chest X-rays by unifying spatial annotation, gaze analysis, knowledge retrieval, and image-grounded reasoning in a single AutoGen-based workflow. The tutor simultaneously ingests learner bounding boxes, gaze samples, and free-text observations. Specialized agents evaluate localization quality, generate Socratic coaching, retrieve PubMed evidence, suggest similar cases from REFLACX, and trigger NV-Reason-CXR-3B for vision-language reasoning when mastery remains low or the learner explicitly asks. Bayesian Knowledge Tracing (BKT) maintains skill-specific mastery estimates that drive both knowledge reinforcement and case similarity retrieval. A lung-lobe segmentation module derived from a TensorFlow U-Net enables anatomically aware gaze feedback, and safety prompts prevent premature disclosure of ground-truth labels. We describe the system architecture, implementation highlights, and integration with the REFLACX dataset for real DICOM cases. IMACT-CXR demonstrates responsive tutoring flows with bounded latency, precise control over answer leakage, and extensibility toward live residency deployment. Preliminary evaluation shows improved localization and diagnostic reasoning compared to baselines.",
+  "authors": [
+    "Tuan-Anh Le",
+    "Anh Mai Vu",
+    "David Yang",
+    "Akash Awasthi",
+    "Hien Van Nguyen"
+  ],
+  "published": "2025-11-19T19:32:29Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2511.15825"
+}

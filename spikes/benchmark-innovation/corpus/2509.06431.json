@@ -1,0 +1,16 @@
+{
+  "arxiv_id": "2509.06431",
+  "title": "HECATE: An ECS-based Framework for Teaching and Developing Multi-Agent Systems",
+  "abstract": "This paper introduces HECATE, a novel framework based on the Entity-Component-System (ECS) architectural pattern that bridges the gap between distributed systems engineering and MAS development. HECATE is built using the Entity-Component-System architectural pattern, leveraging data-oriented design to implement multiagent systems. This approach involves engineering multiagent systems (MAS) from a distributed systems (DS) perspective, integrating agent concepts directly into the DS domain. This approach simplifies MAS development by (i) reducing the need for specialized agent knowledge and (ii) leveraging familiar DS patterns and standards to minimize the agent-specific knowledge required for engineering MAS. We present the framework's architecture, core components, and implementation approach, demonstrating how it supports different agent models.",
+  "authors": [
+    "Arthur Casals",
+    "Anarosa A. F. Brandão"
+  ],
+  "published": "2025-09-08T08:26:01Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2509.06431"
+}

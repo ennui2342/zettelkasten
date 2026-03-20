@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2512.14321",
+  "title": "Multi-Agent Medical Decision Consensus Matrix System: An Intelligent Collaborative Framework for Oncology MDT Consultations",
+  "abstract": "Multidisciplinary team (MDT) consultations are the gold standard for cancer care decision-making, yet current practice lacks structured mechanisms for quantifying consensus and ensuring decision traceability. We introduce a Multi-Agent Medical Decision Consensus Matrix System that deploys seven specialized large language model agents, including an oncologist, a radiologist, a nurse, a psychologist, a patient advocate, a nutritionist and a rehabilitation therapist, to simulate realistic MDT workflows. The framework incorporates a mathematically grounded consensus matrix that uses Kendall's coefficient of concordance to objectively assess agreement. To further enhance treatment recommendation quality and consensus efficiency, the system integrates reinforcement learning methods, including Q-Learning, PPO and DQN. Evaluation across five medical benchmarks (MedQA, PubMedQA, DDXPlus, MedBullets and SymCat) shows substantial gains over existing approaches, achieving an average accuracy of 87.5% compared with 83.8% for the strongest baseline, a consensus achievement rate of 89.3% and a mean Kendall's W of 0.823. Expert reviewers rated the clinical appropriateness of system outputs at 8.9/10. The system guarantees full evidence traceability through mandatory citations of clinical guidelines and peer-reviewed literature, following GRADE principles. This work advances medical AI by providing structured consensus measurement, role-specialized multi-agent collaboration and evidence-based explainability to improve the quality and efficiency of clinical decision-making.",
+  "authors": [
+    "Xudong Han",
+    "Xianglun Gao",
+    "Xiaoyi Qu",
+    "Zhenyu Yu"
+  ],
+  "published": "2025-12-16T11:35:09Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2512.14321"
+}

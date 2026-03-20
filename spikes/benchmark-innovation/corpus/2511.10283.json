@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2511.10283",
+  "title": "Behavior Modeling for Training-free Building of Private Domain Multi Agent System",
+  "abstract": "The rise of agentic systems that combine orchestration, tool use, and conversational capabilities, has been more visible by the recent advent of large language models (LLMs). While open-domain frameworks exist, applying them in private domains remains difficult due to heterogeneous tool formats, domain-specific jargon, restricted accessibility of APIs, and complex governance. Conventional solutions, such as fine-tuning on synthetic dialogue data, are burdensome and brittle under domain shifts, and risk degrading general performance. In this light, we introduce a framework for private-domain multi-agent conversational systems that avoids training and data generation by adopting behavior modeling and documentation. Our design simply assumes an orchestrator, a tool-calling agent, and a general chat agent, with tool integration defined through structured specifications and domain-informed instructions. This approach enables scalable adaptation to private tools and evolving contexts without continual retraining. The framework supports practical use cases, including lightweight deployment of multi-agent systems, leveraging API specifications as retrieval resources, and generating synthetic dialogue for evaluation -- providing a sustainable method for aligning agent behavior with domain expertise in private conversational ecosystems.",
+  "authors": [
+    "Won Ik Cho",
+    "Woonghee Han",
+    "Kyung Seo Ki",
+    "Young Min Kim"
+  ],
+  "published": "2025-11-13T13:14:06Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2511.10283"
+}

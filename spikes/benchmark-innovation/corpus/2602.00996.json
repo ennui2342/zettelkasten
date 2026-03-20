@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2602.00996",
+  "title": "DeALOG: Decentralized Multi-Agents Log-Mediated Reasoning Framework",
+  "abstract": "Complex question answering across text, tables and images requires integrating diverse information sources. A framework supporting specialized processing with coordination and interpretability is needed. We introduce DeALOG, a decentralized multi-agent framework for multimodal question answering. It uses specialized agents: Table, Context, Visual, Summarizing and Verification, that communicate through a shared natural-language log as persistent memory. This log-based approach enables collaborative error detection and verification without central control, improving robustness. Evaluations on FinQA, TAT-QA, CRT-QA, WikiTableQuestions, FeTaQA, and MultiModalQA show competitive performance. Analysis confirms the importance of the shared log, agent specialization, and verification for accuracy. DeALOG, provides a scalable approach through modular components using natural-language communication.",
+  "authors": [
+    "Abhijit Chakraborty",
+    "Ashish Raj Shekhar",
+    "Shiven Agarwal",
+    "Vivek Gupta"
+  ],
+  "published": "2026-02-01T03:26:52Z",
+  "primary_category": "cs.CL",
+  "categories": [
+    "cs.CL",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2602.00996"
+}

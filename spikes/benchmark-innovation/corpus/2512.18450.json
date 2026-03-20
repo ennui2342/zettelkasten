@@ -1,0 +1,21 @@
+{
+  "arxiv_id": "2512.18450",
+  "title": "Agent-Based Output Drift Detection for Breast Cancer Response Prediction in a Multisite Clinical Decision Support System",
+  "abstract": "Modern clinical decision support systems can concurrently serve multiple, independent medical imaging institutions, but their predictive performance may degrade across sites due to variations in patient populations, imaging hardware, and acquisition protocols. Continuous surveillance of predictive model outputs offers a safe and reliable approach for identifying such distributional shifts without ground truth labels. However, most existing methods rely on centralized monitoring of aggregated predictions, overlooking site-specific drift dynamics. We propose an agent-based framework for detecting drift and assessing its severity in multisite clinical AI systems. To evaluate its effectiveness, we simulate a multi-center environment for output-based drift detection, assigning each site a drift monitoring agent that performs batch-wise comparisons of model outputs against a reference distribution. We analyse several multi-center monitoring schemes, that differ in how the reference is obtained (site-specific, global, production-only and adaptive), alongside a centralized baseline. Results on real-world breast cancer imaging data using a pathological complete response prediction model shows that all multi-center schemes outperform centralized monitoring, with F1-score improvements up to 10.3% in drift detection. In the absence of site-specific references, the adaptive scheme performs best, with F1-scores of 74.3% for drift detection and 83.7% for drift severity classification. These findings suggest that adaptive, site-aware agent-based drift monitoring can enhance reliability of multisite clinical decision support systems.",
+  "authors": [
+    "Xavier Rafael-Palou",
+    "Jose Munuera",
+    "Ana Jimenez-Pastor",
+    "Richard Osuala",
+    "Karim Lekadir",
+    "Oliver Diaz"
+  ],
+  "published": "2025-12-20T17:49:14Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.CV",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2512.18450"
+}

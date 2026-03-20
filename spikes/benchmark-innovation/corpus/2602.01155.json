@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2602.01155",
+  "title": "Multi-Agent Causal Reasoning System for Error Pattern Rule Automation in Vehicles",
+  "abstract": "Modern vehicles generate thousands of different discrete events known as Diagnostic Trouble Codes (DTCs). Automotive manufacturers use Boolean combinations of these codes, called error patterns (EPs), to characterize system faults and ensure vehicle safety. Yet, EP rules are still manually handcrafted by domain experts, a process that is expensive and prone to errors as vehicle complexity grows. This paper introduces CAREP (Causal Automated Reasoning for Error Patterns), a multi-agent system that automatizes the generation of EP rules from high-dimensional event sequences of DTCs. CAREP combines a causal discovery agent that identifies potential DTC-EP relations, a contextual information agent that integrates metadata and descriptions, and an orchestrator agent that synthesizes candidate boolean rules together with interpretable reasoning traces. Evaluation on a large-scale automotive dataset with over 29,100 unique DTCs and 474 error patterns demonstrates that CAREP can automatically and accurately discover the unknown EP rules, outperforming LLM-only baselines while providing transparent causal explanations. By uniting practical causal discovery and agent-based reasoning, CAREP represents a step toward fully automated fault diagnostics, enabling scalable, interpretable, and cost-efficient vehicle maintenance.",
+  "authors": [
+    "Hugo Math",
+    "Julian Lorenz",
+    "Stefan Oelsner",
+    "Rainer Lienhart"
+  ],
+  "published": "2026-02-01T11:06:03Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.SE"
+  ],
+  "url": "https://arxiv.org/abs/2602.01155"
+}

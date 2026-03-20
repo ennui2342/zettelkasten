@@ -1,0 +1,15 @@
+{
+  "arxiv_id": "2512.06595",
+  "title": "ChargingBoul: A Competitive Negotiating Agent with Novel Opponent Modeling",
+  "abstract": "Automated negotiation has emerged as a critical area of research in multiagent systems, with applications spanning e-commerce, resource allocation, and autonomous decision-making. This paper presents ChargingBoul, a negotiating agent that competed in the 2022 Automated Negotiating Agents Competition (ANAC) and placed second in individual utility by an exceptionally narrow margin. ChargingBoul employs a lightweight yet effective strategy that balances concession and opponent modeling to achieve high negotiation outcomes. The agent classifies opponents based on bid patterns, dynamically adjusts its bidding strategy, and applies a concession policy in later negotiation stages to maximize utility while fostering agreements. We evaluate ChargingBoul's performance using competition results and subsequent studies that have utilized the agent in negotiation research. Our analysis highlights ChargingBoul's effectiveness across diverse opponent strategies and its contributions to advancing automated negotiation techniques. We also discuss potential enhancements, including more sophisticated opponent modeling and adaptive bidding heuristics, to improve its performance further.",
+  "authors": [
+    "Joe Shymanski"
+  ],
+  "published": "2025-12-06T23:32:11Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2512.06595"
+}

@@ -1,0 +1,21 @@
+{
+  "arxiv_id": "2602.04129",
+  "title": "KGLAMP: Knowledge Graph-guided Language model for Adaptive Multi-robot Planning and Replanning",
+  "abstract": "Heterogeneous multi-robot systems are increasingly deployed in long-horizon missions that require coordination among robots with diverse capabilities. However, existing planning approaches struggle to construct accurate symbolic representations and maintain plan consistency in dynamic environments. Classical PDDL planners require manually crafted symbolic models, while LLM-based planners often ignore agent heterogeneity and environmental uncertainty. We introduce KGLAMP, a knowledge-graph-guided LLM planning framework for heterogeneous multi-robot teams. The framework maintains a structured knowledge graph encoding object relations, spatial reachability, and robot capabilities, which guides the LLM in generating accurate PDDL problem specifications. The knowledge graph serves as a persistent, dynamically updated memory that incorporates new observations and triggers replanning upon detecting inconsistencies, enabling symbolic plans to adapt to evolving world states. Experiments on the MAT-THOR benchmark show that KGLAMP improves performance by at least 25.5% over both LLM-only and PDDL-based variants.",
+  "authors": [
+    "Chak Lam Shek",
+    "Faizan M. Tariq",
+    "Sangjae Bae",
+    "David Isele",
+    "Piyush Gupta"
+  ],
+  "published": "2026-02-04T01:46:02Z",
+  "primary_category": "cs.RO",
+  "categories": [
+    "cs.RO",
+    "cs.AI",
+    "cs.ET",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2602.04129"
+}

@@ -1,0 +1,16 @@
+{
+  "arxiv_id": "2512.17914",
+  "title": "Q-KVComm: Efficient Multi-Agent Communication Via Adaptive KV Cache Compression",
+  "abstract": "Multi-agent Large Language Model (LLM) systems face a critical bottleneck: redundant transmission of contextual information between agents consumes excessive bandwidth and computational resources. Traditional approaches discard internal semantic representations and transmit raw text, forcing receiving agents to recompute similar representations from scratch. We introduce Q-KVComm, a new protocol that enables direct transmission of compressed key-value (KV) cache representations between LLM agents. Q-KVComm combines three key innovations: (1) adaptive layer-wise quantization that allocates variable bit-widths based on sensitivity profiling, (2) hybrid information extraction that preserves critical facts across content domains, and (3) heterogeneous model calibration establishing cross-architecture communication. Extensive experiments across three diverse question-answering datasets demonstrate that Q-KVComm achieves 5-6x compression ratios while maintaining semantic fidelity, with coherence quality scores above 0.77 across all scenarios. The protocol exhibits robust performance across model sizes (1.1B-1.5B parameters) and adapts to real-world applications including conversational QA and multi-hop reasoning. Our work establishes a new paradigm for LLM agent communication, shifting from text-based to representation-based information exchange.",
+  "authors": [
+    "Boris Kriuk",
+    "Logic Ng"
+  ],
+  "published": "2025-11-27T10:45:41Z",
+  "primary_category": "cs.CL",
+  "categories": [
+    "cs.CL",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2512.17914"
+}

@@ -1,0 +1,16 @@
+{
+  "arxiv_id": "2602.18773",
+  "title": "LAMMI-Pathology: A Tool-Centric Bottom-Up LVLM-Agent Framework for Molecularly Informed Medical Intelligence in Pathology",
+  "abstract": "The emergence of tool-calling-based agent systems introduces a more evidence-driven paradigm for pathology image analysis in contrast to the coarse-grained text-image diagnostic approaches. With the recent large-scale experimental adoption of spatial transcriptomics technologies, molecularly validated pathological diagnosis is becoming increasingly open and accessible. In this work, we propose LAMMI-Pathology (LVLM-Agent System for Molecularly Informed Medical Intelligence in Pathology), a scalable agent framework for domain-specific agent tool-calling. LAMMI-Pathology adopts a tool-centric, bottom-up architecture in which customized domain-adaptive tools serve as the foundation. These tools are clustered by domain style to form component agents, which are then coordinated through a top-level planner hierarchically, avoiding excessively long context lengths that could induce task drift. Based on that, we introduce a novel trajectory construction mechanism based on Atomic Execution Nodes (AENs), which serve as reliable and composable units for building semi-simulated reasoning trajectories that capture credible agent-tool interactions. Building on this foundation, we develop a trajectory-aware fine-tuning strategy that aligns the planner's decision-making process with these multi-step reasoning trajectories, thereby enhancing inference robustness in pathology understanding and its adaptive use of the customized toolset.",
+  "authors": [
+    "Haoyang Su",
+    "Shaoting Zhang",
+    "Xiaosong Wang"
+  ],
+  "published": "2026-02-21T09:51:32Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2602.18773"
+}

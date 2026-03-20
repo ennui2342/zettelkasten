@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2601.07152",
+  "title": "Agents of Diffusion: Enhancing Diffusion Language Models with Multi-Agent Reinforcement Learning for Structured Data Generation (Extended Version)",
+  "abstract": "Generating high-quality structured data such as JSON records, remains a fundamental challenge for large language models (LLMs), particularly when semantic richness must coexist with strict schema adherence. While autoregressive LLMs offer strong structural consistency, they often struggle with semantic variation and output diversity. In contrast, diffusion language models (DLMs) introduce powerful mechanisms for semantic richness and bidirectional decoding, yet lack the inductive biases needed for reliable structure preservation. We present Agents of Diffusion (AoD), a novel framework that unifies the generative flexibility of DLMs with the reasoning capabilities of autoregressive models through language-mediated reinforcement learning. AoD frames structured text generation as a multi-agent alignment process, where a prompt optimization agent collaborates with a judge agent to iteratively guide a DLM using natural language feedback. This approach enables controllable, schema-consistent generation without modifying model parameters or relying on handcrafted constraints. AoD advances the state of controllable generation by demonstrating that diffusion models, when supervised by cooperative agents, can achieve both high semantic novelty and structural fidelity. Across multiple structured data benchmarks, AoD consistently outperforms diffusion and autoregressive baselines, establishing a new path forward for structure-aware, diversity-enhanced text synthesis.",
+  "authors": [
+    "Aja Khanal",
+    "Kaushik T. Ranade",
+    "Rishabh Agrawal",
+    "Kalyan S. Basu",
+    "Apurva Narayan"
+  ],
+  "published": "2026-01-12T02:49:09Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2601.07152"
+}

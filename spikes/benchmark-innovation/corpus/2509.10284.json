@@ -1,0 +1,20 @@
+{
+  "arxiv_id": "2509.10284",
+  "title": "A Holistic Architecture for Monitoring and Optimization of Robust Multi-Agent Path Finding Plan Execution",
+  "abstract": "The goal of Multi-Agent Path Finding (MAPF) is to find a set of paths for a fleet of agents moving in a shared environment such that the agents reach their goals without colliding with each other. In practice, some of the robots executing the plan may get delayed, which can introduce collision risk. Although robust execution methods are used to ensure safety even in the presence of delays, the delays may still have a significant impact on the duration of the execution. At some point, the accumulated delays may become significant enough that instead of continuing with the execution of the original plan, even if it was optimal, there may now exist an alternate plan which will lead to a shorter execution. However, the problem is how to decide when to search for the alternate plan, since it is a costly procedure. In this paper, we propose a holistic architecture for robust execution of MAPF plans, its monitoring and optimization. We exploit a robust execution method called Action Dependency Graph to maintain an estimate of the expected execution duration during the plan's execution. This estimate is used to predict the potential that finding an alternate plan would lead to shorter execution. We empirically evaluate the architecture in experiments in a real-time simulator which we designed to mimic our real-life demonstrator of an autonomous warehouse robotic fleet.",
+  "authors": [
+    "David Zahrádka",
+    "Denisa Mužíková",
+    "David Woller",
+    "Miroslav Kulich",
+    "Jiří Švancara",
+    "Roman Barták"
+  ],
+  "published": "2025-09-12T14:23:02Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.RO"
+  ],
+  "url": "https://arxiv.org/abs/2509.10284"
+}

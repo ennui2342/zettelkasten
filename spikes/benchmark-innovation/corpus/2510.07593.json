@@ -1,0 +1,24 @@
+{
+  "arxiv_id": "2510.07593",
+  "title": "AgentAsk: Multi-Agent Systems Need to Ask",
+  "abstract": "Multi-agent systems (MAS) built on large language models promise improved problem-solving through collaboration, yet they often fail to consistently outperform strong single-agent baselines due to error propagation at inter-agent message handoffs.In this work, we conduct a systematic empirical analysis of such failures and introduce an edge-level error taxonomy that identifies four dominant error types: Data Gap, Signal Corruption, Referential Drift, and Capability Gap, as primary sources of failure in multi-agent interactions. Building on this taxonomy, we propose AgentAsk, a lightweight clarification module designed to intervene at the edge level in MAS to prevent cascading errors. The module operates by strategically applying minimal clarifications at critical points within the system, improving the accuracy and efficiency of the overall task. AgentAsk is trained to balance the trade-offs between clarification cost, latency, and accuracy, while it is also architecture-agnostic and can be easily integrated into existing systems. Evaluated across five benchmarks, AgentAsk consistently improves accuracy by up to 4.69%, while keeping latency and extra costs below 10% compared to baseline MAS, showcasing its high efficiency and minimal overhead.",
+  "authors": [
+    "Bohan Lin",
+    "Kuo Yang",
+    "Zelin Tan",
+    "Yingchuan Lai",
+    "Chen Zhang",
+    "Guibin Zhang",
+    "Xinlei Yu",
+    "Miao Yu",
+    "Xu Wang",
+    "Yudong Zhang",
+    "Yang Wang"
+  ],
+  "published": "2025-10-08T22:36:05Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2510.07593"
+}

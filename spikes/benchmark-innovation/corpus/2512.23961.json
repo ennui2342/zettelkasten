@@ -1,0 +1,16 @@
+{
+  "arxiv_id": "2512.23961",
+  "title": "An Comparative Analysis about KYC on a Recommendation System Toward Agentic Recommendation System",
+  "abstract": "This research presents a cutting-edge recommendation system utilizing agentic AI for KYC (Know Your Customer in the financial domain), and its evaluation across five distinct content verticals: Advertising (Ad), News, Gossip, Sharing (User-Generated Content), and Technology (Tech). The study compares the performance of four experimental groups, grouping by the intense usage of KYC, benchmarking them against the Normalized Discounted Cumulative Gain (nDCG) metric at truncation levels of $k=1$, $k=3$, and $k=5$. By synthesizing experimental data with theoretical frameworks and industry benchmarks from platforms such as Baidu and Xiaohongshu, this research provides insight by showing experimental results for engineering a large-scale agentic recommendation system.",
+  "authors": [
+    "Junjie H. Xu"
+  ],
+  "published": "2025-12-30T03:25:49Z",
+  "primary_category": "cs.IR",
+  "categories": [
+    "cs.IR",
+    "cs.AI",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2512.23961"
+}

@@ -1,0 +1,14 @@
+{
+  "arxiv_id": "2512.06645",
+  "title": "Analyzing Collision Rates in Large-Scale Mixed Traffic Control via Multi-Agent Reinforcement Learning",
+  "abstract": "Vehicle collisions remain a major challenge in large-scale mixed traffic systems, especially when human-driven vehicles (HVs) and robotic vehicles (RVs) interact under dynamic and uncertain conditions. Although Multi-Agent Reinforcement Learning (MARL) offers promising capabilities for traffic signal control, ensuring safety in such environments remains difficult. As a direct indicator of traffic risk, the collision rate must be well understood and incorporated into traffic control design. This study investigates the primary factors influencing collision rates in a MARL-governed Mixed Traffic Control (MTC) network. We examine three dimensions: total vehicle count, signalized versus unsignalized intersection configurations, and turning-movement strategies. Through controlled simulation experiments, we evaluate how each factor affects collision likelihood. The results show that collision rates are sensitive to traffic density, the level of signal coordination, and turning-control design. These findings provide practical insights for improving the safety and robustness of MARL-based mixed traffic control systems, supporting the development of intelligent transportation systems in which both efficiency and safety are jointly optimized.",
+  "authors": [
+    "Muyang Fan"
+  ],
+  "published": "2025-12-07T03:52:55Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2512.06645"
+}

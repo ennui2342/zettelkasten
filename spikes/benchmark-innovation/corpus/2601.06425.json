@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2601.06425",
+  "title": "HiDVFS: A Hierarchical Multi-Agent DVFS Scheduler for OpenMP DAG Workloads",
+  "abstract": "With advancements in multicore embedded systems, leakage power, exponentially tied to chip temperature, has surpassed dynamic power consumption. Energy-aware solutions use dynamic voltage and frequency scaling (DVFS) to mitigate overheating in performance-intensive scenarios, while software approaches allocate high-utilization tasks across core configurations in parallel systems to reduce power. However, existing heuristics lack per-core frequency monitoring, failing to address overheating from uneven core activity, and task assignments without detailed profiling overlook irregular execution patterns. We target OpenMP DAG workloads. Because makespan, energy, and thermal goals often conflict within a single benchmark, this work prioritizes performance (makespan) while reporting energy and thermal as secondary outcomes. To overcome these issues, we propose HiDVFS (a hierarchical multi-agent, performance-aware DVFS scheduler) for parallel systems that optimizes task allocation based on profiling data, core temperatures, and makespan-first objectives. It employs three agents: one selects cores and frequencies using profiler data, another manages core combinations via temperature sensors, and a third sets task priorities during resource contention. A makespan-focused reward with energy and temperature regularizers estimates future states and enhances sample efficiency. Experiments on the NVIDIA Jetson TX2 using the BOTS suite (9 benchmarks) compare HiDVFS against state-of-the-art approaches. With multi-seed validation (seeds 42, 123, 456), HiDVFS achieves the best finetuned performance with 4.16 plus/minus 0.58s average makespan (L10), representing a 3.44x speedup over GearDVFS (14.32 plus/minus 2.61s) and 50.4% energy reduction (63.7 kJ vs 128.4 kJ). Across all BOTS benchmarks, HiDVFS achieves an average 3.95x speedup and 47.1% energy reduction.",
+  "authors": [
+    "Mohammad Pivezhandi",
+    "Abusayeed Saifullah",
+    "Ali Jannesari"
+  ],
+  "published": "2026-01-10T04:42:42Z",
+  "primary_category": "cs.DC",
+  "categories": [
+    "cs.DC",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2601.06425"
+}

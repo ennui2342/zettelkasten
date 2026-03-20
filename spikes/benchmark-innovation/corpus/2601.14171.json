@@ -1,0 +1,20 @@
+{
+  "arxiv_id": "2601.14171",
+  "title": "Paper2Rebuttal: A Multi-Agent Framework for Transparent Author Response Assistance",
+  "abstract": "Writing effective rebuttals is a high-stakes task that demands more than linguistic fluency, as it requires precise alignment between reviewer intent and manuscript details. Current solutions typically treat this as a direct-to-text generation problem, suffering from hallucination, overlooked critiques, and a lack of verifiable grounding. To address these limitations, we introduce $\\textbf{RebuttalAgent}$, the first multi-agents framework that reframes rebuttal generation as an evidence-centric planning task. Our system decomposes complex feedback into atomic concerns and dynamically constructs hybrid contexts by synthesizing compressed summaries with high-fidelity text while integrating an autonomous and on-demand external search module to resolve concerns requiring outside literature. By generating an inspectable response plan before drafting, $\\textbf{RebuttalAgent}$ ensures that every argument is explicitly anchored in internal or external evidence. We validate our approach on the proposed $\\textbf{RebuttalBench}$ and demonstrate that our pipeline outperforms strong baselines in coverage, faithfulness, and strategic coherence, offering a transparent and controllable assistant for the peer review process. Code will be released.",
+  "authors": [
+    "Qianli Ma",
+    "Chang Guo",
+    "Zhiheng Tian",
+    "Siyu Wang",
+    "Jipeng Xiao",
+    "Yuanhao Yue",
+    "Zhipeng Zhang"
+  ],
+  "published": "2026-01-20T17:23:51Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2601.14171"
+}

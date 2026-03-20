@@ -1,0 +1,21 @@
+{
+  "arxiv_id": "2512.10975",
+  "title": "Agent-Based Modular Learning for Multimodal Emotion Recognition in Human-Agent Systems",
+  "abstract": "Effective human-agent interaction (HAI) relies on accurate and adaptive perception of human emotional states. While multimodal deep learning models - leveraging facial expressions, speech, and textual cues - offer high accuracy in emotion recognition, their training and maintenance are often computationally intensive and inflexible to modality changes. In this work, we propose a novel multi-agent framework for training multimodal emotion recognition systems, where each modality encoder and the fusion classifier operate as autonomous agents coordinated by a central supervisor. This architecture enables modular integration of new modalities (e.g., audio features via emotion2vec), seamless replacement of outdated components, and reduced computational overhead during training. We demonstrate the feasibility of our approach through a proof-of-concept implementation supporting vision, audio, and text modalities, with the classifier serving as a shared decision-making agent. Our framework not only improves training efficiency but also contributes to the design of more flexible, scalable, and maintainable perception modules for embodied and virtual agents in HAI scenarios.",
+  "authors": [
+    "Matvey Nepomnyaschiy",
+    "Oleg Pereziabov",
+    "Anvar Tliamov",
+    "Stanislav Mikhailov",
+    "Ilya Afanasyev"
+  ],
+  "published": "2025-12-02T21:47:00Z",
+  "primary_category": "cs.LG",
+  "categories": [
+    "cs.LG",
+    "cs.AI",
+    "cs.HC",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2512.10975"
+}

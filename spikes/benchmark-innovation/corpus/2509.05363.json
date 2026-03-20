@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2509.05363",
+  "title": "SasAgent: Multi-Agent AI System for Small-Angle Scattering Data Analysis",
+  "abstract": "We introduce SasAgent, a multi-agent AI system powered by large language models (LLMs) that automates small-angle scattering (SAS) data analysis by leveraging tools from the SasView software and enables user interaction via text input. SasAgent features a coordinator agent that interprets user prompts and delegates tasks to three specialized agents for scattering length density (SLD) calculation, synthetic data generation, and experimental data fitting. These agents utilize LLM-friendly tools to execute tasks efficiently. These tools, including the model data tool, Retrieval-Augmented Generation (RAG) documentation tool, bump fitting tool, and SLD calculator tool, are derived from the SasView Python library. A user-friendly Gradio-based interface enhances user accessibility. Through diverse examples, we demonstrate SasAgent's ability to interpret complex prompts, calculate SLDs, generate accurate scattering data, and fit experimental datasets with high precision. This work showcases the potential of LLM-driven AI systems to streamline scientific workflows and enhance automation in SAS research.",
+  "authors": [
+    "Lijie Ding",
+    "Changwoo Do"
+  ],
+  "published": "2025-09-04T02:23:23Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cond-mat.mtrl-sci",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2509.05363"
+}

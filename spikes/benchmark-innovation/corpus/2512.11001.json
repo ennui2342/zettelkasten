@@ -1,0 +1,16 @@
+{
+  "arxiv_id": "2512.11001",
+  "title": "Query Optimization Beyond Data Systems: The Case for Multi-Agent Systems",
+  "abstract": "The proliferation of large language models (LLMs) has accelerated the adoption of agent-based workflows, where multiple autonomous agents reason, invoke functions, and collaborate to compose complex data pipelines. However, current approaches to building such agentic architectures remain largely ad hoc, lacking generality, scalability, and systematic optimization. Existing systems often rely on fixed models and single execution engines and are unable to efficiently optimize multiple agents operating over heterogeneous data sources and query engines. This paper presents a vision for a next-generation query optimization framework tailored to multi-agent workflows. We argue that optimizing these workflows can benefit from redesigning query optimization principles to account for new challenges: orchestration of diverse agents, cost efficiency under expensive LLM calls and across heterogeneous engines, and redundancy across tasks. Led by a real-world example and building on an analysis of multi-agent workflows, we outline our envisioned architecture and the main research challenges of building a multi-agent query optimization framework, which aims at enabling automated model selection, workflow composition, and execution across heterogeneous engines. This vision establishes the groundwork for query optimization in emerging multi-agent architectures and opens up a set of future research directions.",
+  "authors": [
+    "Zoi Kaoudi",
+    "Ioana Giurgiu"
+  ],
+  "published": "2025-12-10T20:16:20Z",
+  "primary_category": "cs.DB",
+  "categories": [
+    "cs.DB",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2512.11001"
+}

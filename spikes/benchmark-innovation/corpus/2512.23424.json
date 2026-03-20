@@ -1,0 +1,33 @@
+{
+  "arxiv_id": "2512.23424",
+  "title": "AKG kernel Agent: A Multi-Agent Framework for Cross-Platform Kernel Synthesis",
+  "abstract": "Modern AI models demand high-performance computation kernels. The growing complexity of LLMs, multimodal architectures, and recommendation systems, combined with techniques like sparsity and quantization, creates significant computational challenges. Moreover, frequent hardware updates and diverse chip architectures further complicate this landscape, requiring tailored kernel implementations for each platform. However, manual optimization cannot keep pace with these demands, creating a critical bottleneck in AI system development. Recent advances in LLM code generation capabilities have opened new possibilities for automating kernel development. In this work, we propose AKG kernel agent (AI-driven Kernel Generator), a multi-agent system that automates kernel generation, migration, and performance tuning. AKG kernel agent is designed to support multiple domain-specific languages (DSLs), including Triton, TileLang, CPP, and CUDA-C, enabling it to target different hardware backends while maintaining correctness and portability. The system's modular design allows rapid integration of new DSLs and hardware targets. When evaluated on KernelBench using Triton DSL across GPU and NPU backends, AKG kernel agent achieves an average speedup of 1.46$\\times$ over PyTorch Eager baselines implementations, demonstrating its effectiveness in accelerating kernel development for modern AI workloads.",
+  "authors": [
+    "Jinye Du",
+    "Quan Yuan",
+    "Zuyao Zhang",
+    "Yanzhi Yi",
+    "Jiahui Hu",
+    "Wangyi Chen",
+    "Yiyang Zhu",
+    "Qishui Zheng",
+    "Wenxiang Zou",
+    "Xiangyu Chang",
+    "Zuohe Zheng",
+    "Zichun Ye",
+    "Chao Liu",
+    "Shanni Li",
+    "Renwei Zhang",
+    "Yiping Deng",
+    "Xinwei Hu",
+    "Xuefeng Jin",
+    "Jie Zhao"
+  ],
+  "published": "2025-12-29T12:42:05Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.LG"
+  ],
+  "url": "https://arxiv.org/abs/2512.23424"
+}

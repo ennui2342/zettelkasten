@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2509.15799",
+  "title": "Hierarchical Reinforcement Learning with Low-Level MPC for Multi-Agent Control",
+  "abstract": "Achieving safe and coordinated behavior in dynamic, constraint-rich environments remains a major challenge for learning-based control. Pure end-to-end learning often suffers from poor sample efficiency and limited reliability, while model-based methods depend on predefined references and struggle to generalize. We propose a hierarchical framework that combines tactical decision-making via reinforcement learning (RL) with low-level execution through Model Predictive Control (MPC). For the case of multi-agent systems this means that high-level policies select abstract targets from structured regions of interest (ROIs), while MPC ensures dynamically feasible and safe motion. Tested on a predator-prey benchmark, our approach outperforms end-to-end and shielding-based RL baselines in terms of reward, safety, and consistency, underscoring the benefits of combining structured learning with model-based control.",
+  "authors": [
+    "Max Studt",
+    "Georg Schildbach"
+  ],
+  "published": "2025-09-19T09:27:15Z",
+  "primary_category": "eess.SY",
+  "categories": [
+    "eess.SY",
+    "cs.AI",
+    "cs.RO",
+    "math.OC"
+  ],
+  "url": "https://arxiv.org/abs/2509.15799"
+}

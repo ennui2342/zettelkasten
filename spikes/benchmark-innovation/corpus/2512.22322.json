@@ -1,0 +1,30 @@
+{
+  "arxiv_id": "2512.22322",
+  "title": "SmartSnap: Proactive Evidence Seeking for Self-Verifying Agents",
+  "abstract": "Agentic reinforcement learning (RL) holds great promise for the development of autonomous agents under complex GUI tasks, but its scalability remains severely hampered by the verification of task completion. Existing task verification is treated as a passive, post-hoc process: a verifier (i.e., rule-based scoring script, reward or critic model, and LLM-as-a-Judge) analyzes the agent's entire interaction trajectory to determine if the agent succeeds. Such processing of verbose context that contains irrelevant, noisy history poses challenges to the verification protocols and therefore leads to prohibitive cost and low reliability. To overcome this bottleneck, we propose SmartSnap, a paradigm shift from this passive, post-hoc verification to proactive, in-situ self-verification by the agent itself. We introduce the Self-Verifying Agent, a new type of agent designed with dual missions: to not only complete a task but also to prove its accomplishment with curated snapshot evidences. Guided by our proposed 3C Principles (Completeness, Conciseness, and Creativity), the agent leverages its accessibility to the online environment to perform self-verification on a minimal, decisive set of snapshots. Such evidences are provided as the sole materials for a general LLM-as-a-Judge verifier to determine their validity and relevance. Experiments on mobile tasks across model families and scales demonstrate that our SmartSnap paradigm allows training LLM-driven agents in a scalable manner, bringing performance gains up to 26.08% and 16.66% respectively to 8B and 30B models. The synergizing between solution finding and evidence seeking facilitates the cultivation of efficient, self-verifying agents with competitive performance against DeepSeek V3.1 and Qwen3-235B-A22B. Code is available at: https://github.com/TencentYoutuResearch/SmartSnap",
+  "authors": [
+    "Shaofei Cai",
+    "Yulei Qin",
+    "Haojia Lin",
+    "Zihan Xu",
+    "Gang Li",
+    "Yuchen Shi",
+    "Zongyi Li",
+    "Yong Mao",
+    "Siqi Cai",
+    "Xiaoyu Tan",
+    "Yitao Liang",
+    "Ke Li",
+    "Xing Sun"
+  ],
+  "published": "2025-12-26T14:51:39Z",
+  "primary_category": "cs.CL",
+  "categories": [
+    "cs.CL",
+    "cs.AI",
+    "cs.CV",
+    "cs.LG",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2512.22322"
+}

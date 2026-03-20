@@ -1,0 +1,21 @@
+{
+  "arxiv_id": "2510.23443",
+  "title": "A Neuro-Symbolic Multi-Agent Approach to Legal-Cybersecurity Knowledge Integration",
+  "abstract": "The growing intersection of cybersecurity and law creates a complex information space where traditional legal research tools struggle to deal with nuanced connections between cases, statutes, and technical vulnerabilities. This knowledge divide hinders collaboration between legal experts and cybersecurity professionals. To address this important gap, this work provides a first step towards intelligent systems capable of navigating the increasingly intricate cyber-legal domain. We demonstrate promising initial results on multilingual tasks.",
+  "authors": [
+    "Chiara Bonfanti",
+    "Alessandro Druetto",
+    "Cataldo Basile",
+    "Tharindu Ranasinghe",
+    "Marcos Zampieri"
+  ],
+  "published": "2025-10-27T15:46:02Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.CL",
+    "cs.CR",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2510.23443"
+}

@@ -1,0 +1,21 @@
+{
+  "arxiv_id": "2510.10633",
+  "title": "Collaborative Text-to-Image Generation via Multi-Agent Reinforcement Learning and Semantic Fusion",
+  "abstract": "Multimodal text-to-image generation remains constrained by the difficulty of maintaining semantic alignment and professional-level detail across diverse visual domains. We propose a multi-agent reinforcement learning framework that coordinates domain-specialized agents (e.g., focused on architecture, portraiture, and landscape imagery) within two coupled subsystems: a text enhancement module and an image generation module, each augmented with multimodal integration components. Agents are trained using Proximal Policy Optimization (PPO) under a composite reward function that balances semantic similarity, linguistic visual quality, and content diversity. Cross-modal alignment is enforced through contrastive learning, bidirectional attention, and iterative feedback between text and image. Across six experimental settings, our system significantly enriches generated content (word count increased by 1614%) while reducing ROUGE-1 scores by 69.7%. Among fusion methods, Transformer-based strategies achieve the highest composite score (0.521), despite occasional stability issues. Multimodal ensembles yield moderate consistency (ranging from 0.444 to 0.481), reflecting the persistent challenges of cross-modal semantic grounding. These findings underscore the promise of collaborative, specialization-driven architectures for advancing reliable multimodal generative systems.",
+  "authors": [
+    "Jiabao Shi",
+    "Minfeng Qi",
+    "Lefeng Zhang",
+    "Di Wang",
+    "Yingjie Zhao",
+    "Ziying Li",
+    "Yalong Xing",
+    "Ningran Li"
+  ],
+  "published": "2025-10-12T14:29:32Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2510.10633"
+}

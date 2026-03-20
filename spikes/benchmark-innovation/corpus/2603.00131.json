@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2603.00131",
+  "title": "Thought Virus: Viral Misalignment via Subliminal Prompting in Multi-Agent Systems",
+  "abstract": "Subliminal prompting is a phenomenon in which language models are biased towards certain concepts or traits through prompting with semantically unrelated tokens. While prior work has examined subliminal prompting in user-LLM interactions, potential bias transfer in multi-agent systems and its associated security implications remain unexplored. In this work, we show that a single subliminally prompted agent can spread a weakening but persisting bias throughout its entire network. We measure this phenomenon across 6 agents using two different topologies, observing that the transferred concept maintains an elevated response rate throughout the network. To exemplify potential misalignment risks, we assess network performance on multiple-choice TruthfulQA, showing that subliminal prompting of a single agent may degrade the truthfulness of other agents. Our findings reveal that subliminal prompting introduces a new attack vector in multi-agent security, with implications for the alignment of such systems. The implementation of all experiments is publicly available at https://github.com/Multi-Agent-Security-Initiative/thought_virus .",
+  "authors": [
+    "Moritz Weckbecker",
+    "Jonas Müller",
+    "Ben Hagag",
+    "Michael Mulet"
+  ],
+  "published": "2026-02-23T13:46:26Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2603.00131"
+}

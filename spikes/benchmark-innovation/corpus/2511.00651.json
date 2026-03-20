@@ -1,0 +1,24 @@
+{
+  "arxiv_id": "2511.00651",
+  "title": "Leveraging Multi-Agent System (MAS) and Fine-Tuned Small Language Models (SLMs) for Automated Telecom Network Troubleshooting",
+  "abstract": "Telecom networks are rapidly growing in scale and complexity, making effective management, operation, and optimization increasingly challenging. Although Artificial Intelligence (AI) has been applied to many telecom tasks, existing models are often narrow in scope, require large amounts of labeled data, and struggle to generalize across heterogeneous deployments. Consequently, network troubleshooting continues to rely heavily on Subject Matter Experts (SMEs) to manually correlate various data sources to identify root causes and corrective actions. To address these limitations, we propose a Multi-Agent System (MAS) that employs an agentic workflow, with Large Language Models (LLMs) coordinating multiple specialized tools for fully automated network troubleshooting. Once faults are detected by AI/ML-based monitors, the framework dynamically activates agents such as an orchestrator, solution planner, executor, data retriever, and root-cause analyzer to diagnose issues and recommend remediation strategies within a short time frame. A key component of this system is the solution planner, which generates appropriate remediation plans based on internal documentation. To enable this, we fine-tuned a Small Language Model (SLM) on proprietary troubleshooting documents to produce domain-grounded solution plans. Experimental results demonstrate that the proposed framework significantly accelerates troubleshooting automation across both Radio Access Network (RAN) and Core network domains.",
+  "authors": [
+    "Chenhua Shi",
+    "Bhavika Jalli",
+    "Gregor Macdonald",
+    "John Zou",
+    "Wanlu Lei",
+    "Mridul Jain",
+    "Joji Philip"
+  ],
+  "published": "2025-11-01T18:19:41Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.CL",
+    "cs.IT",
+    "cs.MA",
+    "cs.NI"
+  ],
+  "url": "https://arxiv.org/abs/2511.00651"
+}

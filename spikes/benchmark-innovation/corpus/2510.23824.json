@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2510.23824",
+  "title": "Decentralized Multi-Agent Goal Assignment for Path Planning using Large Language Models",
+  "abstract": "Coordinating multiple autonomous agents in shared environments under decentralized conditions is a long-standing challenge in robotics and artificial intelligence. This work addresses the problem of decentralized goal assignment for multi-agent path planning, where agents independently generate ranked preferences over goals based on structured representations of the environment, including grid visualizations and scenario data. After this reasoning phase, agents exchange their goal rankings, and assignments are determined by a fixed, deterministic conflict-resolution rule (e.g., agent index ordering), without negotiation or iterative coordination. We systematically compare greedy heuristics, optimal assignment, and large language model (LLM)-based agents in fully observable grid-world settings. Our results show that LLM-based agents, when provided with well-designed prompts and relevant quantitative information, can achieve near-optimal makespans and consistently outperform traditional heuristics. These findings underscore the potential of language models for decentralized goal assignment in multi-agent path planning and highlight the importance of information structure in such systems.",
+  "authors": [
+    "Murad Ismayilov",
+    "Edwin Meriaux",
+    "Shuo Wen",
+    "Gregory Dudek"
+  ],
+  "published": "2025-10-27T20:05:56Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2510.23824"
+}

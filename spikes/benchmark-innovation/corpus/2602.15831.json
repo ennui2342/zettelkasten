@@ -1,0 +1,21 @@
+{
+  "arxiv_id": "2602.15831",
+  "title": "A2H: Agent-to-Human Protocol for AI Agent",
+  "abstract": "AI agents are increasingly deployed as autonomous systems capable of planning, tool use, and multi-agent collaboration across complex tasks. However, existing agent-related protocols focus on agent-to-agent interactions, leaving humans as external observers rather than integrated participants within the agent systems. This limitation arises from the lack of a standardized mechanism for agents to discover, address, and interact with humans across heterogeneous messaging platforms. In this paper, we propose the A2H (Agent-to-Human) protocol, a unified protocol that enables humans to be registered, discovered, and communicated with by AI agents as resolvable entities within agent systems. A2H contributes three key components: (1) Human Card for registering human identities via resolvable domain names, making them discoverable to agents; (2) Formal Communication Schema defines when, why, and how agents contact with human;(3) Unified Messaging Abstraction standardizes diverse communication medias and transforms complex JSON outputs into human-friendly formats. This work establishes a foundational protocol for integrating humans into agent ecosystems, advancing AI agents from isolated autonomous systems toward truly human-connected intelligent infrastructures.",
+  "authors": [
+    "Zhiyuan Liang",
+    "Enfang Cui",
+    "Qian Wei",
+    "Rui She",
+    "Tianzheng Li",
+    "Minxin Guo",
+    "Yujun Cheng"
+  ],
+  "published": "2025-12-31T16:24:06Z",
+  "primary_category": "cs.HC",
+  "categories": [
+    "cs.HC",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2602.15831"
+}

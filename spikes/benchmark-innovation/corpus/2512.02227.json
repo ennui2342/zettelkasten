@@ -1,0 +1,21 @@
+{
+  "arxiv_id": "2512.02227",
+  "title": "Orchestration Framework for Financial Agents: From Algorithmic Trading to Agentic Trading",
+  "abstract": "The financial market is a mission-critical playground for AI agents due to its temporal dynamics and low signal-to-noise ratio. Building an effective algorithmic trading system may require a professional team to develop and test over the years. In this paper, we propose an orchestration framework for financial agents, which aims to democratize financial intelligence to the general public. We map each component of the traditional algorithmic trading system to agents, including planner, orchestrator, alpha agents, risk agents, portfolio agents, backtest agents, execution agents, audit agents, and memory agent. We present two in-house trading examples. For the stock trading task (hourly data from 04/2024 to 12/2024), our approach achieved a return of $20.42\\%$, a Sharpe ratio of 2.63, and a maximum drawdown of $-3.59\\%$, while the S&P 500 index yielded a return of $15.97\\%$. For the BTC trading task (minute data from 27/07/2025 to 13/08/2025), our approach achieved a return of $8.39\\%$, a Sharpe ratio of $0.38$, and a maximum drawdown of $-2.80\\%$, whereas the BTC price increased by $3.80\\%$. Our code is available on \\href{https://github.com/Open-Finance-Lab/AgenticTrading}{GitHub}.",
+  "authors": [
+    "Jifeng Li",
+    "Arnav Grover",
+    "Abraham Alpuerto",
+    "Yupeng Cao",
+    "Xiao-Yang Liu"
+  ],
+  "published": "2025-12-01T21:50:22Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI",
+    "cs.CE",
+    "cs.LG"
+  ],
+  "url": "https://arxiv.org/abs/2512.02227"
+}

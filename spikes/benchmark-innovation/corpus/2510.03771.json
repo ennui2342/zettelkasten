@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2510.03771",
+  "title": "OptAgent: Optimizing Query Rewriting for E-commerce via Multi-Agent Simulation",
+  "abstract": "Deploying capable and user-aligned LLM-based systems necessitates reliable evaluation. While LLMs excel in verifiable tasks like coding and mathematics, where gold-standard solutions are available, adoption remains challenging for subjective tasks that lack a single correct answer. E-commerce Query Rewriting (QR) is one such problem where determining whether a rewritten query properly captures the user intent is extremely difficult to figure out algorithmically. In this work, we introduce OptAgent, a novel framework that combines multi-agent simulations with genetic algorithms to verify and optimize queries for QR. Instead of relying on a static reward model or a single LLM judge, our approach uses multiple LLM-based agents, each acting as a simulated shopping customer, as a dynamic reward signal. The average of these agent-derived scores serves as an effective fitness function for an evolutionary algorithm that iteratively refines the user's initial query. We evaluate OptAgent on a dataset of 1000 real-world e-commerce queries in five different categories, and we observe an average improvement of 21.98% over the original user query and 3.36% over a Best-of-N LLM rewriting baseline.",
+  "authors": [
+    "Divij Handa",
+    "David Blincoe",
+    "Orson Adams",
+    "Yinlin Fu"
+  ],
+  "published": "2025-10-04T10:41:09Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2510.03771"
+}

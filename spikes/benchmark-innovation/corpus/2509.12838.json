@@ -1,0 +1,22 @@
+{
+  "arxiv_id": "2509.12838",
+  "title": "Multi-Robot Task Planning for Multi-Object Retrieval Tasks with Distributed On-Site Knowledge via Large Language Models",
+  "abstract": "It is crucial to efficiently execute instructions such as \"Find an apple and a banana\" or \"Get ready for a field trip,\" which require searching for multiple objects or understanding context-dependent commands. This study addresses the challenging problem of determining which robot should be assigned to which part of a task when each robot possesses different situational on-site knowledge-specifically, spatial concepts learned from the area designated to it by the user. We propose a task planning framework that leverages large language models (LLMs) and spatial concepts to decompose natural language instructions into subtasks and allocate them to multiple robots. We designed a novel few-shot prompting strategy that enables LLMs to infer required objects from ambiguous commands and decompose them into appropriate subtasks. In our experiments, the proposed method achieved 47/50 successful assignments, outperforming random (28/50) and commonsense-based assignment (26/50). Furthermore, we conducted qualitative evaluations using two actual mobile manipulators. The results demonstrated that our framework could handle instructions, including those involving ad hoc categories such as \"Get ready for a field trip,\" by successfully performing task decomposition, assignment, sequential planning, and execution.",
+  "authors": [
+    "Kento Murata",
+    "Shoichi Hasegawa",
+    "Tomochika Ishikawa",
+    "Yoshinobu Hagiwara",
+    "Akira Taniguchi",
+    "Lotfi El Hafi",
+    "Tadahiro Taniguchi"
+  ],
+  "published": "2025-09-16T09:00:25Z",
+  "primary_category": "cs.RO",
+  "categories": [
+    "cs.RO",
+    "cs.AI",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2509.12838"
+}

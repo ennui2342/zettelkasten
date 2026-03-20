@@ -1,0 +1,16 @@
+{
+  "arxiv_id": "2511.06179",
+  "title": "MemoriesDB: A Temporal-Semantic-Relational Database for Long-Term Agent Memory / Modeling Experience as a Graph of Temporal-Semantic Surfaces",
+  "abstract": "We introduce MemoriesDB, a unified data architecture designed to avoid decoherence across time, meaning, and relation in long-term computational memory. Each memory is a time-semantic-relational entity-a structure that simultaneously encodes when an event occurred, what it means, and how it connects to other events. Built initially atop PostgreSQL with pgvector extensions, MemoriesDB combines the properties of a time-series datastore, a vector database, and a graph system within a single append-only schema. Each memory is represented as a vertex uniquely labeled by its microsecond timestamp and accompanied by low- and high-dimensional normalized embeddings that capture semantic context. Directed edges between memories form labeled relations with per-edge metadata, enabling multiple contextual links between the same vertices. Together these constructs form a time-indexed stack of temporal-semantic surfaces, where edges project as directional arrows in a 1+1-dimensional similarity field, tracing the evolution of meaning through time while maintaining cross-temporal coherence. This formulation supports efficient time-bounded retrieval, hybrid semantic search, and lightweight structural reasoning in a single query path. A working prototype demonstrates scalable recall and contextual reinforcement using standard relational infrastructure, and we discuss extensions toward a columnar backend, distributed clustering, and emergent topic modeling.",
+  "authors": [
+    "Joel Ward"
+  ],
+  "published": "2025-11-09T01:41:55Z",
+  "primary_category": "cs.DB",
+  "categories": [
+    "cs.DB",
+    "cs.AI",
+    "cs.IR"
+  ],
+  "url": "https://arxiv.org/abs/2511.06179"
+}

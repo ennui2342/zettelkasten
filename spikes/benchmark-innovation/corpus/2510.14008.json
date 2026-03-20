@@ -1,0 +1,22 @@
+{
+  "arxiv_id": "2510.14008",
+  "title": "Stop Reducing Responsibility in LLM-Powered Multi-Agent Systems to Local Alignment",
+  "abstract": "LLM-powered Multi-Agent Systems (LLM-MAS) unlock new potentials in distributed reasoning, collaboration, and task generalization but also introduce additional risks due to unguaranteed agreement, cascading uncertainty, and adversarial vulnerabilities. We argue that ensuring responsible behavior in such systems requires a paradigm shift: from local, superficial agent-level alignment to global, systemic agreement. We conceptualize responsibility not as a static constraint but as a lifecycle-wide property encompassing agreement, uncertainty, and security, each requiring the complementary integration of subjective human-centered values and objective verifiability. Furthermore, a dual-perspective governance framework that combines interdisciplinary design with human-AI collaborative oversight is essential for tracing and ensuring responsibility throughout the lifecycle of LLM-MAS. Our position views LLM-MAS not as loose collections of agents, but as unified, dynamic socio-technical systems that demand principled mechanisms to support each dimension of responsibility and enable ethically aligned, verifiably coherent, and resilient behavior for sustained, system-wide agreement.",
+  "authors": [
+    "Jinwei Hu",
+    "Yi Dong",
+    "Shuang Ao",
+    "Zhuoyun Li",
+    "Boxuan Wang",
+    "Lokesh Singh",
+    "Guangliang Cheng",
+    "Sarvapali D. Ramchurn",
+    "Xiaowei Huang"
+  ],
+  "published": "2025-10-15T18:39:31Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2510.14008"
+}

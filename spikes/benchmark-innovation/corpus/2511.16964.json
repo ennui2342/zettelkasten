@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2511.16964",
+  "title": "Optimizing PyTorch Inference with LLM-Based Multi-Agent Systems",
+  "abstract": "Maximizing performance on available GPU hardware is an ongoing challenge for modern AI inference systems. Traditional approaches include writing custom GPU kernels and using specialized model compilers to tune high-level code for specific GPU targets. Recent work shows that LLM-based multi-agent systems can effectively perform such tuning, often outperforming existing compilers and eliminating the need for manual kernel development. However, the dynamics of multi-agent systems for this task remain unexplored. In this work, we present a logical framework for comparing multi-agent PyTorch optimization systems. Our evaluation shows that exploit-heavy strategies perform best when paired with error-fixing agents, and that performance correlates with the granularity of optimization steps. The best implementation achieves an average 2.88x speedup on an H100 GPU across diverse tasks in KernelBench, a benchmark suite covering a range of machine learning architectures in PyTorch.",
+  "authors": [
+    "Kirill Nagaitsev",
+    "Luka Grbcic",
+    "Samuel Williams",
+    "Costin Iancu"
+  ],
+  "published": "2025-11-21T05:37:38Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI",
+    "cs.DC"
+  ],
+  "url": "https://arxiv.org/abs/2511.16964"
+}

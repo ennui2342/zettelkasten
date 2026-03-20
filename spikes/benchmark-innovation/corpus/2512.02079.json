@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2512.02079",
+  "title": "Robust Geospatial Coordination of Multi-Agent Communications Networks Under Attrition",
+  "abstract": "Fast, efficient, robust communication during wildfire and other emergency responses is critical. One way to achieve this is by coordinating swarms of autonomous aerial vehicles carrying communications equipment to form an ad-hoc network connecting emergency response personnel to both each other and central command. However, operating in such extreme environments may lead to individual networking agents being damaged or rendered inoperable, which could bring down the network and interrupt communications.   To overcome this challenge and enable multi-agent UAV networking in difficult environments, this paper introduces and formalizes the problem of Robust Task Networking Under Attrition (RTNUA), which extends connectivity maintenance in multi-robot systems to explicitly address proactive redundancy and attrition recovery. We introduce Physics-Informed Robust Employment of Multi-Agent Networks ($Φ$IREMAN), a topological algorithm leveraging physics-inspired potential fields to solve this problem. Through simulation across 25 problem configurations, $Φ$IREMAN consistently outperforms the DCCRS baseline, and on large-scale problems with up to 100 tasks and 500 drones, maintains $>99.9\\%$ task uptime despite substantial attrition, demonstrating both effectiveness and scalability.",
+  "authors": [
+    "Jonathan S. Kent",
+    "Eliana Stefani",
+    "Brian K. Plancher"
+  ],
+  "published": "2025-11-30T22:13:50Z",
+  "primary_category": "cs.RO",
+  "categories": [
+    "cs.RO",
+    "cs.MA",
+    "eess.SY"
+  ],
+  "url": "https://arxiv.org/abs/2512.02079"
+}

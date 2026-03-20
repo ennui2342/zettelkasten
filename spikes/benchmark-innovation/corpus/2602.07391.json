@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2602.07391",
+  "title": "NAAMSE: Framework for Evolutionary Security Evaluation of Agents",
+  "abstract": "AI agents are increasingly deployed in production, yet their security evaluations remain bottlenecked by manual red-teaming or static benchmarks that fail to model adaptive, multi-turn adversaries. We propose NAAMSE, an evolutionary framework that reframes agent security evaluation as a feedback-driven optimization problem. Our system employs a single autonomous agent that orchestrates a lifecycle of genetic prompt mutation, hierarchical corpus exploration, and asymmetric behavioral scoring. By using model responses as a fitness signal, the framework iteratively compounds effective attack strategies while simultaneously ensuring \"benign-use correctness\", preventing the degenerate security of blanket refusal. Our experiments across a diverse suite of state-of-the-art large language models demonstrate that evolutionary mutation systematically amplifies vulnerabilities missed by one-shot methods, with controlled ablations revealing that the synergy between exploration and targeted mutation uncovers high-severity failure modes. We show that this adaptive approach provides a more realistic and scalable assessment of agent robustness in the face of evolving threats. The code for NAAMSE is open source and available at https://github.com/HASHIRU-AI/NAAMSE.",
+  "authors": [
+    "Kunal Pai",
+    "Parth Shah",
+    "Harshil Patel"
+  ],
+  "published": "2026-02-07T06:13:02Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2602.07391"
+}

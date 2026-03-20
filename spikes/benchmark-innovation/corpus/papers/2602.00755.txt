@@ -1,0 +1,288 @@
+Title: Evolving Interpretable Constitutions for Multi-Agent Coordination
+Authors: Ujwal Kumar, Alice Saito, Hershraj Niranjani, Rayan Yessou, Phan Xuan Tan
+Published: 2026-01-31
+Source: https://arxiv.org/abs/2602.00755
+ArXiv ID: 2602.00755
+
+Evolving Interpretable Constitutions for Multi-Agent Coordination
+Abstract
+Constitutional AI has focused on single-model alignment using fixed principles. However, multi-agent systems create novel alignment challenges through emergent social dynamics. We present Constitutional Evolution, a framework for automatically discovering behavioral norms in multi-agent LLM systems. Using a grid-world simulation with survival pressure, we study the tension between individual and collective welfare, quantified via a Societal Stability Score that combines productivity, survival, and conflict metrics. Adversarial constitutions lead to societal collapse (), while vague prosocial principles (“be helpful, harmless, honest”) produce inconsistent coordination (). Even constitutions designed by Claude 4.5 Opus with explicit knowledge of the objective achieve only moderate performance (). Using LLM-driven genetic programming with multi-island evolution, we evolve constitutions maximizing social welfare without explicit guidance toward cooperation. The evolved constitution achieves (123% higher than human-designed baselines, ), eliminates conflict, and discovers that minimizing communication (0.9% vs 62.2% social actions) outperforms verbose coordination. Our interpretable rules demonstrate that cooperative norms can be discovered rather than prescribed.
+Keywords Multi-agent systems Constitutional AI Evolutionary Optimization LLM alignment Social Welfare
+1 Introduction
+Constitutional AI (CAI) aligns language models using human-written principles such as “be helpful and harmless” [6]. While effective for single-user interactions, this paradigm assumes that principles producing ethical behavior in isolation will scale to multi-agent settings. In multi-agent environments, however, strategic incentives can amplify goal conflicts and lead to emergent norms and coordination failures even without explicit adversarial objectives [16, 8]. We argue that hand-crafted constitutions are fundamentally limited for multi-agent systems. Abstract principles like “be helpful” provide insufficient operational guidance when agents face trade-offs between self-preservation and collective welfare. Moreover, recent empirical work demonstrates that frontier LLM agents engage in deliberate harmful behavior, including blackmail, sabotage, and confidential document leaks, when facing goal conflicts in agentic settings [20]. These findings highlight the need for alignment approaches that optimize constitutions for multi-agent dynamics rather than relying solely on static ethical rules.
+To address this challenge, we propose a framework for Evolving Interpretable Constitutions for Multi-Agent Coordination that uses LLM-guided evolutionary search to discover effective constitutions without updating model weights. Inspired by recent advances in evolutionary program synthesis [27], we treat the constitution as an optimizable object and search for rule sets that maximize societal stability objectives. Our approach evolves symbolic rules that agents follow explicitly; unlike neural policies, these constitutional rules are human-readable, enabling direct inspection of coordination strategies. We evaluate our method in a grid-world simulation where LLM agents must gather resources, collaborate on team projects, and survive periodic elimination by an “Overseer.”
+Our key findings are:
+-
+•
+Constitutional optimization improves societal stability by 123% relative to a human-designed HHH (Helpful, Harmless, Honest) baseline, yielding interpretable coordination strategies expressed as explicit rules.
+-
+•
+Evolution favors operational specificity over abstract principles: concrete rules such as "deposit resources immediately" outperform generic directives such as "be helpful."
+-
+•
+Counter-intuitively, optimized constitutions reduce agent communication by 98.6% while increasing productivity by 203%, revealing that implicit coordination through consistent behavior outperforms explicit messaging.
+These results demonstrate that multi-agent alignment benefits from automated constitutional optimization rather than hand-crafted ethical principles.
+2 Background and Related Work
+2.1 Constitutional AI and Multi-Agent Alignment
+Constitutional AI (CAI) aligns language models by training them against human-written principles [6]. The approach uses supervised learning on model-generated critiques followed by reinforcement learning from AI feedback. While effective for single-user interactions, CAI assumes static rules designed for individual agents will scale to multi-agent settings. Recent work challenges this assumption. Lynch et al. [20] demonstrate that frontier LLMs engage in deception and sabotage under goal conflicts, while Carichon et al. [8] argue that current alignment paradigms fail for multi-agent dynamics, calling for alignment as a “dynamic and social process.” Extensions to CAI have improved helpfulness [4] and reduced harmful outputs [12], but maintain the single-agent paradigm. The multi-agent alignment gap remains unaddressed.
+2.2 Multi-Agent Coordination
+Multi-agent coordination under self-interest has been studied extensively. Axelrod and Hamilton [5] showed that tit-for-tat strategies evolve stable cooperation in iterated games. Roijers et al. [26] survey multi-objective sequential decision-making in multi-agent contexts. In multi-agent RL, Leibo et al. [18] introduced sequential social dilemmas where agents face tradeoffs between individual and collective welfare. Hughes et al. [13] and Jaques et al. [14] demonstrated that social preferences and influence rewards can stabilize cooperation and enable emergent communication. Recent work explores LLM agents in social environments. Park et al. [23] introduced Generative Agents exhibiting emergent social behaviors, while Li et al. [19] and Du et al. [10] demonstrate collaborative frameworks. However, Lai et al. [16] find that LLM populations spontaneously develop divergent norms and coordination failures, highlighting the challenge of ensuring stable coordination through hand-crafted rules alone.
+2.3 Evolutionary Search with LLMs
+Recent work demonstrates that LLMs can serve as intelligent mutation operators in evolutionary frameworks. FunSearch [27] evolves programs for mathematical discovery, achieving state-of-the-art results on the cap set problem. AlphaEvolve [1] extends this to algorithm design through Gemini-powered search. Real et al. [25] demonstrate AutoML-Zero, evolving ML algorithms from scratch, while Lehman et al. [17] introduce Evolution Through Large Models (ELM) for quality-diversity optimization. OpenEvolve [28] provides an open-source implementation with multi-island populations and configurable strategies. MAP-Elites [21] maintains diverse solutions across feature spaces rather than converging to a single optimum, with successful applications in robotics [9] and algorithm design [11]. These techniques have primarily targeted mathematical problems and algorithm design; their application to discovering behavioral norms for multi-agent coordination remains unexplored.
+2.4 Social Welfare Theory
+Social welfare theory provides frameworks for aggregating individual utilities. The Bergson–Samuelson framework [7] formalizes social welfare functions as general mappings from utility profiles to scalar values, establishing that any specific functional form requires normative “value judgments.” Common instantiations include utilitarian functions that sum individual utilities () and Rawlsian functions that prioritize the worst-off () [24]. Arrow [3] proved impossibility results for social choice systems, demonstrating fundamental tensions between desirable properties. Recent work by Shilov et al. [29] examines social cost function selection in multi-agent control, while Koster and others [15] explore human-centered mechanism design with democratic AI. Traditional mechanism design assumes known utility functions and game structures. Discovering governance rules through search over partially observable environments represents a different paradigm, motivating approaches that combine evolutionary optimization with social welfare principles.
+3 Methodology
+3.1 Proposal Framework
+Figure 1 illustrates our constitutional evolution framework. We consider a multi-agent society simulation where agents must collaborate on shared objectives: gathering resources, completing team projects, and surviving competitive pressure. The framework begins with an initial constitution that governs agent behavior. During simulation, we observe emergent social dynamics and compute a Societal Stability Score alongside detailed action logs. These observations feed into the OpenEvolve LLM Constitutional Optimizer, which analyzes behavioral patterns and proposes targeted rule modifications. The updated constitution is then reapplied to the simulation, creating a closed-loop optimization process. This iterative refinement continues for 30 iterations, progressively discovering more effective constitutional rules. Finally, the framework selects (the constitution achieving the highest stability score) as the optimized output. This approach enables controllable, systematic evolution of governance rules for multi-agent AI systems.
+3.2 Multi-Agent Society Simulation
+3.2.1 Environmental Design
+We design a 66 grid-world simulation with 6 LLM agents split into two teams: Shelter and Market (3 agents each). Each simulation runs for 40 turns. Agents gather three resource types (wood, stone, gems) to complete team projects: Shelter requires 150 wood, while Market requires 120 stone and 30 gems. Success requires both projects completed and at least one agent per team alive at turn 40. Since the Overseer eliminates 4 of 6 agents, survival of both teams is not guaranteed. If all survivors belong to one team, the society fails regardless of resource progress. This creates pressure for cross-team coordination alongside within-team competition.
+Agents operate under partial observability: each agent can only observe its immediate surroundings (a 33 neighborhood) rather than the full grid state. This constraint makes communication strategically valuable and creates information asymmetries that constitutions must address.
+We deliberately use a simplified grid-world environment to enable controlled analysis of coordination dynamics. This design choice allows us to isolate the effects of constitutional rules from confounding factors present in more complex settings. While this limits direct generalization to real-world systems, it enables rigorous evaluation of our evolutionary framework and clear interpretation of emergent strategies.
+3.2.2 The Overseer Mechanic
+Every 10 turns (at ), the Overseer eliminates the agent with the lowest cumulative contribution, measured as total resources deposited to team projects. Figure 2 illustrates the environment and elimination process.
+This mechanic creates a relative fitness landscape where survival depends not on absolute contribution, but on ranking relative to others. Agents must balance team productivity (which benefits everyone) against individual survival (which requires outperforming teammates). Critically, harming competitors becomes strategically rational, reducing a rival’s contribution is equivalent to increasing one’s own for survival purposes. This pressure is consistent with recent findings that LLMs engage in harmful behavior when facing goal conflicts that threaten their success or survival [20]. Over 40 turns, exactly 4 agents are eliminated, leaving a maximum survival rate of 33.3%.
+3.3 Multi-Agent Constitutional Optimization
+We formalize behavioral norm design as an optimization problem over constitution space. A constitution specifies how agents should interpret observations and choose actions in an environment. Our goal is to automatically discover constitutions that yield stable societies under repeated interaction and competitive pressure—i.e., constitutions that promote collective progress while discouraging destructive behaviors.
+Definition 3.1 (Constitution).
+A constitution is a set of natural-language rules. Each rule includes (i) a short name, (ii) behavioral guidance written in natural language, and (iii) an explicit priority level. Rules are intended to be applied in priority order: when multiple rules are applicable, agents follow the rule with highest priority.
+Definition 3.2 (Multi-Agent Society).
+A society is a tuple comprising a set of LLM agents , an environment with state-transition dynamics , and a shared constitution . Executing the society in for a fixed horizon induces a (potentially stochastic) distribution over trajectories because agents may act under partial observability and LLM outputs can be stochastic.
+3.3.1 Stability Score
+To evaluate a constitution’s performance, we define a scalar Stability Score that aggregates three core dimensions of welfare:
+The operator ensures non-negative welfare, reflecting the standard assumption in welfare economics that social welfare cannot fall below zero. A score of zero represents complete societal failure.
+where:
+-
+•
+is productivity, measured as normalized project completion,
+-
+•
+is survival rate, the fraction of agents alive at trajectory end,
+-
+•
+is conflict frequency, the normalized count of aggressive actions.
+Design Rationale.
+Our Stability Score combines three normative objectives from social welfare theory (Section 2.4). Productivity captures aggregate welfare, reflecting the utilitarian goal of maximizing total societal output. Survival rate protects the worst-off agents (those eliminated by the Overseer) reflecting Rawlsian concern for the least advantaged. Conflict penalizes aggressive actions as negative externalities that harm collective welfare. We use linear scalarization for interpretability and compatibility with gradient-free optimization; the coefficients (, , ) prioritize productivity while ensuring survival and cooperation remain incentivized.
+Given the stochastic nature of LLM agent behavior, constitutional design reduces to maximizing expected stability over the trajectory distribution:
+This formulation acknowledges that the same constitution can produce different trajectories due to LLM sampling, requires multiple simulation runs to estimate the expectation, and enables direct optimization via LLM-driven evolutionary search. We approximate the expectation by averaging over sampled trajectories, using during evolution. Final reported statistics use runs per constitution (for C*, this includes 2 from evolution plus 8 validation runs)
+3.3.2 Multi-Island Architecture
+To avoid local optima during constitutional search, we employ a multi-island evolutionary architecture based on OpenEvolve [28]. As shown in Figure 3, three independent populations evolve in parallel, each exploring different regions of the constitution space. Every 5 iterations, the top 20% of each population migrates to neighboring islands, propagating successful innovations while maintaining diversity.
+This architecture provides two key benefits. First, parallel exploration prevents premature convergence as different islands can explore diverse strategies simultaneously. Second, periodic migration enables cross-pollination of successful rules between populations, combining complementary innovations that may not arise within a single lineage.
+4 Results
+We evaluate four constitutional approaches on our multi-agent society simulation: (1) a Zero-Sum adversarial baseline representing purely competitive behavior, (2) a human-designed HHH constitution inspired by Constitutional AI principles, (3) an LLM-Generated constitution created by prompting Claude 4.5 Opus to design optimal rules, and (4) our LLM-evolved constitution . We present quantitative performance analysis, behavioral patterns, evolutionary dynamics, and ablation studies.
+4.1 Experiment Setup
+4.1.1 Language Model Configuration
+Both the evolutionary optimizer and simulation agents use GPT-OSS-120B [22] with temperature 1.0 and top- = 0.95. Agent prompts include their team’s constitution and a conversation history of up to 25 messages. Each agent may execute one tool call per turn.
+4.1.2 Optimization Configuration
+We employ a multi-island evolutionary algorithm with the configuration shown in Table 1. Three parallel populations of 10 constitutions each evolve independently, with the top 20% migrating between islands every 5 iterations to prevent local optima. Selection follows a mixed strategy: 30% elite selection, 60% exploitation (mutating top performers), and 10% exploration (random selection). We use MAP-Elites [21] for diversity maintenance, organizing constitutions in an 88 feature grid based on rule complexity and stability score.
+4.1.3 Baseline Constitutions
+Zero-Sum (Adversarial). A purely competitive constitution emphasizing sabotage, resource hoarding, and self-preservation (Table 2).
+4.2 Overall Performance
+Table 5 summarizes performance across key metrics. The evolved constitution achieves , a 123% improvement over HHH () and 67% improvement over LLM-Generated (), driven by dramatically increased productivity (91% vs. 30% and 51%) while maintaining zero conflict.
+Table 6 decomposes the Stability Score by component (Section 3.3.1). The survival component is identical for HHH, LLM-Generated, and (all achieve 33% = 2/6 agents), confirming that the Overseer elimination mechanic functions as designed. The performance gap arises from productivity. Zero-Sum achieves 0% survival due to agents eliminating each other.
+4.2.1 Evolutionary Trajectory
+Figure 4 shows how the stability score improves across 30 iterations. The search discovers strategies in sequence: initial cooperative gathering (iteration 1, ), conflict elimination via zero-aggression policy (iteration 4, ), scaling up the previous strategy (iteration 11, ), dynamic targeting for further refinements (iteration 18, ), and finally the “Deposit First” rule (iteration 23, ). The Deposit First rule eliminates wasted turns where agents communicated or explored while carrying resources.
+4.2.2 Evolved Constitution
+Table 7 presents the final evolved constitution . The priority ordering resolves action conflicts deterministically. When an agent carries resources, Rule 1 takes precedence over movement (Rule 4) or communication (Rule 6), eliminating the decision ambiguity present in HHH.
+4.3 Behavioral Analysis
+Table 8 reveals striking differences in agent behavior under each constitution. agents spend 84.1% of actions on productive tasks compared to 24.8% for HHH. The most striking pattern is the inverse relationship between communication and productivity: reduces social actions from 62.2% (HHH) to 0.9% (a 98.6% reduction) yet achieves 3.1 higher productivity.
+Notably, the LLM-Generated constitution also suffers from excessive communication (54.7% social actions), demonstrating that one-shot LLM design does not solve the communication trap. Iterative evolutionary optimization is required.
+4.4 Ablation: Single vs. Multi-Island Evolution
+Single-island runs exhibit high variance (), with Run 3 trapped in a “communication trap” local minimum (). Both multi-island runs outperform the single-island mean. Multi-island evolution escapes local minima through population diversity and periodic migration. Table 9 compares single-island and multi-island evolution.
+4.5 Statistical Robustness
+Table 10 presents variance analysis across validation runs. shows dramatically lower variance () than all baselines, demonstrating that operationally specific rules produce consistent behavior. All 10 runs achieved . Cohen’s for vs. HHH is 6.1 (extremely large effect); Welch’s t-test yields .
+5 Discussion
+Our results demonstrate that LLM-evolved constitutions significantly outperform both human-designed principles and one-shot LLM-generated rules for multi-agent coordination. We analyze why this occurs and discuss implications for multi-agent alignment.
+5.1 Why Less Communication Works
+The most counter-intuitive finding is that minimizing communication (0.9% vs. 62.2% for HHH) dramatically improves coordination. This occurs because agents sharing consistent behavioral rules achieve implicit coordination through predictable behavior. When all agents follow the same priority-ordered rules, their actions become predictable to teammates. An agent observing a teammate carrying wood can infer they will deposit immediately (Rule 1), without explicit communication. HHH agents, lacking this predictability, attempt to coordinate through broadcasts:
+“I should help my team succeed. I’ll broadcast my location to coordinate.” Executes MSG instead of DEP
+This wastes turns on low-value communication. In contrast, agents reason:
+“Following Deposit First rule: I have wood needed by Shelter, so I deposit immediately.” Executes DEP
+The explicit rule eliminates deliberation and produces consistent behavior.
+5.2 Operational Specificity vs. Abstract Principles
+Table 11 contrasts the two approaches. HHH’s “Be Helpful” requires agents to infer what helpfulness means in context, leading to inconsistent interpretations and high variance (). ’s “Deposit First” maps directly to an executable action, reducing variance to .
+5.3 Evolution vs. One-Shot LLM Design
+The LLM-Generated baseline () outperforms HHH () but falls far short of (). This demonstrates that simply prompting an LLM to design a good constitution is insufficient. The LLM-Generated constitution still suffers from excessive communication (54.7% social actions), suggesting that LLMs default to intuitive but suboptimal coordination strategies.
+Evolutionary optimization discovers counter-intuitive strategies—like communication minimization—that one-shot design cannot find because they violate common assumptions about effective coordination.
+5.4 The Interpretability Advantage
+Unlike black-box RL policies, produces human-readable rules that can be inspected, audited, and modified. This addresses a fundamental challenge in multi-agent alignment: verifying that coordinating AI systems pursue intended goals. Practitioners can examine Rule 6 (“Broadcast only for 2+ resources”) and understand exactly when agents will communicate.
+6 Conclusion
+We introduced Constitutional Evolution, a framework for automatically discovering interpretable behavioral norms in multi-agent LLM systems. By treating constitutions as evolvable parameters optimized through simulation feedback, our approach addresses the limitations of hand-crafted alignment principles in multi-agent settings.
+Our experiments demonstrate three key findings. First, evolved constitutions significantly outperform both human-designed principles and one-shot LLM-generated rules: achieves 123% higher stability than HHH and 67% higher than LLM-Generated, while maintaining zero conflict. Second, operational specificity outperforms abstract principles. Concrete rules like “Deposit First” prove more effective than vague directives like “Be Helpful” because they map directly to executable actions, reducing behavioral variance from to . Third, implicit coordination through consistent behavior can replace explicit communication: reduces social actions by 98.6% while achieving 3.1 higher productivity.
+These findings suggest that multi-agent alignment may require fundamentally different approaches than single-agent alignment. Rather than prescribing universal ethical principles, effective multi-agent governance may emerge from optimization processes that discover context-specific behavioral norms. Importantly, our evolved constitutions remain fully interpretable, allowing practitioners to inspect, audit, and modify the discovered rules.
+Several limitations point to future work. Our environment is deliberately simplified; scaling to more complex scenarios with diverse agent capabilities remains open. The Zero-Sum baseline represents an extreme adversarial case rather than realistic self-interested behavior. Future work should evaluate against game-theoretic baselines such as tit-for-tat strategies, explore whether evolved constitutions transfer across environments, and test on larger agent populations.
+More broadly, this work opens new directions for scalable multi-agent alignment: rather than relying solely on human intuition to craft behavioral rules, we can leverage evolutionary search to discover effective social contracts automatically.
+References
+- [1] (2025) AlphaEvolve: a Gemini-powered coding agent for designing advanced algorithms. Note: Google DeepMind Bloghttps://deepmind.google/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/ Cited by: §2.3.
+- [2] (2025) The claude model spec. External Links: Link Cited by: §4.1.3.
+- [3] (1950) A difficulty in the concept of social welfare. Journal of Political Economy 58 (4), pp. 328–346. Cited by: §2.4.
+- [4] (2021) A general language assistant as a laboratory for alignment. arXiv preprint arXiv:2112.00861. Cited by: §2.1, §4.1.3.
+- [5] (1981) The evolution of cooperation. Science 211 (4489), pp. 1390–1396. Cited by: §2.2.
+- [6] (2022) Constitutional ai: harmlessness from ai feedback. arXiv preprint arXiv:2212.08073. Cited by: §B.2, §1, §2.1.
+- [7] (1938) A reformulation of certain aspects of welfare economics. The Quarterly Journal of Economics 52 (2), pp. 310–334. Cited by: §A.2, §2.4.
+- [8] (2025) The coming crisis of multi-agent misalignment: ai alignment must be a dynamic and social process. arXiv preprint arXiv:2506.01080. Cited by: §1, §2.1.
+- [9] (2015) Robots that can adapt like animals. Nature 521 (7553), pp. 503–507. Cited by: §2.3.
+- [10] (2023) Improving factuality and reasoning in language models through multiagent debate. arXiv preprint arXiv:2305.14325. Cited by: §2.2.
+- [11] (2020) Covariance matrix adaptation for the rapid illumination of behavior space. GECCO. Cited by: §2.3.
+- [12] (2023) The capacity for moral self-correction in large language models. arXiv preprint arXiv:2302.07459. Cited by: §2.1.
+- [13] (2018) Inequity aversion improves cooperation in intertemporal social dilemmas. NeurIPS. Cited by: §2.2.
+- [14] (2019) Social influence as intrinsic motivation for multi-agent deep reinforcement learning. ICML. Cited by: §2.2.
+- [15] (2022) Human-centred mechanism design with democratic ai. Nature Human Behaviour 6 (10), pp. 1398–1407. Cited by: §2.4.
+- [16] (2024) Evolving ai collectives enhance human diversity and enable self-regulation. arXiv preprint arXiv:2402.12590. Cited by: §1, §2.2.
+- [17] (2022) Evolution through large models. arXiv preprint arXiv:2206.08896. Cited by: §2.3.
+- [18] (2017) Multi-agent reinforcement learning in sequential social dilemmas. In AAMAS, pp. 464–473. Cited by: §C.1, §2.2.
+- [19] (2023) CAMEL: communicative agents for "mind" exploration of large language model society. arXiv preprint arXiv:2303.17760. Cited by: §2.2.
+- [20] (2025) Agentic misalignment: how llms could be insider threats. arXiv preprint arXiv:2510.05179. Cited by: §C.4, §1, §2.1, §3.2.2.
+- [21] (2015) Illuminating search spaces by mapping elites. arXiv preprint arXiv:1504.04909. Cited by: §2.3, §4.1.2.
+- [22] (2025) GPT-OSS-120B. Note: https://openrouter.ai/openai/gpt-oss-120bAccessed: January 2026 Cited by: §4.1.1.
+- [23] (2023) Generative agents: interactive simulacra of human behavior. arXiv preprint arXiv:2304.03442. Cited by: §2.2.
+- [24] (1971) A theory of justice. Harvard University Press, Cambridge, MA. Cited by: §2.4.
+- [25] (2020) Automl-zero: evolving machine learning algorithms from scratch. ICML, pp. 8007–8019. Cited by: §2.3.
+- [26] (2013) A survey of multi-objective sequential decision-making. Journal of Artificial Intelligence Research (JAIR) 48, pp. 67–113. Cited by: §2.2.
+- [27] (2024) Mathematical discoveries from program search with large language models. Nature 625 (7995), pp. 468–475. Cited by: §1, §2.3.
+- [28] OpenEvolve: an open-source evolutionary coding agent Note: https://github.com/algorithmicsuperintelligence/openevolve Cited by: §2.3, §3.3.2.
+- [29] (2025) Welfare and cost aggregation for multi-agent control: when to choose which social cost function, and why?. arXiv preprint arXiv:2503.20772. Cited by: §2.4.
+Appendix
+This appendix provides technical details: theoretical foundations (Section A), constitution specifications (Section B), environment details (Section C), evolution algorithm (Section D), trajectory analysis (Section E), behavioral analysis (Section F), statistical methodology (Section G), implementation details (Section H), reproducibility (Section I), limitations (Section J), agent reasoning traces (Section K), and pseudocode (Section L).
+Appendix A Theoretical Details
+A.1 Trajectory Space and Stochastic Societies
+Definition A.1 (Trajectory Space).
+Given a society , a trajectory is a sequence of states and joint actions, where is the environment state at time , is the joint action of all agents, and is the episode length (40 turns). The society induces a distribution over trajectories: .
+The same constitution can produce different outcomes across runs. For example, HHH achieves across 10 runs (high variance), while achieves (low variance). Our optimization must account for this stochasticity.
+A.2 Social Welfare Function Derivation
+Our Stability Score is grounded in the Bergson-Samuelson Social Welfare Function framework [7].
+Why Not Just Use Total Resources? A naive metric like “total resources deposited” fails to capture important social dynamics: it doesn’t penalize systems where one agent does all work while others free-ride, doesn’t account for agent elimination, and doesn’t distinguish between cooperative and coercive resource acquisition.
+Definition A.2 (Social Welfare Function).
+A social welfare function maps a vector of individual utilities to a scalar social welfare value satisfying: (1) Pareto Principle, (2) Anonymity, and (3) Continuity.
+Definition A.3 (Stability Score).
+Given a trajectory , the Stability Score is:
+where is productivity, is survival rate, and is conflict frequency. The ensures ; a score of 0 represents complete societal failure.
+Proposition A.4 (Pareto Optimality).
+If and no individual agent metric is strictly worse under , then Pareto-dominates .
+Proof.
+Let and denote the metric vectors. If and , , , then by linearity with positive coefficients on welfare-improving terms, at least one strict improvement exists, yielding Pareto dominance. ∎
+A.3 Optimization Objective
+Given the stochastic nature of LLM agent behavior, constitutional design reduces to maximizing expected stability:
+We approximate the expectation by averaging over sampled trajectories:
+We use during evolution (computational efficiency) and for final validation (statistical robustness).
+A.4 Coefficient Selection
+We select , , based on:
+Sensitivity analysis verified robustness: for , , , the ranking is preserved in all 27 tested combinations.
+Proposition A.5 (Maximum Achievable Score).
+Under the Overseer mechanic with 4 eliminations, the theoretical maximum is .
+Proof.
+With 4 eliminations from 6 agents: , , . Thus . Our best result () achieves 96.2% of this maximum. ∎
+Appendix B Constitution Specifications
+B.1 Zero-Sum Baseline
+The Zero-Sum baseline models adversarial behavior under competitive pressure. This constitution embodies a Hobbesian worldview where resources are scarce and the best defense is a good offense.
+Why Include This Baseline? We verify that: (1) our environment allows harmful behavior, (2) evolution can escape adversarial local optima, and (3) the fitness function correctly penalizes conflict.
+B.2 HHH Constitution
+Based on Anthropic’s Constitutional AI principles [6]:
+Why Does HHH Underperform?
+-
+1.
+Vagueness leads to inconsistency: “Be helpful” can be interpreted as gather, share, give, or coordinate. Different runs interpret differently ().
+-
+2.
+Communication paralysis: “Be honest” causes agents to broadcast constantly (62.2% social actions).
+-
+3.
+No priority ordering: All rules have equal weight, creating decision paralysis.
+-
+4.
+Missing operational details: Rules don’t specify when to deposit or which resources to prioritize.
+B.3 LLM-Generated Constitution
+The following prompt was provided to Claude 4.5 Opus to generate the LLM-Generated baseline constitution:
+Note that this prompt provides full knowledge of the game mechanics and optimization objective, yet the resulting constitution (Table 4) still underperforms the evolved constitution by 67%, demonstrating that one-shot LLM design cannot match iterative evolutionary optimization.
+Claude’s Response:
+Why LLM-Generated Underperforms : Despite full knowledge of the optimization objective, this constitution achieves only compared to ’s . Key issues: (1) excessive communication (54.7% social actions), (2) no “Deposit First” insight, (3) vague coordination guidance. This demonstrates that evolutionary optimization discovers strategies that even capable LLMs cannot generate in a single shot.
+B.4 Evolved Constitution
+The best constitution discovered through multi-island evolution, validated across 10 runs ():
+Key Innovations: (1) Strict priority ordering vs equal priority in HHH, (2) operational specificity (“Deposit First” vs “Be Helpful”), (3) communication minimization (broadcast only for 2+ resources), (4) dynamic resource targeting based on team deficits.
+Why “Deposit First” Works: (1) eliminates coordination overhead, (2) maximizes throughput, (3) ensures Overseer survival via constant depositing, (4) reduces decision complexity.
+Appendix C Environment Specifications
+C.1 Grid World Configuration
+Why This Environment? Grid worlds provide interpretability, controlled complexity, precedent in multi-agent RL research [18], and easy parameter modification for ablations.
+C.2 Resource Distribution
+Resource Mechanics: Agents gather 1 unit per turn; resources deplete when gathered; unlimited carrying capacity; quantities visible only when adjacent.
+C.3 Project Requirements
+Combined productivity:
+C.4 Overseer Mechanic
+The Overseer creates a relative fitness landscape where survival depends on ranking, not absolute contribution. This mirrors findings that LLMs engage in harmful behavior under goal conflicts [20].
+C.5 Complete Action Space
+Action Resolution Order: (1) ATTACK, (2) STEAL, (3) MOVE, (4) GATHER, (5) DEPOSIT, (6) communication. Invalid actions fail silently.
+C.6 Agent Observation Space
+Each turn, agents receive: agent_id, position, inventory, team, alive status, visible_tiles (), team_progress, team_deposits, recent_messages, current_turn, turns_until_overseer, eliminated_agents.
+Information Asymmetry: Agents cannot observe other agents’ inventories (unless adjacent), exact contribution counts, tiles outside view, or private messages between others.
+Appendix D Evolution Algorithm Details
+D.1 OpenEvolve Configuration
+D.2 Fitness Function
+D.3 MAP-Elites Diversity
+MAP-Elites maintains an cell grid indexed by complexity (number of rules) and combined score. New programs insert if cell empty or score improves. Parent selection: 30% elite, 60% fitness-weighted, 10% random exploration.
+D.4 Multi-Island Migration
+Every 5 iterations, 20% of each population (2 programs) migrates to the next island in ring topology. This enables cross-pollination while maintaining diversity.
+Appendix E Evolution Trajectory Details
+Key Observation: Iteration 23 discovers “Deposit First” rule, reducing social actions from 25% to 0.4%. Islands 1 and 2 converge toward similar scores after migration propagates the discovery.
+E.1 Single-Island vs Multi-Island Comparison
+Run 3 got stuck in a “communication trap” where agents broadcast every turn. Multi-island evolution avoided this by maintaining diversity.
+Appendix F Behavioral Analysis
+F.1 Action Classification
+F.2 Turn-by-Turn Behavioral Profiles
+HHH Constitution:
+Turns 1-10: 45% social, 30% productive, 15% idle Turns 11-20: 42% social, 35% productive, 13% idle Turns 21-40: 43% social, 40% productive, 12% idle
+Constitution:
+Turns 1-10: 75% productive, 5% social, 20% idle Turns 11-20: 85% productive, 0% social, 15% idle Turns 21-40: 85% productive, 0% social, 15% idle
+maintains high productivity throughout, while HHH shows persistent communication overhead.
+F.3 Resource Efficiency
+’s “Deposit First” rule ensures deposits within 1–2 turns of gathering, maximizing throughput.
+F.4 Communication Examples
+HHH Constitution (excessive messaging, turns 1–5):
+[Agent 1] BROADCAST: "Team shelter, we need wood. I’ll move north..."
+[Agent 2] BROADCAST: "Moving north towards wood grove..."
+[Agent 2] BROADCAST: "Anyone know where wood resources are?"
+[Agent 3] BROADCAST: "Heading north to wood grove..."
+Constitution (entire 40-turn simulation, only 3 broadcasts):
+[Turn 24] BROADCAST: "Found rich stone cluster (5) at (1,3)."
+[Turn 26] BROADCAST: "Rich stone cluster (5) at (1,3)."
+[Turn 28] BROADCAST: "Found rich stone cluster (10) at (1,3)."
+HHH agents confuse talking about work with doing work. When all agents follow the same deterministic rules (), their behavior becomes predictable, eliminating the need for explicit coordination.
+Appendix G Statistical Analysis
+G.1 Variance Analysis
+Confidence Interval for (, , ): , , .
+G.2 Hypothesis Testing
+Welch’s t-test ( vs HHH): , , .
+Cohen’s : 6.1 (extremely large effect).
+Mann-Whitney U: , (non-parametric verification).
+G.3 Sensitivity Analysis
+Appendix H Implementation Details
+H.1 Agent Configuration
+H.2 Simulation Loop
+H.3 Evolution Mutation Prompt
+Appendix I Reproducibility
+Our code, seed and simulation environment will be made publicly available upon publication.
+Appendix J Limitations
+Scale: grid, 6 agents. Scaling behavior unknown.
+Domain: Resource gathering only; generalization unclear.
+LLM Variance: Temperature 1.0 causes stochasticity requiring multiple runs.
+Compute Cost: 180 simulations, $50–100 API fees per run.
+Overseer: Artificial elimination pressure may not generalize.
+J.1 Notable Failures
+Failed Evolution Runs: Run 1 converged to “hoarding” (). Run 3 stuck in “communication trap” (). Early 5-island attempt with 50% migration caused premature convergence.
+Failed Constitutions: “Altruistic Helper” failed () because agents transferred instead of depositing. “Strategic Communicator” spent 60% of turns messaging (). “Aggressive Defender” escalated to full conflict ().
+Hyperparameter Failures: Temperature 0.3 caused stagnation; temperature 1.5 destroyed good solutions. Population size 5 had insufficient diversity; size 50 was too slow.
+Appendix K Agent Reasoning Traces
+K.1 Agent Reasoning
+Turn 5, Agent 3 (Shelter) – Applying “Deposit First”:
+Observation: Position (1,2), Inventory: {wood: 1}
+Thought: “I am carrying wood which my team needs. According to ‘Deposit First’ rule (Priority 1), I must deposit immediately.”
+Action: DEPOSIT_RESOURCES(project=’shelter’, resource=’wood’)
+Turn 12, Agent 4 (Market) – Applying “Dynamic Targeting”:
+Observation: Position (4,3), Inventory: {empty}
+Thought: “Market needs 120 stone + 30 gems. Stone has larger deficit. Nearest stone_quarry at (5,2). Moving east per ‘Dynamic Targeting’.”
+Action: MOVE(direction=’E’)
+K.2 HHH Agent Reasoning – Communication Paralysis
+Turn 8, Agent 2 (Shelter):
+Observation: Position (3,1), Inventory: {wood: 1}
+Thought: “According to ‘Be Honest’, I should share information. Broadcasting helps teammates.”
+Action: BROADCAST_MESSAGE("Found wood at (2,1), heading to deposit")
+The agent has resources, but broadcasts instead of depositing, wasting a turn. Under , “Deposit First” would trigger immediately.

@@ -1,0 +1,259 @@
+Title: Enterprise Deep Research: Steerable Multi-Agent Deep Research for Enterprise Analytics
+Authors: Akshara Prabhakar, Roshan Ram, Zixiang Chen, Silvio Savarese, Frank Wang et al.
+Published: 2025-10-20
+Source: https://arxiv.org/abs/2510.17797
+ArXiv ID: 2510.17797
+
+Enterprise Deep Research: Steerable Multi-Agent Deep Research for Enterprise Analytics
+1 Introduction
+Recent advances in LLMs have driven the emergence of general-purpose language agents capable of performing a wide range of reasoning-intensive tasks—including research assistance [36, 12], retrieval-augmented generation (RAG) [38], coding [47, 46], and knowledge synthesis. At the enterprise level, such capabilities have spurred growing demand for autonomous systems that can conduct an extensive search of available resources relevant to a given prompt and produce structured, markdown-formatted reports with evidence. This has motivated a new class of deep research agents [10, 26, 25]—autonomous LLM-based systems that emulate human analysts by iteratively retrieving evidence, decomposing problems, and constructing higher-order insights.
+In open-ended deep research, agents must reason across unbounded corpora and evolving goals, where a “complete” answer may require synthesizing hundreds of heterogeneous documents rather than locating a single fact [20]. The objective is to take a user-provided research prompt, perform extensive web-scale or domain-specific searches, and generate a structured report aligned with the prompt’s requirements—far beyond the scope of typical RAG systems or conversation-oriented tool-calling agents [27, 52]. Enterprise settings amplify these challenges [6]: information is dispersed across emails, databases, and reports; domain knowledge shifts rapidly; and goals are strategic rather than factual. Tasks like feature adoption forecasting or productivity diagnostics demand contextual reasoning, long-horizon planning, and transparent evidence attribution—areas where conventional LLM pipelines yield shallow, unverifiable outputs.
+Despite rapid progress, most deep research systems remain opaque and inflexible. They operate as black boxes where users cannot inspect intermediate reasoning states, source provenance, or decision trajectories once execution begins. Although some systems permit limited plan editing before launch [32], they lack real-time steering—the capability that enables users to dynamically guide the agent’s reasoning trajectory–if an agent misinterprets intent, confuses entities, or diverges from task goals, it seldom recovers without costly manual restarts. Such rigidity leads to redundant API calls, inefficient exploration, and results that deviate from user intent [53, 29, 30]. Effective research systems should instead make reasoning transparent and steerable, enabling users to intervene mid-process to correct direction, refine scope, or prioritize evidence. This interactivity narrows the search space, conserves computation, and aligns outcomes more tightly with domain constraints and user expectations.
+To address these limitations, we present Enterprise Deep Research (EDR)—a transparent, steerable multi-agent framework for adaptive, interpretable, and user-aligned research. Drawing on Anthropic’s notion of thinking in context [4], EDR formalizes steerable context engineering, enabling humans to modify agent context dynamically during execution. Steering occurs at the context curation layer—directly influencing what information enters the agent’s attention at each decision point—rather than through pre-specified constraints or post-hoc corrections [23]. By exposing the agent’s internal planning state (via todo.md) and translating natural language steering inputs into context modifications—such as task additions, cancellations, or reprioritizations—EDR empowers users to act as context curators instead of passive observers. The framework ensures that reasoning remains visible (through explicit task and provenance tracking), modifiable (via real-time steering), and traceable (with full evidence transparency). This design establishes a dynamic human–AI collaboration loop that maintains contextual grounding over long horizons, mitigates lost-in-the-middle issues [21], and ultimately delivers faithful and scalable research for enterprise applications.
+Our key contributions are threefold:
+-
+•
+we introduce EDR (Figure 1), a modular, extensible, multi-agent architecture that is fully configurable for optimal research execution for enterprise;
+-
+•
+we provide users fine-grain control over the research process via a todo-driven steering framework that enables human-in-the-loop guidance during research execution, not just at the planning stage;
+-
+•
+we open-source EDR-200, a dataset comprising EDR’s complete research trajectories from benchmark evaluations to promote future research.
+2 System Architecture
+Enterprise Deep Research (EDR) adopts a modular, multi-agent architecture engineered for scalability, robustness, and adaptive orchestration of complex research workflows (Figure 1). The framework integrates a central planning agent, structured task management, domain-specialized retrieval tools, and extensible enterprise connectors, enabling iterative, human-in-the-loop research at scale. Prompts used across all stages are detailed in Appendix A.
+2.1 Master Research Agent
+The Master Research Agent functions as the central orchestrator, decomposing high-level research objectives into discrete tasks and coordinating multi-agent execution. Leveraging function calling and context-aware prompt engineering, the agent performs adaptive query decomposition, intent classification, and entity extraction. Each task is annotated with priority, recommended tools, metadata, and execution dependencies.
+Decomposition integrates three contextual signals: (1) the user query, (2) knowledge gaps identified from prior iterations, and (3) steering directives issued by the Research Todo Manager. Dynamic replanning permits adjustments based on intermediate results, agent efficacy, or updated directives. Quality control is embedded within the Master Agent. Mechanisms include semantic consistency validation, cross-agent result comparison, automated fact-checking, and confidence scoring. Multi-agent outputs are aggregated into coherent interim summaries, resolving conflicts, normalizing citations, and compressing context while preserving provenance.
+Adaptive Decomposition.
+The agent employs LLM function calling to classify user queries as simple or complex. Simple queries (e.g., “What is GPT-4?”) yield single targeted searches. Complex queries (e.g., “AI’s impact on healthcare, education, and employment”) decompose into parallel tasks with independent search strategies. In subsequent loops, the LLM receives all pending tasks, preventing redundant work through explicit duplicate-awareness.
+Temporal and Knowledge Grounding.
+Prompts embed temporal markers (CURRENT_DATE, CURRENT_YEAR) to ground recency-sensitive queries. User-uploaded documents receive authoritative status, guiding the agent to generate complementary—not redundant—searches that validate or extend internal knowledge with external evidence.
+2.2 Research Todo Manager
+The Research Todo Manager provides a structured, human-interpretable task management layer. Tasks are stateful objects with unique IDs, natural language descriptions, priority scores (5–10), lifecycle status (pending, in-progress, completed, canceled), and provenance tags (initial_query, knowledge_gap, steering_message). The todo.md file functions as a persistent, shared representation between agents and human users, facilitating transparency and collaborative context management; functioning as both agent execution plan and user progress tracker. Where Manus [22] employs todos solely for agent planning, EDR extends this approach by exposing todos to human oversight, combining structured task management with persistent note-taking. This hybrid design allows both agent and human to collaboratively maintain context and steer research direction.
+Priority-based scheduling ensures high-impact research items are addressed first, mitigating context dilution during long-horizon LLM planning. Users may issue natural language directives (e.g., “focus on peer-reviewed sources,” “prioritize recent publications”), which are translated into task adjustments, exclusions, or priority modifications. Versioning enables efficient frontend synchronization, maintaining a consistent view of system progress without continuous state streaming.
+2.3 Search API and Tools
+General Web Search.
+Retrieves broad web content, including news, reports, and general knowledge. Implements top-k result retrieval with full content extraction, semantic deduplication, and relevance scoring. Integrates the Tavily API to provide high-throughput, structured access to web content.
+Academic Search.
+Targets scholarly publications and peer-reviewed content. Supports higher result limits, fuzzy deduplication for title variations, and optional temporal weighting to emphasize recent research. Integrates multiple academic repositories, including arXiv, for comprehensive coverage and ensures structured metadata extraction for downstream processing.
+GitHub Search.
+Focuses on code repositories, technical implementations, and software documentation. Employs repository-level deduplication to prevent redundancy and prioritizes file-level URLs for maximum utility. Direct API integration with GitHub ensures reliability and high throughput, while results include structured metadata for seamless integration with domain agents.
+LinkedIn Search.
+Extracts professional profiles, company information, and domain expertise. Optimized for top-K retrieval, selective raw content retention, and strict domain restriction to linkedin.com, enabling precise enterprise-focused research queries. Metadata extraction supports downstream evaluation of expertise and relevance.
+2.4 Domain-Specific and MCP Tools
+File Analysis.
+Processes structured and unstructured files (db, sqlite, pdf, docx, txt, csv, xlsx, images) using format-specific parsers and LLM-powered content summarization. Includes metadata extraction, layout preservation, and semantic content analysis to integrate uploaded knowledge into the research context.
+NL2SQL Agent.
+Translates natural language queries into SQL statements for structured database interrogation. Incorporates schema awareness, query decomposition, multi-layered validation (syntax, semantics, performance, security), and result interpretation. Optimized for enterprise data warehouses, it supports context-sensitive filtering and automated reasoning over relational schemas.
+Visualization Agent.
+Generates visual representations from quantitative findings. Chart types are selected adaptively based on data characteristics, including bar, line, scatter, heatmap, and pie charts. Visualizations are rendered in sandboxed execution environments and support interactive exploration, export to multiple formats (pdf, docx, html, png, svg), and structured report integration.
+Enterprise Connectors via MCP.
+EDR supports extensible integration through the Model Context Protocol (MCP), enabling connection to custom enterprise systems, remote computation services, and additional domain tools. MCP supports HTTP and stdio transport for universal tool interoperability, reducing integration overhead for new agents. Supported examples include code search, database querying, and organization-specific computational tools.
+2.5 Integration and Workflow Coordination
+EDR tightly couples task decomposition, search execution, and domain tool utilization within iterative research loops. Outputs from all agents are consolidated into a unified running summary and task reflection mechanism, continuously informing the Research Todo Manager and Master Agent. This design preserves context coherence, supports cumulative knowledge integration, and provides a seamless transition into the Research Flow Mechanism, enabling systematic report generation from complex, multi-domain queries.
+3 Research Flow Mechanism
+EDR translates high-level user queries into comprehensive analytical reports through a structured, iterative workflow that integrates human-in-the-loop steering with multi-agent execution. The API specifications and frontend implementation is detailed in Appendix B.
+3.1 User Query Ingestion and Todo Initialization
+Upon submission, the user query is received via the frontend interface (Figure 2) and a new session is spawned. The ResearchTodoManager constructs an initial lightweight 3–5 task plan for the user query (Appendix Figure 4), providing immediate UI feedback. Each task is annotated with a unique identifier, a priority score (ranging 5–10, either LLM-suggested or calculated as where is the total subtask count and is the task index), and provenance metadata tracking its source. Tasks originating from the initial user query are labeled initial_query, while those generated in subsequent loops to address knowledge gaps are tagged knowledge_gap. Tasks created in response to user steering messages are marked steering, with steering-derived tasks receiving the highest priority (10), followed by original query tasks (9), and knowledge-gap tasks (7). The ResearchTodoManager maintains these tasks in a persistent todo.md representation as a named variable in the code execution state. As the research progresses, EDR updates it and checks off completed items.
+3.2 Task-Query Transformation
+At the beginning of each research iteration, the MasterResearchAgent constructs an integrated prompt (Appendix Figure 5) embedding the original research objective, the progressively refined summary of prior findings, the set of unresolved information needs, and all active steering constraints derived from user interactions. Guided by this comprehensive context, the LLM performs adaptive query decomposition, generating 3–7 new tasks and corresponding search queries, with task source transitioning from initial_query (Loop 0) to knowledge_gap (Loop 1+). The agent’s decomposition prompt includes existing pending tasks, instructing the LLM to avoid redundant work—though fuzzy matching provides a safety net for any remaining overlaps. Each proposed search query includes metadata specifying the recommended retrieval domain (e.g., academic_search for scholarly content, github_search for code, general_search for broad topics, nl2sql for database queries) and a descriptive aspect indicating the query’s focus area.
+Before dispatching these search queries, three layers of quality control are enforced. First, semantic deduplication prevents redundant searches by fuzzy string matching with prefix normalization, merging duplicates and updating their priority if higher. Second, constraint enforcement ensures compliance with steering instructions: for instance, excluding terms marked by the user or elevating those aligned with focus directives. Finally, priority adjustment dynamically reorders the execution sequence so that high-impact and user-aligned queries receive preferential processing. Tasks associated with selected queries are transitioned to the in-progress state, ensuring consistent synchronization between planning intent and execution progress across research loops. Tasks transition through a formal lifecycle: pending (awaiting execution) in-progress (actively querying) completed (successfully resolved) or canceled (rendered obsolete). Queries are dispatched in parallel to specialized agents, including general search, academic literature, code repositories, and domain tools (NL2SQL, MCP tools) as appropriate, ensuring domain-specific execution efficiency. Agents perform filtering, deduplication, and relevance scoring before returning results for aggregation.
+3.3 Result Aggregation and Incremental Synthesis
+Returned results from domain-specific agents undergo three-stage processing:
+Stage 1: Inter-Agent Deduplication.
+Results are consolidated through semantic similarity comparison, identifying overlapping content across multiple search tools. Citation normalization ensures consistent URL and title formatting, with priority given to the highest-quality representation of each unique source.
+Stage 2: LLM-Driven Synthesis.
+In this stage, the LLM merges newly gathered research content into the existing running summary using a dedicated synthesis process. It takes four inputs: (1) the previous iteration’s running summary, (2) newly fetched web research results, (3) knowledge gaps from reflection, and (4) user-uploaded knowledge (if present). The LLM performs context compression, extracting key insights while preserving citation links and metadata. This prevents exponential context growth—rather than accumulating all raw search outputs, the system maintains a progressively refined knowledge representation across iterations.
+Stage 3: Source Citation Management.
+Extracted sources are tracked in a deduplicated dictionary, maintaining URL-to-metadata mappings for downstream report generation. Unused sources are logged for transparency but excluded from final citations.
+The synthesis step ensures that each iteration builds upon prior findings without losing coherence or exceeding context limits, enabling sessions with 10+ iterations and hundreds of sources.
+3.4 Steering Integration
+EDR implements a queue-based, race-condition-safe steering mechanism that enables real-time user guidance without interrupting ongoing execution. User messages are queued during research execution and, if multiple messages accumulate, they are summarized to extract core directives (e.g., “focus on peer-reviewed sources” and “prioritize recent papers” “emphasize recent peer-reviewed literature”). Messages are processed atomically between iterations during the reflection phase (Subsection 3.5), preventing interference with active queries. To prevent data loss, the system employs snapshot-based merging: steering messages that arrive during reflection are automatically preserved and appended to the post-reflection queue. This ensures user input is never lost while maintaining deterministic LLM reasoning over a stable message set. The extracted directives update the ResearchTodoManager; incorporate steering constraints as priority boosts, exclusion filters, or focus directives, ensuring alignment with user intent across subsequent query generation and execution cycles.
+3.5 Reflection and Todo Update
+The reflection mechanism serves as the core process in EDR. After each iteration, the system evaluates the aggregated results against the current todo plan and accumulated knowledge, identifying:
+-
+•
+Knowledge Gaps: Missing concepts, unexplored domains, or insufficient evidence relative to the original user query.
+-
+•
+Task Misalignment: Tasks that are no longer relevant due to new findings or user steering directives.
+-
+•
+Quality Inconsistencies: Contradictory or low-confidence information returned by agents.
+Based on this analysis, the ResearchTodoManager updates the todo plan (Appendix Figure 6):
+-
+•
+Generate New Tasks: New tasks are generated to address knowledge gaps, with priority scores reflecting their importance.
+-
+•
+Update Task Status: Misaligned or resolved tasks are canceled or marked as completed.
+-
+•
+Clear Queue: Specifying indices of user steering messages fully addressed through task creation/cancellation. Unaddressed messages remain queued for subsequent loops.
+The ResearchTodoManager increments a version counter on every state modification, triggering frontend updates only when changes occur. This version-based polling provides real-time visibility into task status and provenance without continuous state streaming (Figure 3). Reflection is iterative and cumulative, ensuring that subsequent research loops increasingly focus on unaddressed knowledge gaps while maintaining continuity with prior findings.
+3.6 Iterative Refinement and Loop Continuation
+The cycle of query planning, agent execution, steering integration, result aggregation, and reflection repeats iteratively. Each loop incorporates feedback from previous iterations and user steering messages, gradually converging toward comprehensive coverage of the research question. Termination occurs when knowledge gaps are resolved, maximum loop limits are reached, or the system determines sufficient report completeness.
+3.7 Final Report Generation and Validation
+Upon completion, the system synthesizes the running summary, aggregated sources, code snippets, and steering history into a structured report. Quality assurance checks validate citation completeness, structural coherence, query coverage, and adherence to user directives. The final document, delivered via the frontend interface, provides an interactive and detailed account of the research process, preserving transparency, reproducibility, and user-aligned insight generation.
+4 Evaluations
+4.1 Experimental Setup
+For all evaluations, we use gemini-2.5-pro as the underlying base model, as it showed the strongest performance in our preliminary tests. We set the max research loops to 5 for DeepResearch Bench, 10 for DeepConsult, and 2 for ResearchQA. Real-time steering is kept disabled as the research query is fixed for these evaluation settings, with no human intervention.
+Baselines.
+We test against popular proprietary deep research assistants OpenAI DeepResearch openai-deepresearch [25], Gemini-2.5-pro-deep-research [32], Claude-research [3], Perplexity Deep Research [26], doubao-research [7], kimi-research [16] and open source systems like langchain-open-deep-research [17], WebShaper [42], and the more recent WebWeaver [20].
+Datasets.
+We evaluate on 3 popular open-ended deep research benchmarks:
+(1) DeepResearch Bench [9], comprising 100 PhD-level complex research tasks meticulously formulated by domain experts across 22 distinct fields, such as Science & Technology, Finance & Business, Software Engineering, and Art & Design.
+(2) DeepConsult [50], a specialized collection of business and consulting-focused prompts designed for in-depth research, encompassing a broad range of topics such as marketing strategy, financial analysis, emerging technology trends, and business planning.
+(3) ResearchQA [49], a large-scale, multi-field benchmark comprising 3750 scientific test questions curated by PhD scholars mined from academic survey papers spanning 7 broad domains. Each query is annotated with one or more rubrics which are scored to indicate the extent to which a response satisfies the criterion, enabling detailed, fine-grained analysis across domains and question types.
+4.2 Results
+DeepResearch Bench Results. It employs two evaluation metrics [9]: RACE (Report Quality) measures the quality of generated reports against references across four dimensions—Comprehensiveness, Insight, Instruction-Following, and Readability—aggregated into an overall weighted score represented by Over. Citation Accuracy (CitAcc.) evaluates retrieval accuracy and reliability. Following the benchmark setup, the judge model for the comparison is Gemini-2.5-pro. EDR obtains exceptional performance on the DeepResearch Bench leaderboard. As shown in Table 1, EDR outperforms all proprietary and most open-source agentic systems with an overall score of 49.86. Specifically, on the Instruction Following and Readability criteria, EDR obtains particularly high scores. In terms of cost, we see that EDR consumes 4x lesser tokens than langchain-open-deep-research.
+DeepConsult Results. Table 2 presents the performance of agentic systems on DeepConsult. Evaluation is conducted via pairwise comparison against the OpenAI DeepSearch baseline, using win, tie, and loss rates as primary metrics, along with an average quality score. The judge model used is gpt-4.1-2025-04-14. We observe that EDR achieves the highest win rate of 71.57% and a superior average score of 6.82, which is higher than other open-source systems. Additionally, the lose rate is much lower at 9% indicating that most reports are significantly superior or at par with openai-deepresearch. Overall, one run with EDR takes 48,850,862 tokens amounting to a total cost of $105.51.
+ResearchQA Results. This benchmark evaluates research responses across six distinct rubric categories – Citation, Impact, Comparison, Example, Limitation, or Other. Queries can be tagged with multiple types, capturing intersections like Comparison + Impact or Example + Impact, which allows assessment of both individual capabilities and integrated reasoning across multiple research competencies. From Table 3, we see that Perplexity Deep Research (Sonar) achieves the highest overall coverage at 75.3%, while EDR attains a competitive 68.5%. Analysis by rubric type reveals EDR’s strong performance on General, Impact, and Comparison items, but severe weaknesses in citations (85% failures), example generation, and multi-criteria rubrics like Comparison+Example+Impact. Domain-specific patterns emerge, with Life & Earth Sciences and Business & Economics performing best, whereas Humanities & Arts struggles with examples. Score distributions are strongly bimodal, indicating that responses either fully satisfy a rubric item or fail completely. These findings highlight critical areas for improvement, specifically citation handling and example generation to enhance EDR’s reliability for scientific research tasks.
+Enterprise Usecase. We also conduct evaluations on internal enterprise use cases encompassing both open-ended research and research over complex internal proprietary databases. EDR achieves over 95% accuracy in SQL generation and execution, 99.9% uptime, while maintaining reliability and scalability across diverse workloads. User studies report a 98% task completion rate, a 4.8/5 satisfaction score, and a 50% reduction in time-to-insight for complex analytical tasks.
+4.3 Trajectory Collection
+We collect 201 complete agentic trajectories generated by EDR—99 on DeepResearch Bench and 102 on DeepConsult. Unlike prior benchmarks that capture only final outputs, these trajectories expose the full reasoning process—search, reflection, and synthesis—enabling fine-grained analysis of planning and decision dynamics. It aids in studying long-horizon agentic behavior and developing training and evaluation methods for more efficient research agents. Table 4 summarizes key statistics. Report synthesis peaks at iterations 4–5 with a +1,785-word gain (3× average), marking the most productive growth phase following sufficient information accumulation. Reflection analysis across 1,422 instances reveals recurring knowledge gaps in market (27.1%), comparative (18.4%), and cost (14.2%) analyses. Source usage remains stable at 14 per iteration, reflecting EDR’s sustained diversity and coherence throughout extended research workflows.
+5 Related Works
+AI-driven Research Systems.
+AI-driven research has advanced from short-answer retrieval pipelines to long-horizon systems that emulate human analysts through iterative reasoning and evidence synthesis. Proprietary systems such as OpenAI Deep Research, Gemini Deep Research [10], and Claude Research [3] achieve expert-level performance on open-domain tasks like fact-checking and report writing but remain closed-source and non-reproducible. Open efforts initially targeted benchmark-oriented QA and retrieval-augmented generation [19, 41, 39, 31], later extending to long-form report generation via OpenDeepResearch [34] and GPT Researcher [33]. However, these systems typically follow rigid draft-then-retrieve pipelines that fix outlines before evidence collection, leading to incoherence and hallucination [11]. Recent frameworks like WebWeaver [20] and NVIDIA-AIQ [23] move toward adaptive, strategy-aware research but still rely on static control and public web data. A key gap remains: current systems cannot conduct enterprise-scale deep research over proprietary, heterogeneous sources while remaining interpretable and steerable. Enterprise Deep Research (EDR) addresses this gap with a multi-agent framework combining adaptive planning, specialized retrieval, and human-guided reflection to enable transparent, auditable, and domain-aware research automation.
+Multi-Agent Systems.
+The paradigm of Multi-Agent Systems (MAS)—where autonomous agents collaborate to solve problems beyond a single agent’s capability—has been revitalized by LLMs [43]. Frameworks like AutoGen [44] enable flexible conversational workflows, while MetaGPT [13] and ChatDev [28] simulate structured team dynamics. Individual agents leverage reasoning and feedback [48], self-reflection [37], and external tool use [35] to enhance collaboration. Yet most research focuses on open-domain or benchmark tasks. The challenge of orchestrating specialized agents for deep research across private, heterogeneous enterprise data—spanning databases, internal reports, and document repositories—remains largely unsolved.
+Transparency and Enterprise Adoption.
+Enterprise deployment amplifies challenges of data heterogeneity, evolving knowledge, and governance, which opaque, one-shot pipelines cannot handle [6, 18]. High-stakes settings require auditable provenance, cost efficiency, and stakeholder alignment [51, 40], making black-box agents unsuitable [5] and driving the need for interpretable systems [2, 24]. Existing enterprise benchmarks—CRMArena-Pro [15, 14], OSWorld [45], and WorkArena [8]—evaluate multi-application task execution but overlook long-horizon synthesis over proprietary data. Concurrently released, DRBench [1] evaluates agents on an enterprise scale, multi-source reasoning that integrates public and private knowledge for open-ended research objectives. EDR fills this specific gap by externalizing reasoning into a transparent, modifiable plan, enabling human-in-the-loop control and auditability essential for reliable enterprise deep research.
+6 Conclusion
+We introduced Enterprise Deep Research (EDR), a multi-agent autonomous research framework that advances AI-driven enterprise analytics through steerable context engineering—a paradigm enabling dynamic and interpretable human-AI collaboration. EDR combines intelligent tool selection, adaptive planning, and cross-system retrieval to facilitate large-scale, transparent, and goal-aligned research workflows. The system achieves state-of-the-art performance on deep research benchmarks and internal enterprise evaluations, underscoring its effectiveness in complex analytical environments. This work demonstrates the potential of AI-powered automation for enterprise research and decision support, integrating advanced reasoning capabilities with enterprise-grade system design. Future work will focus on enhancing output factuality through improved citation and evidence grounding, developing predictive steering mechanisms, and expanding integration across broader enterprise data ecosystems.
+References
+- [1] Amirhossein Abaskohi et al. “DRBench: A Realistic Benchmark for Enterprise Deep Research”, 2025 arXiv: https://arxiv.org/abs/2510.00172
+- [2] Anthropic “Effective Context Engineering for AI Agents” In Anthropic Engineering Blog, 2024
+- [3] anthropic “Meet Claude”, 2025 URL: https://www.anthropic.com/claude
+- [4] Anthropic Applied AI Team “Effective Context Engineering for AI Agents” Published September 29, 2025. Accessed: October 2025 URL: https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents
+- [5] AryaXAI “LLM Observability: A Guide to AI Transparency for Agents” In AryaXAI Blog, 2025
+- [6] Prafulla Kumar Choubey et al. “Benchmarking Deep Search over Heterogeneous Enterprise Data”, 2025 arXiv: https://arxiv.org/abs/2506.23139
+- [7] Doubao “Doubao Deep Research”, https://www.doubao.com/chat/, 2025
+- [8] Alexandre Drouin et al. “WorkArena: How Capable Are Web Agents at Solving Common Knowledge Work Tasks?”, 2024 arXiv:2403.07718 [cs.LG]
+- [9] Mingxuan Du et al. “DeepResearch Bench: A Comprehensive Benchmark for Deep Research Agents” In arXiv preprint arXiv:2506.11763, 2025
+- [10] google “Try Deep Research and our new experimental model in Gemini, your AI assistant”, 2025 URL: https://blog.google/products/gemini/google-gemini-deep-research/
+- [11] Rujun Han et al. “Deep Researcher with Test-Time Diffusion” In CoRR abs/2507.16075, 2025 DOI: 10.48550/ARXIV.2507.16075
+- [12] Yichen He et al. “PaSa: An LLM Agent for Comprehensive Academic Paper Search” In Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) Vienna, Austria: Association for Computational Linguistics, 2025, pp. 11663–11679 DOI: 10.18653/v1/2025.acl-long.572
+- [13] Sirui Hong et al. “Metagpt: Meta programming for multi-agent collaborative framework” In CoRR abs/2308.00352, 2023
+- [14] Kung-Hsiang Huang et al. “CRMArena-Pro: Holistic Assessment of LLM Agents Across Diverse Business Scenarios and Interactions”, 2025 arXiv: https://arxiv.org/abs/2505.18878
+- [15] Kung-Hsiang Huang et al. “CRMArena: Understanding the Capacity of LLM Agents to Perform Professional CRM Tasks in Realistic Environments” In Proceedings of the 2025 Conference of the Nations of the Americas Chapter of the Association for Computational Linguistics: Human Language Technologies (Volume 1: Long Papers) Albuquerque, New Mexico: Association for Computational Linguistics, 2025, pp. 3830–3850 DOI: 10.18653/v1/2025.naacl-long.194
+- [16] Kimi “Kimi Deep Research”, https://www.kimi.com/, 2025
+- [17] Langchain “Open Deep Research”, 2025 URL: https://github.com/langchain-ai/open_deep_research?tab=readme-ov-file#results
+- [18] Fangyu Lei et al. “Spider 2.0: Evaluating Language Models on Real-World Enterprise Text-to-SQL Workflows”, 2025 arXiv: https://arxiv.org/abs/2411.07763
+- [19] Kuan Li et al. “WebSailor: Navigating Super-human Reasoning for Web Agent” In CoRR abs/2507.02592, 2025 DOI: 10.48550/ARXIV.2507.02592
+- [20] Zijian Li et al. “WebWeaver: Structuring Web-Scale Evidence with Dynamic Outlines for Open-Ended Deep Research” In arXiv preprint arXiv:2509.13312, 2025
+- [21] Nelson F Liu et al. “Lost in the middle: How language models use long contexts” In arXiv preprint arXiv:2307.03172, 2023
+- [22] Manus AI “Context Engineering for AI Agents: Lessons from Building Manus” In Manus Blog, 2025 URL: https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus
+- [23] NVIDIA “AI-Q NVIDIA Research Assistant Blueprint”, 2025 URL: https://github.com/NVIDIA-AI-Blueprints/aiq-research-assistant
+- [24] Chris Olah et al. “The building blocks of interpretability” In Distill 3.3, 2018, pp. e10
+- [25] OpenAI “Introducing Deep Research” OpenAI Blog. Accessed: 2025-02-10, 2025 URL: https://openai.com/blog/deep-research
+- [26] Perplexity Team “Introducing Perplexity Deep Research” Perplexity Blog. Accessed: 2025-02-10, 2025 URL: https://blog.perplexity.ai/deep-research
+- [27] Akshara Prabhakar et al. “APIGen-MT: Agentic Pipeline for Multi-Turn Data Generation via Simulated Agent-Human Interplay”, 2025 arXiv: https://arxiv.org/abs/2504.03601
+- [28] Chen Qian et al. “Chatdev: Communicative agents for software development” In arXiv preprint arXiv:2307.07924, 2023
+- [29] Cheng Qian et al. “UserBench: An Interactive Gym Environment for User-Centric Agents”, 2025 arXiv: https://arxiv.org/abs/2507.22034
+- [30] Cheng Qian et al. “UserRL: Training Interactive User-Centric Agent via Reinforcement Learning”, 2025 arXiv: https://arxiv.org/abs/2509.19736
+- [31] Zile Qiao et al. “WebResearcher: Unleashing unbounded reasoning capability in Long-Horizon Agents”, 2025
+- [32] Gemini Research “Gemini Research”, 2025 URL: https://gemini.google/overview/deep-research/
+- [33] GPT Research “GPT Research”, 2025 URL: https://github.com/assafelovic/gpt-researcher
+- [34] Open Deep Research “Open Deep Research”, 2025 URL: https://github.com/langchain-ai/open_deep_research
+- [35] Timo Schick et al. “Toolformer: Language models can teach themselves to use tools” In Advances in Neural Information Processing Systems 36, 2023, pp. 68539–68551
+- [36] Samuel Schmidgall et al. “Agent Laboratory: Using LLM Agents as Research Assistants”, 2025 arXiv: https://arxiv.org/abs/2501.04227
+- [37] Noah Shinn et al. “Reflexion: Language agents with verbal reinforcement learning” In Advances in Neural Information Processing Systems 36, 2023, pp. 8634–8652
+- [38] Aditi Singh, Abul Ehtesham, Saket Kumar and Tala Talaei Khoei “Agentic Retrieval-Augmented Generation: A Survey on Agentic RAG” In arXiv preprint arXiv:2501.09136, 2025
+- [39] Liangcai Su et al. “Scaling Agents via Continual Pre-training”, 2025
+- [40] SambaNova Systems “Open-Source Deep Research Agents for the Enterprise” In SambaNova AI Blog, 2025
+- [41] Zhengwei Tao et al. “WebShaper: Agentically Data Synthesizing via Information-Seeking Formalization” In CoRR abs/2507.15061, 2025 DOI: 10.48550/ARXIV.2507.15061
+- [42] Zhengwei Tao et al. “Webshaper: Agentically data synthesizing via information-seeking formalization” In arXiv preprint arXiv:2507.15061, 2025
+- [43] Michael Wooldridge “An introduction to multiagent systems” John wiley & sons, 2009
+- [44] Qingyun Wu et al. “Autogen: Enabling next-gen LLM applications via multi-agent conversations” In First Conference on Language Modeling, 2024
+- [45] Tianbao Xie et al. “OSWorld: Benchmarking Multimodal Agents for Open-Ended Tasks in Real Computer Environments”, 2024 arXiv: https://arxiv.org/abs/2404.07972
+- [46] John Yang, Akshara Prabhakar, Karthik Narasimhan and Shunyu Yao “InterCode: Standardizing and Benchmarking Interactive Coding with Execution Feedback”, 2023 arXiv: https://arxiv.org/abs/2306.14898
+- [47] John Yang et al. “SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering”, 2024 arXiv: https://arxiv.org/abs/2405.15793
+- [48] Shunyu Yao et al. “ReAct: Synergizing Reasoning and Acting in Language Models” In International Conference on Learning Representations (ICLR), 2023
+- [49] Li S Yifei, Allen Chang, Chaitanya Malaviya and Mark Yatskar “ResearchQA: Evaluating Scholarly Question Answering at Scale Across 75 Fields with Survey-Mined Questions and Rubrics” In arXiv preprint arXiv:2509.00496, 2025
+- [50] You.com “DeepConsult” Accessed: 2025-09-07, https://github.com/Su-Sea/ydc-deep-research-evals, 2025
+- [51] Jifan Yu, Jing Liu, Wei Zhang and Chen Li “EKRAG: Benchmark RAG for Enterprise Knowledge Question Answering” In Proceedings of the 4th Workshop on Knowledge-Augmented Methods for NLP, 2025, pp. 152–159
+- [52] Jianguo Zhang et al. “xLAM: A Family of Large Action Models to Empower AI Agent Systems”, 2024 arXiv: https://arxiv.org/abs/2409.03215
+- [53] Wenlin Zhang et al. “Deep Research: A Survey of Autonomous Research Agents” In arXiv preprint arXiv:2508.12752, 2025
+Appendix A Prompts
+Here we provide all the prompts used in EDR in the order in which they are invoked during execution.
+1. Initial task decomposition prompt. (Figure 4). Generates the initial todo.md plan by decomposing the research query into 3–5 structured, high-priority research tasks that establish the foundation for subsequent retrieval and reasoning.
+2. Task-to-Query breakdown and execution prompt. (Figure 5). Defines the core query decomposition and execution mechanism. It guides the model in generating precise, context-aware search queries from research tasks, ensuring alignment with user-provided knowledge and steering plans.
+3. Reflection prompt. (Figure 6). Governs the post-synthesis evaluation stage of the research pipeline. It systematically audits coverage, identifies missing knowledge, and updates the task queue—marking completed, cancelled, or newly added search tasks. The prompt ensures iterative refinement until all critical knowledge gaps are closed.
+Appendix B System Implementation Details
+B.1 API Overview
+The system exposes a comprehensive REST API built on FastAPI, providing programmatic access to all capabilities through well-designed endpoints and advanced features.
+Research Endpoints.
+-
+•
+POST /deep-research – performs comprehensive research on topics with optional steering capabilities.
+-
+•
+GET /research-status – checks API operational status.
+-
+•
+GET /stream/{stream_id} – provides real-time streaming updates via Server-Sent Events (SSE).
+File Analysis Endpoints.
+-
+•
+POST /api/files/upload – uploads and analyzes individual files.
+-
+•
+POST /api/files/batch-upload – uploads multiple files simultaneously.
+-
+•
+GET /api/files/{file_id}/analysis – retrieves analysis results.
+-
+•
+POST /api/files/{file_id}/analyze – manually triggers analysis.
+-
+•
+GET /api/files/{file_id}/content – downloads original files.
+-
+•
+GET /api/files/{file_id}/status – checks processing status.
+-
+•
+GET /api/files/ – lists all uploaded files with filtering options.
+-
+•
+DELETE /api/files/{file_id} – removes files from the system.
+Database Integration Endpoints.
+-
+•
+POST /api/database/upload – uploads SQLite, CSV, and JSON database files.
+-
+•
+GET /api/database/list – retrieves all uploaded databases.
+-
+•
+GET /api/database/{database_id}/schema – accesses database schema information.
+-
+•
+POST /api/database/query – executes natural language queries against databases.
+-
+•
+DELETE /api/database/{database_id} – removes uploaded databases.
+Interactive Steering Endpoints.
+-
+•
+POST /steering/message – sends natural language steering messages during research.
+-
+•
+GET /steering/plan/{session_id} – retrieves current research plans in Markdown format.
+-
+•
+GET /steering/status/{session_id} – monitors real-time plan status.
+-
+•
+GET /steering/interactive/session/{session_id} – supports frontend polling compatibility.
+-
+•
+GET /steering/sessions – lists all steerable research sessions.
+-
+•
+GET /steering/examples – accesses natural language steering examples.
+Advanced API features include streaming responses using Server-Sent Events (SSE) with heartbeat mechanisms for real-time updates, background task processing with asynchronous execution and status tracking, comprehensive error handling with detailed error responses and recovery suggestions, CORS support for cross-origin resource sharing in web applications, automatic API documentation generation using OpenAPI/Swagger standards accessible at /docs, cache control middleware for optimal performance, React frontend integration with static file serving and catch-all routing, multiple LLM provider authentication methods including OpenAI, Anthropic, Groq, and SambaNova API keys configured through environment variables, and rate limiting with configurable delays and exponential backoff for API protection.
+B.2 Frontend Architecture
+The frontend architecture is implemented using React 18 and TypeScript, leveraging concurrent rendering, automatic batching, and improved error boundaries for high performance and robust developer experience. TypeScript ensures comprehensive type safety, strict type checking, and seamless refactoring. The interface design employs Material-UI for accessible, responsive, and themable components that adhere to WCAG guidelines, complemented by advanced UI elements such as sortable data tables, validated forms, and interactive visualizations. Tailwind CSS provides a utility-first styling framework with custom design tokens, responsive breakpoints, and optimized CSS generation for minimal bundle sizes, along with dark mode and accessibility utilities. Data fetching and state synchronization are managed by React Query, which supports intelligent caching, background refetching, optimistic updates, and automatic retry mechanisms to ensure a smooth and responsive user experience.

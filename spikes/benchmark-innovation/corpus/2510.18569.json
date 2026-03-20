@@ -1,0 +1,16 @@
+{
+  "arxiv_id": "2510.18569",
+  "title": "QuantEvolve: Automating Quantitative Strategy Discovery through Multi-Agent Evolutionary Framework",
+  "abstract": "Automating quantitative trading strategy development in dynamic markets is challenging, especially with increasing demand for personalized investment solutions. Existing methods often fail to explore the vast strategy space while preserving the diversity essential for robust performance across changing market conditions. We present QuantEvolve, an evolutionary framework that combines quality-diversity optimization with hypothesis-driven strategy generation. QuantEvolve employs a feature map aligned with investor preferences, such as strategy type, risk profile, turnover, and return characteristics, to maintain a diverse set of effective strategies. It also integrates a hypothesis-driven multi-agent system to systematically explore the strategy space through iterative generation and evaluation. This approach produces diverse, sophisticated strategies that adapt to both market regime shifts and individual investment needs. Empirical results show that QuantEvolve outperforms conventional baselines, validating its effectiveness. We release a dataset of evolved strategies to support future research.",
+  "authors": [
+    "Junhyeog Yun",
+    "Hyoun Jun Lee",
+    "Insu Jeon"
+  ],
+  "published": "2025-10-21T12:22:16Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2510.18569"
+}

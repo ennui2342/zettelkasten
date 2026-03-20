@@ -1,0 +1,24 @@
+{
+  "arxiv_id": "2512.13481",
+  "title": "neuralFOMO: Can LLMs Handle Being Second Best? Measuring Envy-Like Preferences in Multi-Agent Settings",
+  "abstract": "Envy shapes competitiveness and cooperation in human groups, yet its role in large language model interactions remains largely unexplored. As LLMs increasingly operate in multi-agent settings, it is important to examine whether they exhibit envy-like preferences under social comparison. We evaluate LLM behavior across two scenarios: (1) a point-allocation game testing sensitivity to relative versus absolute payoff, and (2) comparative evaluations across general and contextual settings. To ground our analysis in psychological theory, we adapt four established psychometric questionnaires spanning general, domain-specific, workplace, and sibling-based envy. Our results reveal heterogeneous envy-like patterns across models and contexts, with some models sacrificing personal gain to reduce a peer's advantage, while others prioritize individual maximization. These findings highlight competitive dispositions as a design and safety consideration for multi-agent LLM systems.",
+  "authors": [
+    "Arnav Ramamoorthy",
+    "Shrey Dhorajiya",
+    "Ojas Pungalia",
+    "Rashi Upadhyay",
+    "Abhishek Mishra",
+    "Abhiram H",
+    "Tejasvi Alladi",
+    "Sujan Yenuganti",
+    "Dhruv Kumar"
+  ],
+  "published": "2025-12-15T16:17:12Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.CL",
+    "cs.CY"
+  ],
+  "url": "https://arxiv.org/abs/2512.13481"
+}

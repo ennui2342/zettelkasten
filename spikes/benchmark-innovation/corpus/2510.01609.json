@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2510.01609",
+  "title": "AgentRec: Next-Generation LLM-Powered Multi-Agent Collaborative Recommendation with Adaptive Intelligence",
+  "abstract": "Interactive conversational recommender systems have gained significant attention for their ability to capture user preferences through natural language interactions. However, existing approaches face substantial challenges in handling dynamic user preferences, maintaining conversation coherence, and balancing multiple ranking objectives simultaneously. This paper introduces AgentRec, a next-generation LLM-powered multi-agent collaborative recommendation framework that addresses these limitations through hierarchical agent networks with adaptive intelligence. Our approach employs specialized LLM-powered agents for conversation understanding, preference modeling, context awareness, and dynamic ranking, coordinated through an adaptive weighting mechanism that learns from interaction patterns. We propose a three-tier learning strategy combining rapid response for simple queries, intelligent reasoning for complex preferences, and deep collaboration for challenging scenarios. Extensive experiments on three real-world datasets demonstrate that AgentRec achieves consistent improvements over state-of-the-art baselines, with 2.8\\% enhancement in conversation success rate, 1.9\\% improvement in recommendation accuracy (NDCG@10), and 3.2\\% better conversation efficiency while maintaining comparable computational costs through intelligent agent coordination.",
+  "authors": [
+    "Bo Ma",
+    "Hang Li",
+    "ZeHua Hu",
+    "XiaoFan Gui",
+    "LuYao Liu",
+    "Simon Lau"
+  ],
+  "published": "2025-10-02T02:47:11Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2510.01609"
+}

@@ -1,0 +1,763 @@
+Title: Norm-Governed Multi-Agent Decision-Making in Simulator-Coupled Environments:The Reinsurance Constrained Multi-Agent Simulation Process (R-CMASP)
+Authors: Stella C. Dong
+Published: 2025-12-04
+Source: https://arxiv.org/abs/2512.09939
+ArXiv ID: 2512.09939
+
+Norm-Governed Multi-Agent Decision-Making in Simulator-Coupled Environments: The Reinsurance Constrained Multi-Agent Simulation Process (R–CMASP)
+Abstract
+Reinsurance decision-making displays the core structural properties that motivate multi-agent models: distributed and asymmetric information, partial observability, heterogeneous epistemic responsibilities, environment dynamics mediated by external stochastic simulators, and hard prudential and regulatory constraints. Deterministic workflow automation cannot satisfy these requirements, as it lacks the epistemic flexibility, cooperative coordination mechanisms, and norm-sensitive behaviour necessary for institutional risk-transfer processes.
+We propose the Reinsurance Constrained Multi-Agent Simulation Process (R–CMASP), a formal model that extends stochastic games and Dec-POMDPs by incorporating three elements missing from prior MAS and agentic-LLM frameworks: (i) simulator-coupled transition dynamics driven by catastrophe, capital, and portfolio engines; (ii) role-specialized epistemic agents with structured observability, belief updates, and typed communication; and (iii) a normative feasibility layer encoding solvency, regulatory, and organizational rules as admissibility constraints on joint actions. R–CMASP thereby provides a principled environment model for domains in which norms and simulators jointly determine feasible behaviour.
+We instantiate the formalism using LLM-based agents equipped with tool access, structured prompts, and typed message protocols (state broadcasts, proposals, critiques, constraints). Experiments in a domain-calibrated synthetic environment show that governed multi-agent coordination yields more stable, consistent, and norm-adherent equilibria than both deterministic automation and monolithic LLM baselines—achieving lower pricing variance, higher capital efficiency, and improved clause-interpretation accuracy—while preserving auditability and human oversight. We further show that embedding prudential norms as admissibility constraints and structuring communication into typed acts measurably enhances equilibrium stability and normative adherence at the MAS level.
+Beyond the reinsurance domain, our results support a broader methodological conclusion: regulated, simulator-driven decision environments are most naturally and effectively modelled as norm-governed, simulator-coupled multi-agent systems. R–CMASP provides a general computational ontology for integrating epistemic reasoning, external simulators, constrained cooperation, and formal governance in high-stakes institutional settings.
+Keywords: multi-agent systems; normative and governed MAS; organizational and epistemic coordination; constrained cooperative decision-making; simulator-coupled transitions; regulated financial domains.
+1 Introduction
+Reinsurance is a foundational mechanism of global risk transfer, enabling insurers to pool, cede, and diversify exposure to extreme natural catastrophe, cyber, liability, and other tail events [cummins2012reinsurance, swissre2023sigma]. It supports solvency, stabilizes balance sheets, and mitigates accumulation risk, thereby contributing to systemic financial resilience. Yet the workflows required to interpret treaties, validate exposures, integrate stochastic hazard models, price risk, allocate capital, and steer portfolios are intrinsically complex. They combine (i) legally dense and often ambiguous contractual semantics, (ii) simulation-based hazard and loss models, and (iii) strict prudential regimes such as Solvency II, IFRS 17, and NAIC RBC that impose binding valuation, capital, and governance rules [eiopa2020solvency2, ifrs17standard2020].
+Despite substantial tooling, reinsurance operations remain predominantly manual and epistemically fragmented. Underwriters, exposure analysts, catastrophe modelers, pricing actuaries, and capital specialists operate on heterogeneous information sets with partially conflicting objectives. Treaty interpretation requires resolving linguistic ambiguity [mangini2019treatyanalysis]; pricing requires reconciling correlated hazard outputs [grossi2005catmodels]; and portfolio steering must account for non-stationary perils and accumulation [barnett2021nonstationary, mcgill2021aggregation]. These asymmetries routinely yield divergent assumptions, duplicated analyses, and elevated operational and model risk [lloyds2019processreview].
+Classical workflow automation captures only the deterministic fragments of these processes. ETL pipelines, RPA systems, and ACORD-normalization frameworks [rpa_insurance2018] function when transformations are unambiguous, but from a multi-agent systems (MAS) perspective they instantiate degenerate agents: they have no belief states, cannot update interpretations, and cannot negotiate joint decisions under uncertainty. As argued in MAS and socio-technical research [rahwan2019society_agents, wooldridge2009mas], such systems fail in domains characterized by partial observability, distributed expertise, interdependent constraints, and binding norms—all intrinsic to reinsurance.
+Recent developments in large language models (LLMs) [brown2020gpt3, openai2024o1] and agentic reasoning frameworks—including reasoning–acting loops [yao2022react], metacognitive self-critique [shinn2023reflexion], and structured multi-agent protocols [li2023autogen, wang2023surveyagents]—enable richer epistemic and organizational behaviour. These systems can parse heterogeneous documents, invoke external simulators, critique intermediate assumptions, and coordinate through structured message exchange. The epistemic and organizational structure of reinsurance aligns closely with these capabilities: workflows require semantic interpretation, simulator-grounded reasoning, constraint satisfaction, interdependent optimization, and explicit governance.
+Crucially, reinsurance decision-making is not purely technical but profoundly normative. Decisions must satisfy regulatory constraints, internal risk appetite, and auditability requirements. Following governed MAS principles [rahwan2019society_agents], the goal is not to replace human underwriters or actuaries, but to augment their epistemic and organizational capacity. Agents serve as analytic collaborators—surfacing inconsistencies, enforcing cross-role coherence, automating repetitive reasoning steps, and maintaining transparent audit trails—while final authority remains with human experts.
+Contributions.
+This paper develops a theoretically grounded, institutionally aligned framework for governed multi-agent decision-making in reinsurance. Our contributions are:
+-
+•
+Conceptual. We formalize the fundamental distinction between deterministic automation and autonomous, communication-enabled agents, showing that the epistemic, stochastic, and normative structure of reinsurance renders fixed pipelines structurally inadequate. From a MAS perspective, we contribute a new class of simulator-coupled, norm-governed decision processes together with an operational equilibrium notion tailored to institutional settings.
+-
+•
+Architectural. We introduce a multi-agent architecture mirroring the organizational decomposition of reinsurance practice, with role-specialized agents for treaty interpretation, exposure reasoning, hazard modeling, pricing, capital evaluation, portfolio steering, claims handling, and governance. Typed communication (state, proposal, critique, constraint) enables cooperative reasoning under uncertainty and normative constraints.
+-
+•
+Formal and empirical. We propose the Reinsurance Constrained Multi-Agent Simulation Process (R–CMASP), a formal model that augments stochastic games and Dec-POMDPs with simulator-coupled transitions, normative feasibility constraints, and structured inter-agent communication. In a calibrated synthetic environment, governed multi-agent coordination yields substantial improvements in pricing stability, capital efficiency, interpretive accuracy, and governance robustness relative to deterministic automation and monolithic LLM baselines.
+The paper’s main contributions are therefore: (i) a formal model (R–CMASP), (ii) an aligned multi-agent architecture, and (iii) an empirical instantiation in a simulator-grounded environment; taken together, these demonstrate how simulator-coupled, norm-governed MAS can be engineered and analysed in high-stakes institutional settings.
+Paper Outline.
+Section 2 reviews relevant work. Section 3 contrasts deterministic workflows with agentic computation. Section 4 presents the multi-agent architecture. Section 5 introduces the R–CMASP formalism. Section 6 reports empirical evaluations. Section 7 analyzes theoretical implications. Section 8 concludes.
+2 Related Work
+Reinsurance decision-making integrates semantic interpretation, stochastic simulation, multi-objective optimization, and institutionally governed coordination. Developing a principled multi-agent formalism for this domain touches five relevant literatures: (i) deterministic workflow automation in insurance, (ii) large language models (LLMs) for semantic reasoning, (iii) agentic LLM systems with tool use and structured communication, (iv) foundational multi-agent systems (MAS) research on coordination, norms, and organizational design, and (v) governance mechanisms for high-stakes socio-technical systems. We synthesize these strands using MAS-theoretic concepts—epistemic reasoning, normative constraints, and distributed coordination—to identify a structural gap motivating R–CMASP.
+Research in normative and organizational multi-agent systems has long examined obligations, permissions, institutional rules, and coordination under uncertainty. Our model builds on this lineage while integrating features—external simulators and prudential constraints—not addressed in prior MAS frameworks.
+2.1 Insurance Automation
+Operational automation in insurance is dominated by deterministic pipelines, RPA systems, and ACORD-standardized processing [rpa_insurance2018]. In MAS terms, these systems instantiate degenerate agents: they implement fixed transition rules, maintain no epistemic state, and cannot revise beliefs or form intentions in the BDI sense [wooldridge2009mas]. They perform well only when data are schema-preserving and semantics unambiguous.
+Reinsurance workflows violate these assumptions. They require (i) resolving linguistic and legal ambiguity in treaty text [mangini2019treatyanalysis], (ii) integrating heterogeneous stochastic hazard and capital models [grossi2005catmodels], and (iii) coordinating across organizational roles operating under asymmetric information. Deterministic automation fails under exactly these conditions, producing inconsistencies, duplicated analyses, and elevated model and operational risk [lloyds2019processreview, cummins2012reinsurance]. This motivates a move from fixed workflows to systems capable of epistemic reasoning and cooperative coordination.
+2.2 Large Language Models
+LLMs provide powerful semantic grounding and approximate belief updating [brown2020gpt3, openai2024o1]. They can extract treaty structure, reason over text, and perform multi-step chains of thought.
+However, LLMs are not agents in the MAS sense: they lack persistent epistemic state, explicit action models, shared world-state representations, commitment strategies, and formal coordination mechanisms. They cannot reason about other agents’ knowledge or enforce institutional norms. Thus, while essential for treaty interpretation, LLMs alone do not provide the machinery required for structured multi-agent decision-making.
+2.3 Tool-Using and Agentic LLM Systems
+Frameworks such as ReAct [yao2022react], Reflexion [shinn2023reflexion], and AutoGen [li2023autogen] extend LLMs toward agent-like behaviour via tool invocation, self-critique, and structured dialogues. These systems approximate classical MAS ideas—distributed planning, critique cycles, and joint intention formation [shoham1995mas, kraus1997mas].
+Yet they remain domain-general. They do not:
+-
+•
+embed domain-specific catastrophe, capital, or portfolio simulators directly in the transition model;
+-
+•
+represent multi-objective institutional rewards shaped by solvency or regulatory constraints;
+-
+•
+incorporate normative feasibility conditions or governance mechanisms as first-class components.
+These gaps directly correspond to missing elements in classical normative and organizational MAS frameworks.
+2.4 Multi-Agent Systems in Finance
+The MAS literature offers deep foundations for coordination, distributed constraint satisfaction, and normative behaviour [wooldridge2009mas, shoham1995mas]. Prior work has extensively examined (i) role-based and organizational MAS, (ii) normative systems with obligations, permissions, and sanctions, and (iii) negotiation and coordination under uncertainty. These strands provide the conceptual basis for modelling cooperative decision processes involving heterogeneous roles, partial observability, and institutionally governed constraints.
+In finance, MAS approaches model markets, trading behaviour, and learning dynamics [lebaron2006agentfinance, hommes2021agentfinc], typically in competitive settings with strategic interplay. Reinsurance differs structurally:
+-
+•
+interactions are cooperative, not adversarial;
+-
+•
+agents represent organizational roles, not self-interested actors;
+-
+•
+feasibility is defined by prudential and regulatory constraints, not market equilibria;
+-
+•
+transition dynamics depend on external simulators (catastrophe, capital, portfolio).
+Existing MAS models provide coordination and negotiation toolkits but do not capture the simulator-coupled, norm-governed nature of institutional reinsurance.
+2.5 Human–AI Governance and Oversight
+Governance research emphasizes alignment, traceability, auditability, and override mechanisms in autonomous systems [rahwan2019society_agents]. Within MAS, this corresponds to integrating norms, institutional rules, and supervisory agents to maintain global consistency.
+Reinsurance is intensively regulated: solvency constraints, reporting requirements, and internal risk policies shape the feasible action space. Modern agentic LLM systems do not encode these constraints, and classical normative MAS models do not incorporate external stochastic simulators or capital formulas as part of the environment dynamics. This gap motivates formalism in which governance and simulator-based feasibility jointly constrain behaviour.
+2.6 Comparison of Prior Work
+Table 1 compares prior strands along MAS-theoretic dimensions essential for institutional reinsurance: semantic grounding, tool-mediated reasoning, multi-step coordination, constraint negotiation, normative compliance, auditability, and human oversight.
+2.7 Gap Analysis
+The synthesis reveals structural deficiencies across all prior approaches:
+-
+•
+Deterministic automation lacks semantic grounding, epistemic reasoning, and deliberative coordination.
+-
+•
+LLMs supply semantics but lack persistent beliefs, action models, and multi-agent coordination.
+-
+•
+Agentic LLM frameworks support communication and tool use but not normative feasibility or domain-specific constraints.
+-
+•
+MAS in finance address competitive markets, not cooperative, regulation-bound institutional workflows.
+-
+•
+Governance research specifies principles but does not operationalize them within simulator-coupled MAS architectures.
+Importantly, while normative MAS models reason about obligations, permissions, and sanctions, they typically do not integrate external stochastic simulators or prudential capital rules as explicit components of the environment dynamics. R–CMASP incorporates both elements directly—treating simulation outputs and regulatory constraints as first-class drivers of state transitions—thereby bridging classical normative MAS with modern agentic systems that interact with quantitative models and institutional rules.
+In combination, these gaps indicate the absence of a unified framework integrating semantic interpretation, simulator-coupled transitions, constrained multi-agent coordination, and explicit normative governance. This motivates the R–CMASP formalism introduced in Section 4.
+3 Automation vs. AI Agents
+Reinsurance decision-making integrates semantic interpretation, stochastic simulation, multi-objective coordination, and governance under binding regulatory norms. From a multi-agent systems (MAS) perspective, this environment exhibits partial observability, distributed expertise, and normative constraints that make static, unilateral decision rules inadequate. This section sharpens the distinction between deterministic automation and autonomous agents, drawing on epistemic logic, organizational MAS theory, and cooperative game-theoretic models.
+3.1 Deterministic Automation
+Classical workflow automation instantiates a degenerate form of agency. Such systems implement fixed, context-insensitive transition functions
+with no explicit epistemic state, deliberation, or communication. RPA, ETL pipelines, and deterministic workflow engines used in insurance operations exemplify this category [rpa_insurance2018].
+Epistemic limitations.
+In epistemic logic, deterministic workflows lack knowledge () and belief () modalities. They cannot:
+-
+•
+revise interpretations of ambiguous treaty text;
+-
+•
+incorporate stochastic evidence from hazard or capital simulators;
+-
+•
+represent uncertainty or distribution shift;
+-
+•
+reason about what other organizational roles know or assume.
+Their epistemic state is effectively trivial, which makes them brittle when meaning, evidence, and assumptions evolve—precisely the setting of treaty interpretation, non-stationary hazard modeling, and capital evaluation.
+Organizational and normative limitations.
+Normative MAS theory requires agents that can check obligations, permissions, and prohibitions and react to violations [boella2009normative]. Deterministic systems with a fixed cannot:
+-
+•
+verify solvency or capital constraints (e.g., SCR requirements) in a history-dependent way;
+-
+•
+enforce internal risk policies or escalation rules that depend on evolving evidence;
+-
+•
+reason about exceptions or conflicts between norms.
+Encoding the space of regulatory and institutional contingencies into a single, static is infeasible; norm evaluation itself becomes an open-ended reasoning task.
+Coordination and interdependence limitations.
+Reinsurance evaluation couples multiple interdependent tasks: treaty interpretation informs hazard modeling; hazard outputs inform pricing; pricing is constrained by capital and portfolio requirements. Deterministic automation lacks mechanisms for:
+-
+•
+coordinating across roles with asymmetric information;
+-
+•
+distributed constraint satisfaction across interdependent objectives;
+-
+•
+proposal–critique cycles characteristic of organizational decision-making [kraus1997mas, jennings2000mas].
+Game-theoretically, such workflows have essentially zero cooperative capacity: no joint intention formation, no search over Pareto trade-offs, and no adaptive response to normative or evidential feedback.
+Deterministic workflows as a trivial R–CMASP.
+The above limitations can be expressed formally within our framework.
+Proposition 1.
+Any deterministic workflow with fixed transition function can be represented as an R–CMASP with a single agent, trivial epistemic state, and no communication. However, such a system cannot satisfy any norm that requires history-dependent or belief-dependent evaluation beyond .
+Sketch.
+Construct with: (i) a single agent ; (ii) a singleton (the agent has no real choice); (iii) implementing the deterministic workflow; (iv) and (full observation); (v) (no communication); (vi) arbitrary; and (vii) containing only norms that can be evaluated pointwise on without reference to history or beliefs.
+This construction shows that any such workflow is an R–CMASP instance. Now consider any norm that requires (a) dependence on past states or (b) dependence on an agent belief that is not already encoded in . Because and the policy are fixed, and no explicit history or belief state is maintained, cannot be evaluated or enforced other than by hard-coding its consequences into . For open-ended, context-dependent norms (e.g., dynamic SCR constraints under changing scenarios), this is not possible in general. Hence such a system cannot, in any non-trivial sense, satisfy history- or belief-dependent norms. ∎
+Proposition 1 formalizes the intuition that deterministic workflows are a strict special case of our model with trivial epistemic and normative structure. Institutional reinsurance, by contrast, requires non-trivial , , and communication.
+3.2 Autonomous AI Agents
+Autonomous agents differ fundamentally from deterministic systems by maintaining epistemic representations, deliberative policies, and communicative capabilities. Modern LLM-driven agents combine semantic grounding with multi-step planning, critique, and tool-mediated reasoning [brown2020gpt3, yao2022react, shinn2023reflexion]. These capabilities align closely with MAS models of reasoning, organizational coordination, and norm compliance.
+Epistemic and semantic agency.
+An autonomous agent maintains belief and knowledge states that support:
+-
+1.
+semantic interpretation of treaty clauses and endorsements;
+-
+2.
+belief revision in response to simulation feedback (hazard, capital, portfolio);
+-
+3.
+higher-order epistemics (reasoning about others’ knowledge), needed for coherent pricing and capital decisions;
+-
+4.
+formation of mutual and common knowledge, central to cooperative agreement and joint intention.
+These features parallel dynamic epistemic logic and epistemic action models commonly used in multi-agent reasoning frameworks.
+Organizational MAS perspective.
+Reinsurance workflows form an organizational MAS: roles (interpretation, hazard modeling, pricing, capital, portfolio, claims) are defined by institutional structure rather than individual incentives. Agents must:
+-
+•
+verify compliance with solvency and risk policies;
+-
+•
+reason about organizational rules, escalation paths, and exceptions;
+-
+•
+maintain justifications for auditability and accountability.
+These behaviours arise naturally in architectures with typed communication, shared state, and explicit norms [rahwan2019society_agents].
+Cooperative game-theoretic framing.
+Reinsurance decision-making corresponds to a cooperative, norm-constrained optimization problem:
+-
+•
+utility is shared (pricing accuracy, capital efficiency, solvency preservation);
+-
+•
+constraints are shared and hard (SCR limits, concentration bounds, governance rules);
+-
+•
+contributions are distributed across specialized roles;
+-
+•
+interaction proceeds via proposals, critiques, and constraint checks.
+This structure fits distributed constraint optimization (DCOP) and joint-intention theory [kraus1997mas, jennings2000mas] more naturally than competitive multi-agent games.
+Capabilities of autonomous agents.
+Modern LLM-based agents support core components of cooperative MAS design:
+-
+•
+Semantic grounding of treaty text and contractual logic;
+-
+•
+Long-horizon deliberation via reasoning–acting loops [yao2022react];
+-
+•
+Self-critique and metacognition via Reflexion [shinn2023reflexion];
+-
+•
+Typed, structured communication via AutoGen-style protocols [li2023autogen];
+-
+•
+Tool-mediated inference through catastrophe, capital, and portfolio simulators;
+-
+•
+Norm enforcement through supervisory or governance agents [rahwan2019society_agents].
+Why reinsurance strongly motivates agent-based formulations.
+The structural properties of reinsurance align with canonical MAS conditions:
+-
+•
+Partial observability: roles access different subsets of the global state;
+-
+•
+Distributed expertise: interpretation, modeling, pricing, and capital evaluation are epistemically distinct;
+-
+•
+Hard normative constraints: decisions must satisfy solvency, reserving, concentration, and auditability requirements;
+-
+•
+Interdependent objectives: pricing interacts with capital and portfolio feasibility;
+-
+•
+Communication-dependent coordination: consistent outcomes require proposal, critique, and consensus formation.
+Taken together, these features strongly motivate agent-based formulations rather than purely deterministic pipelines. Reinsurance decision-making is a prototypical example of a governed, cooperative MAS, which motivates the architecture described in Section 4 and the R–CMASP formal model in Section 5.
+4 Multi-Agent Architecture for Reinsurance
+Reinsurance operations instantiate a prototypical organizational and norm-governed multi-agent system (MAS): decision-making is distributed across roles (underwriting, pricing, capital, portfolio, claims), information is heterogeneous and partially observable, and all actions are constrained by institutional and regulatory norms. In this section we describe a multi-agent architecture that operationalizes these properties and serves as a concrete instantiation of the R–CMASP formalism later developed in Section 5.
+We build on organizational MAS and role-based design [wooldridge2009mas, dignum2004role], normative systems and institutional reasoning [boella2009normative], distributed constraint optimization [modi2005dcop], and epistemic multi-agent reasoning [fagin2003reasoning]. At a high level, the architecture provides: (i) a role structure aligned with reinsurance workflows, (ii) an institutional layer encoding norms and constraints, (iii) a typed communication protocol for cooperative reasoning, and (iv) LLM-based agent policies that implement semantic, epistemic, and normative behaviour.
+Formally, we model the architecture as
+where:
+-
+•
+is a finite set of roles, each corresponding to a functional responsibility (e.g., Treaty Interpretation, Pricing, Capital, Portfolio, Claims, Governance);
+-
+•
+is an institutional model capturing the organizational context: permissible workflows, escalation paths, and the mapping from workflows to roles;
+-
+•
+is a set of norms (obligations, permissions, prohibitions) induced by regulation, internal policies, and risk appetite;
+-
+•
+is a communication protocol specifying message types, conversation structures, and logging requirements;
+-
+•
+is a family of role-specific policies implemented by LLM-based agents with tool access and deliberative capabilities.
+This tuple provides the organizational and normative scaffolding within which the R–CMASP state, transition, observation, and reward structures (Section 5) are instantiated.
+Architectural choices vs. formal requirements.
+Some aspects of reflect domain-specific design choices, such as the concrete role set (e.g., separating Portfolio and Capital) and workflow mapping . Others are directly motivated by the R–CMASP formal model: the presence of a Governance Agent and Audit Trail Agent traces to the explicit norm sets and feasibility constraints ; the typed message protocol mirrors the communication graph and speech-act types embedded in the formal model. Thus, the architecture is both domain-aligned and formally grounded.
+Implementation note.
+In the empirical instantiation (Section 6), each role is realized by an LLM-based agent with a prompt-specified policy and controlled tool access (hazard simulators, capital engines, retrieval systems). However, R–CMASP itself is agnostic to the underlying policy representation: could equally comprise hand-crafted rules, learned policies (e.g., via multi-agent reinforcement learning), or hybrids.
+4.1 Organizational and Functional Layering
+Following role-based and organizational MAS frameworks [dignum2004role, wooldridge2009mas], we structure the architecture into four functional layers. Each layer groups roles that share epistemic focus and normative responsibilities:
+-
+1.
+Interpretation and Knowledge Layer. Agents transform unstructured artefacts (treaties, exposure files, historical documents) into structured epistemic content. Their primary function is semantic grounding and knowledge consolidation for the rest of the system.
+-
+2.
+Risk and Modeling Layer. Agents interface with stochastic simulators and quantitative models (catastrophe, capital, portfolio). They translate epistemic content into probabilistic beliefs and loss distributions, thereby shaping the stochastic environment of R–CMASP.
+-
+3.
+Decision and Optimization Layer. Agents coordinate to solve a constrained cooperative decision problem over pricing, capital, retrocession, and portfolio exposures. They operate as a distributed constraint optimization process [modi2005dcop] under the norms .
+-
+4.
+Governance and Oversight Layer. Agents enforce institutional norms, verify cross-agent consistency, and decide when human oversight is required. They realize the normative and governance aspects of the institutional model and norms [boella2009normative, rahwan2019society_agents].
+Each role is instantiated as an autonomous agent with:
+-
+•
+an epistemic state capturing the agent’s knowledge and beliefs;
+-
+•
+a normative profile (obligations, permissions, prohibitions) inherited from ;
+-
+•
+a policy mapping local observations and messages into actions and outgoing messages.
+The resulting architecture can be viewed as an organizational MAS in which agents jointly seek norm-compliant, utility-improving decisions under uncertainty.
+4.2 Workflow-Scoped Agent Activation
+Reinsurance processes are naturally segmented into workflows (e.g., pricing a new treaty, assessing a claim, optimizing retrocession), each with specific informational inputs, applicable norms, and optimization goals. To capture this, we introduce a workflow-scoped activation policy
+mapping each workflow to the subset of roles required for valid execution.
+Activation depends on:
+-
+1.
+Epistemic pre-conditions: which artefacts and simulations are available (treaty text, exposures, claims notices, etc.);
+-
+2.
+Normative requirements: which regulatory and internal checks must be enforced (e.g., SCR impact for pricing);
+-
+3.
+Optimization scope: which objectives are primary (e.g., capital efficiency versus portfolio diversification);
+-
+4.
+Tool dependencies: which external simulators or engines must be invoked (hazard models, capital engines, portfolio aggregators).
+Table 2 summarizes typical role activations per workflow.
+From an organizational MAS viewpoint, each workflow induces a temporary sub-organization on with its own communication topology, local constraints, and decision responsibilities.
+4.3 Running Example: Pricing a Coastal Wind Treaty
+To make the architecture concrete, we sketch a stylized pricing episode for a coastal wind excess-of-loss treaty. The environment provides: (i) a draft treaty wording with layered structure and exclusions, (ii) an exposure file with coastal property risks, and (iii) current portfolio and capital positions.
+Activation.
+The workflow-scoped policy activates roles
+Epistemic grounding.
+The Treaty Interpretation Agent parses the wording to infer attachment points, limits, hours clauses, and wind-specific exclusions, and broadcasts a State message with the structured treaty representation. The Exposure Understanding Agent normalizes and validates the exposure file, producing a structured exposure state and issuing a corresponding State message.
+Simulation and risk quantification.
+The Hazard Modeling Agent invokes coastal wind catastrophe models, generating annual loss distributions and event sets for the treaty. These populate and are communicated via State messages. The Capital Agent computes incremental SCR and solvency ratios under the proposed participation; the Portfolio Steering Agent computes changes in accumulation and concentration metrics in relevant coastal zones.
+Proposal–critique–constraint cycle.
+The Pricing Agent uses the structured treaty, hazard outputs, and market priors to issue a Proposal for rate-on-line and terms. The Capital Agent responds with Constraint messages if the proposal breaches solvency or risk-appetite norms; the Portfolio Steering Agent may issue Critique messages if concentration limits are approached. The Pricing Agent revises its proposal accordingly. This exchange continues for a small number of rounds until no unresolved Critique remains and all active Constraint messages are satisfied.
+Governance and escalation.
+The Governance Agent checks for internal inconsistencies (e.g., mismatches between treaty interpretation and pricing assumptions, or unexplained deviations from historical practice). If unresolved inconsistencies or norm violations remain, it triggers the Human Oversight Agent, which compiles a summary for underwriters and risk committees. Otherwise, the episode terminates in an operational equilibrium (Section 5), and the Audit Trail Agent logs the full interaction.
+This running example illustrates how the same formal machinery—roles, message types, norms, and simulator calls—is instantiated in a realistic pricing scenario, and anticipates the formal definitions of state, transition, observation, reward, and feasibility in R–CMASP. We revisit a variant of this coastal wind treaty scenario in Section 6.5 as a qualitative case study of empirical behaviour.
+4.4 Typed Communication and Interaction Protocol
+Cooperative reasoning is enabled by a structured communication protocol over a set of typed messages
+This design builds on speech-act inspired agent communication and negotiation frameworks [kraus1997mas, jennings2000mas] and is consistent with message-passing patterns in recent LLM-based multi-agent systems [li2023autogen].
+Each message type has a distinct epistemic and normative role:
+-
+•
+State: broadcasts partial views of the global state (e.g., treaty parses, hazard outputs, capital positions), contributing to shared or common knowledge [fagin2003reasoning];
+-
+•
+Proposal: encodes candidate decisions (rates, capital allocations, retrocession structures), functioning as publicly observable intentions;
+-
+•
+Critique: challenges or refines proposals, enabling distributed belief revision and cooperative constraint resolution;
+-
+•
+Constraint: propagates norms and feasibility restrictions (capital floors, risk limits, regulatory requirements) derived from .
+Interaction proceeds in discrete rounds:
+This process implements a distributed constraint optimization mechanism [modi2005dcop] over the constrained decision space defined by R–CMASP, while maintaining auditability via the Audit Trail Agent (Section 4.8).
+4.5 Interpretation and Knowledge Agents
+Agents in the Interpretation and Knowledge Layer transform heterogeneous artefacts into structured epistemic representations.
+Treaty Interpretation Agent.
+Uses LLM-based semantic parsing [brown2020gpt3] to extract layered structures, triggers, exclusions, hours clauses, and other contractual features. Formally, it realizes a mapping from raw text to a structured treaty state , thereby populating part of the global state in R–CMASP.
+Exposure Understanding Agent.
+Normalizes and validates exposure data (e.g., geocoded risks, insured values), assembling and resolving missing or inconsistent entries.
+Knowledge Retrieval Agent.
+Implements retrieval-augmented reasoning [wang2023surveyagents] over internal corpora (historical treaties, past decisions, regulatory circulars), enabling other agents to condition their policies on institutional memory.
+4.6 Risk and Modeling Agents
+Agents in the Risk and Modeling Layer couple epistemic content to stochastic simulators and quantitative models, thereby shaping the transition dynamics of R–CMASP.
+Hazard Modeling Agent.
+Interfaces with catastrophe models and other hazard simulators [grossi2005catmodels], selecting perils, regions, and model configurations. It outputs loss distributions and event sets that populate .
+Scenario and Stress Testing Agent.
+Generates multi-peril, correlated scenarios incorporating non-stationarity and emerging risks [barnett2021nonstationary]. These scenarios support counterfactual reasoning and stress testing of portfolio and capital decisions.
+Model Risk Agent.
+Assesses model uncertainty, calibration drift, and conflicting outputs across simulators. It may generate Constraint messages when model risk exceeds thresholds, introducing normative obligations to re-evaluate or escalate.
+4.7 Decision and Optimization Agents
+Agents in this layer perform cooperative decision-making over a constrained multi-objective space, consistent with DCOP-style formulations [modi2005dcop]. Given a joint decision variable (e.g., treaty pricing, capacity allocation, retrocession structure), they implicitly aim to solve:
+where is the feasible set induced by contractual semantics, hazard outputs, and norms .
+Pricing Agent.
+Combines treaty structure, exposure, hazard outputs, and market priors to propose rate-on-line and structure-specific pricing recommendations. It emits Proposal messages and revises them in response to Critique and Constraint signals.
+Capital Agent.
+Computes Solvency Capital Requirement (SCR), RBC measures, diversification benefits, and solvency ratios [eiopa2020solvency2]. When proposals violate capital or solvency norms, it issues Constraint messages, narrowing the feasible set .
+Portfolio Steering Agent.
+Evaluates portfolio-level accumulation, peril correlation, and concentration metrics [mcgill2021aggregation]. It negotiates with the Pricing and Capital Agents to ensure that individual treaty decisions are consistent with portfolio-wide risk appetite.
+Retrocession Strategy Agent.
+Evaluates quota-share, excess-of-loss, and aggregate retrocession structures, considering tail-risk mitigation, capital relief, and availability constraints. Conceptually, it operates as a cooperative partner in the joint optimization problem above.
+4.8 Operations, Compliance, and Claims Agents
+Operational and compliance agents ensure that decisions are correctly executed and institutionally valid.
+Claims and Recoveries Agent.
+Interprets claims notifications, event footprints, and treaty triggers to compute recoveries at treaty and retrocession levels. It updates and informs subsequent capital and portfolio updates.
+Regulatory Compliance Agent.
+Checks that decisions adhere to external regulations (Solvency II, IFRS 17) and internal policies encoded in . Violations trigger Constraint messages and may force re-negotiation.
+Audit Trail Agent.
+Maintains a tamper-evident log of messages, decisions, and constraint applications. This provides an explicit record for ex-post audit, consistent with socio-technical governance requirements [rahwan2019society_agents].
+4.9 Governance and Human Oversight
+Governance Agent.
+Acts as a supervisory agent that monitors global consistency and norm satisfaction. It:
+-
+•
+cross-checks outputs across agents for epistemic and numerical consistency;
+-
+•
+flags hallucinations and contradictions in LLM-generated content;
+-
+•
+enforces that the joint policy profile remains within the normative constraints .
+Formally, it seeks to maintain and to trigger corrective processes whenever inconsistencies become common knowledge.
+Human Oversight Agent.
+Implements a meta-level policy that determines when human intervention is required. It aggregates explanations, counterfactual analyses, and key metrics into summaries suitable for underwriters, actuaries, and risk committees. High-stakes or ambiguous cases are thus escalated to human decision-makers, preserving accountability and expert control.
+Overall, this architecture realizes reinsurance decision-making as a governed organizational MAS, providing a concrete operational semantics for the R–CMASP framework. The next section formalizes the underlying state, transition, observation, reward, and constraint structures that define R–CMASP as a domain-grounded cooperative multi-agent decision process.
+5 Formal Model
+Reinsurance decision-making comprises a tightly coupled collection of processes—contract interpretation, exposure analysis, hazard modeling, pricing, capital evaluation, portfolio steering, claims assessment, and regulatory governance. Each component has been studied separately (e.g., catastrophe modeling [grossi2005catmodels, barnett2021nonstationary], solvency regulation [eiopa2020solvency2], portfolio aggregation [mcgill2021aggregation]), but there is no unified formalism that treats reinsurance as a regulated cooperative multi-agent decision problem.
+Classical multi-agent system (MAS) models [shoham1995mas, wooldridge2009mas, kraus1997mas], stochastic games, and Dec-POMDPs provide rich foundations for joint decision-making under uncertainty, yet they typically abstract away (i) external simulators (catastrophe, capital, and portfolio models) that define environment dynamics; (ii) contractual semantics of legal artefacts such as treaties and endorsements; and (iii) prudential and regulatory constraints that delimit the admissible joint action space.
+Conversely, recent LLM-based agent frameworks [yao2022react, shinn2023reflexion, li2023autogen, wang2023surveyagents] provide mechanisms for tool use, multi-step deliberation, and message passing, but lack a principled treatment of solvency rules, normative constraints, and governance.
+To bridge this gap, we introduce the Reinsurance Constrained Multi-Agent Simulation Process (R–CMASP). Intuitively, an R–CMASP is a constrained, simulator-augmented multi-agent decision process in which (i) agents reason over structured representations of treaties, exposures, hazards, and capital; (ii) state transitions are mediated by external quantitative engines; and (iii) admissible policies are restricted by a normative layer encoding solvency, regulatory, and governance requirements.
+5.1 R–CMASP: Reinsurance Constrained Multi-Agent Simulation Process
+Let index the agents.
+Definition 1 (Reinsurance Constrained Multi-Agent Simulation Process).
+A Reinsurance Constrained Multi-Agent Simulation Process is a tuple
+where:
+-
+•
+is the global state space;
+-
+•
+is the action space of agent (with joint action space );
+-
+•
+is the transition kernel, implemented via external simulators and analytical engines;
+-
+•
+is the observation space of agent ;
+-
+•
+is the joint observation kernel;
+-
+•
+is a directed communication graph specifying which agents may send messages to which others;
+-
+•
+is a vector-valued reward capturing institutional objectives (e.g., capital efficiency, portfolio risk, cross-agent consistency, governance);
+-
+•
+is a set of normative rules (obligations, permissions, prohibitions) regulating joint behaviour;
+-
+•
+is a set of exogenous regulatory and solvency constraints (e.g., Solvency II, IFRS 17) that any feasible policy profile must satisfy.
+Positioning.
+From a MAS perspective, R–CMASP can be viewed as a partially observable stochastic game or Dec-POMDP augmented with (i) a norm-induced feasibility component derived from and , and (ii) an explicit simulator coupling in that encodes domain-specific catastrophe, capital, and portfolio engines. When and are empty and abstracts away simulator calls, R–CMASP reduces to a standard partially observable stochastic game. In this sense, R–CMASP generalises existing formalisms by embedding normative feasibility and simulator-driven dynamics as first-class components of the environment.
+Conceptually, an R–CMASP is thus a constrained, simulator-augmented, partially observable stochastic game equipped with an explicit normative layer [wooldridge2009mas, boella2009normative]. The kernels and capture the stochastic, simulation-driven nature of reinsurance, while and encode institutional and regulatory structure typically absent from standard MAS and Dec-POMDP models.
+5.2 State Space
+The global state decomposes into semantically meaningful components aligned with reinsurance workflows:
+Each component corresponds to a distinct epistemic dimension:
+-
+•
+: structured representations of treaties—layer structures, attachment points and limits, reinstatements, exclusions, hours clauses, event definitions, and ambiguous provisions—derived from textual wordings and endorsements [mangini2019treatyanalysis].
+-
+•
+: geocoded exposures, insured values, line-of-business indicators, policy terms, and aggregate exposure statistics.
+-
+•
+: simulation outputs from hazard and catastrophe models, including event catalogues, loss distributions, peril correlations, and scenario stress paths [grossi2005catmodels, barnett2021nonstationary].
+-
+•
+: Solvency Capital Requirement (SCR), Risk-Based Capital (RBC), diversification credits, solvency ratios, and internal capital metrics [eiopa2020solvency2].
+-
+•
+: accumulation measures, correlation matrices, diversification indices, and capacity utilisation across treaties and perils [mcgill2021aggregation].
+-
+•
+: reported and incurred losses, claim development factors, trigger states, and realised or potential recoveries at treaty and retrocession levels.
+-
+•
+: parameters and status variables capturing the current regulatory and governance environment (Solvency II parameters, IFRS 17 discounting and contract boundaries, risk appetite statements, escalation thresholds).
+Agents observe (possibly partial and noisy) projections of through and their role-specific observation spaces . For example, the Treaty Interpretation Agent is primarily informed by , while the Capital Agent observes .
+5.3 Agents, Local Policies, and Belief States
+Each agent maintains an internal belief state over , updated via local observations, received messages, and tool outputs. Let denote the space of local histories for agent , consisting of its past actions, observations, and incoming messages. A local policy is a mapping
+which may be stochastic and history-dependent. In our implementation, is realised as the prompt history (including tool calls) of an LLM-based agent, and corresponds to a prompt-specified decision rule; the R–CMASP formalism also accommodates learned policies (e.g., multi-agent reinforcement learning).
+The agent set reflects the role structure of Section 4:
+-
+•
+Epistemic roles: Treaty Interpretation, Exposure Understanding, Knowledge Retrieval;
+-
+•
+Simulation roles: Hazard Modeling, Scenario/Stress Testing, Model Risk;
+-
+•
+Decision roles: Pricing, Capital, Portfolio Steering, Retrocession Strategy;
+-
+•
+Operational and institutional roles: Claims, Regulatory Compliance, Audit Trail;
+-
+•
+Governance roles: Governance and Human Oversight [rahwan2019society_agents].
+A joint policy profile , together with and , induces a probability distribution over trajectories in that must respect both the feasibility constraints induced by and and the communication structure .
+5.4 Communication Graph and Message Semantics
+Communication is represented by a directed graph
+where indicates that agent may send messages to agent . Let denote the set of message contents, with each message annotated by a type
+as introduced in Section 4.
+Messages have two primary formal roles:
+-
+1.
+Epistemic updates. State and Proposal messages act as public announcements [fagin2003reasoning], refining other agents’ beliefs about the global state and about peers’ intended actions.
+-
+2.
+Normative signalling. Constraint messages encode obligations, permissions, or prohibitions derived from and (e.g., capital floors, exposure limits), while Critique messages indicate non-acceptance or requested revision, guiding the system toward norm-compatible joint actions.
+In the implementation considered here, communication proceeds in synchronous rounds, but the formalism is agnostic to timing and admits asynchronous variants.
+5.5 Transition Kernel and Simulator Coupling
+The transition kernel
+captures both deterministic and stochastic updates, including those mediated by external simulators. A single transition may consist of:
+-
+•
+evaluating catastrophe or hazard models to generate loss distributions and event sets for selected perils and regions [grossi2005catmodels, barnett2021nonstationary];
+-
+•
+running capital engines (e.g., Solvency II standard formula or internal models) to update [eiopa2020solvency2];
+-
+•
+recalculating portfolio measures in to reflect new binding decisions or retrocession structures [mcgill2021aggregation];
+-
+•
+updating with new reported or settled losses and associated recoveries;
+-
+•
+adjusting when thresholds are breached or regulatory statuses change.
+Thus, the environment dynamics in an R–CMASP are defined not only by abstract state-transition rules, but also by domain-calibrated quantitative engines that reflect external models and regulatory formulas.
+5.6 Reward Structure, Norms, and Feasibility
+The vector-valued reward assigns to each state–action pair a tuple
+where, for example:
+-
+•
+measures capital efficiency (e.g., expected profit per unit of SCR);
+-
+•
+penalises portfolio risk, accumulation, and concentration;
+-
+•
+penalises cross-agent inconsistencies (e.g., conflicting treaty interpretations or incompatible pricing and capital assessments);
+-
+•
+penalises norm violations, including breaches of prudential, regulatory, or governance rules [rahwan2019society_agents].
+For analysis and evaluation, it is convenient to consider a scalarised global reward
+for nonnegative weights .
+Crucially, not all joint actions are admissible. The normative system and exogenous constraints induce a feasibility set
+such that any feasible policy profile must satisfy
+Intuitively, norms and regulations act as hard constraints on behaviour, while (or ) shapes trade-offs within the feasible region.
+Norm-induced policy restriction.
+It is useful to characterise how norms constrain behaviour relative to an unconstrained policy profile.
+Lemma 1 (Norm-induced policy restriction).
+Let be any joint policy profile on , and let be the feasibility set induced by . Assume that for every infeasible pair there exists at least one closest feasible joint action according to some fixed tie-breaking rule. Then there exists a norm-compliant profile such that:
+-
+1.
+for all , whenever the history leads to ; and
+-
+2.
+under , all visited state–action pairs lie in almost surely.
+Proof sketch.
+Construct by modifying as follows. For any history leading to state , if assigns positive probability to an infeasible joint action with , reassign that probability to the corresponding closest feasible (according to the fixed tie-breaking rule). On feasible histories and actions, leave unchanged. By construction, (i) holds by definition, and (ii) follows because all probability mass on infeasible actions is systematically redirected to feasible ones at each step, so trajectories under remain in with probability one. ∎
+Lemma 1 formalises the intuitive view that norms and prudential rules restrict an otherwise unconstrained policy space to a norm-compliant subspace without changing behaviour on already-feasible decisions.
+5.7 Operational Equilibrium and Convergence
+Because reinsurance decisions are episodic (e.g., pricing a treaty, assessing a claim), we adopt an operational equilibrium notion tailored to constrained cooperative decision-making. Consider a workflow episode with a fixed joint policy profile and the induced trajectory of states, actions, and messages. We say that the outcome is in R–CMASP equilibrium if:
+-
+•
+Feasibility: all encountered lie in ; in particular, capital, portfolio, and regulatory constraints (as encoded in and ) are satisfied.
+-
+•
+Consistency: there are no unresolved Critique messages; all active Proposal messages form a mutually compatible set (no conflicting rates, capital views, or portfolio decisions).
+-
+•
+Constrained stability: given the communication graph and current beliefs, no single agent can unilaterally adjust its policy to achieve a strictly higher scalar reward without causing a violation of feasibility. Any further improvement in would require coordinated deviation by multiple agents.
+This notion parallels negotiation-based equilibria in cooperative MAS [kraus1997mas], but explicitly incorporates the feasibility set induced by norms and regulation, as well as simulator-driven dynamics.
+Proposition 2 (Existence of operational equilibrium under finite state and action spaces).
+Assume that and are finite, that norms induce a non-empty feasibility set , and that for any state and joint action with , the Governance and Compliance agents eventually emit Constraint messages that force revision to some feasible . Suppose further that the proposal–critique–constraint process terminates in a finite number of rounds for any fixed . Then for any norm-compliant policy profile (e.g., as in Lemma 1), every episode admits at least one R–CMASP equilibrium outcome.
+Proof sketch.
+Under the stated assumptions, the proposal–critique–constraint dynamics over a finite state–action space induce a finite-state terminating negotiation process: repeated application of Critique and Constraint cannot continue indefinitely. Termination occurs only when (i) no further Critique or Constraint is emitted and (ii) the realised joint action lies in by construction. At such a terminal point, feasibility and consistency are satisfied by definition. Constrained stability holds because any unilateral deviation that would increase while remaining feasible would, by assumption, have been reachable via further proposals and would thus contradict termination. Hence, the terminal outcome satisfies all conditions of a R–CMASP equilibrium. ∎
+Proposition 2 does not claim uniqueness or global optimality; it formalises that, under mild termination assumptions, the governance and critique machinery suffices to induce well-defined operational equilibria for a given policy profile.
+In this work, rather than proving stronger convergence guarantees, we empirically assess (in Section 6) (i) feasibility, (ii) consistency, and (iii) coordination cost (measured by the number of inter-agent message rounds) under fixed, prompt-specified policies.
+5.8 Graphical Overview
+Figure 1 summarises the core components of the R–CMASP: a structured global state , role-specialised agents communicating over , and a global reward shaping cooperative behaviour under normative and regulatory constraints.
+Novelty.
+The R–CMASP formalism is, to our knowledge, the first to:
+-
+•
+model reinsurance as a constrained, simulator-coupled multi-agent decision process with explicit state, observation, communication, reward, and normative components;
+-
+•
+integrate LLM-based semantic reasoning with external catastrophe, capital, and portfolio models within a single MAS framework;
+-
+•
+embed regulatory and governance norms as hard feasibility constraints on multi-agent trajectories;
+-
+•
+support role-specialised agents that coordinate via typed messages (State, Proposal, Critique, Constraint) over a communication graph ;
+-
+•
+provide an operational equilibrium notion that combines feasibility, consistency, and constrained stability for institutional risk-transfer decisions.
+6 Experiments
+This section instantiates the proposed architecture within a controlled Reinsurance Constrained Multi-Agent Simulation Process (R–CMASP) and evaluates different joint policy profiles. Because real-world treaty and exposure data are proprietary and subject to strict confidentiality, we follow standard practice in catastrophe and portfolio risk modeling [grossi2005catmodels, barnett2021nonstationary] and construct a synthetic but structurally realistic environment. This allows us to (i) control multi-peril dependence, (ii) impose explicit capital and portfolio constraints, and (iii) define exact ground truth for treaty semantics and feasibility.
+Each experimental condition corresponds to a joint policy profile
+ranging from deterministic workflows to governed multi-agent coordination. All reported metrics are empirical functionals of the trajectory distribution induced by .
+6.1 Experimental Setup
+Synthetic portfolio generation.
+We generate a portfolio of 500 reinsurance treaties, sampling realistic attachment points, limits, reinstatements, line-of-business mixes, hours clauses, and exclusion combinations [cummins2012reinsurance, swissre2023sigma]. The generator emits:
+-
+•
+a textual representation simulating treaty wordings and schedules, and
+-
+•
+a structured representation (layering, triggers, exclusions, limits) that populates .
+Because both views are produced jointly, clause interpretation accuracy can be measured exactly by comparing agent outputs to this structured ground truth.
+Exposure data are created at location level with geospatial clustering, insured values, and line-of-business labels, yielding realistic spatial and business-line structure in .
+Hazard and loss modeling.
+The hazard component consists of wind, flood, and wildfire modules with event catalogs, intensity footprints, vulnerability curves, and non-stationary perturbations [grossi2005catmodels, barnett2021nonstationary]. We impose a prescribed cross-peril correlation structure to obtain multi-peril annual loss distributions and event sequences, which are observed (partially) by Pricing, Capital, and Portfolio agents.
+Capital and regulatory constraints.
+Capital calculations approximate the Solvency II standard formula [eiopa2020solvency2]. For each portfolio configuration, we:
+-
+•
+compute peril- and line-of-business-specific SCR components;
+-
+•
+aggregate components via prescribed correlation matrices to obtain diversified SCR;
+-
+•
+compute solvency ratios and compare them against minimum thresholds;
+-
+•
+enforce portfolio-level concentration and capacity constraints (e.g., maximum accumulation by zone, maximum tail VaR), following [mcgill2021aggregation].
+These define a feasibility set that is enforced by Capital, Portfolio, and Governance agents as part of their policies.
+Agent configurations and baselines.
+We evaluate four configurations on the same environment :
+-
+•
+Rule-based automation: a deterministic pricing–capital pipeline that applies fixed rating formulas and capital loadings, with no role decomposition or inter-agent communication.
+-
+•
+Single-agent LLM: a tool-using LLM that receives treaty text and exposure summaries, invokes catastrophe and capital tools, and outputs pricing and accept/decline decisions. Internally, the policy follows a ReAct-style reasoning–acting loop [yao2022react] but has no explicit role structure.
+-
+•
+Multi-agent (ours): the full R–CMASP architecture with role-specialized agents (Treaty Interpretation, Exposure, Hazard, Pricing, Capital, Portfolio, Claims, Governance, etc.) and typed messages (State, Proposal, Critique, Constraint) [li2023autogen, wang2023surveyagents].
+-
+•
+Ablation—no Governance: the multi-agent system with Governance and Human Oversight agents disabled; all other roles, tools, and environment dynamics remain identical.
+All LLM-based configurations use the same foundation model and the same simulator interfaces; differences in behaviour arise solely from organizational structure (monolithic versus role-specialized; governed versus unguided).
+6.2 Metrics
+We evaluate both outcomes and interaction processes. Metrics are chosen to align with the formal structure of Section 5:
+-
+•
+Pricing variance: variance of recommended rate-on-line across repeated runs and seeds, probing policy stability in the induced process .
+-
+•
+Capital efficiency: expected return per unit SCR (profit per unit capital), capturing how effectively a policy profile exploits the feasible region .
+-
+•
+Coordination cost: number of inter-agent message rounds required to reach an operational equilibrium (Section 5.7) for a treaty episode.
+-
+•
+Clause interpretation error: error rate in inferred treaty semantics (attachments, limits, exclusions, triggers) relative to the generator’s structured ground truth [mangini2019treatyanalysis], probing epistemic quality of the Interpretation + Governance stack.
+-
+•
+Human intervention frequency: fraction of treaties for which the system flags unresolved contradictions, regulatory violations, or model-risk concerns requiring escalation to human experts. At comparable quality, lower intervention frequency indicates more effective but still safe autonomy [rahwan2019society_agents].
+6.3 Environment Validation and Statistical Robustness
+Synthetic environment validation.
+While real treaty data are inaccessible, we validate the generator by comparing high-level statistics against published market summaries [cummins2012reinsurance, swissre2023sigma]. Table 3 reports representative examples (normalised for confidentiality).
+The synthetic portfolios lie within reported industry ranges for key ratios and peril mixes, suggesting that the environment captures the structures most relevant to treaty pricing, capital feasibility, and portfolio concentration.
+Statistical robustness.
+For all configurations, we run three independent seeds for the treaty generator and simulator sampling. Reported metrics are averaged across seeds; error bars (not shown for space) correspond to confidence intervals. Improvements of the multi-agent system over the single-agent LLM are consistent across seeds and statistically significant for all metrics in Table 4 (paired -tests, ).
+Sensitivity to environment parameters.
+We conduct a small sensitivity study by:
+-
+•
+varying cross-peril correlations (low, medium, high dependence), and
+-
+•
+tightening/loosening solvency thresholds by .
+Absolute metric values change as expected (e.g., tighter capital thresholds reduce overall capital efficiency), but the ordering of configurations remains stable: the governed multi-agent system dominates or matches baselines in all settings, indicating qualitative robustness of the main conclusions.
+6.4 Results
+Across 500 treaties and multiple seeds, the governed multi-agent system improves stability, capital efficiency, semantic accuracy, and safety relative to both deterministic and monolithic baselines.
+Pricing stability and capital efficiency.
+The multi-agent architecture reduces pricing variance by approximately relative to the rule-based pipeline and improves capital efficiency by about . Joint deliberation among Pricing, Capital, and Portfolio agents yields decisions closer to the feasibility frontier , rather than applying fixed loadings in isolation. Confidence intervals across seeds do not overlap for these improvements.
+Interpretation accuracy and governance effects.
+Structured role decomposition together with Governance feedback reduces treaty interpretation error by roughly relative to the single-agent LLM, which is more prone to hallucinating or inconsistently applying exclusions. The governance-free ablation shows measurable degradation in both interpretation error and human intervention frequency, corroborating normative MAS predictions that explicit monitoring and enforcement mechanisms improve system-level behaviour [rahwan2019society_agents, boella2009normative].
+Coordination cost.
+Despite involving more agents, the multi-agent system converges with modest communication effort: on average, message rounds per treaty episode, compared to internal reasoning steps for the single-agent LLM. The governance layer reduces both contradictions and human escalations, indicating that structured proposal–critique–constraint cycles can be efficient in practice.
+6.5 Qualitative Case Study: A Single Treaty Episode
+To illustrate the mechanics of the R–CMASP, we consider a representative property XoL treaty with a $50m attachment, $100m limit, coastal exposure, and a wind/flood mixed-peril footprint.
+Rule-based automation.
+The deterministic pipeline:
+-
+•
+mis-parses an exclusion applying to “storm surge” but not “flood”;
+-
+•
+applies fixed catastrophe loadings without portfolio context;
+-
+•
+violates concentration limits due to missing correlation-aware aggregation;
+-
+•
+produces an infeasible capital position (SCR breach), which is not detected until ex-post checks.
+Single-agent LLM.
+The monolithic LLM:
+-
+•
+correctly identifies most clauses but inconsistently interprets the surge/flood boundary across reasoning chains;
+-
+•
+generates a plausible price but largely ignores portfolio concentration;
+-
+•
+produces contradictory internal justifications, triggering human review.
+Multi-agent (ours).
+The governed multi-agent system:
+-
+1.
+Treaty Interpretation parses the exclusion and broadcasts a State message with structured semantics.
+-
+2.
+Hazard Modeling runs mixed-peril simulations and shares loss distributions with Pricing, Capital, and Portfolio.
+-
+3.
+Pricing proposes an initial rate-on-line via a Proposal message.
+-
+4.
+Capital issues a Constraint message: SCR ratio would fall below threshold under stressed scenarios.
+-
+5.
+Portfolio adds a Critique: coastal accumulation is above internal risk appetite.
+-
+6.
+Pricing revises the proposal; Capital and Portfolio jointly confirm feasibility and portfolio consistency.
+-
+7.
+Governance validates cross-agent consistency and records the audit trail.
+The resulting quote is both feasible and capital-efficient, and no human escalation is required. This episode illustrates how typed communication, simulator-coupled transitions, and normative feasibility jointly shape the R–CMASP dynamics.
+6.6 Ablation Study
+The ablations isolate the contribution of governance and role specialization.
+Effect of the Governance Agent.
+Removing the Governance and Human Oversight agents increases clause-interpretation error () and human intervention frequency (). Qualitatively, the ablated system exhibits more unresolved Critique cycles and occasional violations of capital or portfolio constraints that would have been caught earlier by Governance. This behaviour aligns with normative MAS results [rahwan2019society_agents, boella2009normative], which predict that explicit monitoring and sanctioning mechanisms reduce undesirable emergent behaviour.
+Effect of role specialization.
+Comparing the multi-agent configuration to the single-agent LLM baseline shows that organizational decomposition matters: the single-agent system exhibits higher pricing variance ( vs. ), deeper reasoning chains ( vs. rounds), and higher interpretation error ( vs. ). These findings support organizational MAS theories [jennings2000mas, wooldridge2009mas] that decomposing complex tasks across specialized roles can improve efficiency, reduce coordination overhead, and enhance epistemic robustness.
+6.7 Limitations and Threats to Validity
+Several limitations qualify the empirical results:
+-
+•
+Synthetic environment. Real portfolios and treaties cannot be used due to legal and contractual constraints. Although the generator is calibrated to published statistics (Table 3), it may under-represent rare semantic edge cases or extreme multi-peril tail dependence.
+-
+•
+Fixed policies rather than learning. Agents follow prompt-specified policies; learning dynamics (e.g., MARL, negotiation protocols that adapt over time) are not explored. Different learning regimes could yield alternative equilibria.
+-
+•
+Single foundation model. All configurations share the same base model; results therefore isolate organizational structure rather than frontier model performance. Behaviour under smaller or more specialized models is not assessed.
+-
+•
+No real-time human collaboration. Human–agent mixed workflows, which are central in practice (e.g., underwriters interacting with tools in real time), are modelled only via an escalation mechanism, not as fully interactive processes.
+Within these constraints, the experiments consistently show that framing reinsurance decision-making as a constrained, simulator-coupled multi-agent process—and instantiating it via a governed organizational architecture—yields systematic improvements in stability, semantic fidelity, capital efficiency, and operational safety relative to deterministic and monolithic agentic baselines.
+7 Discussion
+The empirical behaviour of the R–CMASP instantiation suggests that reinsurance—with its distributed information, multi-objective coupling, contractual ambiguity, and binding prudential constraints—naturally aligns with the foundational assumptions of multi-agent systems (MAS). Partial observability, heterogeneous capabilities, role asymmetry, and negotiation under constraints are not modelling conveniences but intrinsic properties of institutional risk-transfer. From this perspective, governed multi-agent architectures are not merely an engineering choice but an appropriate computational ontology for regulated financial decision-making.
+Role specialization and epistemic division of labour.
+The gains in pricing stability, capital efficiency, and interpretive accuracy corroborate longstanding results in organizational MAS [jennings2000mas, wooldridge2009mas]: decomposing a complex task into epistemically coherent subtasks improves bounded-rational decision quality and facilitates convergence. Reinsurance subtasks—semantic parsing, hazard simulation, capital evaluation, portfolio aggregation—operate over fundamentally different epistemic representations. By aligning these subtasks with dedicated roles and typed communication, the R–CMASP instantiation enables agents to reconcile heterogeneous evidence and achieve more stable joint outcomes than monolithic LLM baselines.
+Semantic authority, epistemic governance, and belief stability.
+The reduction in clause-interpretation error highlights the value of explicit epistemic authority. Assigning the Treaty Interpretation Agent primary semantic responsibility, and equipping the Governance Agent with meta-level critique and consistency checks, yields more stable and interpretable structured treaty representations. This mirrors normative MAS views in which epistemic norms (consistency, justification, evidential support) are allocated across agents with differentiated roles [boella2009normative]. Because contractual ambiguity drives basis risk in reinsurance [mangini2019treatyanalysis], epistemic governance acts as a stabiliser that prevents divergent or hallucinated interpretations from propagating through the system.
+Prudential regulation as a structural constraint.
+Reinsurance differs from many canonical MAS domains in that the feasible decision set is constrained by externally imposed, legally binding prudential rules (Solvency II, IFRS 17, internal risk appetite). By embedding these constraints directly into the normative and feasibility layers ( and ), R–CMASP treats them as structural admissibility conditions rather than soft penalties. The observed improvements in capital efficiency and the reduction in solvency-violating proposals show that cooperative optimisation is meaningfully shaped by normative feasibility sets, supporting arguments that MAS for high-stakes domains must incorporate institutional norms as first-class primitives of the environment [rahwan2019society_agents].
+Operational equilibrium and bounded coordination.
+Despite involving more agents and heterogeneous subproblems, the multi-agent configuration converges with modest communication overhead, typically within a small number of message rounds. This suggests that the system reaches an operational equilibrium (Section 5.7) characterised by feasibility, consistency, and constrained stability. The result parallels cooperative negotiation theories [kraus1997mas], in which typed proposal–critique protocols can sharply reduce negotiation depth. The experiments therefore indicate that LLM-based agents, when embedded within structured organisational roles and governed communication patterns, need not exhibit unbounded deliberation or unstable reasoning.
+Socio-technical alignment and the function of human oversight.
+The observed reduction in human escalations—together with improved consistency and norm compliance—supports a socio-technical interpretation of the architecture. Rather than replacing human experts, agents function as epistemic collaborators: they automate checks for internal coherence, enforce prudential constraints, and produce transparent audit trails. Human Oversight remains essential for adjudicating ambiguous cases, validating solvency-critical assumptions, and authorising final decisions. This aligns with governed MAS perspectives [rahwan2019society_agents], which emphasise human orchestration and institutional accountability over fully autonomous decision making.
+7.1 Limitations and Boundaries
+While the results are encouraging, several boundaries of the current study should be emphasised.
+First, the empirical evaluation uses a synthetic but domain-calibrated environment rather than proprietary treaty corpora, due to legal and confidentiality constraints. Although Section 6 verifies that key portfolio statistics fall within published market ranges, real-world textual ambiguity, legacy wordings, and complex programme structures may introduce additional failure modes.
+Second, the agent policies are prompt-specified rather than learned. The reported improvements therefore characterise the value of the architectural design (roles, norms, communication) under fixed decision rules, not the behaviour of adaptive policies. Different learning regimes could shift the location of operational equilibria within the feasible set .
+Third, LLMs exhibit known failure modes (hallucination, numerical inconsistency, context drift). Governance and oversight agents mitigate these effects by issuing critiques and constraints, but cannot guarantee elimination in all regimes, especially under distributional shift in treaties or hazard patterns.
+Finally, the current formalism treats norms as hard feasibility constraints. In practice, institutions often operate with layered, context-dependent norms (e.g., soft risk appetite limits, temporary waivers, or supervisory guidance) that may require richer logical treatments, such as graded obligations or priority-based norm systems.
+These limitations do not undermine the conceptual claim that norm-governed, simulator-coupled MAS provide a natural abstraction for reinsurance; they instead delineate where further theoretical and empirical work is required.
+7.2 Learning and Governance
+The present instantiation adopts static, hand-engineered policies to isolate the impact of the architectural and formal design. A natural next step is to study learning dynamics within the R–CMASP framework. Multi-agent reinforcement learning, epistemic-planning methods, or differentiable negotiation mechanisms could enable agents to adapt pricing, capital, and retrocession strategies to evolving market and hazard conditions.
+However, introducing learning raises non-trivial governance challenges. Learned policies must remain norm-compliant, auditable, and interpretable with respect to institutional constraints. This motivates hybrid governance architectures in which: (i) safety constraints are encoded as shielding or runtime enforcement mechanisms; (ii) governance agents perform ongoing epistemic calibration and consistency checking; and (iii) human oversight retains ultimate authority over high-stakes decisions. Viewed from a multi-agent systems perspective, R–CMASP offers a concrete testbed for combining learning, norms, and simulator-coupled dynamics within a unified framework.
+7.3 Broader Implications
+Implications for reinsurance and regulated finance.
+For the reinsurance domain, the results suggest that moving from deterministic workflow automation to governed multi-agent architectures can materially improve pricing stability, capital efficiency, and semantic fidelity while maintaining—and in some cases strengthening—prudential oversight. Similar structural features appear in other regulated financial settings, including banking, credit risk, and systemic risk supervision, where decisions rely on simulator-coupled models (e.g., stress tests, scenario analyses) under binding regulatory norms.
+Implications for MAS theory and modelling.
+From a MAS perspective, R–CMASP contributes a concrete example of a simulator-coupled, norm-governed decision process. It suggests that future work on normative MAS and stochastic-game formalisms should treat external quantitative models and institutional norms as integral components of the environment, rather than as afterthoughts layered onto agent utilities. The explicit separation between environment dynamics (), normative feasibility (, , ), and operational equilibrium offers a template for modelling other high-stakes domains where simulators and regulations jointly determine admissible behaviour.
+In summary, R–CMASP illustrates how epistemic reasoning, simulator-based inference, constrained cooperation, and human-centred governance can be combined in a single MAS framework. For the broader MAS community, the key takeaway is that institutional decision systems in regulated domains are not merely application areas for generic agents; they require models in which norms, simulators, and organizational roles are first-class design elements.
+8 Conclusion
+This work has developed a formally grounded and institutionally aligned account of reinsurance decision-making by introducing the Reinsurance Constrained Multi-Agent Simulation Process (R–CMASP). By moving from deterministic workflow automation to a governed multi-agent perspective—informed by epistemic logic, organizational MAS theory, and constrained cooperative decision-making—we provide a computational ontology that matches how reinsurance actually operates: distributed, epistemically asymmetric, and norm-governed. The proposed architecture captures this structure via role-specialised agents that share a semantic state space and interact through typed communication constrained by prudential and organizational norms.
+Empirically, the governed multi-agent instantiation outperforms both deterministic automation and monolithic LLM baselines. Reductions in pricing variance, gains in capital efficiency, and lower clause-interpretation error show that epistemically differentiated agents achieve more stable and coherent behaviour than centralized decision-makers under partial observability and heterogeneous information. These findings echo classical MAS results [shoham1995mas, kraus1997mas, wooldridge2009mas] on the benefits of organizational decomposition and structured coordination, while R–CMASP additionally operationalises modern LLM capabilities—semantic parsing, tool-mediated inference, and reflective critique [yao2022react, shinn2023reflexion, li2023autogen]—under hard prudential and governance constraints. The Governance Agent, in particular, functions as an institutional mechanism enforcing epistemic discipline, checking cross-agent consistency, and screening out solvency-violating or policy-breaking decisions [rahwan2019society_agents].
+Methodologically, the work argues that in domains where external stochastic simulators and institutional norms jointly define feasibility, MAS models should treat these elements as first-class components of the environment rather than as post-hoc additions to agent utilities. The R–CMASP formalism exemplifies this view by combining simulator-coupled dynamics, normative feasibility, and structured communication within a single multi-agent decision process suitable for regulated sectors such as insurance, banking, and systemic risk supervision.
+8.1 Future Directions
+Several research directions follow naturally from this work.
+A first direction is deeper empirical grounding with real-world artefacts: integrating anonymised treaty corpora, proprietary exposure datasets, and production-grade catastrophe, capital, and portfolio engines to assess behaviour under realistic ambiguity, model risk, and operational constraints.
+A second direction concerns adaptive policy learning within the R–CMASP framework. Multi-agent reinforcement learning, epistemic-planning methods, or negotiation-based learning algorithms could refine pricing, capital, and retrocession strategies over time. A key challenge is ensuring that learned policies remain norm-compliant and auditable.
+A third direction involves formal verification and assurance. Logical consistency checkers, normative conflict resolvers, epistemic inconsistency detectors, and counterfactual explanation modules could provide stronger guarantees of safety, compliance, and traceability for institutional stakeholders.
+Finally, richer models of human–agent collaboration are needed to capture how governed MAS integrate into existing institutional decision processes. This includes formalising escalation thresholds, expert arbitration mechanisms, and decision rights, so that automated components remain aligned with professional judgement, governance structures, and regulatory expectations.
+Throughout, the proposed architecture is explicitly assistive and human-centred. Reinsurance is governed by professional judgement, legal interpretation, and institutional accountability; no multi-agent system, however capable, can replace expert responsibility. Instead, R–CMASP is designed to augment expert decision-making by reducing epistemic fragmentation, enforcing prudential coherence, and surfacing transparent audit trails, while ensuring that ultimate authority remains with underwriters, actuaries, and risk managers. More broadly, when decision-making is distributed, normatively constrained, and epistemically complex, governed multi-agent architectures offer both effective computational machinery and a principled foundation for safe and institutionally coherent AI deployment.

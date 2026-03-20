@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2510.03823",
+  "title": "Distributed Area Coverage with High Altitude Balloons Using Multi-Agent Reinforcement Learning",
+  "abstract": "High Altitude Balloons (HABs) can leverage stratospheric wind layers for limited horizontal control, enabling applications in reconnaissance, environmental monitoring, and communications networks. Existing multi-agent HAB coordination approaches use deterministic methods like Voronoi partitioning and extremum seeking control for large global constellations, which perform poorly for smaller teams and localized missions. While single-agent HAB control using reinforcement learning has been demonstrated on HABs, coordinated multi-agent reinforcement learning (MARL) has not yet been investigated. This work presents the first systematic application of multi-agent reinforcement learning (MARL) to HAB coordination for distributed area coverage. We extend our previously developed reinforcement learning simulation environment (RLHAB) to support cooperative multi-agent learning, enabling multiple agents to operate simultaneously in realistic atmospheric conditions. We adapt QMIX for HAB area coverage coordination, leveraging Centralized Training with Decentralized Execution to address atmospheric vehicle coordination challenges. Our approach employs specialized observation spaces providing individual state, environmental context, and teammate data, with hierarchical rewards prioritizing coverage while encouraging spatial distribution. We demonstrate that QMIX achieves similar performance to the theoretically optimal geometric deterministic method for distributed area coverage, validating the MARL approach and providing a foundation for more complex autonomous multi-HAB missions where deterministic methods become intractable.",
+  "authors": [
+    "Adam Haroon",
+    "Tristan Schuler"
+  ],
+  "published": "2025-10-04T14:39:45Z",
+  "primary_category": "cs.LG",
+  "categories": [
+    "cs.LG",
+    "cs.MA",
+    "cs.RO"
+  ],
+  "url": "https://arxiv.org/abs/2510.03823"
+}

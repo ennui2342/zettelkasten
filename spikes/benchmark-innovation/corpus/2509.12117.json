@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2509.12117",
+  "title": "$K$-Level Policy Gradients for Multi-Agent Reinforcement Learning",
+  "abstract": "Actor-critic algorithms for deep multi-agent reinforcement learning (MARL) typically employ a policy update that responds to the current strategies of other agents. While being straightforward, this approach does not account for the updates of other agents at the same update step, resulting in miscoordination. In this paper, we introduce the $K$-Level Policy Gradient (KPG), a method that recursively updates each agent against the updated policies of other agents, speeding up the discovery of effective coordinated policies. We theoretically prove that KPG with finite iterates achieves monotonic convergence to a local Nash equilibrium under certain conditions. We provide principled implementations of KPG by applying it to the deep MARL algorithms MAPPO, MADDPG, and FACMAC. Empirically, we demonstrate superior performance over existing deep MARL algorithms in StarCraft II and multi-agent MuJoCo.",
+  "authors": [
+    "Aryaman Reddi",
+    "Gabriele Tiboni",
+    "Jan Peters",
+    "Carlo D'Eramo"
+  ],
+  "published": "2025-09-15T16:42:56Z",
+  "primary_category": "cs.LG",
+  "categories": [
+    "cs.LG",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2509.12117"
+}

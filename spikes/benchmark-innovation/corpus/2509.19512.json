@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2509.19512",
+  "title": "The Heterogeneous Multi-Agent Challenge",
+  "abstract": "Multi-Agent Reinforcement Learning (MARL) is a growing research area which gained significant traction in recent years, extending Deep RL applications to a much wider range of problems. A particularly challenging class of problems in this domain is Heterogeneous Multi-Agent Reinforcement Learning (HeMARL), where agents with different sensors, resources, or capabilities must cooperate based on local information. The large number of real-world situations involving heterogeneous agents makes it an attractive research area, yet underexplored, as most MARL research focuses on homogeneous agents (e.g., a swarm of identical robots). In MARL and single-agent RL, standardized environments such as ALE and SMAC have allowed to establish recognized benchmarks to measure progress. However, there is a clear lack of such standardized testbed for cooperative HeMARL. As a result, new research in this field often uses simple environments, where most algorithms perform near optimally, or uses weakly heterogeneous MARL environments.",
+  "authors": [
+    "Charles Dansereau",
+    "Junior-Samuel Lopez-Yepez",
+    "Karthik Soma",
+    "Antoine Fagette"
+  ],
+  "published": "2025-09-23T19:30:30Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2509.19512"
+}

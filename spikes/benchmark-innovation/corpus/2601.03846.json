@@ -1,0 +1,20 @@
+{
+  "arxiv_id": "2601.03846",
+  "title": "When Numbers Start Talking: Implicit Numerical Coordination Among LLM-Based Agents",
+  "abstract": "LLMs-based agents increasingly operate in multi-agent environments where strategic interaction and coordination are required. While existing work has largely focused on individual agents or on interacting agents sharing explicit communication, less is known about how interacting agents coordinate implicitly. In particular, agents may engage in covert communication, relying on indirect or non-linguistic signals embedded in their actions rather than on explicit messages. This paper presents a game-theoretic study of covert communication in LLM-driven multi-agent systems. We analyse interactions across four canonical game-theoretic settings under different communication regimes, including explicit, restricted, and absent communication. Considering heterogeneous agent personalities and both one-shot and repeated games, we characterise when covert signals emerge and how they shape coordination and strategic outcomes.",
+  "authors": [
+    "Alessio Buscemi",
+    "Daniele Proverbio",
+    "Alessandro Di Stefano",
+    "The Anh Han",
+    "German Castignani",
+    "Pietro Liò"
+  ],
+  "published": "2026-01-07T12:07:48Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2601.03846"
+}

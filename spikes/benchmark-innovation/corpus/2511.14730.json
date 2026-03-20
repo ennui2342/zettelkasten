@@ -1,0 +1,16 @@
+{
+  "arxiv_id": "2511.14730",
+  "title": "Heterogeneous Multi-Agent Proximal Policy Optimization for Power Distribution System Restoration",
+  "abstract": "Restoring power distribution systems (PDSs) after large-scale outages requires sequential switching actions that reconfigure feeder topology and coordinate distributed energy resources (DERs) under nonlinear constraints, including power balance, voltage limits, and thermal ratings. These challenges limit the scalability of conventional optimization and value-based reinforcement learning (RL) approaches. This paper applies a Heterogeneous-Agent Reinforcement Learning (HARL) framework via Heterogeneous-Agent Proximal Policy Optimization (HAPPO) to enable coordinated restoration across interconnected microgrids. Each agent controls a distinct microgrid with different loads, DER capacities, and switch counts. Decentralized actors are trained with a centralized critic for stable on-policy learning, while a physics-informed OpenDSS environment enforces electrical feasibility. Experiments on IEEE 123-bus and 8500-node feeders show HAPPO outperforms PPO, QMIX, Mean-Field RL, and other baselines in restored power, convergence stability, and multi-seed reproducibility. Under a 2400 kW generation cap, the framework restores over 95\\% of available load on both systems with low-latency execution, supporting practical real-time PDS restoration.",
+  "authors": [
+    "Parya Dolatyabi",
+    "Ali Farajzadeh Bavil",
+    "Mahdi Khodayar"
+  ],
+  "published": "2025-11-18T18:23:35Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2511.14730"
+}

@@ -1,0 +1,15 @@
+{
+  "arxiv_id": "2601.00324",
+  "title": "Multiagent Reinforcement Learning for Liquidity Games",
+  "abstract": "Making use of swarm methods in financial market modeling of liquidity, and techniques from financial analysis in swarm analysis, holds the potential to advance both research areas. In swarm research, the use of game theory methods holds the promise of explaining observed phenomena of collective utility adherence with rational self-interested swarm participants. In financial markets, a better understanding of how independent financial agents may self-organize for the betterment and stability of the marketplace would be a boon for market design researchers. This paper unifies Liquidity Games, where trader payoffs depend on aggregate liquidity within a trade, with Rational Swarms, where decentralized agents use difference rewards to align self-interested learning with global objectives. We offer a theoretical frameworks where we define a swarm of traders whose collective objective is market liquidity provision while maintaining agent independence. Using difference rewards within a Markov team games framework, we show that individual liquidity-maximizing behaviors contribute to overall market liquidity without requiring coordination or collusion. This Financial Swarm model provides a framework for modeling rational, independent agents where they achieve both individual profitability and collective market efficiency in bilateral asset markets.",
+  "authors": [
+    "Alicia Vidler",
+    "Gal A. Kaminka"
+  ],
+  "published": "2026-01-01T12:36:28Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2601.00324"
+}

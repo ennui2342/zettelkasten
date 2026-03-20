@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2602.18731",
+  "title": "Beyond Description: A Multimodal Agent Framework for Insightful Chart Summarization",
+  "abstract": "Chart summarization is crucial for enhancing data accessibility and the efficient consumption of information. However, existing methods, including those with Multimodal Large Language Models (MLLMs), primarily focus on low-level data descriptions and often fail to capture the deeper insights which are the fundamental purpose of data visualization. To address this challenge, we propose Chart Insight Agent Flow, a plan-and-execute multi-agent framework effectively leveraging the perceptual and reasoning capabilities of MLLMs to uncover profound insights directly from chart images. Furthermore, to overcome the lack of suitable benchmarks, we introduce ChartSummInsights, a new dataset featuring a diverse collection of real-world charts paired with high-quality, insightful summaries authored by human data analysis experts. Experimental results demonstrate that our method significantly improves the performance of MLLMs on the chart summarization task, producing summaries with deep and diverse insights.",
+  "authors": [
+    "Yuhang Bai",
+    "Yujuan Ding",
+    "Shanru Lin",
+    "Wenqi Fan"
+  ],
+  "published": "2026-02-21T06:17:37Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2602.18731"
+}

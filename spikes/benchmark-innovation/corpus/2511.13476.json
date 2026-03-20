@@ -1,0 +1,20 @@
+{
+  "arxiv_id": "2511.13476",
+  "title": "Multi-Agent Multimodal Large Language Model Framework for Automated Interpretation of Fuel Efficiency Analytics in Public Transportation",
+  "abstract": "Enhancing fuel efficiency in public transportation requires the integration of complex multimodal data into interpretable, decision-relevant insights. However, traditional analytics and visualization methods often yield fragmented outputs that demand extensive human interpretation, limiting scalability and consistency. This study presents a multi-agent framework that leverages multimodal large language models (LLMs) to automate data narration and energy insight generation. The framework coordinates three specialized agents, including a data narration agent, an LLM-as-a-judge agent, and an optional human-in-the-loop evaluator, to iteratively transform analytical artifacts into coherent, stakeholder-oriented reports. The system is validated through a real-world case study on public bus transportation in Northern Jutland, Denmark, where fuel efficiency data from 4006 trips are analyzed using Gaussian Mixture Model clustering. Comparative experiments across five state-of-the-art LLMs and three prompting paradigms identify GPT-4.1 mini with Chain-of-Thought prompting as the optimal configuration, achieving 97.3% narrative accuracy while balancing interpretability and computational cost. The findings demonstrate that multi-agent orchestration significantly enhances factual precision, coherence, and scalability in LLM-based reporting. The proposed framework establishes a replicable and domain-adaptive methodology for AI-driven narrative generation and decision support in energy informatics.",
+  "authors": [
+    "Zhipeng Ma",
+    "Ali Rida Bahja",
+    "Andreas Burgdorf",
+    "André Pomp",
+    "Tobias Meisen",
+    "Bo Nørregaard Jørgensen",
+    "Zheng Grace Ma"
+  ],
+  "published": "2025-11-17T15:14:17Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2511.13476"
+}

@@ -1,0 +1,24 @@
+{
+  "arxiv_id": "2512.13154",
+  "title": "MAC: A Multi-Agent Framework for Interactive User Clarification in Multi-turn Conversations",
+  "abstract": "Conversational agents often encounter ambiguous user requests, requiring an effective clarification to successfully complete tasks. While recent advancements in real-world applications favor multi-agent architectures to manage complex conversational scenarios efficiently, ambiguity resolution remains a critical and underexplored challenge--particularly due to the difficulty of determining which agent should initiate a clarification and how agents should coordinate their actions when faced with uncertain or incomplete user input. The fundamental questions of when to interrupt a user and how to formulate the optimal clarification query within the most optimal multi-agent settings remain open. In this paper, we propose MAC (Multi-Agent Clarification), an interactive multi-agent framework specifically optimized to resolve user ambiguities by strategically managing clarification dialogues. We first introduce a novel taxonomy categorizing user ambiguities to systematically guide clarification strategies. Then, we present MAC that autonomously coordinates multiple agents to interact synergistically with users. Empirical evaluations on MultiWOZ 2.4 demonstrate that enabling clarification at both levels increases task success rate 7.8\\% (54.5 to 62.3) and reduces the average number of dialogue turns (6.53 to 4.86) by eliciting all required user information up front and minimizing repetition. Our findings highlight the importance of active user interaction and role-aware clarification for more reliable human-agent communication.",
+  "authors": [
+    "Emre Can Acikgoz",
+    "Jinoh Oh",
+    "Joo Hyuk Jeon",
+    "Jie Hao",
+    "Heng Ji",
+    "Dilek Hakkani-Tür",
+    "Gokhan Tur",
+    "Xiang Li",
+    "Chengyuan Ma",
+    "Xing Fan"
+  ],
+  "published": "2025-12-15T10:02:50Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.CL"
+  ],
+  "url": "https://arxiv.org/abs/2512.13154"
+}

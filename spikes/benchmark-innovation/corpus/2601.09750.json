@@ -1,0 +1,22 @@
+{
+  "arxiv_id": "2601.09750",
+  "title": "SAGE: Tool-Augmented LLM Task Solving Strategies in Scalable Multi-Agent Environments",
+  "abstract": "Large language models (LLMs) have proven to work well in question-answering scenarios, but real-world applications often require access to tools for live information or actuation. For this, LLMs can be extended with tools, which are often defined in advance, also allowing for some fine-tuning for specific use cases. However, rapidly evolving software landscapes and individual services require the constant development and integration of new tools. Domain- or company-specific tools can greatly elevate the usefulness of an LLM, but such custom tools can be problematic to integrate, or the LLM may fail to reliably understand and use them. For this, we need strategies to define new tools and integrate them into the LLM dynamically, as well as robust and scalable zero-shot prompting methods that can make use of those tools in an efficient manner. In this paper, we present SAGE, a specialized conversational AI interface, based on the OPACA framework for tool discovery and execution. The integration with OPACA makes it easy to add new tools or services for the LLM to use, while SAGE itself presents rich extensibility and modularity. This not only provides the ability to seamlessly switch between different models (e.g. GPT, LLAMA), but also to add and select prompting methods, involving various setups of differently prompted agents for selecting and executing tools and evaluating the results. We implemented a number of task-solving strategies, making use of agentic concepts and prompting methods in various degrees of complexity, and evaluated those against a comprehensive set of benchmark services. The results are promising and highlight the distinct strengths and weaknesses of different task-solving strategies. Both SAGE and the OPACA framework, as well as the different benchmark services and results, are available as Open Source/Open Data on GitHub.",
+  "authors": [
+    "Robert K. Strehlow",
+    "Tobias Küster",
+    "Oskar F. Kupke",
+    "Brandon Llanque Kurps",
+    "Fikret Sivrikaya",
+    "Sahin Albayrak"
+  ],
+  "published": "2026-01-12T15:49:47Z",
+  "primary_category": "cs.SE",
+  "categories": [
+    "cs.SE",
+    "cs.AI",
+    "cs.HC",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2601.09750"
+}

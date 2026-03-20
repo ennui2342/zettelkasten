@@ -1,0 +1,24 @@
+{
+  "arxiv_id": "2509.12927",
+  "title": "HLSMAC: A New StarCraft Multi-Agent Challenge for High-Level Strategic Decision-Making",
+  "abstract": "Benchmarks are crucial for assessing multi-agent reinforcement learning (MARL) algorithms. While StarCraft II-related environments have driven significant advances in MARL, existing benchmarks like SMAC focus primarily on micromanagement, limiting comprehensive evaluation of high-level strategic intelligence. To address this, we introduce HLSMAC, a new cooperative MARL benchmark with 12 carefully designed StarCraft II scenarios based on classical stratagems from the Thirty-Six Stratagems. Each scenario corresponds to a specific stratagem and is designed to challenge agents with diverse strategic elements, including tactical maneuvering, timing coordination, and deception, thereby opening up avenues for evaluating high-level strategic decision-making capabilities. We also propose novel metrics across multiple dimensions beyond conventional win rate, such as ability utilization and advancement efficiency, to assess agents' overall performance within the HLSMAC environment. We integrate state-of-the-art MARL algorithms and LLM-based agents with our benchmark and conduct comprehensive experiments. The results demonstrate that HLSMAC serves as a robust testbed for advancing multi-agent strategic decision-making.",
+  "authors": [
+    "Xingxing Hong",
+    "Yungong Wang",
+    "Dexin Jin",
+    "Ye Yuan",
+    "Ximing Huang",
+    "Zijian Wu",
+    "Wenxin Li"
+  ],
+  "published": "2025-09-16T10:26:12Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.CV",
+    "cs.GT",
+    "cs.LG",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2509.12927"
+}

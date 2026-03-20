@@ -1,0 +1,20 @@
+{
+  "arxiv_id": "2510.06240",
+  "title": "Knowledge Graph-Guided Multi-Agent Distillation for Reliable Industrial Question Answering with Datasets",
+  "abstract": "Industrial question-answering (QA) systems require higher safety and reliability than general-purpose dialogue models, as errors in high-risk scenarios such as equipment fault diagnosis can have severe consequences. Although multi-agent large language models enhance reasoning depth, they suffer from uncontrolled iterations and unverifiable outputs, and conventional distillation methods struggle to transfer collaborative reasoning capabilities to lightweight, deployable student models. To address these challenges, we propose Knowledge Graph-guided Multi-Agent System Distillation (KG-MASD). Our approach formulates distillation as a Markov Decision Process and incorporates a knowledge graph as a verifiable structured prior to enrich state representation and ensure convergence. By integrating collaborative reasoning with knowledge grounding, KG-MASD generates high-confidence instruction-tuning data and jointly distills reasoning depth and verifiability into compact student models suitable for edge deployment. Experiments on an industrial QA dataset show that KG-MASD improves accuracy by 2.4 per cent to 20.1 per cent over baselines and significantly enhances reliability, enabling trustworthy AI deployment in safety-critical industrial scenarios. Code and data are available at https://github.com/erwinmsmith/KG-MAD/.",
+  "authors": [
+    "Jiqun Pan",
+    "Zhenke Duan",
+    "Jiani Tu",
+    "Anzhi Cheng",
+    "Yanqing Wang"
+  ],
+  "published": "2025-10-03T06:52:59Z",
+  "primary_category": "cs.CL",
+  "categories": [
+    "cs.CL",
+    "cs.AI",
+    "cs.DB"
+  ],
+  "url": "https://arxiv.org/abs/2510.06240"
+}

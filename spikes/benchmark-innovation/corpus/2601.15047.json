@@ -1,0 +1,22 @@
+{
+  "arxiv_id": "2601.15047",
+  "title": "Game-Theoretic Lens on LLM-based Multi-Agent Systems",
+  "abstract": "Large language models (LLMs) have demonstrated strong reasoning, planning, and communication abilities, enabling them to operate as autonomous agents in open environments. While single-agent systems remain limited in adaptability and coordination, recent progress has shifted attention toward multi-agent systems (MAS) composed of interacting LLMs that pursue cooperative, competitive, or mixed objectives. This emerging paradigm provides a powerful testbed for studying social dynamics and strategic behaviors among intelligent agents. However, current research remains fragmented and lacks a unifying theoretical foundation. To address this gap, we present a comprehensive survey of LLM-based multi-agent systems through a game-theoretic lens. By organizing existing studies around the four key elements of game theory: players, strategies, payoffs, and information, we establish a systematic framework for understanding, comparing, and guiding future research on the design and analysis of LLM-based MAS.",
+  "authors": [
+    "Jianing Hao",
+    "Han Ding",
+    "Yuanjian Xu",
+    "Tianze Sun",
+    "Ran Chen",
+    "Wanbo Zhang",
+    "Guang Zhang",
+    "Siguang Li"
+  ],
+  "published": "2026-01-21T14:50:34Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.GT"
+  ],
+  "url": "https://arxiv.org/abs/2601.15047"
+}

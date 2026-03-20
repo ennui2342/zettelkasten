@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2601.06232",
+  "title": "Multi-Agent Framework for Controllable and Protected Generative Content Creation: Addressing Copyright and Provenance in AI-Generated Media",
+  "abstract": "The proliferation of generative AI systems creates unprecedented opportunities for content creation while raising critical concerns about controllability, copyright infringement, and content provenance. Current generative models operate as \"black boxes\" with limited user control and lack built-in mechanisms to protect intellectual property or trace content origin. We propose a novel multi-agent framework that addresses these challenges through specialized agent roles and integrated watermarking. Our system orchestrates Director, Generator, Reviewer, Integration, and Protection agents to ensure user intent alignment while embedding digital provenance markers. We demonstrate feasibility through two case studies: creative content generation with iterative refinement and copyright protection for AI-generated art in commercial contexts. Preliminary feasibility evidence from prior work indicates up to 23\\% improvement in semantic alignment and 95\\% watermark recovery rates. This work contributes to responsible generative AI deployment, positioning multi-agent systems as a solution for trustworthy creative workflows in legal and commercial applications.",
+  "authors": [
+    "Haris Khan",
+    "Sadia Asif",
+    "Shumaila Asif"
+  ],
+  "published": "2026-01-09T12:29:20Z",
+  "primary_category": "cs.CR",
+  "categories": [
+    "cs.CR",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2601.06232"
+}

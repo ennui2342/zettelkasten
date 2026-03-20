@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2511.05637",
+  "title": "Novel Concepts for Agent-Based Population Modelling and Simulation: Updates from GEPOC ABM",
+  "abstract": "In recent years, dynamic agent-based population models, which model every inhabitant of a country as a statistically representative agent, have been gaining in popularity for decision support. This is mainly due to their high degree of flexibility with respect to their area of application. GEPOC ABM is one of these models. Developed in 2015, it is now a well-established decision support tool and has been successfully applied for a wide range of population-level research questions ranging from health-care to logistics. At least in part, this success is attributable to continuous improvement and development of new methods. While some of these are very application- or implementation-specific, others can be well transferred to other population models. The focus of the present work lies on the presentation of three selected transferable innovations. We illustrate an innovative time-update concept for the individual agents, a co-simulation-inspired simulation strategy, and a strategy for accurate model parametrisation. We describe these methods in a reproducible manner, explain their advantages and provide ideas on how they can be transferred to other population models.",
+  "authors": [
+    "Martin Bicher",
+    "Maximilian Viehauser",
+    "Daniele Giannandrea",
+    "Hannah Kastinger",
+    "Dominik Brunmeir",
+    "Niki Popper"
+  ],
+  "published": "2025-11-07T13:51:06Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2511.05637"
+}

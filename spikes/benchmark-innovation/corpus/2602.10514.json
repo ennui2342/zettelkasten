@@ -1,0 +1,26 @@
+{
+  "arxiv_id": "2602.10514",
+  "title": "Co-jump: Cooperative Jumping with Quadrupedal Robots via Multi-Agent Reinforcement Learning",
+  "abstract": "While single-agent legged locomotion has witnessed remarkable progress, individual robots remain fundamentally constrained by physical actuation limits. To transcend these boundaries, we introduce Co-jump, a cooperative task where two quadrupedal robots synchronize to execute jumps far beyond their solo capabilities. We tackle the high-impulse contact dynamics of this task under a decentralized setting, achieving synchronization without explicit communication or pre-specified motion primitives. Our framework leverages Multi-Agent Proximal Policy Optimization (MAPPO) enhanced by a progressive curriculum strategy, which effectively overcomes the sparse-reward exploration challenges inherent in mechanically coupled systems. We demonstrate robust performance in simulation and successful transfer to physical hardware, executing multi-directional jumps onto platforms up to 1.5 m in height. Specifically, one of the robots achieves a foot-end elevation of 1.1 m, which represents a 144% improvement over the 0.45 m jump height of a standalone quadrupedal robot, demonstrating superior vertical performance. Notably, this precise coordination is achieved solely through proprioceptive feedback, establishing a foundation for communication-free collaborative locomotion in constrained environments.",
+  "authors": [
+    "Shihao Dong",
+    "Yeke Chen",
+    "Zeren Luo",
+    "Jiahui Zhang",
+    "Bowen Xu",
+    "Jinghan Lin",
+    "Yimin Han",
+    "Ji Ma",
+    "Zhiyou Yu",
+    "Yudong Zhao",
+    "Peng Lu"
+  ],
+  "published": "2026-02-11T04:28:04Z",
+  "primary_category": "cs.RO",
+  "categories": [
+    "cs.RO",
+    "cs.AI",
+    "cs.LG"
+  ],
+  "url": "https://arxiv.org/abs/2602.10514"
+}

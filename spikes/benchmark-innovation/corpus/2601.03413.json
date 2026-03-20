@@ -1,0 +1,20 @@
+{
+  "arxiv_id": "2601.03413",
+  "title": "Sensor to Pixels: Decentralized Swarm Gathering via Image-Based Reinforcement Learning",
+  "abstract": "This study highlights the potential of image-based reinforcement learning methods for addressing swarm-related tasks. In multi-agent reinforcement learning, effective policy learning depends on how agents sense, interpret, and process inputs. Traditional approaches often rely on handcrafted feature extraction or raw vector-based representations, which limit the scalability and efficiency of learned policies concerning input order and size. In this work we propose an image-based reinforcement learning method for decentralized control of a multi-agent system, where observations are encoded as structured visual inputs that can be processed by Neural Networks, extracting its spatial features and producing novel decentralized motion control rules. We evaluate our approach on a multi-agent convergence task of agents with limited-range and bearing-only sensing that aim to keep the swarm cohesive during the aggregation. The algorithm's performance is evaluated against two benchmarks: an analytical solution proposed by Bellaiche and Bruckstein, which ensures convergence but progresses slowly, and VariAntNet, a neural network-based framework that converges much faster but shows medium success rates in hard constellations. Our method achieves high convergence, with a pace nearly matching that of VariAntNet. In some scenarios, it serves as the only practical alternative.",
+  "authors": [
+    "Yigal Koifman",
+    "Eran Iceland",
+    "Erez Koifman",
+    "Ariel Barel",
+    "Alfred M. Bruckstein"
+  ],
+  "published": "2026-01-06T20:58:11Z",
+  "primary_category": "cs.LG",
+  "categories": [
+    "cs.LG",
+    "cs.MA",
+    "eess.SY"
+  ],
+  "url": "https://arxiv.org/abs/2601.03413"
+}

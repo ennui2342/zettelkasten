@@ -1,0 +1,15 @@
+{
+  "arxiv_id": "2512.24145",
+  "title": "When Does Pairing Seeds Reduce Variance? Evidence from a Multi-Agent Economic Simulation",
+  "abstract": "Machine learning systems appear stochastic but are deterministically random, as seeded pseudorandom number generators produce identical realisations across repeated executions. Standard evaluation practice typically treats runs across alternatives as independent and does not exploit shared sources of randomness. This paper analyses the statistical structure of comparative evaluation under shared random seeds. Under this design, competing systems are evaluated using identical seeds, inducing matched stochastic realisations and yielding strict variance reduction whenever outcomes are positively correlated at the seed level. We demonstrate these effects using an extended learning-based multi-agent economic simulator, where paired evaluation exposes systematic differences in aggregate and distributional outcomes that remain statistically inconclusive under independent evaluation at fixed budgets.",
+  "authors": [
+    "Udit Sharma"
+  ],
+  "published": "2025-12-30T11:15:04Z",
+  "primary_category": "cs.LG",
+  "categories": [
+    "cs.LG",
+    "stat.ML"
+  ],
+  "url": "https://arxiv.org/abs/2512.24145"
+}

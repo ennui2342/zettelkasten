@@ -1,0 +1,27 @@
+{
+  "arxiv_id": "2602.01415",
+  "title": "Evidence-Decision-Feedback: Theory-Driven Adaptive Scaffolding for LLM Agents",
+  "abstract": "Multi-agent LLM architectures offer opportunities for pedagogical agents to help students construct domain knowledge and develop critical-thinking skills, yet many operate on a \"one-size-fits-all\" basis, limiting their ability to provide personalized support. To address this, we introduce Evidence-Decision-Feedback (EDF), a theoretical framework for adaptive scaffolding using LLMs. EDF integrates elements of intelligent tutoring systems and agentic behavior by organizing interactions around evidentiary inference, pedagogical decision-making, and adaptive feedback. We instantiate EDF through Copa, an agentic collaborative peer agent for STEM+C problem-solving. In an authentic high school classroom study, we show that EDF-aligned interactions align feedback with students' demonstrated understanding and task mastery; promote gradual scaffold fading; and support interpretable, evidence-grounded explanations without fostering overreliance.",
+  "authors": [
+    "Clayton Cohn",
+    "Siyuan Guo",
+    "Surya Rayala",
+    "Hanchen David Wang",
+    "Naveeduddin Mohammed",
+    "Umesh Timalsina",
+    "Shruti Jain",
+    "Angela Eeds",
+    "Menton Deweese",
+    "Pamela J. Osborn Popp",
+    "Rebekah Stanton",
+    "Shakeera Walker",
+    "Meiyi Ma",
+    "Gautam Biswas"
+  ],
+  "published": "2026-02-01T19:43:00Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2602.01415"
+}

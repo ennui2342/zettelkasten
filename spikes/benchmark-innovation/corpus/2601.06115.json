@@ -1,0 +1,14 @@
+{
+  "arxiv_id": "2601.06115",
+  "title": "Dreaming Is Not a Bug: A Jung-Inspired Dream Layer for Multi-Agent LLM Companions",
+  "abstract": "Inspired by a personal dream about knowledge-sharing barriers in an everyday hardware project, this paper proposes a Jung-inspired \"Dream Layer\" for LLM companions, reframing controlled offline hallucinations as a resource for learning and relationship-building rather than a mere reliability bug. Drawing on Jung's notion of the collective unconscious as a shared repository of archetypal forms, we introduce an Artificial Collective Unconscious (ACU): a shared dream pool where agents contribute de-identified, abstract Interaction Templates that are later re-instantiated as idiosyncratic Dream Narratives. The Dream Layer runs strictly offline: logic-enforcing modules are relaxed and sampling temperature is increased, yielding safe but deliberately bizarre narratives (e.g., travel sequences with mismatched currencies) that augment data for rare events and edge-case safety tests; to harness risk productively, we add a governance stack of strict abstraction, temporal delays, and ephemeral memory. Through behavioural simulations of everyday dialogue and long-horizon adaptation tasks, we show that the Dream Layer enables a critical decoupling: agents remain firm on safety constraints (e.g., security policies) while becoming flexible in narrative strategy (e.g., using shared archetypal metaphors to resolve deadlocks), conceptually reframing hallucination so that online, unmarked instances remain bugs, whereas bounded, marked, and delayed ones become a goldmine for synthetic scenarios and deepened companionship, echoing anti-overfitting dream mechanisms proposed in contemporary neuroscience.",
+  "authors": [
+    "V. Cheung"
+  ],
+  "published": "2026-01-03T15:19:54Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2601.06115"
+}

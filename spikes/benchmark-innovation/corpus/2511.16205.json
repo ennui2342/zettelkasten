@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2511.16205",
+  "title": "ChemLabs on ChemO: A Multi-Agent System for Multimodal Reasoning on IChO 2025",
+  "abstract": "Olympiad-level benchmarks in mathematics and physics are crucial testbeds for advanced AI reasoning, but chemistry, with its unique multimodal symbolic language, has remained an open challenge. We introduce ChemO, a new benchmark built from the International Chemistry Olympiad (IChO) 2025. ChemO features two key innovations for automated assessment: Assessment-Equivalent Reformulation (AER), which converts problems requiring visual outputs (e.g., drawing molecules) into computationally tractable formats, and Structured Visual Enhancement (SVE), a diagnostic mechanism to disentangle a model's visual perception capabilities from its core chemical reasoning. To tackle this benchmark, we propose ChemLabs, a hierarchical multi-agent framework that mimics human expert collaboration through specialized agents for problem decomposition, perception, reasoning, and auditing. Experiments on state-of-the-art multimodal models demonstrate that combining SVE with our multi-agent system yields dramatic performance gains. Our top configuration achieves a score of 93.6 out of 100, surpassing an estimated human gold medal threshold and establishing a new state-of-the-art in automated chemical problem-solving. ChemO Dataset: https://huggingface.co/datasets/IDEA-AI4SCI/ChemO",
+  "authors": [
+    "Qiang Xu",
+    "Shengyuan Bai",
+    "Leqing Chen",
+    "Zijing Liu",
+    "Yu Li"
+  ],
+  "published": "2025-11-20T10:15:39Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2511.16205"
+}

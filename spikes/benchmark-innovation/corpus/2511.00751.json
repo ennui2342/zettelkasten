@@ -1,0 +1,15 @@
+{
+  "arxiv_id": "2511.00751",
+  "title": "Reevaluating Self-Consistency Scaling in Multi-Agent Systems",
+  "abstract": "This study examines the trade-offs of increasing sampled reasoning paths in self-consistency for modern large language models (LLMs). Earlier research with older models showed that combining multiple reasoning chains improves results before reaching a plateau. Using Gemini 2.5 models on HotpotQA and Math-500, we revisit those claims under current model conditions. Each configuration pooled outputs from varying sampled reasoning paths and compared them to a single chain-of-thought (CoT) baseline. Larger models exhibited a more stable and consistent improvement curve. The results confirm that performance gains taper off after moderate sampling, aligning with past findings. This plateau suggests diminishing returns driven by overlap among reasoning paths. Self-consistency remains useful, but high-sample configurations offer little benefit relative to their computational cost.",
+  "authors": [
+    "Chiyan Loo"
+  ],
+  "published": "2025-11-02T00:36:49Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.CL"
+  ],
+  "url": "https://arxiv.org/abs/2511.00751"
+}

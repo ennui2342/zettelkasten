@@ -1,0 +1,16 @@
+{
+  "arxiv_id": "2601.11583",
+  "title": "Bit-politeia: An AI Agent Community in Blockchain",
+  "abstract": "Current resource allocation paradigms, particularly in academic evaluation, are constrained by inherent limitations such as the Matthew Effect, reward hacking driven by Goodhart's Law, and the trade-off between efficiency and fairness. To address these challenges, this paper proposes \"Bit-politeia\", an AI agent community on blockchain designed to construct a fair, efficient, and sustainable resource allocation system. In this virtual community, residents interact via AI agents serving as their exclusive proxies, which are optimized for impartiality and value alignment. The community adopts a \"clustered grouping + hierarchical architecture\" that integrates democratic centralism to balance decision-making efficiency and trust mechanisms. Agents engage through casual chat and deliberative interactions to evaluate research outputs and distribute a virtual currency as rewards. This incentive mechanism aims to achieve incentive compatibility through consensus-driven evaluation, while blockchain technology ensures immutable records of all transactions and reputation data. By leveraging AI for objective assessment and decentralized verification, Bit-politeia minimizes human bias and mitigates resource centralization issues found in traditional peer review. The proposed framework provides a novel pathway for optimizing scientific innovation through a fair and automated resource configuration process.",
+  "authors": [
+    "Xing Yang"
+  ],
+  "published": "2026-01-01T17:26:54Z",
+  "primary_category": "cs.CY",
+  "categories": [
+    "cs.CY",
+    "cs.AI",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2601.11583"
+}

@@ -1,0 +1,25 @@
+{
+  "arxiv_id": "2511.12439",
+  "title": "Multi-agent Self-triage System with Medical Flowcharts",
+  "abstract": "Online health resources and large language models (LLMs) are increasingly used as a first point of contact for medical decision-making, yet their reliability in healthcare remains limited by low accuracy, lack of transparency, and susceptibility to unverified information. We introduce a proof-of-concept conversational self-triage system that guides LLMs with 100 clinically validated flowcharts from the American Medical Association, providing a structured and auditable framework for patient decision support. The system leverages a multi-agent framework consisting of a retrieval agent, a decision agent, and a chat agent to identify the most relevant flowchart, interpret patient responses, and deliver personalized, patient-friendly recommendations, respectively. Performance was evaluated at scale using synthetic datasets of simulated conversations. The system achieved 95.29% top-3 accuracy in flowchart retrieval (N=2,000) and 99.10% accuracy in flowchart navigation across varied conversational styles and conditions (N=37,200). By combining the flexibility of free-text interaction with the rigor of standardized clinical protocols, this approach demonstrates the feasibility of transparent, accurate, and generalizable AI-assisted self-triage, with potential to support informed patient decision-making while improving healthcare resource utilization.",
+  "authors": [
+    "Yujia Liu",
+    "Sophia Yu",
+    "Hongyue Jin",
+    "Jessica Wen",
+    "Alexander Qian",
+    "Terrence Lee",
+    "Mattheus Ramsis",
+    "Gi Won Choi",
+    "Lianhui Qin",
+    "Xin Liu",
+    "Edward J. Wang"
+  ],
+  "published": "2025-11-16T03:48:22Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2511.12439"
+}

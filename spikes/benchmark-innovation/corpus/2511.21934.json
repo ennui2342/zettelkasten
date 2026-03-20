@@ -1,0 +1,20 @@
+{
+  "arxiv_id": "2511.21934",
+  "title": "Heterogeneous Multi-Agent Reinforcement Learning with Attention for Cooperative and Scalable Feature Transformation",
+  "abstract": "Feature transformation enhances downstream task performance by generating informative features through mathematical feature crossing. Despite the advancements in deep learning, feature transformation remains essential for structured data, where deep models often struggle to capture complex feature interactions. Prior literature on automated feature transformation has achieved success but often relies on heuristics or exhaustive searches, leading to inefficient and time-consuming processes. Recent works employ reinforcement learning (RL) to enhance traditional approaches through a more effective trial-and-error way. However, two limitations remain: 1) Dynamic feature expansion during the transformation process, which causes instability and increases the learning complexity for RL agents; 2) Insufficient cooperation and communication between agents, which results in suboptimal feature crossing operations and degraded model performance. To address them, we propose a novel heterogeneous multi-agent RL framework to enable cooperative and scalable feature transformation. The framework comprises three heterogeneous agents, grouped into two types, each designed to select essential features and operations for feature crossing. To enhance communication among these agents, we implement a shared critic mechanism that facilitates information exchange during feature transformation. To handle the dynamically expanding feature space, we tailor multi-head attention-based feature agents to select suitable features for feature crossing. Additionally, we introduce a state encoding technique during the optimization process to stabilize and enhance the learning dynamics of the RL agents, resulting in more robust and reliable transformation policies. Finally, we conduct extensive experiments to validate the effectiveness, efficiency, robustness, and interpretability of our model.",
+  "authors": [
+    "Tao Zhe",
+    "Huazhen Fang",
+    "Kunpeng Liu",
+    "Qian Lou",
+    "Tamzidul Hoque",
+    "Dongjie Wang"
+  ],
+  "published": "2025-11-26T21:45:38Z",
+  "primary_category": "cs.LG",
+  "categories": [
+    "cs.LG",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2511.21934"
+}

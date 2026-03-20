@@ -1,0 +1,16 @@
+{
+  "arxiv_id": "2602.00307",
+  "title": "Autonomous Data Processing using Meta-Agents",
+  "abstract": "Traditional data processing pipelines are typically static and handcrafted for specific tasks, limiting their adaptability to evolving requirements. While general-purpose agents and coding assistants can generate code for well-understood data pipelines, they lack the ability to autonomously monitor, manage, and optimize an end-to-end pipeline once deployed. We present \\textbf{Autonomous Data Processing using Meta-agents} (ADP-MA), a framework that dynamically constructs, executes, and iteratively refines data processing pipelines through hierarchical agent orchestration. At its core, \\textit{meta-agents} analyze input data and task specifications to design a multi-phase plan, instantiate specialized \\textit{ground-level agents}, and continuously evaluate pipeline performance. The architecture comprises three key components: a planning module for strategy generation, an orchestration layer for agent coordination and tool integration, and a monitoring loop for iterative evaluation and backtracking. Unlike conventional approaches, ADP-MA emphasizes context-aware optimization, adaptive workload partitioning, and progressive sampling for scalability. Additionally, the framework leverages a diverse set of external tools and can reuse previously designed agents, reducing redundancy and accelerating pipeline construction. We demonstrate ADP-MA through an interactive demo that showcases pipeline construction, execution monitoring, and adaptive refinement across representative data processing tasks.",
+  "authors": [
+    "Udayan Khurana"
+  ],
+  "published": "2026-01-30T20:58:17Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.DB",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2602.00307"
+}

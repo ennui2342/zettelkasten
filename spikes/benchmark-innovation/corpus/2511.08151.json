@@ -1,0 +1,35 @@
+{
+  "arxiv_id": "2511.08151",
+  "title": "SciAgent: A Unified Multi-Agent System for Generalistic Scientific Reasoning",
+  "abstract": "Recent advances in large language models have enabled AI systems to achieve expert-level performance on domain-specific scientific tasks, yet these systems remain narrow and handcrafted. We introduce SciAgent, a unified multi-agent system designed for generalistic scientific reasoning-the ability to adapt reasoning strategies across disciplines and difficulty levels. SciAgent organizes problem solving as a hierarchical process: a Coordinator Agent interprets each problem's domain and complexity, dynamically orchestrating specialized Worker Systems, each composed of interacting reasoning Sub-agents for symbolic deduction, conceptual modeling, numerical computation, and verification. These agents collaboratively assemble and refine reasoning pipelines tailored to each task. Across mathematics and physics Olympiads (IMO, IMC, IPhO, CPhO), SciAgent consistently attains or surpasses human gold-medalist performance, demonstrating both domain generality and reasoning adaptability. Additionally, SciAgent has been tested on the International Chemistry Olympiad (IChO) and selected problems from the Humanity's Last Exam (HLE) benchmark, further confirming the system's ability to generalize across diverse scientific domains. This work establishes SciAgent as a concrete step toward generalistic scientific intelligence-AI systems capable of coherent, cross-disciplinary reasoning at expert levels.",
+  "authors": [
+    "Xuchen Li",
+    "Ruitao Wu",
+    "Xuanbo Liu",
+    "Xukai Wang",
+    "Jinbo Hu",
+    "Zhixin Bai",
+    "Bohan Zeng",
+    "Hao Liang",
+    "Leheng Chen",
+    "Mingrui Chen",
+    "Haitian Zhong",
+    "Xuanlin Yang",
+    "Xu-Yao Zhang",
+    "Liu Liu",
+    "Jia Li",
+    "Kaiqi Huang",
+    "Jiahao Xu",
+    "Haitao Mi",
+    "Wentao Zhang",
+    "Bin Dong"
+  ],
+  "published": "2025-11-11T12:00:34Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.CL",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2511.08151"
+}

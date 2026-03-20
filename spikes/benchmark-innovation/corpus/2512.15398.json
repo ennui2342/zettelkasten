@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2512.15398",
+  "title": "Mapis: A Knowledge-Graph Grounded Multi-Agent Framework for Evidence-Based PCOS Diagnosis",
+  "abstract": "Polycystic Ovary Syndrome (PCOS) constitutes a significant public health issue affecting 10% of reproductive-aged women, highlighting the critical importance of developing effective diagnostic tools. Previous machine learning and deep learning detection tools are constrained by their reliance on large-scale labeled data and an lack of interpretability. Although multi-agent systems have demonstrated robust capabilities, the potential of such systems for PCOS detection remains largely unexplored. Existing medical multi-agent frameworks are predominantly designed for general medical tasks, suffering from insufficient domain integration and a lack of specific domain knowledge. To address these challenges, we propose Mapis, the first knowledge-grounded multi-agent framework explicitly designed for guideline-based PCOS diagnosis. Specifically, it built upon the 2023 International Guideline into a structured collaborative workflow that simulates the clinical diagnostic process. It decouples complex diagnostic tasks across specialized agents: a gynecological endocrine agent and a radiology agent collaborative to verify inclusion criteria, while an exclusion agent strictly rules out other causes. Furthermore, we construct a comprehensive PCOS knowledge graph to ensure verifiable, evidence-based decision-making. Extensive experiments on public benchmarks and specialized clinical datasets, benchmarking against nine diverse baselines, demonstrate that Mapis significantly outperforms competitive methods. On the clinical dataset, it surpasses traditional machine learning models by 13.56%, single-agent by 6.55%, and previous medical multi-agent systems by 7.05% in Accuracy.",
+  "authors": [
+    "Zanxiang He",
+    "Meng Li",
+    "Liyun Shi",
+    "Weiye Daia",
+    "Liming Nie"
+  ],
+  "published": "2025-12-17T12:49:57Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2512.15398"
+}

@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2510.06307",
+  "title": "Belief-Calibrated Multi-Agent Consensus Seeking for Complex NLP Tasks",
+  "abstract": "A multi-agent system (MAS) enhances its capacity to solve complex natural language processing (NLP) tasks through collaboration among multiple agents, where consensus-seeking serves as a fundamental mechanism. However, existing consensus-seeking approaches typically rely on voting mechanisms to judge consensus, overlooking contradictions in system-internal beliefs that destabilize the consensus. Moreover, these methods often involve agents updating their results through indiscriminate collaboration with every other agent. Such uniform interaction fails to identify the optimal collaborators for each agent, hindering the emergence of a stable consensus. To address these challenges, we provide a theoretical framework for selecting optimal collaborators that maximize consensus stability. Based on the theorems, we propose the Belief-Calibrated Consensus Seeking (BCCS) framework to facilitate stable consensus via selecting optimal collaborators and calibrating the consensus judgment by system-internal beliefs. Experimental results on the MATH and MMLU benchmark datasets demonstrate that the proposed BCCS framework outperforms the best existing results by 2.23% and 3.95% of accuracy on challenging tasks, respectively. Our code and data are available at https://github.com/dengwentao99/BCCS.",
+  "authors": [
+    "Wentao Deng",
+    "Jiahuan Pei",
+    "Zhiwei Xu",
+    "Zhaochun Ren",
+    "Zhumin Chen",
+    "Pengjie Ren"
+  ],
+  "published": "2025-10-07T17:53:34Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2510.06307"
+}

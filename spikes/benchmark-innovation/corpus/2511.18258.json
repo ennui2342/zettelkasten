@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2511.18258",
+  "title": "Hybrid Agentic AI and Multi-Agent Systems in Smart Manufacturing",
+  "abstract": "The convergence of Agentic AI and MAS enables a new paradigm for intelligent decision making in SMS. Traditional MAS architectures emphasize distributed coordination and specialized autonomy, while recent advances in agentic AI driven by LLMs introduce higher order reasoning, planning, and tool orchestration capabilities. This paper presents a hybrid agentic AI and multi agent framework for a Prescriptive Maintenance use case, where LLM based agents provide strategic orchestration and adaptive reasoning, complemented by rule based and SLMs agents performing efficient, domain specific tasks on the edge. The proposed framework adopts a layered architecture that consists of perception, preprocessing, analytics, and optimization layers, coordinated through an LLM Planner Agent that manages workflow decisions and context retention. Specialized agents autonomously handle schema discovery, intelligent feature analysis, model selection, and prescriptive optimization, while a HITL interface ensures transparency and auditability of generated maintenance recommendations. This hybrid design supports dynamic model adaptation, cost efficient maintenance scheduling, and interpretable decision making. An initial proof of concept implementation is validated on two industrial manufacturing datasets. The developed framework is modular and extensible, supporting seamless integration of new agents or domain modules as capabilities evolve. The results demonstrate the system capability to automatically detect schema, adapt preprocessing pipelines, optimize model performance through adaptive intelligence, and generate actionable, prioritized maintenance recommendations. The framework shows promise in achieving improved robustness, scalability, and explainability for RxM in smart manufacturing, bridging the gap between high level agentic reasoning and low level autonomous execution.",
+  "authors": [
+    "Mojtaba A. Farahani",
+    "Md Irfan Khan",
+    "Thorsten Wuest"
+  ],
+  "published": "2025-11-23T03:06:23Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI",
+    "cs.LG"
+  ],
+  "url": "https://arxiv.org/abs/2511.18258"
+}

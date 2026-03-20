@@ -1,0 +1,16 @@
+{
+  "arxiv_id": "2509.06374",
+  "title": "MAPF-HD: Multi-Agent Path Finding in High-Density Environments",
+  "abstract": "Multi-agent path finding (MAPF) involves planning efficient paths for multiple agents to move simultaneously while avoiding collisions. In typical warehouse environments, agents are often sparsely distributed along aisles; however, increasing the agent density can improve space efficiency. When the agent density is high, it becomes necessary to optimize the paths not only for goal-assigned agents but also for those obstructing them. This study proposes a novel MAPF framework for high-density environments (MAPF-HD). Several studies have explored MAPF in similar settings using integer linear programming (ILP). However, ILP-based methods require substantial computation time to optimize all agent paths simultaneously. Even in small grid-based environments with fewer than $100$ cells, these computations can take tens to hundreds of seconds. Such high computational costs render these methods impractical for large-scale applications such as automated warehouses and valet parking. To address these limitations, we introduce the phased null-agent swapping (PHANS) method. PHANS employs a heuristic approach to incrementally swap positions between agents and empty vertices. This method solves the MAPF-HD problem within a few seconds, even in large environments containing more than $700$ cells. The proposed method has the potential to improve efficiency in various real-world applications such as warehouse logistics, traffic management, and crowd control. The implementation is available at https://github.com/ToyotaCRDL/MAPF-in-High-Density-Envs.",
+  "authors": [
+    "Hiroya Makino",
+    "Seigo Ito"
+  ],
+  "published": "2025-09-08T06:59:46Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.RO"
+  ],
+  "url": "https://arxiv.org/abs/2509.06374"
+}

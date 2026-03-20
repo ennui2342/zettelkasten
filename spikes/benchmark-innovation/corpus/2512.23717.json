@@ -1,0 +1,15 @@
+{
+  "arxiv_id": "2512.23717",
+  "title": "HarmTransform: Transforming Explicit Harmful Queries into Stealthy via Multi-Agent Debate",
+  "abstract": "Large language models (LLMs) are equipped with safety mechanisms to detect and block harmful queries, yet current alignment approaches primarily focus on overtly dangerous content and overlook more subtle threats. However, users can often disguise harmful intent through covert rephrasing that preserves malicious objectives while appearing benign, which creates a significant gap in existing safety training data. To address this limitation, we introduce HarmTransform, a multi-agent debate framework for systematically transforming harmful queries into stealthier forms while preserving their underlying harmful intent. Our framework leverages iterative critique and refinement among multiple agents to generate high-quality, covert harmful query transformations that can be used to improve future LLM safety alignment. Experiments demonstrate that HarmTransform significantly outperforms standard baselines in producing effective query transformations. At the same time, our analysis reveals that debate acts as a double-edged sword: while it can sharpen transformations and improve stealth, it may also introduce topic shifts and unnecessary complexity. These insights highlight both the promise and the limitations of multi-agent debate for generating comprehensive safety training data.",
+  "authors": [
+    "Shenzhe Zhu"
+  ],
+  "published": "2025-12-09T17:56:38Z",
+  "primary_category": "cs.CL",
+  "categories": [
+    "cs.CL",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2512.23717"
+}

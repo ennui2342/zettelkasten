@@ -1,0 +1,16 @@
+{
+  "arxiv_id": "2602.12102",
+  "title": "DEpiABS: Differentiable Epidemic Agent-Based Simulator",
+  "abstract": "The COVID-19 pandemic highlighted the limitations of existing epidemic simulation tools. These tools provide information that guides non-pharmaceutical interventions (NPIs), yet many struggle to capture complex dynamics while remaining computationally practical and interpretable. We introduce DEpiABS, a scalable, differentiable agent-based model (DABM) that balances mechanistic detail, computational efficiency and interpretability. DEpiABS captures individual-level heterogeneity in health status, behaviour, and resource constraints, while also modelling epidemic processes like viral mutation and reinfection dynamics. The model is fully differentiable, enabling fast simulation and gradient-based parameter calibration. Building on this foundation, we introduce a z-score-based scaling method that maps small-scale simulations to any real-world population sizes with negligible loss in output granularity, reducing the computational burden when modelling large populations. We validate DEpiABS through sensitivity analysis and calibration to COVID-19 and flu data from ten regions of varying scales. Compared to the baseline, DEpiABS is more detailed, fully interpretable, and has reduced the average normal deviation in forecasting from 0.97 to 0.92 on COVID-19 mortality data and from 0.41 to 0.32 on influenza-like-illness data. Critically, these improvements are achieved without relying on auxiliary data, making DEpiABS a reliable, generalisable, and data-efficient framework for future epidemic response modelling.",
+  "authors": [
+    "Zhijian Gao",
+    "Shuxin Li",
+    "Bo An"
+  ],
+  "published": "2026-02-12T15:56:52Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2602.12102"
+}

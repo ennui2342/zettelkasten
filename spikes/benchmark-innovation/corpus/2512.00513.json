@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2512.00513",
+  "title": "Truthful and Trustworthy IoT AI Agents via Immediate-Penalty Enforcement under Approximate VCG Mechanisms",
+  "abstract": "The deployment of autonomous AI agents in Internet of Things (IoT) energy systems requires decision-making mechanisms that remain robust, efficient, and trustworthy under real-time constraints and imperfect monitoring. While reinforcement learning enables adaptive prosumer behaviors, ensuring economic consistency and preventing strategic manipulation remain open challenges, particularly when sensing noise or partial observability reduces the operator's ability to verify actions. This paper introduces a trust-enforcement framework for IoT energy trading that combines an approximate Vickrey-Clarke-Groves (VCG) double auction with an immediate one-shot penalty. Unlike reputation- or history-based approaches, the proposed mechanism restores truthful reporting within a single round, even when allocation accuracy is approximate and monitoring is noisy. We theoretically characterize the incentive gap induced by approximation and derive a penalty threshold that guarantees truthful bidding under bounded sensing errors. To evaluate learning-enabled prosumers, we embed the mechanism into a multi-agent reinforcement learning environment reflecting stochastic generation, dynamic loads, and heterogeneous trading opportunities. Experiments show that improved allocation accuracy reduces deviation incentives, the required penalty matches analytical predictions, and learned bidding behaviors remain stable and interpretable despite imperfect monitoring. These results demonstrate that lightweight penalty designs can reliably align strategic IoT agents with socially efficient energy-trading outcomes.",
+  "authors": [
+    "Xun Shao",
+    "Ryuuto Shimizu",
+    "Zhi Liu",
+    "Kaoru Ota",
+    "Mianxiong Dong"
+  ],
+  "published": "2025-11-29T15:07:55Z",
+  "primary_category": "cs.GT",
+  "categories": [
+    "cs.GT",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2512.00513"
+}

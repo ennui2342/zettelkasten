@@ -1,0 +1,21 @@
+{
+  "arxiv_id": "2602.00299",
+  "title": "Agentic Framework for Epidemiological Modeling",
+  "abstract": "Epidemic modeling is essential for public health planning, yet traditional approaches rely on fixed model classes that require manual redesign as pathogens, policies, and scenario assumptions evolve. We introduce EPIAGENT, an agentic framework that automatically synthesizes, calibrates, verifies, and refines epidemiological simulators by modeling disease progression as an iterative program synthesis problem. A central design choice is an explicit epidemiological flow graph intermediate representation that links scenario specifications to model structure and enables strong, modular correctness checks before code is generated. Verified flow graphs are then compiled into mechanistic models supporting interpretable parameter learning under physical and epidemiological constraints. Evaluation on epidemiological scenario case studies demonstrates that EPIAGENT captures complex growth dynamics and produces epidemiologically consistent counterfactual projections across varying vaccination and immune escape assumptions. Our results show that the agentic feedback loop prevents degeneration and significantly accelerates convergence toward valid models by mimicking professional expert workflows.",
+  "authors": [
+    "Rituparna Datta",
+    "Zihan Guan",
+    "Baltazar Espinoza",
+    "Yiqi Su",
+    "Priya Pitre",
+    "Srini Venkatramanan",
+    "Naren Ramakrishnan",
+    "Anil Vullikanti"
+  ],
+  "published": "2026-01-30T20:45:45Z",
+  "primary_category": "cs.LG",
+  "categories": [
+    "cs.LG"
+  ],
+  "url": "https://arxiv.org/abs/2602.00299"
+}

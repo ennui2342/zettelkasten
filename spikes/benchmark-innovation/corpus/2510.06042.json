@@ -1,0 +1,16 @@
+{
+  "arxiv_id": "2510.06042",
+  "title": "Agent+P: Guiding UI Agents via Symbolic Planning",
+  "abstract": "Large Language Model (LLM)-based UI agents show great promise for UI automation but often hallucinate in long-horizon tasks due to their lack of understanding of the global UI transition structure. To address this, we introduce AGENT+P, a novel framework that leverages symbolic planning to guide LLM-based UI agents. Specifically, we model an app's UI transition structure as a UI Transition Graph (UTG), which allows us to reformulate the UI automation task as a pathfinding problem on the UTG. This further enables an off-the-shelf symbolic planner to generate a provably correct and optimal high-level plan, preventing the agent from redundant exploration and guiding the agent to achieve the automation goals. AGENT+P is designed as a plug-and-play framework to enhance existing UI agents. Evaluation on the AndroidWorld benchmark demonstrates that AGENT+P improves the success rates of state-of-the-art UI agents by up to 14.31% and reduces the action steps by 37.70%.",
+  "authors": [
+    "Shang Ma",
+    "Xusheng Xiao",
+    "Yanfang Ye"
+  ],
+  "published": "2025-10-07T15:36:04Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2510.06042"
+}

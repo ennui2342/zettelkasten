@@ -1,0 +1,16 @@
+{
+  "arxiv_id": "2512.07588",
+  "title": "Understanding Individual Decision-Making in Multi-Agent Reinforcement Learning: A Dynamical Systems Approach",
+  "abstract": "Analysing learning behaviour in Multi-Agent Reinforcement Learning (MARL) environments is challenging, in particular with respect to \\textit{individual} decision-making. Practitioners frequently tend to study or compare MARL algorithms from a qualitative perspective largely due to the inherent stochasticity in practical algorithms arising from random dithering exploration strategies, environment transition noise, and stochastic gradient updates to name a few. Traditional analytical approaches, such as replicator dynamics, often rely on mean-field approximations to remove stochastic effects, but this simplification, whilst able to provide general overall trends, might lead to dissonance between analytical predictions and actual realisations of individual trajectories. In this paper, we propose a novel perspective on MARL systems by modelling them as \\textit{coupled stochastic dynamical systems}, capturing both agent interactions and environmental characteristics. Leveraging tools from dynamical systems theory, we analyse the stability and sensitivity of agent behaviour at individual level, which are key dimensions for their practical deployments, for example, in presence of strict safety requirements. This framework allows us, for the first time, to rigorously study MARL dynamics taking into consideration their inherent stochasticity, providing a deeper understanding of system behaviour and practical insights for the design and control of multi-agent learning processes.",
+  "authors": [
+    "James Rudd-Jones",
+    "María Pérez-Ortiz",
+    "Mirco Musolesi"
+  ],
+  "published": "2025-12-08T14:30:25Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2512.07588"
+}

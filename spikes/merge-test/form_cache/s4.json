@@ -1,0 +1,11 @@
+{
+  "scenario_key": "s4",
+  "scenario_name": "Vanishing Gradients vs Residual Connections (SYNTHESISE anchor)",
+  "bridging_text_len": 1006,
+  "drafts": [
+    {
+      "title": "Deep Residual Learning and the Vanishing Gradient Problem",
+      "body": "Prior to 2015, neural networks with more than roughly 20 layers consistently performed worse than their shallower counterparts, despite the theoretical expectation that additional depth should increase representational capacity. The root cause was the **vanishing gradient problem**: during backpropagation, gradient magnitudes are multiplied through each layer's operations, and across many layers this repeated multiplication drives the gradients toward near-zero values. As a result, early layers in a deep network receive essentially no useful training signal and fail to learn meaningful representations.\n\n**Residual connections** (also called skip connections), introduced by He et al. in 2016, provided an elegant architectural solution. Instead of requiring each block of layers to learn a desired mapping H(x) directly, a residual block learns only the residual function F(x) = H(x) \u2212 x, and the block's output is computed as F(x) + x. The identity shortcut \u2014 adding the original input x back to the block output \u2014 creates a gradient pathway with an effective magnitude of 1.0 that is independent of network depth. This bypasses the exponential attenuation that previously crippled training in deep architectures.\n\nThe two concepts are tightly coupled: vanishing gradients define the problem that made very deep networks impractical, and residual connections constitute the direct architectural response. The skip connection does not eliminate the learned transformation but supplements it with an unimpeded information highway, ensuring that gradient flow remains healthy even through hundreds of layers. This breakthrough enabled the training of networks far deeper than previously feasible \u2014 such as ResNets with over 100 layers \u2014 and became a foundational design principle in modern deep learning architectures."
+    }
+  ]
+}

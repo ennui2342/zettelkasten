@@ -1,0 +1,22 @@
+{
+  "arxiv_id": "2511.00628",
+  "title": "AgentGit: A Version Control Framework for Reliable and Scalable LLM-Powered Multi-Agent Systems",
+  "abstract": "With the rapid progress of large language models (LLMs), LLM-powered multi-agent systems (MAS) are drawing increasing interest across academia and industry. However, many current MAS frameworks struggle with reliability and scalability, especially on complex tasks. We present AgentGit, a framework that brings Git-like rollback and branching to MAS workflows. Built as an infrastructure layer on top of LangGraph, AgentGit supports state commit, revert, and branching, allowing agents to traverse, compare, and explore multiple trajectories efficiently. To evaluate AgentGit, we designed an experiment that optimizes target agents by selecting better prompts. We ran a multi-step A/B test against three baselines -- LangGraph, AutoGen, and Agno -- on a real-world task: retrieving and analyzing paper abstracts. Results show that AgentGit significantly reduces redundant computation, lowers runtime and token usage, and supports parallel exploration across multiple branches, enhancing both reliability and scalability in MAS development. This work offers a practical path to more robust MAS design and enables error recovery, safe exploration, iterative debugging, and A/B testing in collaborative AI systems.",
+  "authors": [
+    "Yang Li",
+    "Siqi Ping",
+    "Xiyu Chen",
+    "Xiaojian Qi",
+    "Zigan Wang",
+    "Ye Luo",
+    "Xiaowei Zhang"
+  ],
+  "published": "2025-11-01T17:11:31Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI",
+    "cs.SE"
+  ],
+  "url": "https://arxiv.org/abs/2511.00628"
+}

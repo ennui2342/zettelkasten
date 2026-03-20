@@ -1,0 +1,11 @@
+{
+  "scenario_key": "s1",
+  "scenario_name": "Dense Retrieval vs Semantic Search",
+  "bridging_text_len": 1456,
+  "drafts": [
+    {
+      "title": "Dense Retrieval and Semantic Search",
+      "body": "Dense retrieval (also called bi-encoder retrieval) and semantic search (also called embedding-based search) are two names for the same underlying technique, developed independently by the information retrieval (IR) and natural language processing (NLP) communities respectively. The core method involves encoding texts into dense vector representations, indexing those vectors for efficient similarity lookup, and ranking candidate documents by geometric proximity (such as dot product or cosine similarity) to a query vector.\n\nThe convergence of these two lines of work became evident with Dense Passage Retrieval (DPR), introduced by Karpukhin et al. in 2020, which was recognized in both communities as an embedding-based approach to retrieval. The BEIR benchmark, introduced by Thakur et al. in 2021, further cemented the equivalence by evaluating systems described under both labels using a single unified evaluation protocol.\n\nThe architecture, training objectives, and inference procedures are identical across the two framings. The only meaningful difference lies in emphasis: IR researchers frame dense retrieval in contrast to traditional sparse retrieval methods such as BM25, highlighting the shift from sparse term-matching representations to dense learned representations. NLP researchers, by contrast, emphasize the semantic nature of the similarity captured by the embeddings, distinguishing it from surface-level or syntactic matching.\n\nThis terminological divergence has had practical consequences. Both communities independently developed closely related techniques \u2014 including hard negative mining strategies, methods for improving training efficiency, and in-batch negative sampling \u2014 often without awareness of or citation to parallel work in the other community. The duplication of research effort suggests that adopting a unified vocabulary across IR and NLP could reduce redundancy and accelerate progress in the field."
+    }
+  ]
+}

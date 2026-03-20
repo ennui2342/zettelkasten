@@ -1,0 +1,26 @@
+{
+  "arxiv_id": "2509.24855",
+  "title": "PhysicsMinions: Winning Gold Medals in the Latest Physics Olympiads with a Coevolutionary Multimodal Multi-Agent System",
+  "abstract": "Physics is central to understanding and shaping the real world, and the ability to solve physics problems is a key indicator of real-world physical intelligence. Physics Olympiads, renowned as the crown of competitive physics, provide a rigorous testbed requiring complex reasoning and deep multimodal understanding, yet they remain largely underexplored in AI research. Existing approaches are predominantly single-model based, and open-source MLLMs rarely reach gold-medal-level performance. To address this gap, we propose PhysicsMinions, a coevolutionary multi-agent system for Physics Olympiad. Its architecture features three synergistic studios: a Visual Studio to interpret diagrams, a Logic Studio to formulate solutions, and a Review Studio to perform dual-stage verification. The system coevolves through an iterative refinement loop where feedback from the Review Studio continuously guides the Logic Studio, enabling the system to self-correct and converge towards the ground truth. Evaluated on the HiPhO benchmark spanning 7 latest physics Olympiads, PhysicsMinions delivers three major breakthroughs: (i) Strong generalization: it consistently improves both open-source and closed-source models of different sizes, delivering clear benefits over their single-model baselines; (ii) Historic breakthroughs: it elevates open-source models from only 1-2 to 6 gold medals across 7 Olympiads, achieving the first-ever open-source gold medal in the latest International Physics Olympiad (IPhO) under the average-score metric; and (iii) Scaling to human expert: it further advances the open-source Pass@32 score to 26.8/30 points on the latest IPhO, ranking 4th of 406 contestants and far surpassing the top single-model score of 22.7 (ranked 22nd). Generally, PhysicsMinions offers a generalizable framework for Olympiad-level problem solving, with the potential to extend across disciplines.",
+  "authors": [
+    "Fangchen Yu",
+    "Junchi Yao",
+    "Ziyi Wang",
+    "Haiyuan Wan",
+    "Youling Huang",
+    "Bo Zhang",
+    "Shuyue Hu",
+    "Dongzhan Zhou",
+    "Ning Ding",
+    "Ganqu Cui",
+    "Lei Bai",
+    "Wanli Ouyang",
+    "Peng Ye"
+  ],
+  "published": "2025-09-29T14:40:53Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2509.24855"
+}

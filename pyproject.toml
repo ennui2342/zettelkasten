@@ -1,0 +1,38 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "zettelkasten"
+version = "0.1.0"
+description = "Knowledge synthesis — turning documents into a self-organising, queryable note graph using LLMs"
+requires-python = ">=3.12"
+dependencies = [
+    "python-frontmatter>=1.1",
+    "pyyaml>=6.0",
+    "sqlite-vec>=0.1.6",
+    "rank-bm25>=0.2.2",
+    "nltk>=3.9",
+    "numpy>=2.0",
+    "typer>=0.12",
+    "rich>=13.0",
+    "trafilatura>=1.12",
+]
+
+[project.optional-dependencies]
+anthropic = ["anthropic>=0.40"]
+voyage    = ["voyageai>=0.3"]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+]
+
+[project.scripts]
+zettelkasten = "zettelkasten.cli:app"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/zettelkasten"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short"

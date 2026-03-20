@@ -1,0 +1,16 @@
+{
+  "arxiv_id": "2511.00096",
+  "title": "Urban-MAS: Human-Centered Urban Prediction with LLM-Based Multi-Agent System",
+  "abstract": "Urban Artificial Intelligence (Urban AI) has advanced human-centered urban tasks such as perception prediction and human dynamics. Large Language Models (LLMs) can integrate multimodal inputs to address heterogeneous data in complex urban systems but often underperform on domain-specific tasks. Urban-MAS, an LLM-based Multi-Agent System (MAS) framework, is introduced for human-centered urban prediction under zero-shot settings. It includes three agent types: Predictive Factor Guidance Agents, which prioritize key predictive factors to guide knowledge extraction and enhance the effectiveness of compressed urban knowledge in LLMs; Reliable UrbanInfo Extraction Agents, which improve robustness by comparing multiple outputs, validating consistency, and re-extracting when conflicts occur; and Multi-UrbanInfo Inference Agents, which integrate extracted multi-source information across dimensions for prediction. Experiments on running-amount prediction and urban perception across Tokyo, Milan, and Seattle demonstrate that Urban-MAS substantially reduces errors compared to single-LLM baselines. Ablation studies indicate that Predictive Factor Guidance Agents are most critical for enhancing predictive performance, positioning Urban-MAS as a scalable paradigm for human-centered urban AI prediction. Code is available on the project website:https://github.com/THETUREHOOHA/UrbanMAS",
+  "authors": [
+    "Shangyu Lou"
+  ],
+  "published": "2025-10-30T10:26:02Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI",
+    "cs.CY"
+  ],
+  "url": "https://arxiv.org/abs/2511.00096"
+}

@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2512.14846",
+  "title": "MALCDF: A Distributed Multi-Agent LLM Framework for Real-Time Cyber",
+  "abstract": "Traditional, centralized security tools often miss adaptive, multi-vector attacks. We present the Multi-Agent LLM Cyber Defense Framework (MALCDF), a practical setup where four large language model (LLM) agents-Detection, Intelligence, Response, and Analysis-work together in real time. Agents communicate over a Secure Communication Layer (SCL) with encrypted, ontology-aligned messages, and produce audit-friendly outputs (e.g., MITRE ATT&CK mappings).   For evaluation, we keep the test simple and consistent: all reported metrics come from the same 50-record live stream derived from the CICIDS2017 feature schema. CICIDS2017 is used for configuration (fields/schema) and to train a practical ML baseline. The ML-IDS baseline is a Lightweight Random Forest IDS (LRF-IDS) trained on a subset of CICIDS2017 and tested on the 50-record stream, with no overlap between training and test records.   In experiments, MALCDF reaches 90.0% detection accuracy, 85.7% F1-score, and 9.1% false-positive rate, with 6.8s average per-event latency. It outperforms the lightweight ML-IDS baseline and a single-LLM setup on accuracy while keeping end-to-end outputs consistent. Overall, this hands-on build suggests that coordinating simple LLM agents with secure, ontology-aligned messaging can improve practical, real-time cyber defense.",
+  "authors": [
+    "Arth Bhardwaj",
+    "Sia Godika",
+    "Yuvam Loonker"
+  ],
+  "published": "2025-12-16T19:08:12Z",
+  "primary_category": "cs.CR",
+  "categories": [
+    "cs.CR",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2512.14846"
+}

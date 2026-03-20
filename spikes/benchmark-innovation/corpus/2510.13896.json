@@ -1,0 +1,22 @@
+{
+  "arxiv_id": "2510.13896",
+  "title": "GenCellAgent: Generalizable, Training-Free Cellular Image Segmentation via Large Language Model Agents",
+  "abstract": "Cellular image segmentation is essential for quantitative biology yet remains difficult due to heterogeneous modalities, morphological variability, and limited annotations. We present GenCellAgent, a training-free multi-agent framework that orchestrates specialist segmenters and generalist vision-language models via a planner-executor-evaluator loop (choose tool $\\rightarrow$ run $\\rightarrow$ quality-check) with long-term memory. The system (i) automatically routes images to the best tool, (ii) adapts on the fly using a few reference images when imaging conditions differ from what a tool expects, (iii) supports text-guided segmentation of organelles not covered by existing models, and (iv) commits expert edits to memory, enabling self-evolution and personalized workflows. Across four cell-segmentation benchmarks, this routing yields a 15.7\\% mean accuracy gain over state-of-the-art baselines. On endoplasmic reticulum and mitochondria from new datasets, GenCellAgent improves average IoU by 37.6\\% over specialist models. It also segments novel objects such as the Golgi apparatus via iterative text-guided refinement, with light human correction further boosting performance. Together, these capabilities provide a practical path to robust, adaptable cellular image segmentation without retraining, while reducing annotation burden and matching user preferences.",
+  "authors": [
+    "Xi Yu",
+    "Yang Yang",
+    "Qun Liu",
+    "Yonghua Du",
+    "Sean McSweeney",
+    "Yuewei Lin"
+  ],
+  "published": "2025-10-14T17:02:57Z",
+  "primary_category": "q-bio.QM",
+  "categories": [
+    "q-bio.QM",
+    "cs.AI",
+    "cs.CV",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2510.13896"
+}

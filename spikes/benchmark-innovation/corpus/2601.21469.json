@@ -1,0 +1,20 @@
+{
+  "arxiv_id": "2601.21469",
+  "title": "Adaptive Confidence Gating in Multi-Agent Collaboration for Efficient and Optimized Code Generation",
+  "abstract": "While Large Language Models (LLMs) have catalyzed breakthroughs in automated code generation, Small Language Models (SLMs) often encounter reasoning bottlenecks and failure loops when addressing complex logical requirements. To overcome these challenges, we propose DebateCoder, a multi-agent collaborative framework designed to improve the reasoning ability of SLMs (e.g., Pangu-1B) in resource-constrained environments. DebateCoder uses a structured role-playing protocol with three agents: User Agent (A_UA), Technical Agent (A_TA), and Quality Assurance Agent (A_QA). It also includes an Adaptive Confidence Gating mechanism with a 95% threshold to balance accuracy and inference efficiency. In addition, we introduce a multi-turn deliberation module and a reviewer-guided analytical debugging loop for orthogonal pre-generation debate and post-generation refinement. Experiments on HumanEval and MBPP show that DebateCoder achieves 70.12% Pass@1 on HumanEval, outperforming MapCoder while reducing API overhead by about 35%. These results indicate that collaborative protocols can mitigate limitations of small-parameter models and provide a scalable, efficient approach to high-quality automated software engineering.",
+  "authors": [
+    "Haoji Zhang",
+    "Yuzhe Li",
+    "Zhenqiang Liu",
+    "Chenyang Liu",
+    "Shenyang Zhang",
+    "Yi Zhou"
+  ],
+  "published": "2026-01-29T09:48:15Z",
+  "primary_category": "cs.SE",
+  "categories": [
+    "cs.SE",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2601.21469"
+}

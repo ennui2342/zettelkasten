@@ -1,0 +1,23 @@
+{
+  "arxiv_id": "2509.01920",
+  "title": "Dynamic Speculative Agent Planning",
+  "abstract": "Despite their remarkable success in complex tasks propelling widespread adoption, large language-model-based agents still face critical deployment challenges due to prohibitive latency and inference costs. While recent work has explored various methods to accelerate inference, existing approaches suffer from significant limitations: they either fail to preserve performance fidelity, require extensive offline training of router modules, or incur excessive operational costs. Moreover, they provide minimal user control over the tradeoff between acceleration and other performance metrics. To address these gaps, we introduce Dynamic Speculative Planning (DSP), an asynchronous online reinforcement learning framework that provides lossless acceleration with substantially reduced costs without requiring additional pre-deployment preparation. DSP explicitly optimizes a joint objective balancing end-to-end latency against dollar cost, allowing practitioners to adjust a single parameter that steers the system toward faster responses, cheaper operation, or any point along this continuum. Experiments on two standard agent benchmarks demonstrate that DSP achieves comparable efficiency to the fastest lossless acceleration method while reducing total cost by 30% and unnecessary cost up to 60%. Our code and data are available through https://github.com/guanyilin428/Dynamic-Speculative-Planning.",
+  "authors": [
+    "Yilin Guan",
+    "Qingfeng Lan",
+    "Sun Fei",
+    "Dujian Ding",
+    "Devang Acharya",
+    "Chi Wang",
+    "William Yang Wang",
+    "Wenyue Hua"
+  ],
+  "published": "2025-09-02T03:34:36Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.LG",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2509.01920"
+}

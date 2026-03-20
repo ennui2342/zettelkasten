@@ -1,0 +1,20 @@
+{
+  "arxiv_id": "2512.22135",
+  "title": "SoDA: An Efficient Interaction Paradigm for the Agentic Web",
+  "abstract": "As the internet evolves from the mobile App-dominated Attention Economy to the Intent-Interconnection of the Agentic Web era, existing interaction modes fail to address the escalating challenges of data lock-in and cognitive overload. Addressing this, we defines a future-oriented user sovereignty interaction paradigm, aiming to realize a fundamental shift from killing time to saving time. Specifically, we argue that decoupling memory from application logic eliminates the structural basis of data lock-in, while shifting from explicit manual instruction to implicit intent alignment resolves cognitive overload by offloading execution complexity. This paradigm is implemented via the Sovereign Digital Avatar (SoDA), which employs an orthogonal decoupling design of storage, computation, and interaction. This establishes the architectural principle of data as a persistent asset, model as a transient tool, fundamentally breaking the platform monopoly on user memory. To support the operation of this new paradigm in zero-trust environments, we design an Intent-Permission Handshake Mechanism based on A2A protocols, utilizing dual-factor (Sensitivity Coefficient and Strictness Parameter) adaptive routing to achieve active risk governance. Empirical evaluation with a high-fidelity simulation environment indicates that this paradigm reduces token consumption by approximately 27-35\\% during cross-platform service migration and complex task execution. Furthermore, in the orchestration of multi-modal complex tasks, it reduces user cognitive load by 72\\% compared to standard Retrieval-Augmented Generation (RAG) architectures, by 88\\% relative to manual workflows, while significantly boosting the Information Signal-to-Noise Ratio (SNR). These results demonstrate that the SoDA is the essential interaction infrastructure for building an efficient, low-friction, and decentralized Agentic Web.",
+  "authors": [
+    "Zicai Cui",
+    "Zhouyuan Jian",
+    "Weiwen Liu",
+    "Weinan Zhang"
+  ],
+  "published": "2025-12-11T00:44:08Z",
+  "primary_category": "cs.DC",
+  "categories": [
+    "cs.DC",
+    "cs.AI",
+    "cs.HC",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2512.22135"
+}

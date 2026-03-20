@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2512.01434",
+  "title": "A Flexible Multi-Agent LLM-Human Framework for Fast Human Validated Tool Building",
+  "abstract": "We introduce CollabToolBuilder, a flexible multiagent LLM framework with expert-in-the-loop (HITL) guidance that iteratively learns to create tools for a target goal, aligning with human intent and process, while minimizing time for task/domain adaptation effort and human feedback capture. The architecture generates and validates tools via four specialized agents (Coach, Coder, Critic, Capitalizer) using a reinforced dynamic prompt and systematic human feedback integration to reinforce each agent's role toward goals and constraints. This work is best viewed as a system-level integration and methodology combining multi-agent in-context learning, HITL controls, and reusable tool capitalization for complex iterative problems such as scientific document generation. We illustrate it with preliminary experiments (e.g., generating state-of-the-art research papers or patents given an abstract) and discuss its applicability to other iterative problem-solving.",
+  "authors": [
+    "Daull Xavier",
+    "Patrice Bellot",
+    "Emmanuel Bruno",
+    "Vincent Martin",
+    "Elisabeth Murisasco"
+  ],
+  "published": "2025-12-01T09:19:18Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2512.01434"
+}

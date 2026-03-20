@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2601.21879",
+  "title": "astra-langchain4j: Experiences Combining LLMs and Agent Programming",
+  "abstract": "Given the emergence of Generative AI over the last two years and the increasing focus on Agentic AI as a form of Multi-Agent System it is important to explore both how such technologies can impact the use of traditional Agent Toolkits and how the wealth of experience encapsulated in those toolkits can influence the design of the new agentic platforms. This paper presents an overview of our experience developing a prototype large language model (LLM) integration for the ASTRA programming language. It presents a brief overview of the toolkit, followed by three example implementations, concluding with a discussion of the experiences garnered through the examples.",
+  "authors": [
+    "Rem Collier",
+    "Katharine Beaumont",
+    "Andrei Ciortea"
+  ],
+  "published": "2026-01-29T15:46:13Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2601.21879"
+}

@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2601.11578",
+  "title": "LimAgents: Multi-Agent LLMs for Generating Research Limitations",
+  "abstract": "Identifying and articulating limitations is essential for transparent and rigorous scientific research. However, zero-shot large language models (LLMs) approach often produce superficial or general limitation statements (e.g., dataset bias or generalizability). They usually repeat limitations reported by authors without looking at deeper methodological issues and contextual gaps. This problem is made worse because many authors disclose only partial or trivial limitations. We propose LimAgents, a multi-agent LLM framework for generating substantive limitations. LimAgents integrates OpenReview comments and author-stated limitations to provide stronger ground truth. It also uses cited and citing papers to capture broader contextual weaknesses. In this setup, different agents have specific roles as sequential role: some extract explicit limitations, others analyze methodological gaps, some simulate the viewpoint of a peer reviewer, and a citation agent places the work within the larger body of literature. A Judge agent refines their outputs, and a Master agent consolidates them into a clear set. This structure allows for systematic identification of explicit, implicit, peer review-focused, and literature-informed limitations. Moreover, traditional NLP metrics like BLEU, ROUGE, and cosine similarity rely heavily on n-gram or embedding overlap. They often overlook semantically similar limitations. To address this, we introduce a pointwise evaluation protocol that uses an LLM-as-a-Judge to measure coverage more accurately. Experiments show that LimAgents substantially improve performance. The RAG + multi-agent GPT-4o mini configuration achieves a +15.51% coverage gain over zero-shot baselines, while the Llama 3 8B multi-agent setup yields a +4.41% improvement.",
+  "authors": [
+    "Ibrahim Al Azher",
+    "Zhishuai Guo",
+    "Hamed Alhoori"
+  ],
+  "published": "2025-12-30T18:12:52Z",
+  "primary_category": "cs.CL",
+  "categories": [
+    "cs.CL",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2601.11578"
+}

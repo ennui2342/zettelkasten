@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2510.23447",
+  "title": "Model Proficiency in Centralized Multi-Agent Systems: A Performance Study",
+  "abstract": "Autonomous agents are increasingly deployed in dynamic environments where their ability to perform a given task depends on both individual and team-level proficiency. While proficiency self-assessment (PSA) has been studied for single agents, its extension to a team of agents remains underexplored. This letter addresses this gap by presenting a framework for team PSA in centralized settings. We investigate three metrics for centralized team PSA: the measurement prediction bound (MPB), the Kolmogorov-Smirnov (KS) statistic, and the Kullback-Leibler (KL) divergence. These metrics quantify the discrepancy between predicted and actual measurements. We use the KL divergence as a reference metric since it compares the true and predictive distributions, whereas the MPB and KS provide efficient indicators for in situ assessment. Simulation results in a target tracking scenario demonstrate that both MPB and KS metrics accurately capture model mismatches, align with the KL divergence reference, and enable real-time proficiency assessment.",
+  "authors": [
+    "Anna Guerra",
+    "Francesco Guidi",
+    "Pau Closas",
+    "Davide Dardari",
+    "Petar M. Djuric"
+  ],
+  "published": "2025-10-27T15:48:14Z",
+  "primary_category": "stat.AP",
+  "categories": [
+    "stat.AP",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2510.23447"
+}

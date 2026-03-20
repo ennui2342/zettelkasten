@@ -1,0 +1,20 @@
+{
+  "arxiv_id": "2601.00809",
+  "title": "A Modular Reference Architecture for MCP-Servers Enabling Agentic BIM Interaction",
+  "abstract": "Agentic workflows driven by large language models (LLMs) are increasingly applied to Building Information Modelling (BIM), enabling natural-language retrieval, modification and generation of IFC models. Recent work has begun adopting the emerging Model Context Protocol (MCP) as a uniform tool-calling interface for LLMs, simplifying the agent side of BIM interaction. While MCP standardises how LLMs invoke tools, current BIM-side implementations are still authoring tool-specific and ad hoc, limiting reuse, evaluation, and workflow portability across environments. This paper addresses this gap by introducing a modular reference architecture for MCP servers that enables API-agnostic, isolated and reproducible agentic BIM interactions. From a systematic analysis of recurring capabilities in recent literature, we derive a core set of requirements. These inform a microservice architecture centred on an explicit adapter contract that decouples the MCP interface from specific BIM-APIs. A prototype implementation using IfcOpenShell demonstrates feasibility across common modification and generation tasks. Evaluation across representative scenarios shows that the architecture enables reliable workflows, reduces coupling, and provides a reusable foundation for systematic research.",
+  "authors": [
+    "Tobias Heimig-Elschner",
+    "Changyu Du",
+    "Anna Scheuvens",
+    "André Borrmann",
+    "Jakob Beetz"
+  ],
+  "published": "2025-12-21T23:12:26Z",
+  "primary_category": "cs.OH",
+  "categories": [
+    "cs.OH",
+    "cs.AI",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2601.00809"
+}

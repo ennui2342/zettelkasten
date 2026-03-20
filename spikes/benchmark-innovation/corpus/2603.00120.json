@@ -1,0 +1,16 @@
+{
+  "arxiv_id": "2603.00120",
+  "title": "SIGMAS: Second-Order Interaction-based Grouping for Overlapping Multi-Agent Swarms",
+  "abstract": "Swarming systems, such as drone fleets and robotic teams, exhibit complex dynamics driven by both individual behaviors and emergent group-level interactions. Unlike traditional multi-agent domains such as pedestrian crowds or traffic systems, swarms typically consist of a few large groups with inherent and persistent memberships, making group identification essential for understanding fine-grained behavior. We introduce the novel task of group prediction in overlapping multi-agent swarms, where latent group structures must be inferred directly from agent trajectories without ground-truth supervision. To address this challenge, we propose SIGMAS (Second-order Interaction-based Grouping for Multi-Agent Swarms), a self-supervised framework that goes beyond direct pairwise interactions and model second-order interaction across agents. By capturing how similarly agents interact with others, SIGMAS enables robust group inference and adaptively balances individual and collective dynamics through a learnable gating mechanism for joint reasoning. Experiments across diverse synthetic swarm scenarios demonstrate that SIGMAS accurately recovers latent group structures and remains robust under simultaneously overlapping swarm dynamics, establishing both a new benchmark task and a principled modeling framework for swarm understanding.",
+  "authors": [
+    "Minah Lee",
+    "Saibal Mukhopadhyay"
+  ],
+  "published": "2026-02-23T01:43:56Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2603.00120"
+}

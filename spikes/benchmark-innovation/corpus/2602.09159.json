@@ -1,0 +1,23 @@
+{
+  "arxiv_id": "2602.09159",
+  "title": "CoMMa: Contribution-Aware Medical Multi-Agents From A Game-Theoretic Perspective",
+  "abstract": "Recent multi-agent frameworks have broadened the ability to tackle oncology decision support tasks that require reasoning over dynamic, heterogeneous patient data. We propose Contribution-Aware Medical Multi-Agents (CoMMa), a decentralized LLM-agent framework in which specialists operate on partitioned evidence and coordinate through a game-theoretic objective for robust decision-making. In contrast to most agent architectures relying on stochastic narrative-based reasoning, CoMMa utilizes deterministic embedding projections to approximate contribution-aware credit assignment. This yields explicit evidence attribution by estimating each agent's marginal utility, producing interpretable and mathematically grounded decision pathways with improved stability. Evaluated on diverse oncology benchmarks, including a real-world multidisciplinary tumor board dataset, CoMMa achieves higher accuracy and more stable performance than data-centralized and role-based multi-agents baselines.",
+  "authors": [
+    "Yichen Wu",
+    "Yujin Oh",
+    "Sangjoon Park",
+    "Kailong Fan",
+    "Dania Daye",
+    "Hana Farzaneh",
+    "Xiang Li",
+    "Raul Uppot",
+    "Quanzheng Li"
+  ],
+  "published": "2026-02-09T20:04:58Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2602.09159"
+}

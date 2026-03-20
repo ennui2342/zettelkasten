@@ -1,0 +1,27 @@
+{
+  "arxiv_id": "2511.19368",
+  "title": "LLM-Driven Stationarity-Aware Expert Demonstrations for Multi-Agent Reinforcement Learning in Mobile Systems",
+  "abstract": "Multi-agent reinforcement learning (MARL) has been increasingly adopted in many real-world applications. While MARL enables decentralized deployment on resource-constrained edge devices, it suffers from severe non-stationarity due to the synchronous updates of agent policies. This non stationarity results in unstable training and poor policy con vergence, especially as the number of agents increases. In this paper, we propose RELED, a scalable MARL framework that integrates large language model (LLM)-driven expert demonstrations with autonomous agent exploration. RELED incorporates a Stationarity-Aware Expert Demonstration module, which leverages theoretical non-stationarity bounds to enhance the quality of LLM-generated expert trajectories, thus providing high reward and training-stable samples for each agent. Moreover, a Hybrid Expert-Agent Policy Optimization module adaptively balances each agent's learning from both expert-generated and agent-generated trajectories, accelerating policy convergence and improving generalization. Extensive experiments with real city networks based on OpenStreetMap demonstrate that RELED achieves superior performance compared to state-of-the-art MARL methods.",
+  "authors": [
+    "Tianyang Duan",
+    "Zongyuan Zhang",
+    "Zheng Lin",
+    "Songxiao Guo",
+    "Xiuxian Guan",
+    "Guangyu Wu",
+    "Zihan Fang",
+    "Haotian Meng",
+    "Xia Du",
+    "Ji-Zhe Zhou",
+    "Heming Cui",
+    "Jun Luo",
+    "Yue Gao"
+  ],
+  "published": "2025-11-24T18:03:59Z",
+  "primary_category": "cs.LG",
+  "categories": [
+    "cs.LG",
+    "cs.NI"
+  ],
+  "url": "https://arxiv.org/abs/2511.19368"
+}

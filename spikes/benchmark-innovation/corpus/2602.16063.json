@@ -1,0 +1,20 @@
+{
+  "arxiv_id": "2602.16063",
+  "title": "MARLEM: A Multi-Agent Reinforcement Learning Simulation Framework for Implicit Cooperation in Decentralized Local Energy Markets",
+  "abstract": "This paper introduces a novel, open-source MARL simulation framework for studying implicit cooperation in LEMs, modeled as a decentralized partially observable Markov decision process and implemented as a Gymnasium environment for MARL. Our framework features a modular market platform with plug-and-play clearing mechanisms, physically constrained agent models (including battery storage), a realistic grid network, and a comprehensive analytics suite to evaluate emergent coordination. The main contribution is a novel method to foster implicit cooperation, where agents' observations and rewards are enhanced with system-level key performance indicators to enable them to independently learn strategies that benefit the entire system and aim for collectively beneficial outcomes without explicit communication. Through representative case studies (available in a dedicated GitHub repository in https://github.com/salazarna/marlem, we show the framework's ability to analyze how different market configurations (such as varying storage deployment) impact system performance. This illustrates its potential to facilitate emergent coordination, improve market efficiency, and strengthen grid stability. The proposed simulation framework is a flexible, extensible, and reproducible tool for researchers and practitioners to design, test, and validate strategies for future intelligent, decentralized energy systems.",
+  "authors": [
+    "Nelson Salazar-Pena",
+    "Alejandra Tabares",
+    "Andres Gonzalez-Mancera"
+  ],
+  "published": "2026-02-17T22:22:45Z",
+  "primary_category": "eess.SY",
+  "categories": [
+    "eess.SY",
+    "cs.CE",
+    "cs.ET",
+    "cs.LG",
+    "stat.CO"
+  ],
+  "url": "https://arxiv.org/abs/2602.16063"
+}

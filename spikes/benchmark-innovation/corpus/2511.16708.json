@@ -1,0 +1,16 @@
+{
+  "arxiv_id": "2511.16708",
+  "title": "Multi-Agent Code Verification via Information Theory",
+  "abstract": "LLMs generate buggy code: 29.6% of SWE-bench solved patches fail, 62% of BaxBench solutions have vulnerabilities, and existing tools only catch 65% of bugs with 35% false positives. We built CodeX-Verify, a multi-agent system that uses four specialized agents to detect different types of bugs. We prove mathematically that combining agents with different detection patterns finds more bugs than any single agent when the agents look for different problems, using submodularity of mutual information under conditional independence. Measuring agent correlation of rho = 0.05 to 0.25 confirms they detect different bugs. Testing on 99 code samples with verified labels shows our system catches 76.1% of bugs, matching the best existing method (Meta Prompt Testing: 75%) while running faster and without test execution. We tested all 15 agent combinations and found that using multiple agents improves accuracy by 39.7 percentage points (from 32.8% to 72.4%) compared to single agents, with diminishing returns of +14.9pp, +13.5pp, and +11.2pp for agents 2, 3, and 4, validating our theoretical model. The best two-agent combination (Correctness + Performance) reaches 79.3% accuracy. Testing on 300 real patches from Claude Sonnet 4.5 runs in under 200ms per sample, making this practical for production use.",
+  "authors": [
+    "Shreshth Rajan"
+  ],
+  "published": "2025-11-20T03:40:27Z",
+  "primary_category": "cs.SE",
+  "categories": [
+    "cs.SE",
+    "cs.AI",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2511.16708"
+}

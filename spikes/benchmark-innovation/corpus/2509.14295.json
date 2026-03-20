@@ -1,0 +1,24 @@
+{
+  "arxiv_id": "2509.14295",
+  "title": "Aegis: Automated Error Generation and Attribution for Multi-Agent Systems",
+  "abstract": "Large language model based multi-agent systems (MAS) have unlocked significant advancements in tackling complex problems, but their increasing capability introduces a structural fragility that makes them difficult to debug. A key obstacle to improving their reliability is the severe scarcity of large-scale, diverse datasets for error attribution, as existing resources rely on costly and unscalable manual annotation. To address this bottleneck, we introduce Aegis, a novel framework for Automated error generation and attribution for multi-agent systems. Aegis constructs a large dataset of 9,533 trajectories with annotated faulty agents and error modes, covering diverse MAS architectures and task domains. This is achieved using a LLM-based manipulator that can adaptively inject context-aware errors into successful execution trajectories. Leveraging fine-grained labels and the structured arrangement of positive-negative sample pairs, Aegis supports three different learning paradigms: Supervised Fine-Tuning, Reinforcement Learning, and Contrastive Learning. We develop learning methods for each paradigm. Comprehensive experiments show that trained models consistently achieve substantial improvements in error attribution. Notably, several of our fine-tuned LLMs demonstrate performance competitive with or superior to proprietary models an order of magnitude larger, validating our automated data generation framework as a crucial resource for developing more robust and interpretable multi-agent systems. Our project website is available at https://kfq20.github.io/Aegis-Website/.",
+  "authors": [
+    "Fanqi Kong",
+    "Ruijie Zhang",
+    "Huaxiao Yin",
+    "Guibin Zhang",
+    "Xiaofei Zhang",
+    "Ziang Chen",
+    "Zhaowei Zhang",
+    "Xiaoyuan Zhang",
+    "Song-Chun Zhu",
+    "Xue Feng"
+  ],
+  "published": "2025-09-17T02:31:03Z",
+  "primary_category": "cs.RO",
+  "categories": [
+    "cs.RO",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2509.14295"
+}

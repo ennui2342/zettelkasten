@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2509.08785",
+  "title": "Narrative-Guided Reinforcement Learning: A Platform for Studying Language Model Influence on Decision Making",
+  "abstract": "We present a preliminary experimental platform that explores how narrative elements might shape AI decision-making by combining reinforcement learning (RL) with language model reasoning. While AI systems can now both make decisions and engage in narrative reasoning, these capabilities have mostly been studied separately. Our platform attempts to bridge this gap using a dual-system architecture to examine how narrative frameworks could influence reward-based learning. The system comprises a reinforcement learning policy that suggests actions based on past experience, and a language model that processes these suggestions through different narrative frameworks to guide decisions. This setup enables initial experimentation with narrative elements while maintaining consistent environment and reward structures. We implement this architecture in a configurable gridworld environment, where agents receive both policy suggestions and information about their surroundings. The platform's modular design facilitates controlled testing of environmental complexity, narrative parameters, and the interaction between reinforcement learning and narrative-based decisions. Our logging system captures basic decision metrics, from RL policy values to language model reasoning to action selection patterns. While preliminary, this implementation provides a foundation for studying how different narrative frameworks might affect reward-based decisions and exploring potential interactions between optimization-based learning and symbolic reasoning in AI systems.",
+  "authors": [
+    "Anup Tuladhar",
+    "Araz Minhas",
+    "Adam Kirton",
+    "Eli Kinney-Lang"
+  ],
+  "published": "2025-09-10T17:14:12Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.MA",
+    "stat.ML"
+  ],
+  "url": "https://arxiv.org/abs/2509.08785"
+}

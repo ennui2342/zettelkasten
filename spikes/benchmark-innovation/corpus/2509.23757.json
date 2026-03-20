@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2509.23757",
+  "title": "Transparent Visual Reasoning via Object-Centric Agent Collaboration",
+  "abstract": "A central challenge in explainable AI, particularly in the visual domain, is producing explanations grounded in human-understandable concepts. To tackle this, we introduce OCEAN (Object-Centric Explananda via Agent Negotiation), a novel, inherently interpretable framework built on object-centric representations and a transparent multi-agent reasoning process. The game-theoretic reasoning process drives agents to agree on coherent and discriminative evidence, resulting in a faithful and interpretable decision-making process. We train OCEAN end-to-end and benchmark it against standard visual classifiers and popular posthoc explanation tools like GradCAM and LIME across two diagnostic multi-object datasets. Our results demonstrate competitive performance with respect to state-of-the-art black-box models with a faithful reasoning process, which was reflected by our user study, where participants consistently rated OCEAN's explanations as more intuitive and trustworthy.",
+  "authors": [
+    "Benjamin Teoh",
+    "Ben Glocker",
+    "Francesca Toni",
+    "Avinash Kori"
+  ],
+  "published": "2025-09-28T09:06:52Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.CV"
+  ],
+  "url": "https://arxiv.org/abs/2509.23757"
+}

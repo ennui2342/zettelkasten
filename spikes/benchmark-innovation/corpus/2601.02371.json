@@ -1,0 +1,31 @@
+{
+  "arxiv_id": "2601.02371",
+  "title": "Permission Manifests for Web Agents",
+  "abstract": "The rise of Large Language Model (LLM)-based web agents represents a significant shift in automated interactions with the web. Unlike traditional crawlers that follow simple conventions, such as robots$.$txt, modern agents engage with websites in sophisticated ways: navigating complex interfaces, extracting structured information, and completing end-to-end tasks. Existing governance mechanisms were not designed for these capabilities. Without a way to specify what interactions are and are not allowed, website owners increasingly rely on blanket blocking and CAPTCHAs, which undermine beneficial applications such as efficient automation, convenient use of e-commerce services, and accessibility tools. We introduce agent-permissions$.$json, a robots$.$txt-style lightweight manifest where websites specify allowed interactions, complemented by API references where available. This framework provides a low-friction coordination mechanism: website owners only need to write a simple JSON file, while agents can easily parse and automatically implement the manifest's provisions. Website owners can then focus on blocking non-compliant agents, rather than agents as a whole. By extending the spirit of robots$.$txt to the era of LLM-mediated interaction, and complementing data use initiatives such as AIPref, the manifest establishes a compliance framework that enables beneficial agent interactions while respecting site owners' preferences.",
+  "authors": [
+    "Samuele Marro",
+    "Alan Chan",
+    "Xinxing Ren",
+    "Lewis Hammond",
+    "Jesse Wright",
+    "Gurjyot Wanga",
+    "Tiziano Piccardi",
+    "Nuno Campos",
+    "Tobin South",
+    "Jialin Yu",
+    "Sunando Sengupta",
+    "Eric Sommerlade",
+    "Alex Pentland",
+    "Philip Torr",
+    "Jiaxin Pei"
+  ],
+  "published": "2025-12-07T17:45:01Z",
+  "primary_category": "cs.CY",
+  "categories": [
+    "cs.CY",
+    "cs.AI",
+    "cs.MA",
+    "cs.NI"
+  ],
+  "url": "https://arxiv.org/abs/2601.02371"
+}

@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2510.22222",
+  "title": "CreditXAI: A Multi-Agent System for Explainable Corporate Credit Rating",
+  "abstract": "In the domain of corporate credit rating, traditional deep learning methods have improved predictive accuracy but still suffer from the inherent 'black-box' problem and limited interpretability. While incorporating non-financial information enriches the data and provides partial interpretability, the models still lack hierarchical reasoning mechanisms, limiting their comprehensive analytical capabilities. To address these challenges, we propose CreditXAI, a Multi-Agent System (MAS) framework that simulates the collaborative decision-making process of professional credit analysts. The framework focuses on business, financial, and governance risk dimensions to generate consistent and interpretable credit assessments. Experimental results demonstrate that multi-agent collaboration improves predictive accuracy by more than 7% over the best single-agent baseline, confirming its significant synergistic advantage in corporate credit risk evaluation. This study provides a new technical pathway to build intelligent and interpretable credit rating models.",
+  "authors": [
+    "Yumeng Shi",
+    "Zhongliang Yang",
+    "Yisi Wang",
+    "Linna Zhou"
+  ],
+  "published": "2025-10-25T08:52:27Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.CE"
+  ],
+  "url": "https://arxiv.org/abs/2510.22222"
+}

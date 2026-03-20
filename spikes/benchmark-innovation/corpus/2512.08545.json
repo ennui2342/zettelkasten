@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2512.08545",
+  "title": "Curriculum Guided Massive Multi Agent System Solving For Robust Long Horizon Tasks",
+  "abstract": "Large Language Models and multi-agent systems have shown promise in decomposing complex tasks, yet they struggle with long-horizon reasoning tasks and escalating computation cost. This work introduces a hierarchical multi-agent architecture that distributes reasoning across a 64*64 grid of lightweight agents, supported by a selective oracle. A spatial curriculum progressively expands the operational region of the grid, ensuring that agents master easier central tasks before tackling harder peripheral ones. To improve reliability, the system integrates Negative Log-Likelihood as a measure of confidence, allowing the curriculum to prioritize regions where agents are both accurate and well calibrated. A Thompson Sampling curriculum manager adaptively chooses training zones based on competence and NLL-driven reward signals. We evaluate the approach on a spatially grounded Tower of Hanoi benchmark, which mirrors the long-horizon structure of many robotic manipulation and planning tasks. Results demonstrate improved stability, reduced oracle usage, and stronger long-range reasoning from distributed agent cooperation.",
+  "authors": [
+    "Indrajit Kar",
+    "Kalathur Chenchu Kishore Kumar"
+  ],
+  "published": "2025-12-09T12:40:39Z",
+  "primary_category": "cs.CL",
+  "categories": [
+    "cs.CL",
+    "cs.AI",
+    "cs.CV",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2512.08545"
+}

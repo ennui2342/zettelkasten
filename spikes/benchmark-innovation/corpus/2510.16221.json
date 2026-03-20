@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2510.16221",
+  "title": "Heterogeneous Multi-Agent Task-Assignment with Uncertain Execution Times and Preferences",
+  "abstract": "While sequential task assignment for a single agent has been widely studied, such problems in a multi-agent setting, where the agents have heterogeneous task preferences or capabilities, remain less well-characterized. We study a multi-agent task assignment problem where a central planner assigns recurring tasks to multiple members of a team over a finite time horizon. For any given task, the members have heterogeneous capabilities in terms of task completion times, task resource consumption (which can model variables such as energy or attention), and preferences in terms of the rewards they collect upon task completion. We assume that the reward, execution time, and resource consumption for each member to complete any task are stochastic with unknown distributions. The goal of the planner is to maximize the total expected reward that the team receives over the problem horizon while ensuring that the resource consumption required for any assigned task is within the capability of the agent. We propose and analyze a bandit algorithm for this problem. Since the bandit algorithm relies on solving an optimal task assignment problem repeatedly, we analyze the achievable regret in two cases: when we can solve the optimal task assignment exactly and when we can solve it only approximately.",
+  "authors": [
+    "Qinshuang Wei",
+    "Vaibhav Srivastava",
+    "Vijay Gupta"
+  ],
+  "published": "2025-10-17T21:13:33Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "eess.SY"
+  ],
+  "url": "https://arxiv.org/abs/2510.16221"
+}

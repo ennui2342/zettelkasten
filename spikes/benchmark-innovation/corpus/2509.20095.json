@@ -1,0 +1,16 @@
+{
+  "arxiv_id": "2509.20095",
+  "title": "From Pheromones to Policies: Reinforcement Learning for Engineered Biological Swarms",
+  "abstract": "Swarm intelligence emerges from decentralised interactions among simple agents, enabling collective problem-solving. This study establishes a theoretical equivalence between pheromone-mediated aggregation in \\celeg\\ and reinforcement learning (RL), demonstrating how stigmergic signals function as distributed reward mechanisms. We model engineered nematode swarms performing foraging tasks, showing that pheromone dynamics mathematically mirror cross-learning updates, a fundamental RL algorithm. Experimental validation with data from literature confirms that our model accurately replicates empirical \\celeg\\ foraging patterns under static conditions. In dynamic environments, persistent pheromone trails create positive feedback loops that hinder adaptation by locking swarms into obsolete choices. Through computational experiments in multi-armed bandit scenarios, we reveal that introducing a minority of exploratory agents insensitive to pheromones restores collective plasticity, enabling rapid task switching. This behavioural heterogeneity balances exploration-exploitation trade-offs, implementing swarm-level extinction of outdated strategies. Our results demonstrate that stigmergic systems inherently encode distributed RL processes, where environmental signals act as external memory for collective credit assignment. By bridging synthetic biology with swarm robotics, this work advances programmable living systems capable of resilient decision-making in volatile environments.",
+  "authors": [
+    "Aymeric Vellinger",
+    "Nemanja Antonic",
+    "Elio Tuci"
+  ],
+  "published": "2025-09-24T13:16:35Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2509.20095"
+}

@@ -1,0 +1,25 @@
+{
+  "arxiv_id": "2510.19600",
+  "title": "Human-Agent Collaborative Paper-to-Page Crafting for Under $0.1",
+  "abstract": "In the quest for scientific progress, communicating research is as vital as the discovery itself. Yet, researchers are often sidetracked by the manual, repetitive chore of building project webpages to make their dense papers accessible. While automation has tackled static slides and posters, the dynamic, interactive nature of webpages has remained an unaddressed challenge. To bridge this gap, we reframe the problem, arguing that the solution lies not in a single command, but in a collaborative, hierarchical process. We introduce $\\textbf{AutoPage}$, a novel multi-agent system that embodies this philosophy. AutoPage deconstructs paper-to-page creation into a coarse-to-fine pipeline from narrative planning to multimodal content generation and interactive rendering. To combat AI hallucination, dedicated \"Checker\" agents verify each step against the source paper, while optional human checkpoints ensure the final product aligns perfectly with the author's vision, transforming the system from a mere tool into a powerful collaborative assistant. To rigorously validate our approach, we also construct $\\textbf{PageBench}$, the first benchmark for this new task. Experiments show AutoPage not only generates high-quality, visually appealing pages but does so with remarkable efficiency in under 15 minutes for less than \\$0.1. Code and dataset will be released at $\\href{https://mqleet.github.io/AutoPage_ProjectPage/}{Webpage}$.",
+  "authors": [
+    "Qianli Ma",
+    "Siyu Wang",
+    "Yilin Chen",
+    "Yinhao Tang",
+    "Yixiang Yang",
+    "Chang Guo",
+    "Bingjie Gao",
+    "Zhening Xing",
+    "Yanan Sun",
+    "Zhipeng Zhang"
+  ],
+  "published": "2025-10-22T13:53:57Z",
+  "primary_category": "cs.SE",
+  "categories": [
+    "cs.SE",
+    "cs.AI",
+    "cs.CL"
+  ],
+  "url": "https://arxiv.org/abs/2510.19600"
+}

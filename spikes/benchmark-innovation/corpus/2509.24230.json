@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2509.24230",
+  "title": "ELHPlan: Efficient Long-Horizon Task Planning for Multi-Agent Collaboration",
+  "abstract": "Large Language Models (LLMs) enable intelligent multi-robot collaboration but face fundamental trade-offs: open-loop methods that compile tasks into formal representations for external executors produce sound plans but lack adaptability in partially observable environments, while iterative methods incur prohibitive computational costs that scale poorly with team size and task complexity. In this paper, we propose Efficient Long-Horizon Planning (ELHPlan), a novel framework that introduces Action Chains, sequences of actions explicitly bound to sub-goal intentions, as the fundamental planning primitive. ELHPlan operates via a cyclical process: 1) constructing intention-bound action sequences, 2) proactively validating for conflicts and feasibility, 3) refining issues through targeted mechanisms, and 4) executing validated actions. This design balances adaptability and efficiency by providing intention-bound action sequences with longer lookahead while avoiding expensive full re-planning. We further advocate comprehensive efficiency metrics, including token consumption and planning time, to more holistically evaluate multi-agent collaboration. Our experiments on benchmarks TDW-MAT and C-WAH demonstrate that ELHPlan achieves comparable task success rates while consuming only 30-40% of the tokens required by state-of-the-art methods. Our research establishes a new efficiency-effectiveness frontier for LLM-based multi-agent planning systems.",
+  "authors": [
+    "Shaobin Ling",
+    "Yun Wang",
+    "Chenyou Fan",
+    "Tin Lun Lam",
+    "Junjie Hu"
+  ],
+  "published": "2025-09-29T03:15:56Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.RO"
+  ],
+  "url": "https://arxiv.org/abs/2509.24230"
+}

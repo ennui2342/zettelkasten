@@ -1,0 +1,16 @@
+{
+  "arxiv_id": "2601.10123",
+  "title": "Fairness Driven Multi-Agent Path Finding Problem",
+  "abstract": "The Multi-Agent Path Finding (MAPF) problem aims at finding non-conflicting paths for multiple agents from their respective sources to destinations. This problem arises in multiple real-life situations, including robot motion planning and airspace assignment for unmanned aerial vehicle movement. The problem is computationally expensive, and adding to it, the agents are rational and can misreport their private information. In this paper, we study both variants of the problem under the realm of fairness. For the non-rational agents, we propose a heuristic solution for this problem. Considering the agents are rational, we develop a mechanism and demonstrate that it is a dominant strategy, incentive compatible, and individually rational. We employ various solution methodologies to highlight the effectiveness and efficiency of the proposed solution approaches.",
+  "authors": [
+    "Aditi Anand",
+    "Dildar Ali",
+    "Suman Banerjee"
+  ],
+  "published": "2026-01-15T07:08:42Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2601.10123"
+}

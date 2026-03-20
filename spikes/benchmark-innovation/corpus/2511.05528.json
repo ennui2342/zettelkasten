@@ -1,0 +1,20 @@
+{
+  "arxiv_id": "2511.05528",
+  "title": "SMAGDi: Socratic Multi Agent Interaction Graph Distillation for Efficient High Accuracy Reasoning",
+  "abstract": "Multi-agent systems (MAS) often achieve higher reasoning accuracy than single models, but their reliance on repeated debates across agents makes them computationally expensive. We introduce SMAGDi, a distillation framework that transfers the debate dynamics of a five-agent Llama-based MAS into a compact Socratic decomposer-solver student. SMAGDi represents debate traces as directed interaction graphs, where nodes encode intermediate reasoning steps with correctness labels and edges capture continuity and cross-agent influence. The student is trained with a composite objective combining language modeling, graph-based supervision, contrastive reasoning, and embedding alignment to preserve both fluency and structured reasoning. On StrategyQA and MMLU, SMAGDi compresses a 40B multi-agent system into a 6B student while retaining 88% of its accuracy, substantially outperforming prior distillation methods such as MAGDi, standard KD, and fine-tuned baselines. These results highlight that explicitly modeling interaction graphs and Socratic decomposition enable small models to inherit the accuracy benefits of multi-agent debate while remaining efficient enough for real-world deployment.",
+  "authors": [
+    "Aayush Aluru",
+    "Myra Malik",
+    "Samarth Patankar",
+    "Spencer Kim",
+    "Kevin Zhu",
+    "Sean O'Brien",
+    "Vasu Sharma"
+  ],
+  "published": "2025-10-29T04:05:10Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2511.05528"
+}

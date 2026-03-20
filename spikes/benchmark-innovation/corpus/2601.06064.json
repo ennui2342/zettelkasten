@@ -1,0 +1,33 @@
+{
+  "arxiv_id": "2601.06064",
+  "title": "Socio-technical aspects of Agentic AI",
+  "abstract": "Agentic Artificial Intelligence (AI) represents a fundamental shift in the design of intelligent systems, characterized by interconnected components that collectively enable autonomous perception, reasoning, planning, action, and learning. Recent research on agentic AI has largely focused on technical foundations, including system architectures, reasoning and planning mechanisms, coordination strategies, and application-level performance across domains. However, the societal, ethical, economic, environmental, and governance implications of agentic AI remain weakly integrated into these technical treatments. This paper addresses this gap by presenting a socio-technical analysis of agentic AI that explicitly connects core technical components with societal context. We examine how architectural choices in perception, cognition, planning, execution, and memory introduce dependencies related to data governance, accountability, transparency, safety, and sustainability. To structure this analysis, we adopt the MAD-BAD-SAD construct as an analytical lens, capturing motivations, applications, and moral dilemmas (MAD); biases, accountability, and dangers (BAD); and societal impact, adoption, and design considerations (SAD). Using this lens, we analyze ethical considerations, implications, and challenges arising from contemporary agentic AI systems and assess their manifestation across emerging applications, including healthcare, education, industry, smart and sustainable cities, social services, communications and networking, and earth observation and satellite communications. The paper further identifies open challenges and suggests future research directions, framing agentic AI as an integrated socio-technical system whose behavior and impact are co-produced by algorithms, data, organizational practices, regulatory frameworks, and social norms.",
+  "authors": [
+    "Praveen Kumar Donta",
+    "Alaa Saleh",
+    "Ying Li",
+    "Shubham Vaishnav",
+    "Kai Fang",
+    "Hailin Feng",
+    "Yuchao Xia",
+    "Thippa Reddy Gadekallu",
+    "Qiyang Zhang",
+    "Xiaodan Shi",
+    "Ali Beikmohammadi",
+    "Sindri Magnússon",
+    "Ilir Murturi",
+    "Chinmaya Kumar Dehury",
+    "Marcin Paprzycki",
+    "Lauri Loven",
+    "Sasu Tarkoma",
+    "Schahram Dustdar"
+  ],
+  "published": "2025-12-26T10:56:00Z",
+  "primary_category": "cs.CY",
+  "categories": [
+    "cs.CY",
+    "cs.AI",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2601.06064"
+}

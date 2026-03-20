@@ -1,0 +1,29 @@
+{
+  "arxiv_id": "2509.15103",
+  "title": "Vulnerable Agent Identification in Large-Scale Multi-Agent Reinforcement Learning",
+  "abstract": "Partial agent failure becomes inevitable when systems scale up, making it crucial to identify the subset of agents whose compromise would most severely degrade overall performance. In this paper, we study this Vulnerable Agent Identification (VAI) problem in large-scale multi-agent reinforcement learning (MARL). We frame VAI as a Hierarchical Adversarial Decentralized Mean Field Control (HAD-MFC), where the upper level involves an NP-hard combinatorial task of selecting the most vulnerable agents, and the lower level learns worst-case adversarial policies for these agents using mean-field MARL. The two problems are coupled together, making HAD-MFC difficult to solve. To solve this, we first decouple the hierarchical process by Fenchel-Rockafellar transform, resulting a regularized mean-field Bellman operator for upper level that enables independent learning at each level, thus reducing computational complexity. We then reformulate the upper-level combinatorial problem as a MDP with dense rewards from our regularized mean-field Bellman operator, enabling us to sequentially identify the most vulnerable agents by greedy and RL algorithms. This decomposition provably preserves the optimal solution of the original HAD-MFC. Experiments show our method effectively identifies more vulnerable agents in large-scale MARL and the rule-based system, fooling system into worse failures, and learns a value function that reveals the vulnerability of each agent.",
+  "authors": [
+    "Simin Li",
+    "Zheng Yuwei",
+    "Zihao Mao",
+    "Linhao Wang",
+    "Ruixiao Xu",
+    "Chengdong Ma",
+    "Xin Yu",
+    "Yuqing Ma",
+    "Qi Dou",
+    "Xin Wang",
+    "Jie Luo",
+    "Bo An",
+    "Yaodong Yang",
+    "Weifeng Lv",
+    "Xianglong Liu"
+  ],
+  "published": "2025-09-18T16:03:50Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2509.15103"
+}

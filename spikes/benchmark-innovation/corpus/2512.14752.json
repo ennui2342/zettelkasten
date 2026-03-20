@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2512.14752",
+  "title": "Cyberswarm: a novel swarm intelligence algorithm inspired by cyber community dynamics",
+  "abstract": "Recommendation systems face challenges in dynamically adapting to evolving user preferences and interactions within complex social networks. Traditional approaches often fail to account for the intricate interactions within cyber-social systems and lack the flexibility to generalize across diverse domains, highlighting the need for more adaptive and versatile solutions. In this work, we introduce a general-purpose swarm intelligence algorithm for recommendation systems, designed to adapt seamlessly to varying applications. It was inspired by social psychology principles. The framework models user preferences and community influences within a dynamic hypergraph structure. It leverages centrality-based feature extraction and Node2Vec embeddings. Preference evolution is guided by message-passing mechanisms and hierarchical graph modeling, enabling real-time adaptation to changing behaviors. Experimental evaluations demonstrated the algorithm's superior performance in various recommendation tasks, including social networks and content discovery. Key metrics such as Hit Rate (HR), Mean Reciprocal Rank (MRR), and Normalized Discounted Cumulative Gain (NDCG) consistently outperformed baseline methods across multiple datasets. The model's adaptability to dynamic environments allowed for contextually relevant and precise recommendations. The proposed algorithm represents an advancement in recommendation systems by bridging individual preferences and community influences. Its general-purpose design enables applications in diverse domains, including social graphs, personalized learning, and medical graphs. This work highlights the potential of integrating swarm intelligence with network dynamics to address complex optimization challenges in recommendation systems.",
+  "authors": [
+    "Abdelsadeq Elfergany",
+    "Ammar Adl",
+    "Mohammed Kayed"
+  ],
+  "published": "2025-12-14T12:20:20Z",
+  "primary_category": "cs.SI",
+  "categories": [
+    "cs.SI",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2512.14752"
+}

@@ -1,0 +1,15 @@
+{
+  "arxiv_id": "2510.00326",
+  "title": "Reasoning-Aware Prompt Orchestration: A Foundation Model for Multi-Agent Language Model Coordination",
+  "abstract": "The emergence of large language models has enabled sophisticated multi-agent systems, yet coordinating their reasoning capabilities through prompt engineering remains challenging. We present a theoretically-grounded framework for dynamic prompt orchestration that enhances reasoning across multiple specialized agents. This framework addresses three core challenges: logical consistency preservation during agent transitions, reasoning-aware prompt adaptation, and scalable coordination of distributed inference.   Our approach formalizes agent states using prompt templates, reasoning context vectors, and capability matrices. We prove system convergence to stable coordination patterns when step sizes satisfy $α< \\frac{1}{2L}$ where $L$ is the Lipschitz constant of the state transition function. We implement this through a distributed architecture that dynamically routes reasoning tasks while maintaining semantic coherence.   Experimental results on 1,000 synthetic multi-agent conversations demonstrate a 42% reduction in reasoning latency, a 23% improvement in logical consistency measured by ROUGE-L score, and an 89% success rate for task completion without context loss across agent transitions. Ablation studies identify the consensus mechanism as the primary performance driver, while revealing limitations: performance degrades beyond 10 agent transitions, and the system requires 76.5GB memory for 1,000 concurrent agents. These findings establish a new paradigm for scalable reasoning in multi-agent systems, providing theoretical foundations for understanding reasoning emergence across coordinated language models.",
+  "authors": [
+    "Hassen Dhrif"
+  ],
+  "published": "2025-09-30T22:33:01Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2510.00326"
+}

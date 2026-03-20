@@ -1,0 +1,31 @@
+{
+  "arxiv_id": "2510.11824",
+  "title": "Empirical Study on Robustness and Resilience in Cooperative Multi-Agent Reinforcement Learning",
+  "abstract": "In cooperative Multi-Agent Reinforcement Learning (MARL), it is a common practice to tune hyperparameters in ideal simulated environments to maximize cooperative performance. However, policies tuned for cooperation often fail to maintain robustness and resilience under real-world uncertainties. Building trustworthy MARL systems requires a deep understanding of robustness, which ensures stability under uncertainties, and resilience, the ability to recover from disruptions--a concept extensively studied in control systems but largely overlooked in MARL. In this paper, we present a large-scale empirical study comprising over 82,620 experiments to evaluate cooperation, robustness, and resilience in MARL across 4 real-world environments, 13 uncertainty types, and 15 hyperparameters. Our key findings are: (1) Under mild uncertainty, optimizing cooperation improves robustness and resilience, but this link weakens as perturbations intensify. Robustness and resilience also varies by algorithm and uncertainty type. (2) Robustness and resilience do not generalize across uncertainty modalities or agent scopes: policies robust to action noise for all agents may fail under observation noise on a single agent. (3) Hyperparameter tuning is critical for trustworthy MARL: surprisingly, standard practices like parameter sharing, GAE, and PopArt can hurt robustness, while early stopping, high critic learning rates, and Leaky ReLU consistently help. By optimizing hyperparameters only, we observe substantial improvement in cooperation, robustness and resilience across all MARL backbones, with the phenomenon also generalizing to robust MARL methods across these backbones. Code and results available at https://github.com/BUAA-TrustworthyMARL/adv_marl_benchmark .",
+  "authors": [
+    "Simin Li",
+    "Zihao Mao",
+    "Hanxiao Li",
+    "Zonglei Jing",
+    "Zhuohang bian",
+    "Jun Guo",
+    "Li Wang",
+    "Zhuoran Han",
+    "Ruixiao Xu",
+    "Xin Yu",
+    "Chengdong Ma",
+    "Yuqing Ma",
+    "Bo An",
+    "Yaodong Yang",
+    "Weifeng Lv",
+    "Xianglong Liu"
+  ],
+  "published": "2025-10-13T18:24:01Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI",
+    "cs.LG"
+  ],
+  "url": "https://arxiv.org/abs/2510.11824"
+}

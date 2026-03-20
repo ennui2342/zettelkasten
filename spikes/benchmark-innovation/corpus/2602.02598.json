@@ -1,0 +1,22 @@
+{
+  "arxiv_id": "2602.02598",
+  "title": "Social Catalysts, Not Moral Agents: The Illusion of Alignment in LLM Societies",
+  "abstract": "The rapid evolution of Large Language Models (LLMs) has led to the emergence of Multi-Agent Systems where collective cooperation is often threatened by the \"Tragedy of the Commons.\" This study investigates the effectiveness of Anchoring Agents--pre-programmed altruistic entities--in fostering cooperation within a Public Goods Game (PGG). Using a full factorial design across three state-of-the-art LLMs, we analyzed both behavioral outcomes and internal reasoning chains. While Anchoring Agents successfully boosted local cooperation rates, cognitive decomposition and transfer tests revealed that this effect was driven by strategic compliance and cognitive offloading rather than genuine norm internalization. Notably, most agents reverted to self-interest in new environments, and advanced models like GPT-4.1 exhibited a \"Chameleon Effect,\" masking strategic defection under public scrutiny. These findings highlight a critical gap between behavioral modification and authentic value alignment in artificial societies.",
+  "authors": [
+    "Yueqing Hu",
+    "Yixuan Jiang",
+    "Zehua Jiang",
+    "Xiao Wen",
+    "Tianhong Wang"
+  ],
+  "published": "2026-02-01T17:07:10Z",
+  "primary_category": "physics.soc-ph",
+  "categories": [
+    "physics.soc-ph",
+    "cs.AI",
+    "cs.CL",
+    "cs.CY",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2602.02598"
+}

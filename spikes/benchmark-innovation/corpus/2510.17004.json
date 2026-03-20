@@ -1,0 +1,16 @@
+{
+  "arxiv_id": "2510.17004",
+  "title": "ReclAIm: A multi-agent framework for degradation-aware performance tuning of medical imaging AI",
+  "abstract": "Ensuring the long-term reliability of AI models in clinical practice requires continuous performance monitoring and corrective actions when degradation occurs. Addressing this need, this manuscript presents ReclAIm, a multi-agent framework capable of autonomously monitoring, evaluating, and fine-tuning medical image classification models. The system, built on a large language model core, operates entirely through natural language interaction, eliminating the need for programming expertise. ReclAIm successfully trains, evaluates, and maintains consistent performance of models across MRI, CT, and X-ray datasets. Once ReclAIm detects significant performance degradation, it autonomously executes state-of-the-art fine-tuning procedures that substantially reduce the performance gap. In cases with performance drops of up to -41.1% (MRI InceptionV3), ReclAIm managed to readjust performance metrics within 1.5% of the initial model results. ReclAIm enables automated, continuous maintenance of medical imaging AI models in a user-friendly and adaptable manner that facilitates broader adoption in both research and clinical environments.",
+  "authors": [
+    "Eleftherios Tzanis",
+    "Michail E. Klontzas"
+  ],
+  "published": "2025-10-19T21:02:01Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2510.17004"
+}

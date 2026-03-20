@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2602.07749",
+  "title": "Geo-Code: A Code Framework for Reverse Code Generation from Geometric Images Based on Two-Stage Multi-Agent Evolution",
+  "abstract": "Program code serves as a bridge linking vision and logic, providing a feasible supervisory approach for enhancing the multimodal reasoning capability of large models through geometric operations such as auxiliary line construction and perspective transformation. Nevertheless, current inverse graphics methods face tremendous challenges in accurately reconstructing complex geometric details, which often results in the loss of key geometric constraints or structural distortion. To address this bottleneck, we propose Geo-coder -- the first inverse programming framework for geometric images based on a multi-agent system. Our method innovatively decouples the process into geometric modeling via pixel-wise anchoring and metric-driven code evolution: Stage 1 leverages the complementary advantages of visual operators and large models to achieve precise capture of pixel coordinates and visual attributes; Stage 2 introduces a synthesis-rendering-validation closed loop, where bidirectional visual feedback drives the self-correction of code. Extensive experiments demonstrate that Geo-coder achieves a substantial lead in both geometric reconstruction accuracy and visual consistency. Notably, by effectively preserving the core geometric semantics, the images reconstructed with our method exhibit equivalent performance to the original ones in multimodal reasoning tasks, which fully validates the robustness of the framework. Finally, to further reduce research costs, we have open-sourced the Geo-coder dataset constructed on the GeoCode framework, which contains more than 1,500 samples. On this basis, we have also open-sourced the GeocodeLM model, laying a solid data and model foundation for subsequent research in this field.",
+  "authors": [
+    "Zhenyu Wu",
+    "Yanxi Long",
+    "Jian Li",
+    "Hua Huang"
+  ],
+  "published": "2026-02-08T00:48:49Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2602.07749"
+}

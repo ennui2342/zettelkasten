@@ -1,0 +1,20 @@
+{
+  "arxiv_id": "2511.22729",
+  "title": "Solving Context Window Overflow in AI Agents",
+  "abstract": "Large Language Models (LLMs) have become increasingly capable of interacting with external tools, granting access to specialized knowledge beyond their training data - critical in dynamic, knowledge-intensive domains such as Chemistry and Materials Science. However, large tool outputs can overflow the LLMs' context window, preventing task completion. Existing solutions such as truncation or summarization fail to preserve complete outputs, making them unsuitable for workflows requiring the full data. This work introduces a method that enables LLMs to process and utilize tool responses of arbitrary length without loss of information. By shifting the model's interaction from raw data to memory pointers, the method preserves tool functionality, allows seamless integration into agentic workflows, and reduces token usage and execution time. The proposed method is validated on a real-world Materials Science application that cannot be executed with conventional workflows, and its effectiveness is demonstrated via a comparative analysis where both methods succeed. In this experiment, the proposed approach consumed approximately seven times fewer tokens than the traditional workflow.",
+  "authors": [
+    "Anton Bulle Labate",
+    "Valesca Moura de Sousa",
+    "Sandro Rama Fiorini",
+    "Leonardo Guerreiro Azevedo",
+    "Raphael Melo Thiago",
+    "Viviane Torres da Silva"
+  ],
+  "published": "2025-11-27T19:22:20Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2511.22729"
+}

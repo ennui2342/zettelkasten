@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2602.16196",
+  "title": "Graphon Mean-Field Subsampling for Cooperative Heterogeneous Multi-Agent Reinforcement Learning",
+  "abstract": "Coordinating large populations of interacting agents is a central challenge in multi-agent reinforcement learning (MARL), where the size of the joint state-action space scales exponentially with the number of agents. Mean-field methods alleviate this burden by aggregating agent interactions, but these approaches assume homogeneous interactions. Recent graphon-based frameworks capture heterogeneity, but are computationally expensive as the number of agents grows. Therefore, we introduce $\\texttt{GMFS}$, a $\\textbf{G}$raphon $\\textbf{M}$ean-$\\textbf{F}$ield $\\textbf{S}$ubsampling framework for scalable cooperative MARL with heterogeneous agent interactions. By subsampling $κ$ agents according to interaction strength, we approximate the graphon-weighted mean-field and learn a policy with sample complexity $\\mathrm{poly}(κ)$ and optimality gap $O(1/\\sqrtκ)$. We verify our theory with numerical simulations in robotic coordination, showing that $\\texttt{GMFS}$ achieves near-optimal performance.",
+  "authors": [
+    "Emile Anand",
+    "Richard Hoffmann",
+    "Sarah Liaw",
+    "Adam Wierman"
+  ],
+  "published": "2026-02-18T05:34:07Z",
+  "primary_category": "cs.LG",
+  "categories": [
+    "cs.LG",
+    "cs.AI",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2602.16196"
+}

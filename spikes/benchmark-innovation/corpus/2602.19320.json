@@ -1,0 +1,25 @@
+{
+  "arxiv_id": "2602.19320",
+  "title": "Anatomy of Agentic Memory: Taxonomy and Empirical Analysis of Evaluation and System Limitations",
+  "abstract": "Agentic memory systems enable large language model (LLM) agents to maintain state across long interactions, supporting long-horizon reasoning and personalization beyond fixed context windows. Despite rapid architectural development, the empirical foundations of these systems remain fragile: existing benchmarks are often underscaled, evaluation metrics are misaligned with semantic utility, performance varies significantly across backbone models, and system-level costs are frequently overlooked. This survey presents a structured analysis of agentic memory from both architectural and system perspectives. We first introduce a concise taxonomy of MAG systems based on four memory structures. Then, we analyze key pain points limiting current systems, including benchmark saturation effects, metric validity and judge sensitivity, backbone-dependent accuracy, and the latency and throughput overhead introduced by memory maintenance. By connecting the memory structure to empirical limitations, this survey clarifies why current agentic memory systems often underperform their theoretical promise and outlines directions for more reliable evaluation and scalable system design.",
+  "authors": [
+    "Dongming Jiang",
+    "Yi Li",
+    "Songtao Wei",
+    "Jinxin Yang",
+    "Ayushi Kishore",
+    "Alysa Zhao",
+    "Dingyi Kang",
+    "Xu Hu",
+    "Feng Chen",
+    "Qiannan Li",
+    "Bingzhe Li"
+  ],
+  "published": "2026-02-22T19:50:01Z",
+  "primary_category": "cs.CL",
+  "categories": [
+    "cs.CL",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2602.19320"
+}

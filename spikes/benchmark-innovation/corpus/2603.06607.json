@@ -1,0 +1,21 @@
+{
+  "arxiv_id": "2603.06607",
+  "title": "Multi-Agent DRL for V2X Resource Allocation: Disentangling Challenges and Benchmarking Solutions",
+  "abstract": "Multi-agent deep reinforcement learning (DRL) has emerged as a promising approach for radio resource allocation (RRA) in cellular vehicle-to-everything (C-V2X) networks. However, the multifaceted challenges inherent to multi-agent reinforcement learning (MARL) - including non-stationarity, coordination difficulty, large action spaces, partial observability, and limited robustness and generalization - are often intertwined, making it difficult to understand their individual impact on performance in vehicular environments. Moreover, existing studies typically rely on different baseline MARL algorithms, and a systematic comparison of their capabilities in addressing specific challenges in C-V2X RRA remains lacking. In this paper, we bridge this gap by formulating C-V2X RRA as a sequence of multi-agent interference games with progressively increasing complexity, each designed to isolate a key MARL challenge. Based on these formulations, we construct a suite of learning tasks that enable controlled evaluation of performance degradation attributable to each challenge. We further develop large-scale, diverse training and testing datasets using SUMO-generated highway traces to capture a wide range of vehicular topologies and corresponding interference patterns. Through extensive benchmarking of representative MARL algorithms, we identify policy robustness and generalization across diverse vehicular topologies as the dominant challenge in C-V2X RRA. We further show that, on the most challenging task, the best-performing actor-critic method outperforms the value-based approach by 42%. By emphasizing the need for zero-shot policy transfer to both seen and unseen topologies at runtime, and by open-sourcing the code, datasets, and interference-game benchmark suite, this work provides a systematic and reproducible foundation for evaluating and advancing MARL algorithms in vehicular networks.",
+  "authors": [
+    "Siyuan Wang",
+    "Lei Lei",
+    "Pranav Maheshwari",
+    "Sam Bellefeuille",
+    "Kan Zheng",
+    "Dusit Niyato"
+  ],
+  "published": "2026-02-18T14:46:56Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI",
+    "cs.LG"
+  ],
+  "url": "https://arxiv.org/abs/2603.06607"
+}

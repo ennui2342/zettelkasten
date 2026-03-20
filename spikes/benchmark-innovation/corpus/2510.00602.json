@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2510.00602",
+  "title": "Multi-Agent Stage-wise Conservative Linear Bandits",
+  "abstract": "In many real-world applications such as recommendation systems, multiple learning agents must balance exploration and exploitation while maintaining safety guarantees to avoid catastrophic failures. We study the stochastic linear bandit problem in a multi-agent networked setting where agents must satisfy stage-wise conservative constraints. A network of $N$ agents collaboratively maximizes cumulative reward while ensuring that the expected reward at every round is no less than $(1-α)$ times that of a baseline policy. Each agent observes local rewards with unknown parameters, but the network optimizes for the global parameter (average of local parameters). Agents communicate only with immediate neighbors, and each communication round incurs additional regret. We propose MA-SCLUCB (Multi-Agent Stage-wise Conservative Linear UCB), an episodic algorithm alternating between action selection and consensus-building phases. We prove that MA-SCLUCB achieves regret $\\tilde{O}\\left(\\frac{d}{\\sqrt{N}}\\sqrt{T}\\cdot\\frac{\\log(NT)}{\\sqrt{\\log(1/|λ_2|)}}\\right)$ with high probability, where $d$ is the dimension, $T$ is the horizon, and $|λ_2|$ is the network's second largest eigenvalue magnitude. Our analysis shows: (i) collaboration yields $\\frac{1}{\\sqrt{N}}$ improvement despite local communication, (ii) communication overhead grows only logarithmically for well-connected networks, and (iii) stage-wise safety adds only lower-order regret. Thus, distributed learning with safety guarantees achieves near-optimal performance in reasonably connected networks.",
+  "authors": [
+    "Amirhossein Afsharrad",
+    "Ahmadreza Moradipari",
+    "Sanjay Lall"
+  ],
+  "published": "2025-10-01T07:29:18Z",
+  "primary_category": "cs.LG",
+  "categories": [
+    "cs.LG",
+    "eess.SY"
+  ],
+  "url": "https://arxiv.org/abs/2510.00602"
+}

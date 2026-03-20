@@ -1,0 +1,20 @@
+{
+  "arxiv_id": "2512.22941",
+  "title": "Heterogeneity in Multi-Agent Reinforcement Learning",
+  "abstract": "Heterogeneity is a fundamental property in multi-agent reinforcement learning (MARL), which is closely related not only to the functional differences of agents, but also to policy diversity and environmental interactions. However, the MARL field currently lacks a rigorous definition and deeper understanding of heterogeneity. This paper systematically discusses heterogeneity in MARL from the perspectives of definition, quantification, and utilization. First, based on an agent-level modeling of MARL, we categorize heterogeneity into five types and provide mathematical definitions. Second, we define the concept of heterogeneity distance and propose a practical quantification method. Third, we design a heterogeneity-based multi-agent dynamic parameter sharing algorithm as an example of the application of our methodology. Case studies demonstrate that our method can effectively identify and quantify various types of agent heterogeneity. Experimental results show that the proposed algorithm, compared to other parameter sharing baselines, has better interpretability and stronger adaptability. The proposed methodology will help the MARL community gain a more comprehensive and profound understanding of heterogeneity, and further promote the development of practical algorithms.",
+  "authors": [
+    "Tianyi Hu",
+    "Zhiqiang Pu",
+    "Yuan Wang",
+    "Tenghai Qiu",
+    "Min Chen",
+    "Xin Yu"
+  ],
+  "published": "2025-12-28T14:07:31Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2512.22941"
+}

@@ -1,0 +1,183 @@
+Title: A2H: Agent-to-Human Protocol for AI Agent
+Authors: Zhiyuan Liang, Enfang Cui, Qian Wei, Rui She, Tianzheng Li et al.
+Published: 2025-12-31
+Source: https://arxiv.org/abs/2602.15831
+ArXiv ID: 2602.15831
+
+A2H: Agent-to-Human Protocol for AI Agent
+Abstract
+AI agents are increasingly deployed as autonomous systems capable of planning, tool use, and multi-agent collaboration across complex tasks. However, existing agent-related protocols focus on agent-to-agent interactions, leaving humans as external observers rather than integrated participants within the agent systems. This limitation arises from the lack of a standardized mechanism for agents to discover, address, and interact with humans across heterogeneous messaging platforms. In this paper, we propose the A2H (Agent-to-Human) protocol, a unified protocol that enables humans to be registered, discovered, and communicated with by AI agents as resolvable entities within agent systems. A2H contributes three key components: (1) Human Card for registering human identities via resolvable domain names, making them discoverable to agents; (2) Formal Communication Schema defines when, why, and how agents contact with human; (3) Unified Messaging Abstraction standardizes diverse communication medias and transforms complex JSON outputs into human-friendly formats. This work establishes a foundational protocol for integrating humans into agent ecosystems, advancing AI agents from isolated autonomous systems toward truly human-connected intelligent infrastructures.
+1 Introduction
+AI agents are evolved beyond simple chatbots into autonomous systems. They are able to independent planning, tool use, and multi-agent collaboration guo2024large . As agent workflows become more complex, agents are no longer isolated tools but as core components of an AI infrastructure. This shift leads to the rapid development of agent communication protocols yang2025survey where specialized agents work together to achieve high-level objectives.
+To facilitate multi-agent coordination, various communication protocols mcp2024 ; ibm2024acp ; google2024a2a ; anp2024 ; cui2025agentdns between agents are proposed. For instance, context-oriented frameworks like the Model Context Protocol (MCP) mcp2024 and agents.json focus on standardizing how agents access data and tools. Simultaneously, inter-agent protocols such as A2A google2024a2a , ANP anp2024 , and AComP acp2025 have emerged to govern machine-to-machine dialogues, while domain-specific solutions like Agent Protocol agentPro2025 or PXP pxp2025 address task-sharing in localized environments. These advancements standardize the way agents discover each another, creating an efficient but closed agent ecosystem.
+However, a fundamental gap remains in existing communication protocols: only agents are included in the system, while humans are treated as external observers rather than reachable participants. As a result, an agent has no standardized way to discover a specific human when it encounters an impasse. There are two main challenges for agents in finding and engaging humans. First, agents lack clear rules for deciding when and why human assistance is needed. Second, human communication is fragmented across diverse messaging platforms, such as Slack slack , WeChat wechat , Microsoft Teams teams , and email. In addition, agent outputs are usually JSON-based and difficult for humans to read. Together, these issues block seamless interaction between AI agents and humans in autonomous systems.
+To bridge this disconnect between agents and humans, we propose A2H (Agent-to-Human), a protocol that integrates humans as resolvable entities within the agent ecosystem and enables hybrid agent–human collaboration. The core idea of A2H is to move from a human-as-trigger model to a human-as-node architecture through the concept of the Human Card. By assigning humans a standardized digital identity, A2H allows agents to query a human’s availability and expertise in the same way they invoke software tools. In addition, A2H defines clear conditions for when an agent should seek human assistance. Finally, A2H introduces an A2H-JSON schema that transforms complex agent outputs into concise, human-readable messages and maps human responses back into structured formats. Our main contributions are threefold:
+-
+1.
+We propose A2H (Agent-to-Human), the first protocol that integrates humans into the agent discovery and resolution process through the Human Card.
+-
+2.
+We design a Formal Communication Schema that defines when, why, and how agents could seek human for help.
+-
+3.
+We introduce a Unified Messaging Abstraction that enables bidirectional translation between agent outputs and human-readable communication.
+2 Related Work
+The proposed A2H aims to provide a unified protocol for interactions between AI agents and humans. It builds on research in agent communication protocols and human-agent interaction. Existing methods do not treat humans as reachable entities in agent ecosystems. In the following, the related agent communication protocols and human-agent interaction will be introduced.
+2.1 Agent Communication Protocol Standardization
+The rise of AI agents has created a stronger need for standardized communication protocols yang2025survey . Recent surveys suggest that a unified protocol could greatly improve agent–tool interaction bhardwaj2025agent . Several protocols are already in use which includes the Model Context Protocol (MCP), the Agent Communication Protocol (ACP), and the Agent-to-Agent Protocol (A2A) jeong2025study . MCP mcp2024 defines how agents communicate with external tools. It focuses on secure and scalable integration. A2A google2024a2a supports message exchange between multiple agents in a structured format. ACP ibm2024acp enables both asynchronous and synchronous communication between independent agents. Also, there are some domain-specific solutions like Agent Protocol agentPro2025 or PXP pxp2025 address task-sharing in localized environments. AgentDNS cui2025agentdns provides a system that enables LLM agents to discover and utilize external services by routing requests through other LLM agents. It establishes a naming system for LLM agents, enabling them to operate with each other.
+However, these protocols center on agent–agent or agent–tool communication. They do not cover human communication channels such as email or instant messaging. As for AgentDNS, it depends on a centralized registry lacking native support for human participants. This centralized structure only works for agents and does not work for humans. Humans cannot be registered through the same automated process. Thus, humans cannot be discovered through current agent communication protocols. For these reasons, a more comprehensive human-agent interaction method is needed. It is critical for truly human-connected intelligent infrastructures.
+2.2 Human-Agent Interaction Frameworks
+Recently, several human-agent interaction frameworks have been proposed. For example, Blandford et al. blandford2005dicot introduced the Distributed Cognition for Teamwork (DiCoT) framework. It studies how information is shared and processed in human-agent teams, and also analyzes how cognitive processes are shared and coordinated across members. Sepich et al. sepich2021human developed Human-Agent Team Game Analysis framework. This framework evaluates the roles and interactions between humans and agents in collaborative tasks. It highlights autonomy and communication as key factors for effective teamwork. While these frameworks provide valuable insights into the design of agentic systems, they often fall short in scalability, adaptability, and real-world deployment wang2025internet . Future extensions will need to support more complex task recipes with branching logic and preconditions wang2025internet . It is also difficult to integrate these frameworks with diverse communication channels and modalities. Examples include natural language interfaces, multimodal interaction systems, and existing messaging platforms chen2024internet . In addition, the organizers have successfully conducted multiple workshops at human-computer interaction conferences zargham2024designing . These workshops have served as a platform for proposing numerous new methods.
+However, current frameworks exhibit two key limitations. First, these methods are not designed for agent ecosystems. Second, they address human-agent interactions but fail to account for those between agents.
+In summary, existing research offers useful insights into agent discovery, human–agent interaction, and communication protocols. However, it still lacks a unified solution for integrating humans into agent ecosystems. AgentDNS does not natively support human participants. Current human–agent interaction frameworks also ignore discovery and routing challenges. Most communication protocols focus on agent–agent or agent–tool exchanges. They provide no clear way to bridge diverse human communication channels.
+3 Method
+In this section, we present the design and implementation of the A2H protocol. The A2H protocol is designed to transition the role of humans in autonomous systems from passive, external triggers to active, addressable nodes. The architecture consists of three distinct layers: (1) the Human Card for identity registration and discovery, (2) the Formal Communication Schema for governing interaction logic, and (3) the Unified Messaging Abstraction for cross-platform message rendering and serialization.
+Figure 1 illustrates the architectural overview of the A2H protocol, which establishes a bidirectional interaction layer between AI agents and humans. On the left, an AI Agent may be powered by heterogeneous large language models (e.g., ChatGPT, Claude, Gemini, DeepSeek, Qwen) and interacts with enterprise systems and external tools via MCP mcp2024 and standard APIs. On the right, humans are modeled as discoverable entities through Human Cards, which formally encode identity, role, capabilities, availability, and preferred communication endpoints. Different operational roles (such as Approver, Operator, Decision Maker, and Domain Expert) are uniformly abstracted under the same schema.
+3.1 Human Card: Identity and Discovery Human
+To enable agents to discover humans in the same manner they discover software tools or API endpoints, we introduce the concept of the Human Card. The Human Card serves as a structured metadata registry that encapsulates a human’s identity, expertise, availability, and communication endpoints.
+Formally, we define a Human Card as a tuple:
+where:
+-
+•
+ID is a unique, resolvable identifier (e.g., human://alice.eng), similar to a DNS record.
+-
+•
+represents profile metadata (e.g., name, role, timezone).
+-
+•
+is a set of semantic tags describing the human’s expertise (e.g., ["python_expert", "legal_approver"]), allowing agents to perform semantic matching.
+-
+•
+denotes the set of supported communication endpoints (e.g., Slack Webhook, Email API).
+-
+•
+represents the real-time availability status (e.g., AVAILABLE, BUSY, OFFLINE).
+The Human Card is stored in a distributed registry (similar to AgentDNS cui2025agentdns or a Key-Value store). When an agent requires assistance, it queries this registry. For example, if an agent needs code review, it executes a semantic search: .
+A JSON representation of a Human Card is shown below:
+3.2 Formal Communication Schema
+Unlike agent-to-agent communication, which is high-frequency and low-latency, agent-to-human communication must be minimized to avoid cognitive overload. Therefore, we define a Formal Communication Schema that governs when and why an agent initiates contact.
+We model the agent’s decision process as a function that maps the current agent state to an action space :
+The transition to REQUEST_HUMAN is triggered by three primary conditions:
+-
+1.
+Ambiguity Trigger (): When the confidence score of the agent’s next planned action falls below a predefined threshold .
+-
+2.
+Criticality Trigger (): When a proposed action involves irreversible side effects (e.g., deleting a database, transferring funds). These actions are flagged in the protocol manifest as REQUIRE_APPROVAL.
+-
+3.
+Resource Exhaustion (): When the agent enters a loop or exceeds the maximum number of reasoning steps without reaching a terminal state.
+Once triggered, the protocol generates an Intent Packet containing the Reason (Why), the Context (What happened), and the Required Input (What the human needs to do).
+3.2.1 Interaction Primitives
+Once a communication trigger condition () is met, the agent must instantiate a specific interaction type. We categorize the communication requirements into four fundamental interaction primitives. These primitives define the semantic intent of the message and the expected structure of the human response. Table 1 illustrates the taxonomy of these primitives within the A2H protocol.
+Formally, the interaction is defined as:
+where .
+3.2.2 Communication Patterns
+The A2H protocol supports different temporal flows to accommodate the disparity in processing speeds between agents (milliseconds) and humans (minutes to hours). We define two primary Communication Patterns: Synchronous blocking and asynchronous interrupt. Figure 2 illustrates the sequence flow of these two patterns.
+-
+1.
+Synchronous Blocking (Immediate Intervention). It is used primarily for PERMISSION and urgent CLARIFICATION. The agent holds the context window open and polls for a response or establishes a websocket connection. This pattern is resource-intensive but ensures immediate consistency.
+-
+2.
+Asynchronous Interrupt (Callback Mechanism). It is used for SOLICITATION or non-urgent inquiries. The agent serializes its current state (Check-pointing), sends the request, and suspends the process. Upon receiving a response (via a Webhook event), the agent "wakes up," restores the state, and injects the human input into the context window.
+By decoupling the communication logic into these patterns, A2H ensures that agents do not idle wastefully while waiting for human input, thereby optimizing computational resource utilization within the agent infrastructure.
+3.3 Unified Messaging Abstraction (UMA)
+The final component addresses the heterogeneity of communication channels. Agents typically output structured data (JSON), while humans communicate via natural language on platforms like Slack, Teams, or WeChat. The Unified Messaging Abstraction (UMA) acts as a bidirectional translation layer.
+3.3.1 A2H-JSON Schema (Agent Output)
+We standardize the agent’s output into a rigorous format called A2H-JSON. This schema decouples the message content from the presentation layer. An A2H-JSON object consists of:
+-
+•
+type: The category of interaction (e.g., QUESTION, CONFIRMATION, ALERT).
+-
+•
+summary: A one-line TL;DR of the issue.
+-
+•
+body: Detailed context, supporting Markdown rendering.
+-
+•
+actions: Structured options for the human (e.g., ["Approve", "Reject", "Modify"]).
+3.3.2 Channel Adapters (Rendering)
+The UMA layer employs Channel Adapters to render A2H-JSON into platform-specific UI elements.
+-
+•
+Slack/Teams: Renders as interactive "Block Kit" or "Adaptive Cards" with clickable buttons.
+-
+•
+Email: Renders as HTML with deep links.
+-
+•
+CLI: Renders as colored ASCII text.
+3.3.3 Response Normalization (Human Input)
+When a human replies (via text or button click), the Adapter normalizes the input back into a structured format for the agent. For instance, a button click "Approve" on Slack is translated into:
+This ensures the agent can ingest human feedback deterministically as part of its observation space, closing the loop of the autonomous system.
+4 Case Study
+To demonstrate the efficacy of the A2H protocol in a realistic environment, we deployed an A2H-enabled agent in a simulated DevOps scenario. The objective is to showcase the end-to-end workflow: from Human Discovery (locating the expert) to Ambiguity Resolution (clarification) and finally Critical Action Authorization (permission). The collaboration between an AI agent and a human is illustrated in Figure 3.
+4.1 Scenario Setup
+We define a task where an autonomous agent, powered by GPT-4, is responsible for monitoring and fixing a production service named checkout-service.
+-
+1.
+The Problem: The service experiences a memory leak.
+-
+2.
+The Agent: A ReAct-based agent equipped with standard CLI tools (kubectl, git, logs) and the A2H Client.
+-
+3.
+The Human: "Bob," a Senior SRE (Site Reliability Engineer), reachable via Slack.
+-
+4.
+The Environment: The A2H Registry contains a Human Card for Bob with the tag ["sre", "kubernetes", "approver"].
+4.2 Workflow Execution
+The execution trace follows three distinct phases, corresponding to the components defined in our Methodology.
+Phase 1: Human Discovery (Human Card)
+The agent analyzes the logs and identifies that the crash is related to a Kubernetes configuration. To proceed, the agent needs to identify the service owner. Instead of blindly messaging a general channel, the agent queries the A2H Registry:
+Result: The registry returns Bob’s identity (human://bob.sre) and his preferred endpoint for urgent issues (slack_webhook). This demonstrates the shift from broadcast communication to targeted addressing.
+Phase 2: Resolving Ambiguity (Clarification Trigger) The agent generates a fix but encounters two potential configuration files: deployment.yaml and deployment-canary.yaml. It cannot determine which file is currently active. The confidence score for editing either file falls below the threshold (), triggering a CLARIFICATION request.
+There are three steps:
+-
+1.
+Agent Output (A2H-JSON): The agent constructs the following payload:
+{"target": "human://bob.sre","type": "CLARIFICATION","summary": "Ambiguous Configuration Target","body": "I identified a memory limit issue. Multiple config files detected. Which one should I patch?","options": ["deployment.yaml (Production)","deployment-canary.yaml (Canary)"]} -
+2.
+UMA Rendering (Slack): The Unified Messaging Abstraction layer translates this JSON into a Slack "Block Kit" message. Bob sees a structured card with a concise summary and two clickable buttons: [Patch Production] and [Patch Canary].
+-
+3.
+Human Feedback: Bob clicks [Patch Production]. The A2H layer captures this interaction and returns a structured observation to the agent: "selected_option": "deployment.yaml (Production)". The agent proceeds to patch the file.
+Phase 3: Critical Authorization (Permission Trigger) After applying the patch, the agent intends to restart the production cluster to apply changes. The protocol manifest flags (kubectl rollout restart) as a critical action, triggering the PERMISSION primitive.
+Interaction as following:
+-
+1.
+Blocking State: The agent enters a SUSPENDED state (Synchronous Blocking Pattern) to prevent accidental outages.
+-
+2.
+Visualization: A "Risk Alert" card is sent to Bob, highlighting the diff of the changes and a red [Approve Restart] button.
+-
+3.
+Resolution: Bob reviews the diff and clicks Approve. The agent receives the signal TRUE and executes the restart command.
+4.3 Protocol Efficacy Analysis
+Table 2 compares the A2H-enabled workflow against a traditional Baseline Agent (which treats humans as simple chat interfaces).
+This case study confirms that A2H successfully bridges the gap between autonomous logic and human oversight, transforming complex decision points into standardized, safe interaction primitives.
+5 Conclusion
+In this paper, we presented A2H (Agent-to-Human), a novel protocol designed to bridge the gap between autonomous agent ecosystems and human participants. While existing protocols have successfully standardized agent-to-agent interactions, they have largely relegated humans to the role of external observers or manual triggers. A2H redefines this relationship by transitioning from a human-as-trigger model to a human-as-node architecture, treating humans as resolvable, discoverable, and addressable entities within the agent infrastructure.
+We believe A2H represents a foundational step toward human-connected intelligent infrastructures, where AI agents and humans collaborate through standardized communication protocols.
+References
+- (1) Taicheng Guo, Xiuying Chen, Yaqi Wang, Ruidi Chang, Shichao Pei, Nitesh V Chawla, Olaf Wiest, and Xiangliang Zhang. Large language model based multi-agents: A survey of progress and challenges. arXiv preprint arXiv:2402.01680, 2024.
+- (2) Yingxuan Yang, Huacan Chai, Yuanyi Song, Siyuan Qi, Muning Wen, Ning Li, Junwei Liao, Haoyi Hu, Jianghao Lin, Gaowei Chang, et al. A survey of ai agent protocols. arXiv preprint arXiv:2504.16736, 2025.
+- (3) Model Context Protocol. Introduction to model context protocol (mcp). https://modelcontextprotocol.io/introduction, 2024. Accessed: Apr. 2025.
+- (4) IBM BeeAI. Introduction to agent communication protocol (acp). https://docs.beeai.dev/acp/alpha/introduction, 2024. Accessed: Apr. 2025.
+- (5) Google. Agent2agent (a2a) protocol documentation. https://google.github.io/A2A/, 2024. Accessed: Apr. 2025.
+- (6) Agent Network Protocol Contributors. Agent network protocol (anp). https://github.com/agent-network-protocol/AgentNetworkProtocol, 2024. Accessed: Apr. 30, 2025.
+- (7) Enfang Cui, Yujun Cheng, Rui She, Dan Liu, Zhiyuan Liang, Minxin Guo, Tianzheng Li, Qian Wei, Wenjuan Xing, and Zhijie Zhong. Agentdns: A root domain naming system for llm agents. arXiv preprint arXiv:2505.22368, 2025.
+- (8) Linux Foundation AI and IBM Data. Acp: Agent communication protocol. https://agentcommunicationprotocol.dev/introduction/welcome, 2025. Accessed: May. 2025.
+- (9) AlEngineerFoundation. Acp: Agent communication protocol. https://agentprotocol.ai/, 2025. Accessed: April. 2025.
+- (10) Acp: Agent communication protocol. https://www.freshports.org/sysutils/pxp-agent/, 2025. Accessed: Dec. 2025.
+- (11) Slack Technologies. Slack. https://slack.com, 2020. Accessed: Sep. 2025.
+- (12) Tencent. Wechat. https://weixin.qq.com, 2018. Accessed: Sep. 2025.
+- (13) Microsoft. Teams. https://teams.live.com/free, 2017. Accessed: Sep. 2025.
+- (14) Devansh Bhardwaj, Arjun Beniwal, Shreyas Chaudhari, Ashwin Kalyan, Tanmay Rajpurohit, Karthik R Narasimhan, Ameet Deshpande, and Vishvak Murahari. Agent context protocols enhance collective inference. arXiv preprint arXiv:2505.14569, 2025.
+- (15) Cheonsu Jeong. A study on the mcp x a2a framework for enhancing interoperability of llm-based autonomous agents. arXiv preprint arXiv:2506.01804, 2025.
+- (16) Ann Blandford and Dominic Furniss. Dicot: a methodology for applying distributed cognition to the design of teamworking systems. In International workshop on design, specification, and verification of interactive systems, pages 26–38. Springer, 2005.
+- (17) Nathan Sepich, Michael C Dorneich, and Stephen Gilbert. Human-agent team game analysis framework: case studies. In Proceedings of the Human Factors and Ergonomics Society Annual Meeting, volume 65, pages 1146–1150. Sage Publications Sage CA: Los Angeles, CA, 2021.
+- (18) Yuntao Wang, Shaolong Guo, Yanghe Pan, Zhou Su, Fahao Chen, Tom H Luan, Peng Li, Jiawen Kang, and Dusit Niyato. Internet of agents: Fundamentals, applications, and challenges. arXiv preprint arXiv:2505.07176, 2025.
+- (19) Weize Chen, Ziming You, Ran Li, Yitong Guan, Chen Qian, Chenyang Zhao, Cheng Yang, Ruobing Xie, Zhiyuan Liu, and Maosong Sun. Internet of agents: Weaving a web of heterogeneous agents for collaborative intelligence. arXiv preprint arXiv:2407.07061, 2024.
+- (20) Nima Zargham, Mateusz Dubiel, Smit Desai, Thomas Mildner, and Hanz-Joachim Belz. Designing ai personalities: Enhancing human-agent interaction through thoughtful persona design. In Proceedings of the International Conference on Mobile and Ubiquitous Multimedia, pages 490–494, 2024.

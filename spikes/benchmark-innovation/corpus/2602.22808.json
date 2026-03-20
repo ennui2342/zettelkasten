@@ -1,0 +1,29 @@
+{
+  "arxiv_id": "2602.22808",
+  "title": "MiroFlow: Towards High-Performance and Robust Open-Source Agent Framework for General Deep Research Tasks",
+  "abstract": "Despite the remarkable progress of large language models (LLMs), the capabilities of standalone LLMs have begun to plateau when tackling real-world, complex tasks that require interaction with external tools and dynamic environments. Although recent agent frameworks aim to enhance model autonomy through tool integration and external interaction, they still suffer from naive workflows, unstable performance, limited support across diverse benchmarks and tasks, and heavy reliance on costly commercial APIs. In this work, we propose a high-performance and robust open-source agent framework, termed MiroFlow, which incorporates an agent graph for flexible orchestration, an optional deep reasoning mode to enhance performance, and a robust workflow execution to ensure stable and reproducible performance. Extensive experiments demonstrate that MiroFlow consistently achieves state-of-the-art performance across multiple agent benchmarks, including GAIA, BrowseComp-EN/ZH, HLE, xBench-DeepSearch, and notably FutureX. We hope it could serve as an easily accessible, reproducible, and comparable baseline for the deep research community.",
+  "authors": [
+    "Shiqian Su",
+    "Sen Xing",
+    "Xuan Dong",
+    "Muyan Zhong",
+    "Bin Wang",
+    "Xizhou Zhu",
+    "Yuntao Chen",
+    "Wenhai Wang",
+    "Yue Deng",
+    "Pengxiang Zhu",
+    "Ziyuan Liu",
+    "Tiantong Li",
+    "Jiaheng Yu",
+    "Zhe Chen",
+    "Lidong Bing",
+    "Jifeng Dai"
+  ],
+  "published": "2026-02-26T09:45:04Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2602.22808"
+}

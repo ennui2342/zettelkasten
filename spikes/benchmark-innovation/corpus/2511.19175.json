@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2511.19175",
+  "title": "LLM-Based Agentic Negotiation for 6G: Addressing Uncertainty Neglect and Tail-Event Risk",
+  "abstract": "A critical barrier to the trustworthiness of sixth-generation (6G) agentic autonomous networks is the uncertainty neglect bias; a cognitive tendency for large language model (LLM)-powered agents to make high-stakes decisions based on simple averages while ignoring the tail risk of extreme events. This paper proposes an unbiased, risk-aware framework for agentic negotiation, designed to ensure robust resource allocation in 6G network slicing. Specifically, agents leverage Digital Twins (DTs) to predict full latency distributions, which are then evaluated using a formal framework from extreme value theory, namely, Conditional Value-at-Risk (CVaR). This approach fundamentally shifts the agent's objective from reasoning over the mean to reasoning over the tail, thereby building a statistically-grounded buffer against worst-case outcomes. Furthermore, our framework ensures full uncertainty awareness by requiring agents to quantify epistemic uncertainty -- confidence in their own DTs predictions -- and propagate this meta-verification to make robust decisions, preventing them from acting on unreliable data. We validate this framework in a 6G inter-slice negotiation use-case between an eMBB and a URLLC agent. The results demonstrate the profound failure of the biased, mean-based baseline, which consistently fails its SLAs with a 25\\% rate. Our unbiased, CVaR-aware agent successfully mitigates this bias, eliminating SLA violations and reducing the URLLC and eMBB p99.999 latencies by around 11\\%. We show this reliability comes at the rational and quantifiable cost of slightly reduced energy savings to 17\\%, exposing the false economy of the biased approach. This work provides a concrete methodology for building the trustworthy autonomous systems required for 6G.",
+  "authors": [
+    "Hatim Chergui",
+    "Farhad Rezazadeh",
+    "Mehdi Bennis",
+    "Merouane Debbah"
+  ],
+  "published": "2025-11-24T14:36:11Z",
+  "primary_category": "cs.NI",
+  "categories": [
+    "cs.NI",
+    "cs.AI",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2511.19175"
+}

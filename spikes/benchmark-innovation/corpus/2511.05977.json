@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2511.05977",
+  "title": "An Epistemic Perspective on Agent Awareness",
+  "abstract": "The paper proposes to treat agent awareness as a form of knowledge, breaking the tradition in the existing literature on awareness. It distinguishes the de re and de dicto forms of such knowledge. The work introduces two modalities capturing these forms and formally specifies their meaning using a version of 2D-semantics. The main technical result is a sound and complete logical system describing the interplay between the two proposed modalities and the standard \"knowledge of the fact\" modality.",
+  "authors": [
+    "Pavel Naumov",
+    "Alexandra Pavlova"
+  ],
+  "published": "2025-11-08T11:50:25Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.LO",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2511.05977"
+}

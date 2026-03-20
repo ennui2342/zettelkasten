@@ -1,0 +1,20 @@
+{
+  "arxiv_id": "2509.08682",
+  "title": "Automatic Failure Attribution and Critical Step Prediction Method for Multi-Agent Systems Based on Causal Inference",
+  "abstract": "Multi-agent systems (MAS) are critical for automating complex tasks, yet their practical deployment is severely hampered by the challenge of failure attribution. Current diagnostic tools, which rely on statistical correlations, are fundamentally inadequate; on challenging benchmarks like Who\\&When, state-of-the-art methods achieve less than 15\\% accuracy in locating the root-cause step of a failure. To address this critical gap, we introduce the first failure attribution framework for MAS grounded in multi-granularity causal inference. Our approach makes two key technical contributions: (1) a performance causal inversion principle, which correctly models performance dependencies by reversing the data flow in execution logs, combined with Shapley values to accurately assign agent-level blame; (2) a novel causal discovery algorithm, CDC-MAS, that robustly identifies critical failure steps by tackling the non-stationary nature of MAS interaction data. The framework's attribution results directly fuel an automated optimization loop, generating targeted suggestions whose efficacy is validated via counterfactual simulations. Evaluations on the Who\\&When and TRAIL benchmarks demonstrate a significant leap in performance. Our method achieves up to 36.2\\% step-level accuracy. Crucially, the generated optimizations boost overall task success rates by an average of 22.4\\%. This work provides a principled and effective solution for debugging complex agent interactions, paving the way for more reliable and interpretable multi-agent systems.",
+  "authors": [
+    "Guoqing Ma",
+    "Jia Zhu",
+    "Hanghui Guo",
+    "Weijie Shi",
+    "Jiawei Shen",
+    "Jingjiang Liu",
+    "Yidan Liang"
+  ],
+  "published": "2025-09-10T15:22:00Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2509.08682"
+}

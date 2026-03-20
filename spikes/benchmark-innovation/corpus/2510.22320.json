@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2510.22320",
+  "title": "IFS: Information Flow Structure for Multi-agent Ad Hoc System",
+  "abstract": "Multi-agent ad hoc systems are dynamic collaborative systems in which multiple autonomous agents must cooperate with both known and unknown teammates in open environments, without relying on pre-coordinated strategies. These systems operate under conditions of uncertainty and partial observability, where team composition, agent behaviors, and environmental factors may change during execution. Through an analysis of information flow in such systems, we identify two key limitations in existing research: insufficient information flow and limited information processing capacity. To address these issues, we propose an information flow structure for multi-agent ad hoc systems (IFS), which tackles these challenges from the perspectives of communication and information fusion. Experimental results in StarCraft II demonstrate that IFS significantly improves both information flow and processing capacity, while exhibiting strong generalization capabilities and outperforming baseline methods in complex ad hoc teamwork scenarios.",
+  "authors": [
+    "Yanqing Fu",
+    "Chenrun Wang",
+    "Chao Huang",
+    "Zhuping Wang"
+  ],
+  "published": "2025-10-25T14:53:07Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2510.22320"
+}

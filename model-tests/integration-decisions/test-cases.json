@@ -1,0 +1,114 @@
+[
+  {
+    "id": "update-1",
+    "expected_operation": "UPDATE",
+    "expected_target_ids": ["z20260314-002"],
+    "description": "Draft adds elaborative interrogation as equivalent mechanism to testing effect — fills documented gap",
+    "draft": "drafts/testing-effect-draft.md",
+    "cluster": ["notes/testing-effect.md"]
+  },
+  {
+    "id": "update-2",
+    "expected_operation": "UPDATE",
+    "expected_target_ids": ["z20260314-001"],
+    "description": "Draft resolves open question in spaced repetition note: retrieval difficulty is a mechanism, not just a side effect of spacing",
+    "draft": "drafts/spaced-repetition-draft.md",
+    "cluster": ["notes/spaced-repetition.md"]
+  },
+  {
+    "id": "update-3",
+    "expected_operation": "UPDATE",
+    "expected_target_ids": ["z20260314-003"],
+    "description": "Draft answers documented open question: what properties of external systems produce genuine encoding (active engagement + friction)",
+    "draft": "drafts/external-memory-draft.md",
+    "cluster": ["notes/external-memory-systems.md"]
+  },
+  {
+    "id": "create-1",
+    "expected_operation": "CREATE",
+    "expected_target_ids": [],
+    "description": "Draft on generation effect — no existing note covers this topic; cluster contains only distantly related encoding note",
+    "draft": "drafts/generation-effect-create-draft.md",
+    "cluster": ["notes/encoding-and-memory-formation.md"]
+  },
+  {
+    "id": "nothing-1",
+    "expected_operation": "NOTHING",
+    "expected_target_ids": [],
+    "description": "Draft on massed practice — existing note covers mechanism, empirical finding, fluency illusion, and metacognitive failure comprehensively",
+    "draft": "drafts/massed-practice-nothing-draft.md",
+    "cluster": ["notes/massed-practice.md"]
+  },
+  {
+    "id": "nothing-2",
+    "expected_operation": "NOTHING",
+    "expected_target_ids": [],
+    "description": "Draft on forgetting curve — existing note covers Ebbinghaus, exponential decay, savings effect, and timing implications comprehensively",
+    "draft": "drafts/forgetting-curve-nothing-draft.md",
+    "cluster": ["notes/forgetting-curve.md"]
+  },
+  {
+    "id": "stub-1",
+    "expected_operation": "STUB",
+    "expected_target_ids": [],
+    "description": "Draft on sleep consolidation — new topic not covered in cluster; spaced-repetition note is distantly related but cluster is effectively sparse",
+    "draft": "drafts/sleep-consolidation-stub-draft.md",
+    "cluster": ["notes/spaced-repetition.md"]
+  },
+  {
+    "id": "stub-2",
+    "expected_operation": "STUB",
+    "expected_target_ids": [],
+    "description": "Draft on prospective memory — new topic with empty cluster; no existing note covers future-intention memory",
+    "draft": "drafts/prospective-memory-stub-draft.md",
+    "cluster": []
+  },
+  {
+    "id": "split-1",
+    "expected_operation": "SPLIT",
+    "expected_target_ids": ["z20260314-007"],
+    "description": "Draft is specifically about interleaved practice (within-session ordering); existing practice-strategies note conflates this with spaced repetition (cross-session timing) — two distinct topics",
+    "draft": "drafts/interleaved-practice-split-draft.md",
+    "cluster": ["notes/practice-strategies.md"]
+  },
+  {
+    "id": "split-2",
+    "expected_operation": "SPLIT",
+    "expected_target_ids": ["z20260314-008"],
+    "description": "Draft is specifically about working memory (capacity, decay, chunking, cognitive load) — existing memory-systems note conflates working memory and long-term memory under one topic",
+    "draft": "drafts/working-memory-split-draft.md",
+    "cluster": ["notes/memory-systems-overview.md"]
+  },
+  {
+    "id": "merge-1",
+    "expected_operation": "MERGE",
+    "expected_target_ids": ["z20260314-009", "z20260314-010"],
+    "description": "Draft on encoding-retrieval match shows that retrieval-cues and context-dependent-memory notes are two descriptions of the same principle from opposite ends — encoding specificity unifies them",
+    "draft": "drafts/encoding-retrieval-match-merge-draft.md",
+    "cluster": ["notes/retrieval-cues.md", "notes/context-dependent-memory.md"]
+  },
+  {
+    "id": "merge-2",
+    "expected_operation": "MERGE",
+    "expected_target_ids": ["z20260314-011", "z20260314-012"],
+    "description": "Draft explicitly identifies spaced-learning and distributed-practice as the same phenomenon described with different terminology from different disciplines",
+    "draft": "drafts/distributed-spacing-merge-draft.md",
+    "cluster": ["notes/spaced-learning.md", "notes/distributed-practice.md"]
+  },
+  {
+    "id": "synthesise-1",
+    "expected_operation": "SYNTHESISE",
+    "expected_target_ids": ["z20260314-002", "z20260314-001"],
+    "description": "Draft on spaced retrieval practice reveals a multiplicative interaction between testing effect and spaced repetition that neither note captures — they share a mechanism (effortful reconstruction) that compounds when combined",
+    "draft": "drafts/spaced-retrieval-synthesise-draft.md",
+    "cluster": ["notes/testing-effect.md", "notes/spaced-repetition.md"]
+  },
+  {
+    "id": "synthesise-2",
+    "expected_operation": "SYNTHESISE",
+    "expected_target_ids": ["z20260314-004", "z20260314-013"],
+    "description": "Draft on generation as deep encoding mechanism shows that generation-effect and encoding-and-memory-formation notes are complementary halves of one account — the generation effect IS the mechanism that makes processing deep",
+    "draft": "drafts/generation-encoding-synthesise-draft.md",
+    "cluster": ["notes/encoding-and-memory-formation.md", "notes/generation-effect.md"]
+  }
+]

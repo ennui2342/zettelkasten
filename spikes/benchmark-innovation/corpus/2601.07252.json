@@ -1,0 +1,22 @@
+{
+  "arxiv_id": "2601.07252",
+  "title": "SwarmFoam: An OpenFOAM Multi-Agent System Based on Multiple Types of Large Language Models",
+  "abstract": "Numerical simulation is one of the mainstream methods in scientific research, typically performed by professional engineers. With the advancement of multi-agent technology, using collaborating agents to replicate human behavior shows immense potential for intelligent Computational Fluid Dynamics (CFD) simulations. Some muti-agent systems based on Large Language Models have been proposed. However, they exhibit significant limitations when dealing with complex geometries. This paper introduces a new multi-agent simulation framework, SwarmFoam. SwarmFoam integrates functionalities such as Multi-modal perception, Intelligent error correction, and Retrieval-Augmented Generation, aiming to achieve more complex simulations through dual parsing of images and high-level instructions. Experimental results demonstrate that SwarmFoam has good adaptability to simulation inputs from different modalities. The overall pass rate for 25 test cases was 84%, with natural language and multi-modal input cases achieving pass rates of 80% and 86.7%, respectively. The work presented by SwarmFoam will further promote the development of intelligent agent methods for CFD.",
+  "authors": [
+    "Chunwei Yang",
+    "Yankai Wang",
+    "Jianxiang Tang",
+    "Haojie Qu",
+    "Ziqiang Zou",
+    " YuLiu",
+    "Chunrui Deng",
+    "Zhifang Qiu",
+    "Ming Ding"
+  ],
+  "published": "2026-01-12T06:37:26Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2601.07252"
+}

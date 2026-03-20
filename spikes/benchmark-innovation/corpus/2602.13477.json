@@ -1,0 +1,20 @@
+{
+  "arxiv_id": "2602.13477",
+  "title": "OMNI-LEAK: Orchestrator Multi-Agent Network Induced Data Leakage",
+  "abstract": "As Large Language Model (LLM) agents become more capable, their coordinated use in the form of multi-agent systems is anticipated to emerge as a practical paradigm. Prior work has examined the safety and misuse risks associated with agents. However, much of this has focused on the single-agent case and/or setups missing basic engineering safeguards such as access control, revealing a scarcity of threat modeling in multi-agent systems. We investigate the security vulnerabilities of a popular multi-agent pattern known as the orchestrator setup, in which a central agent decomposes and delegates tasks to specialized agents. Through red-teaming a concrete setup representative of a likely future use case, we demonstrate a novel attack vector, OMNI-LEAK, that compromises several agents to leak sensitive data through a single indirect prompt injection, even in the presence of data access control. We report the susceptibility of frontier models to different categories of attacks, finding that both reasoning and non-reasoning models are vulnerable, even when the attacker lacks insider knowledge of the implementation details. Our work highlights the importance of safety research to generalize from single-agent to multi-agent settings, in order to reduce the serious risks of real-world privacy breaches and financial losses and overall public trust in AI agents.",
+  "authors": [
+    "Akshat Naik",
+    "Jay Culligan",
+    "Yarin Gal",
+    "Philip Torr",
+    "Rahaf Aljundi",
+    "Alasdair Paren",
+    "Adel Bibi"
+  ],
+  "published": "2026-02-13T21:32:32Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2602.13477"
+}

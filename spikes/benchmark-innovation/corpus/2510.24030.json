@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2510.24030",
+  "title": "Human Machine Social Hybrid Intelligence:A Collaborative Decision Making Framework for Large Model Agent Groups and Human Experts",
+  "abstract": "The rapid advancements in large foundation models and multi-agent systems offer unprecedented capabilities, yet current Human-in-the-Loop (HiTL) paradigms inadequately integrate human expertise, often leading to cognitive overload and decision-making bottlenecks in complex, high-stakes environments. We propose the \"Human-Machine Social Hybrid Intelligence\" (HMS-HI) framework, a novel architecture designed for deep, collaborative decision-making between groups of human experts and LLM-powered AI agents. HMS-HI is built upon three core pillars: (1) a \\textbf{Shared Cognitive Space (SCS)} for unified, multi-modal situational awareness and structured world modeling; (2) a \\textbf{Dynamic Role and Task Allocation (DRTA)} module that adaptively assigns tasks to the most suitable agent (human or AI) based on capabilities and workload; and (3) a \\textbf{Cross-Species Trust Calibration (CSTC)} protocol that fosters transparency, accountability, and mutual adaptation through explainable declarations and structured feedback. Validated in a high-fidelity urban emergency response simulation, HMS-HI significantly reduced civilian casualties by 72\\% and cognitive load by 70\\% compared to traditional HiTL approaches, demonstrating superior decision quality, efficiency, and human-AI trust. An ablation study confirms the critical contribution of each module, highlighting that engineered trust and shared context are foundational for scalable, synergistic human-AI collaboration.",
+  "authors": [
+    "Ahmet Akkaya Melih",
+    "Yamuna Singh",
+    "Kunal L. Agarwal",
+    "Priya Mukherjee",
+    "Kiran Pattnaik",
+    "Hanuman Bhatia"
+  ],
+  "published": "2025-10-28T03:28:15Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2510.24030"
+}

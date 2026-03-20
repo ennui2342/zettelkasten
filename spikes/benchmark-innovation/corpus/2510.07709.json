@@ -1,0 +1,22 @@
+{
+  "arxiv_id": "2510.07709",
+  "title": "Multimodal Safety Evaluation in Generative Agent Social Simulations",
+  "abstract": "Can generative agents be trusted in multimodal environments? Despite advances in large language and vision-language models that enable agents to act autonomously and pursue goals in rich settings, their ability to reason about safety, coherence, and trust across modalities remains limited. We introduce a reproducible simulation framework for evaluating agents along three dimensions: (1) safety improvement over time, including iterative plan revisions in text-visual scenarios; (2) detection of unsafe activities across multiple categories of social situations; and (3) social dynamics, measured as interaction counts and acceptance ratios of social exchanges. Agents are equipped with layered memory, dynamic planning, multimodal perception, and are instrumented with SocialMetrics, a suite of behavioral and structural metrics that quantifies plan revisions, unsafe-to-safe conversions, and information diffusion across networks. Experiments show that while agents can detect direct multimodal contradictions, they often fail to align local revisions with global safety, reaching only a 55 percent success rate in correcting unsafe plans. Across eight simulation runs with three models - Claude, GPT-4o mini, and Qwen-VL - five agents achieved average unsafe-to-safe conversion rates of 75, 55, and 58 percent, respectively. Overall performance ranged from 20 percent in multi-risk scenarios with GPT-4o mini to 98 percent in localized contexts such as fire/heat with Claude. Notably, 45 percent of unsafe actions were accepted when paired with misleading visuals, showing a strong tendency to overtrust images. These findings expose critical limitations in current architectures and provide a reproducible platform for studying multimodal safety, coherence, and social dynamics.",
+  "authors": [
+    "Alhim Vera",
+    "Karen Sanchez",
+    "Carlos Hinojosa",
+    "Haidar Bin Hamid",
+    "Donghoon Kim",
+    "Bernard Ghanem"
+  ],
+  "published": "2025-10-09T02:42:57Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.CL",
+    "cs.CY",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2510.07709"
+}

@@ -1,0 +1,24 @@
+{
+  "arxiv_id": "2511.11324",
+  "title": "NOVA: An Agentic Framework for Automated Histopathology Analysis and Discovery",
+  "abstract": "Digitized histopathology analysis involves complex, time-intensive workflows and specialized expertise, limiting its accessibility. We introduce NOVA, an agentic framework that translates scientific queries into executable analysis pipelines by iteratively generating and running Python code. NOVA integrates 49 domain-specific tools (e.g., nuclei segmentation, whole-slide encoding) built on open-source software, and can also create new tools ad hoc. To evaluate such systems, we present SlideQuest, a 90-question benchmark -- verified by pathologists and biomedical scientists -- spanning data processing, quantitative analysis, and hypothesis testing. Unlike prior biomedical benchmarks focused on knowledge recall or diagnostic QA, SlideQuest demands multi-step reasoning, iterative coding, and computational problem solving. Quantitative evaluation shows NOVA outperforms coding-agent baselines, and a pathologist-verified case study links morphology to prognostically relevant PAM50 subtypes, demonstrating its scalable discovery potential.",
+  "authors": [
+    "Anurag J. Vaidya",
+    "Felix Meissen",
+    "Daniel C. Castro",
+    "Shruthi Bannur",
+    "Tristan Lazard",
+    "Drew F. K. Williamson",
+    "Faisal Mahmood",
+    "Javier Alvarez-Valle",
+    "Stephanie L. Hyland",
+    "Kenza Bouzid"
+  ],
+  "published": "2025-11-14T14:01:18Z",
+  "primary_category": "cs.CL",
+  "categories": [
+    "cs.CL",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2511.11324"
+}

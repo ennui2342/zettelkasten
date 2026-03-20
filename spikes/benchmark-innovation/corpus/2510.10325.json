@@ -1,0 +1,16 @@
+{
+  "arxiv_id": "2510.10325",
+  "title": "KG-MAS: Knowledge Graph-Enhanced Multi-Agent Infrastructure for coupling physical and digital robotic environments",
+  "abstract": "The seamless integration of physical and digital environments in Cyber-Physical Systems(CPS), particularly within Industry 4.0, presents significant challenges stemming from system heterogeneity and complexity. Traditional approaches often rely on rigid, data-centric solutions like co-simulation frameworks or brittle point-to-point middleware bridges, which lack the semantic richness and flexibility required for intelligent, autonomous coordination. This report introduces the Knowledge Graph-Enhanced Multi-Agent Infrastructure(KG-MAS), as resolution in addressing such limitations. KG-MAS leverages a centralized Knowledge Graph (KG) as a dynamic, shared world model, providing a common semantic foundation for a Multi-Agent System(MAS). Autonomous agents, representing both physical and digital components, query this KG for decision-making and update it with real-time state information. The infrastructure features a model-driven architecture which facilitates the automatic generation of agents from semantic descriptions, thereby simplifying system extension and maintenance. By abstracting away underlying communication protocols and providing a unified, intelligent coordination mechanism, KG-MAS offers a robust, scalable, and flexible solution for coupling heterogeneous physical and digital robotic environments.",
+  "authors": [
+    "Walid Abdela"
+  ],
+  "published": "2025-10-11T19:41:47Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI",
+    "cs.RO"
+  ],
+  "url": "https://arxiv.org/abs/2510.10325"
+}

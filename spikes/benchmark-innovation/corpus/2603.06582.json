@@ -1,0 +1,20 @@
+{
+  "arxiv_id": "2603.06582",
+  "title": "Agentic SPARQL: Evaluating SPARQL-MCP-powered Intelligent Agents on the Federated KGQA Benchmark",
+  "abstract": "Standard protocols such as the Model Context Protocol (MCP) that allow LLMs to connect to tools have recently boosted \"agentic\" AI applications, which, powered by LLMs' planning capabilities, promise to solve complex tasks with the access of external tools and data sources. In this context, publicly available SPARQL endpoints offer a natural connection to combine various data sources through MCP by (a) implementing a standardised protocol and query language, (b) standardised metadata formats, and (c) the native capability to federate queries. In the present paper, we explore the potential of SPARQL-MCP-based intelligent agents to facilitate federated SPARQL querying: firstly, we discuss how to extend an existing Knowledge Graph Question Answering benchmark towards agentic federated Knowledge Graph Question Answering (FKGQA); secondly, we implement and evaluate the ability of integrating SPARQL federation with LLM agents via MCP (incl. endpoint discovery/source selection, schema exploration, and query formulation), comparing different architectural options against the extended benchmark. Our work complements and extends prior work on automated SPARQL query federation towards fruitful combinations with agentic AI.",
+  "authors": [
+    "Daniel Dobriy",
+    "Frederik Bauer",
+    "Amr Azzam",
+    "Debayan Banerjee",
+    "Axel Polleres"
+  ],
+  "published": "2026-01-20T13:17:03Z",
+  "primary_category": "cs.IR",
+  "categories": [
+    "cs.IR",
+    "cs.AI",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2603.06582"
+}

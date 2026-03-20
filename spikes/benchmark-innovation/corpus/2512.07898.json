@@ -1,0 +1,22 @@
+{
+  "arxiv_id": "2512.07898",
+  "title": "MARINE: Theoretical Optimization and Design for Multi-Agent Recursive IN-context Enhancement",
+  "abstract": "Large Language Model (LLM)-based agents demonstrate advanced reasoning capabilities, yet practical constraints frequently limit outputs to single responses, leaving significant performance potential unrealized. This paper introduces MARINE (Multi-Agent Recursive IN-context Enhancement), a theoretically grounded framework that reconceptualizes test-time reasoning as iterative refinement of a persistent reference trajectory, fundamentally departing from conventional one-shot or multi-sample paradigms. The MARINE refinement operator systematically converts a base model's pass@N capabilities into near-optimal pass@1 performance. Rigorous theoretical analysis establishes that minimal feasible batches maximize expected performance gains under fixed invocation budgets, while logarithmically growing batch schedules ensure continuous improvement without computational constraints. Comprehensive evaluation on the BrowserComp-ZH benchmark demonstrates state-of-the-art results, with a 685B-parameter implementation achieving 46.0% pass@1 accuracy. Meanwhile, MARINE establishes a new paradigm for parameter-efficient reasoning: an 80B-parameter model augmented with MARINE matches the performance of standalone 1000B-parameter agents, reducing parameter requirements by over an order of magnitude. Notably, within a fixed computational budget, the proposed MARINE delivers higher-quality samples to alignment and optimization processes than traditional sampling-and-ranking strategies. Consequently, it has great potential to boost post-training efficiency.",
+  "authors": [
+    "Hongwei Zhang",
+    "Ji Lu",
+    "Yongsheng Du",
+    "Yanqin Gao",
+    "Lingjun Huang",
+    "Baoli Wang",
+    "Fang Tan",
+    "Peng Zou"
+  ],
+  "published": "2025-12-05T11:19:18Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2512.07898"
+}

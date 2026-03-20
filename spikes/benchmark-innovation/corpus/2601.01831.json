@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2601.01831",
+  "title": "ARIES: A Scalable Multi-Agent Orchestration Framework for Real-Time Epidemiological Surveillance and Outbreak Monitoring",
+  "abstract": "Global health surveillance is currently facing a challenge of Knowledge Gaps. While general-purpose AI has proliferated, it remains fundamentally unsuited for the high-stakes epidemiological domain due to chronic hallucinations and an inability to navigate specialized data silos. This paper introduces ARIES (Agentic Retrieval Intelligence for Epidemiological Surveillance), a specialized, autonomous multi-agent framework designed to move beyond static, disease-specific dashboards toward a dynamic intelligence ecosystem. Built on a hierarchical command structure, ARIES utilizes GPTs to orchestrate a scalable swarm of sub-agents capable of autonomously querying World Health Organization (WHO), Center for Disease Control and Prevention (CDC), and peer-reviewed research papers. By automating the extraction and logical synthesis of surveillance data, ARIES provides a specialized reasoning that identifies emergent threats and signal divergence in near real-time. This modular architecture proves that a task-specific agentic swarm can outperform generic models, offering a robust, extensible for next-generation outbreak response and global health intelligence.",
+  "authors": [
+    "Aniket Wattamwar",
+    "Sampson Akwafuo"
+  ],
+  "published": "2026-01-05T06:50:40Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI",
+    "cs.IR",
+    "cs.SE"
+  ],
+  "url": "https://arxiv.org/abs/2601.01831"
+}

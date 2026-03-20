@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2511.17915",
+  "title": "DISPATCH -- Decentralized Informed Spatial Planning and Assignment of Tasks for Cooperative Heterogeneous Agents",
+  "abstract": "Spatial task allocation in systems such as multi-robot delivery or ride-sharing requires balancing efficiency with fair service across tasks. Greedy assignment policies that match each agent to its highest-preference or lowest-cost task can maximize efficiency but often create inequities: some tasks receive disproportionately favorable service (e.g., shorter delays or better matches), while others face long waits or poor allocations.   We study fairness in heterogeneous multi-agent systems where tasks vary in preference alignment and urgency. Most existing approaches either assume centralized coordination or largely ignore fairness under partial observability. Distinct from this prior work, we establish a connection between the Eisenberg-Gale (EG) equilibrium convex program and decentralized, partially observable multi-agent learning. Building on this connection, we develop two equilibrium-informed algorithms that integrate fairness and efficiency: (i) a multi-agent reinforcement learning (MARL) framework, EG-MARL, whose training is guided by a centralized EG equilibrium assignment algorithm; and (ii) a stochastic online optimization mechanism that performs guided exploration and subset-based fair assignment as tasks are discovered.   We evaluate on Multi-Agent Particle Environment (MPE) simulations across varying team sizes against centralized EG, Hungarian, and Min-Max distance baselines, and also present a Webots-based warehouse proof-of-concept with heterogeneous robots. Both methods preserve the fairness-efficiency balance of the EG solution under partial observability, with EG-MARL achieving near-centralized coordination and reduced travel distances, and the online mechanism enabling real-time allocation with competitive fairness.",
+  "authors": [
+    "Yao Liu",
+    "Sampad Mohanty",
+    "Elizabeth Ondula",
+    "Bhaskar Krishnamachari"
+  ],
+  "published": "2025-11-22T04:45:09Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2511.17915"
+}

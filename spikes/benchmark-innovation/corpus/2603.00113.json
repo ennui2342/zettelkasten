@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2603.00113",
+  "title": "Position: AI Agents Are Not (Yet) a Panacea for Social Simulation",
+  "abstract": "Recent advances in large language models (LLMs) have spurred growing interest in using LLM-integrated agents for social simulation, often under the implicit assumption that realistic population dynamics will emerge once role-specified agents are placed in a networked multi-agent setting. This position paper argues that LLM-based agents are not (yet) a panacea for social simulation. We attribute this over-optimism to a systematic mismatch between what current agent pipelines are typically optimized and validated to produce and what simulation-as-science requires. Concretely, role-playing plausibility does not imply faithful human behavioral validity; collective outcomes are frequently mediated by agent-environment co-dynamics rather than agent-agent messaging alone; and results can be dominated by interaction protocols, scheduling, and initial information priors, especially in policy-oriented settings. To make these assumptions explicit and auditable, we propose a unified formulation of AI agent-based social simulation as an environment-involved partially observable Markov game with explicit exposure and scheduling mechanisms and call for further actions.",
+  "authors": [
+    "Yiming Li",
+    "Dacheng Tao"
+  ],
+  "published": "2026-02-19T06:35:07Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI",
+    "cs.CE",
+    "cs.CY",
+    "cs.SI"
+  ],
+  "url": "https://arxiv.org/abs/2603.00113"
+}

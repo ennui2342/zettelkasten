@@ -1,0 +1,16 @@
+{
+  "arxiv_id": "2601.05509",
+  "title": "How Exploration Breaks Cooperation in Shared-Policy Multi-Agent Reinforcement Learning",
+  "abstract": "Multi-agent reinforcement learning in dynamic social dilemmas commonly relies on parameter sharing to enable scalability. We show that in shared-policy Deep Q-Network learning, standard exploration can induce a robust and systematic collapse of cooperation even in environments where fully cooperative equilibria are stable and payoff dominant. Through controlled experiments, we demonstrate that shared DQN converges to stable but persistently low-cooperation regimes. This collapse is not caused by reward misalignment, noise, or insufficient training, but by a representational failure arising from partial observability combined with parameter coupling across heterogeneous agent states. Exploration-driven updates bias the shared representation toward locally dominant defection responses, which then propagate across agents and suppress cooperative learning. We confirm that the failure persists across network sizes, exploration schedules, and payoff structures, and disappears when parameter sharing is removed or when agents maintain independent representations. These results identify a fundamental failure mode of shared-policy MARL and establish structural conditions under which scalable learning architectures can systematically undermine cooperation. Our findings provide concrete guidance for the design of multi-agent learning systems in social and economic environments where collective behavior is critical.",
+  "authors": [
+    "Yi-Ning Weng",
+    "Hsuan-Wei Lee"
+  ],
+  "published": "2026-01-09T03:30:17Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "physics.soc-ph"
+  ],
+  "url": "https://arxiv.org/abs/2601.05509"
+}

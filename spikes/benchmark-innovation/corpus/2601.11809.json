@@ -1,0 +1,16 @@
+{
+  "arxiv_id": "2601.11809",
+  "title": "Multi-agent DRL-based Lane Change Decision Model for Cooperative Planning in Mixed Traffic",
+  "abstract": "Connected automated vehicles (CAVs) possess the ability to communicate and coordinate with one another, enabling cooperative platooning that enhances both energy efficiency and traffic flow. However, during the initial stage of CAV deployment, the sparse distribution of CAVs among human-driven vehicles reduces the likelihood of forming effective cooperative platoons. To address this challenge, this study proposes a hybrid multi-agent lane change decision model aimed at increasing CAV participation in cooperative platooning and maximizing its associated benefits. The proposed model employs the QMIX framework, integrating traffic data processed through a convolutional neural network (CNN-QMIX). This architecture addresses a critical issue in dynamic traffic scenarios by enabling CAVs to make optimal decisions irrespective of the varying number of CAVs present in mixed traffic. Additionally, a trajectory planner and a model predictive controller are designed to ensure smooth and safe lane-change execution. The proposed model is trained and evaluated within a microsimulation environment under varying CAV market penetration rates. The results demonstrate that the proposed model efficiently manages fluctuating traffic agent numbers, significantly outperforming the baseline rule-based models. Notably, it enhances cooperative platooning rates up to 26.2\\%, showcasing its potential to optimize CAV cooperation and traffic dynamics during the early stage of deployment.",
+  "authors": [
+    "Zeyu Mu",
+    "Shangtong Zhang",
+    "B. Brian Park"
+  ],
+  "published": "2026-01-16T22:22:05Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2601.11809"
+}

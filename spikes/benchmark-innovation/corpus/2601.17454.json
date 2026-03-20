@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2601.17454",
+  "title": "Embodiment-Induced Coordination Regimes in Tabular Multi-Agent Q-Learning",
+  "abstract": "Centralized value learning is often assumed to improve coordination and stability in multi-agent reinforcement learning, yet this assumption is rarely tested under controlled conditions. We directly evaluate it in a fully tabular predator-prey gridworld by comparing independent and centralized Q-learning under explicit embodiment constraints on agent speed and stamina. Across multiple kinematic regimes and asymmetric agent roles, centralized learning fails to provide a consistent advantage and is frequently outperformed by fully independent learning, even under full observability and exact value estimation. Moreover, asymmetric centralized-independent configurations induce persistent coordination breakdowns rather than transient learning instability. By eliminating confounding effects from function approximation and representation learning, our tabular analysis isolates coordination structure as the primary driver of these effects. The results show that increased coordination can become a liability under embodiment constraints, and that the effectiveness of centralized learning is fundamentally regime and role dependent rather than universal.",
+  "authors": [
+    "Muhammad Ahmed Atif",
+    "Nehal Naeem Haji",
+    "Mohammad Shahid Shaikh",
+    "Muhammad Ebad Atif"
+  ],
+  "published": "2026-01-24T13:09:01Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI",
+    "cs.LG"
+  ],
+  "url": "https://arxiv.org/abs/2601.17454"
+}

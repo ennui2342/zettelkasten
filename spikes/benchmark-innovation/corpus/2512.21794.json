@@ -1,0 +1,21 @@
+{
+  "arxiv_id": "2512.21794",
+  "title": "Multi-agent Adaptive Mechanism Design",
+  "abstract": "We study a sequential mechanism design problem in which a principal seeks to elicit truthful reports from multiple rational agents while starting with no prior knowledge of agents' beliefs. We introduce Distributionally Robust Adaptive Mechanism (DRAM), a general framework combining insights from both mechanism design and online learning to jointly address truthfulness and cost-optimality. Throughout the sequential game, the mechanism estimates agents' beliefs and iteratively updates a distributionally robust linear program with shrinking ambiguity sets to reduce payments while preserving truthfulness. Our mechanism guarantees truthful reporting with high probability while achieving $\\tilde{O}(\\sqrt{T})$ cumulative regret, and we establish a matching lower bound showing that no truthful adaptive mechanism can asymptotically do better. The framework generalizes to plug-in estimators, supporting structured priors and delayed feedback. To our knowledge, this is the first adaptive mechanism under general settings that maintains truthfulness and achieves optimal regret when incentive constraints are unknown and must be learned.",
+  "authors": [
+    "Qiushi Han",
+    "David Simchi-Levi",
+    "Renfei Tan",
+    "Zishuo Zhao"
+  ],
+  "published": "2025-12-25T21:59:51Z",
+  "primary_category": "cs.GT",
+  "categories": [
+    "cs.GT",
+    "cs.AI",
+    "cs.LG",
+    "cs.MA",
+    "econ.TH"
+  ],
+  "url": "https://arxiv.org/abs/2512.21794"
+}

@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2509.14877",
+  "title": "AI-Driven Multi-Agent Vehicular Planning for Battery Efficiency and QoS in 6G Smart Cities",
+  "abstract": "While simulators exist for vehicular IoT nodes communicating with the Cloud through Edge nodes in a fully-simulated osmotic architecture, they often lack support for dynamic agent planning and optimisation to minimise vehicular battery consumption while ensuring fair communication times. Addressing these challenges requires extending current simulator architectures with AI algorithms for both traffic prediction and dynamic agent planning. This paper presents an extension of SimulatorOrchestrator (SO) to meet these requirements. Preliminary results over a realistic urban dataset show that utilising vehicular planning algorithms can lead to improved battery and QoS performance compared with traditional shortest path algorithms. The additional inclusion of desirability areas enabled more ambulances to be routed to their target destinations while utilising less energy to do so, compared to traditional and weighted algorithms without desirability considerations.",
+  "authors": [
+    "Rohin Gillgallon",
+    "Giacomo Bergami",
+    "Reham Almutairi",
+    "Graham Morgan"
+  ],
+  "published": "2025-09-18T11:46:22Z",
+  "primary_category": "cs.NI",
+  "categories": [
+    "cs.NI",
+    "cs.AI",
+    "cs.ET"
+  ],
+  "url": "https://arxiv.org/abs/2509.14877"
+}

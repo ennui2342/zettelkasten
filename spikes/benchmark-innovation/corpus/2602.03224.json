@@ -1,0 +1,24 @@
+{
+  "arxiv_id": "2602.03224",
+  "title": "TAME: A Trustworthy Test-Time Evolution of Agent Memory with Systematic Benchmarking",
+  "abstract": "Test-time evolution of agent memory serves as a pivotal paradigm for achieving AGI by bolstering complex reasoning through experience accumulation. However, even during benign task evolution, agent safety alignment remains vulnerable-a phenomenon known as Agent Memory Misevolution. To evaluate this phenomenon, we construct the Trust-Memevo benchmark to assess multi-dimensional trustworthiness during benign task evolution, revealing an overall decline in trustworthiness across various task domains and evaluation settings. To address this issue, we propose TAME, a dual-memory evolutionary framework that separately evolves executor memory to improve task performance by distilling generalizable methodologies, and evaluator memory to refine assessments of both safety and task utility based on historical feedback. Through a closed loop of memory filtering, draft generation, trustworthy refinement, execution, and dual-track memory updating, TAME preserves trustworthiness without sacrificing utility. Experiments demonstrate that TAME mitigates misevolution, achieving a joint improvement in both trustworthiness and task performance.",
+  "authors": [
+    "Yu Cheng",
+    "Jiuan Zhou",
+    "Yongkang Hu",
+    "Yihang Chen",
+    "Huichi Zhou",
+    "Mingang Chen",
+    "Zhizhong Zhang",
+    "Kun Shao",
+    "Yuan Xie",
+    "Zhaoxia Yin"
+  ],
+  "published": "2026-02-03T07:52:26Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.LG"
+  ],
+  "url": "https://arxiv.org/abs/2602.03224"
+}

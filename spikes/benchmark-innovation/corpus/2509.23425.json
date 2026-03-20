@@ -1,0 +1,15 @@
+{
+  "arxiv_id": "2509.23425",
+  "title": "Situational Awareness for Safe and Robust Multi-Agent Interactions Under Uncertainty",
+  "abstract": "Multi-agent systems are prevalent in a wide range of domains including power systems, vehicular networks, and robotics. Two important problems to solve in these types of systems are how the intentions of non-coordinating agents can be determined to predict future behavior and how the agents can achieve their objectives under resource constraints without significantly sacrificing performance. To study this, we develop a model where an autonomous agent observes the environment within a safety radius of observation, determines the state of a surrounding agent of interest (within the observation radius), estimates future actions to be taken, and acts in an optimal way. In the absence of observations, agents are able to utilize an estimation algorithm to predict the future actions of other agents based on historical trajectory. The use of the proposed estimation algorithm introduces uncertainty, which is managed via risk analysis. The proposed approach in this study is validated using two different learning-based decision making frameworks: reinforcement learning and game theoretic algorithms.",
+  "authors": [
+    "Benjamin Alcorn",
+    "Eman Hammad"
+  ],
+  "published": "2025-09-27T17:38:37Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2509.23425"
+}

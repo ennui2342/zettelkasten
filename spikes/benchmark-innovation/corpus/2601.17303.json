@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2601.17303",
+  "title": "Decentralized Multi-Agent Swarms for Autonomous Grid Security in Industrial IoT: A Consensus-based Approach",
+  "abstract": "As Industrial Internet of Things (IIoT) environments expand to include tens of thousands of connected devices. The centralization of security monitoring architectures creates serious latency issues that savvy attackers can exploit to compromise an entire manufacturing ecosystem. This paper outlines a new, decentralized multi-agent swarm (DMAS) architecture that includes autonomous artificial intelligence (AI) agents at each edge gateway, functioning as a distributed digital \"immune system\" for IIoT networks. Instead of using a traditional static firewall approach, the DMAS agents communicate via a lightweight peer-to-peer protocol to cooperatively detect anomalous behavior across the IIoT network without sending data to a cloud infrastructure. The authors also outline a consensus-based threat validation (CVT) process in which agents vote on the threat level of an identified threat, enabling instant quarantine of a compromised node or nodes. The authors conducted experiments on a testbed that simulated an innovative factory environment with 2000 IIoT devices and found that the DMAS demonstrated sub-millisecond response times (average of 0.85ms), 97.3% accuracy in detecting malicious activity under high load, and 87% accuracy in detecting zero-day attacks. All significantly higher than baseline values for both centralized and edge computing. Additionally, the proposed architecture can prevent real-time cascading failures in industrial control systems and reduce network bandwidth use by 89% compared to cloud-based solutions.",
+  "authors": [
+    "Samaresh Kumar Singh",
+    "Joyjit Roy"
+  ],
+  "published": "2026-01-24T04:25:36Z",
+  "primary_category": "cs.LG",
+  "categories": [
+    "cs.LG",
+    "cs.AI",
+    "cs.DC",
+    "cs.ET"
+  ],
+  "url": "https://arxiv.org/abs/2601.17303"
+}

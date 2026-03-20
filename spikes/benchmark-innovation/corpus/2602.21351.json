@@ -1,0 +1,21 @@
+{
+  "arxiv_id": "2602.21351",
+  "title": "A Hierarchical Multi-Agent System for Autonomous Discovery in Geoscientific Data Archives",
+  "abstract": "The rapid accumulation of Earth science data has created a significant scalability challenge; while repositories like PANGAEA host vast collections of datasets, citation metrics indicate that a substantial portion remains underutilized, limiting data reusability. Here we present PANGAEA-GPT, a hierarchical multi-agent framework designed for autonomous data discovery and analysis. Unlike standard Large Language Model (LLM) wrappers, our architecture implements a centralized Supervisor-Worker topology with strict data-type-aware routing, sandboxed deterministic code execution, and self-correction via execution feedback, enabling agents to diagnose and resolve runtime errors. Through use-case scenarios spanning physical oceanography and ecology, we demonstrate the system's capacity to execute complex, multi-step workflows with minimal human intervention. This framework provides a methodology for querying and analyzing heterogeneous repository data through coordinated agent workflows.",
+  "authors": [
+    "Dmitrii Pantiukhin",
+    "Ivan Kuznetsov",
+    "Boris Shapkin",
+    "Antonia Anna Jost",
+    "Thomas Jung",
+    "Nikolay Koldunov"
+  ],
+  "published": "2026-02-24T20:37:38Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.IR",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2602.21351"
+}

@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2512.12365",
+  "title": "Synthetic Swarm Mosquito Dataset for Acoustic Classification: A Proof of Concept",
+  "abstract": "Mosquito-borne diseases pose a serious global health threat, causing over 700,000 deaths annually. This work introduces a proof-of-concept Synthetic Swarm Mosquito Dataset for Acoustic Classification, created to simulate realistic multi-species and noisy swarm conditions. Unlike conventional datasets that require labor-intensive recording of individual mosquitoes, the synthetic approach enables scalable data generation while reducing human resource demands. Using log-mel spectrograms, we evaluated lightweight deep learning architectures for the classification of mosquito species. Experiments show that these models can effectively identify six major mosquito vectors and are suitable for deployment on embedded low-power devices. The study demonstrates the potential of synthetic swarm audio datasets to accelerate acoustic mosquito research and enable scalable real-time surveillance solutions.",
+  "authors": [
+    "Thai-Duy Dinh",
+    "Minh-Luan Vo",
+    "Cuong Tuan Nguyen",
+    "Bich-Hien Vo"
+  ],
+  "published": "2025-12-13T15:23:12Z",
+  "primary_category": "cs.LG",
+  "categories": [
+    "cs.LG"
+  ],
+  "url": "https://arxiv.org/abs/2512.12365"
+}

@@ -1,0 +1,21 @@
+{
+  "arxiv_id": "2509.22218",
+  "title": "VizGen: Data Exploration and Visualization from Natural Language via a Multi-Agent AI Architecture",
+  "abstract": "Data visualization is essential for interpreting complex datasets, yet traditional tools often require technical expertise, limiting accessibility. VizGen is an AI-assisted graph generation system that empowers users to create meaningful visualizations using natural language. Leveraging advanced NLP and LLMs like Claude 3.7 Sonnet and Gemini 2.0 Flash, it translates user queries into SQL and recommends suitable graph types. Built on a multi-agent architecture, VizGen handles SQL generation, graph creation, customization, and insight extraction. Beyond visualization, it analyzes data for patterns, anomalies, and correlations, and enhances user understanding by providing explanations enriched with contextual information gathered from the internet. The system supports real-time interaction with SQL databases and allows conversational graph refinement, making data analysis intuitive and accessible. VizGen democratizes data visualization by bridging the gap between technical complexity and user-friendly design.",
+  "authors": [
+    "Sandaru Fernando",
+    "Imasha Jayarathne",
+    "Sithumini Abeysekara",
+    "Shanuja Sithamparanthan",
+    "Thushari Silva",
+    "Deshan Jayawardana"
+  ],
+  "published": "2025-09-26T11:31:00Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI",
+    "cs.DB"
+  ],
+  "url": "https://arxiv.org/abs/2509.22218"
+}

@@ -1,0 +1,15 @@
+{
+  "arxiv_id": "2601.00321",
+  "title": "Offline Multi-Agent Reinforcement Learning for 6G Communications: Fundamentals, Applications and Future Directions",
+  "abstract": "The next-generation wireless technologies, including beyond 5G and 6G networks, are paving the way for transformative applications such as vehicle platooning, smart cities, and remote surgery. These innovations are driven by a vast array of interconnected wireless entities, including IoT devices, access points, UAVs, and CAVs, which increase network complexity and demand more advanced decision-making algorithms. Artificial intelligence (AI) and machine learning (ML), especially reinforcement learning (RL), are key enablers for such networks, providing solutions to high-dimensional and complex challenges. However, as networks expand to multi-agent environments, traditional online RL approaches face cost, safety, and scalability limitations. Offline multi-agent reinforcement learning (MARL) offers a promising solution by utilizing pre-collected data, reducing the need for real-time interaction. This article introduces a novel offline MARL algorithm based on conservative Q-learning (CQL), ensuring safe and efficient training. We extend this with meta-learning to address dynamic environments and validate the approach through use cases in radio resource management and UAV networks. Our work highlights offline MARL's advantages, limitations, and future directions in wireless applications.",
+  "authors": [
+    "Eslam Eldeeb",
+    "Hirley Alves"
+  ],
+  "published": "2026-01-01T12:09:58Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2601.00321"
+}

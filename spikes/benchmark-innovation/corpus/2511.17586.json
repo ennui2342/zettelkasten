@@ -1,0 +1,16 @@
+{
+  "arxiv_id": "2511.17586",
+  "title": "Hierarchical Adaptive Consensus Network: A Dynamic Framework for Scalable Consensus in Collaborative Multi-Agent AI Systems",
+  "abstract": "The consensus strategies used in collaborative multi-agent systems (MAS) face notable challenges related to adaptability, scalability, and convergence certainties. These approaches, including structured workflows, debate models, and iterative voting, often lead to communication bottlenecks, stringent decision-making processes, and delayed responses in solving complex and evolving tasks. This article introduces a three-tier architecture, the Hierarchical Adaptive Consensus Network (\\hacn), which suggests various consensus policies based on task characterization and agent performance metrics. The first layer collects the confidence-based voting outcomes of several local agent clusters. In contrast, the second level facilitates inter-cluster communication through cross-clustered partial knowledge sharing and dynamic timeouts. The third layer provides system-wide coordination and final arbitration by employing a global orchestration framework with adaptable decision rules. The proposed model achieves $\\bigO(n)$ communication complexity, as opposed to the $\\bigO(n^2)$ complexity of the existing fully connected MAS. Experiments performed in a simulated environment yielded a 99.9\\% reduction in communication overhead during consensus convergence. Furthermore, the proposed approach ensures consensus convergence through hierarchical escalation and dynamic adaptation for a wide variety of complicated tasks.",
+  "authors": [
+    "Rathin Chandra Shit",
+    "Sharmila Subudhi"
+  ],
+  "published": "2025-11-16T15:09:15Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2511.17586"
+}

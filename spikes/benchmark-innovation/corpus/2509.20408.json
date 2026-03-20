@@ -1,0 +1,20 @@
+{
+  "arxiv_id": "2509.20408",
+  "title": "A Theory of Multi-Agent Generative Flow Networks",
+  "abstract": "Generative flow networks utilize a flow-matching loss to learn a stochastic policy for generating objects from a sequence of actions, such that the probability of generating a pattern can be proportional to the corresponding given reward. However, a theoretical framework for multi-agent generative flow networks (MA-GFlowNets) has not yet been proposed. In this paper, we propose the theory framework of MA-GFlowNets, which can be applied to multiple agents to generate objects collaboratively through a series of joint actions. We further propose four algorithms: a centralized flow network for centralized training of MA-GFlowNets, an independent flow network for decentralized execution, a joint flow network for achieving centralized training with decentralized execution, and its updated conditional version. Joint Flow training is based on a local-global principle allowing to train a collection of (local) GFN as a unique (global) GFN. This principle provides a loss of reasonable complexity and allows to leverage usual results on GFN to provide theoretical guarantees that the independent policies generate samples with probability proportional to the reward function. Experimental results demonstrate the superiority of the proposed framework compared to reinforcement learning and MCMC-based methods.",
+  "authors": [
+    "Leo Maxime Brunswic",
+    "Haozhi Wang",
+    "Shuang Luo",
+    "Jianye Hao",
+    "Amir Rasouli",
+    "Yinchuan Li"
+  ],
+  "published": "2025-09-24T04:01:21Z",
+  "primary_category": "cs.LG",
+  "categories": [
+    "cs.LG",
+    "cs.DC"
+  ],
+  "url": "https://arxiv.org/abs/2509.20408"
+}

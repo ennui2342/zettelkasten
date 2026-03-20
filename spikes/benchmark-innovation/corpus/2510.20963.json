@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2510.20963",
+  "title": "Towards Scalable Oversight with Collaborative Multi-Agent Debate in Error Detection",
+  "abstract": "Accurate detection of errors in large language models (LLM) responses is central to the success of scalable oversight, or providing effective supervision to superhuman intelligence. Yet, self-diagnosis is often unreliable on complex tasks unless aided by reliable external feedback. Multi-agent debate (MAD) seems to be a natural alternative to external feedback: multiple LLMs provide complementary perspectives and cross-checks for error detection. However, prior MAD protocols frame debate as a zero-sum game, where the debaters compete to win the game instead of seeking the truth. Consequently, it leads to debate hacking: debaters tend to mislead the judge by misinterpreting the task or presenting overconfident claims, which introduce more mistakes and underperform single-agent methods. To mitigate the issue, we introduce a new collaborative MAD protocol, termed ColMAD, that reframes MAD as a non-zero sum game. Specifically, ColMAD encourages multiple agents to criticize each other in a supportive way, such that they can complement the missing points of each other. Therefore, the judge agent can make a more informative conclusion based on more comprehensive evidence. Empirically, we show that ColMAD significantly outperforms previous competitive MAD by 19% and brings non-trivial improvements over single-agent methods in error detection.",
+  "authors": [
+    "Yongqiang Chen",
+    "Gang Niu",
+    "James Cheng",
+    "Bo Han",
+    "Masashi Sugiyama"
+  ],
+  "published": "2025-10-23T19:46:00Z",
+  "primary_category": "cs.LG",
+  "categories": [
+    "cs.LG"
+  ],
+  "url": "https://arxiv.org/abs/2510.20963"
+}

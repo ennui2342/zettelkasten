@@ -1,0 +1,16 @@
+{
+  "arxiv_id": "2509.18088",
+  "title": "Strategic Coordination for Evolving Multi-agent Systems: A Hierarchical Reinforcement and Collective Learning Approach",
+  "abstract": "Decentralized combinatorial optimization in evolving multi-agent systems poses significant challenges, requiring agents to balance long-term decision-making, short-term optimized collective outcomes, while preserving autonomy of interactive agents under unanticipated changes. Reinforcement learning offers a way to model sequential decision-making through dynamic programming to anticipate future environmental changes. However, applying multi-agent reinforcement learning (MARL) to decentralized combinatorial optimization problems remains an open challenge due to the exponential growth of the joint state-action space, high communication overhead, and privacy concerns in centralized training. To address these limitations, this paper proposes Hierarchical Reinforcement and Collective Learning (HRCL), a novel approach that leverages both MARL and decentralized collective learning based on a hierarchical framework. Agents take high-level strategies using MARL to group possible plans for action space reduction and constrain the agent behavior for Pareto optimality. Meanwhile, the low-level collective learning layer ensures efficient and decentralized coordinated decisions among agents with minimal communication. Extensive experiments in a synthetic scenario and real-world smart city application models, including energy self-management and drone swarm sensing, demonstrate that HRCL significantly improves performance, scalability, and adaptability compared to the standalone MARL and collective learning approaches, achieving a win-win synthesis solution.",
+  "authors": [
+    "Chuhao Qin",
+    "Evangelos Pournaras"
+  ],
+  "published": "2025-09-22T17:58:45Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.LG"
+  ],
+  "url": "https://arxiv.org/abs/2509.18088"
+}

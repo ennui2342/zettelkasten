@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2509.12049",
+  "title": "Interaction-Driven Browsing: A Human-in-the-Loop Conceptual Framework Informed by Human Web Browsing for Browser-Using Agents",
+  "abstract": "Although browser-using agents (BUAs) show promise for web tasks and automation, most BUAs terminate after executing a single instruction, failing to support users' complex, nonlinear browsing with ambiguous goals, iterative decision-making, and changing contexts. We present a human-in-the-loop (HITL) conceptual framework informed by theories of human web browsing behavior. The framework centers on an iterative loop in which the BUA proactively proposes next actions and the user steers the browsing process through feedback. It also distinguishes between exploration and exploitation actions, enabling users to control the breadth and depth of their browsing. Consequently, the framework aims to reduce users' physical and cognitive effort while preserving users' traditional browsing mental model and supporting users in achieving satisfactory outcomes. We illustrate how the framework operates with hypothetical use cases and discuss the shift from manual browsing to interaction-driven browsing. We contribute a theoretically informed conceptual framework for BUAs.",
+  "authors": [
+    "Hyeonggeun Yun",
+    "Jinkyu Jang"
+  ],
+  "published": "2025-09-15T15:31:53Z",
+  "primary_category": "cs.HC",
+  "categories": [
+    "cs.HC",
+    "cs.AI",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2509.12049"
+}

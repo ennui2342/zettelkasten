@@ -1,0 +1,21 @@
+{
+  "arxiv_id": "2511.15862",
+  "title": "The Subtle Art of Defection: Understanding Uncooperative Behaviors in LLM based Multi-Agent Systems",
+  "abstract": "This paper introduces a novel framework for simulating and analyzing how uncooperative behaviors can destabilize or collapse LLM-based multi-agent systems. Our framework includes two key components: (1) a game theory-based taxonomy of uncooperative agent behaviors, addressing a notable gap in the existing literature; and (2) a structured, multi-stage simulation pipeline that dynamically generates and refines uncooperative behaviors as agents' states evolve. We evaluate the framework via a collaborative resource management setting, measuring system stability using metrics such as survival time and resource overuse rate. Empirically, our framework achieves 96.7% accuracy in generating realistic uncooperative behaviors, validated by human evaluations. Our results reveal a striking contrast: cooperative agents maintain perfect system stability (100% survival over 12 rounds with 0% resource overuse), while any uncooperative behavior can trigger rapid system collapse within 1 to 7 rounds. We also evaluate LLM-based defense methods, finding they detect some uncooperative behaviors, but some behaviors remain largely undetectable. These gaps highlight how uncooperative agents degrade collective outcomes and underscore the need for more resilient multi-agent systems.",
+  "authors": [
+    "Devang Kulshreshtha",
+    "Wanyu Du",
+    "Raghav Jain",
+    "Srikanth Doss",
+    "Hang Su",
+    "Sandesh Swamy",
+    "Yanjun Qi"
+  ],
+  "published": "2025-11-19T20:39:19Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.CL"
+  ],
+  "url": "https://arxiv.org/abs/2511.15862"
+}

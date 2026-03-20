@@ -1,0 +1,26 @@
+{
+  "arxiv_id": "2511.19524",
+  "title": "VideoChat-M1: Collaborative Policy Planning for Video Understanding via Multi-Agent Reinforcement Learning",
+  "abstract": "By leveraging tool-augmented Multimodal Large Language Models (MLLMs), multi-agent frameworks are driving progress in video understanding. However, most of them adopt static and non-learnable tool invocation mechanisms, which limit the discovery of diverse clues essential for robust perception and reasoning regarding temporally or spatially complex videos. To address this challenge, we propose a novel Multi-agent system for video understanding, namely VideoChat-M1. Instead of using a single or fixed policy, VideoChat-M1 adopts a distinct Collaborative Policy Planning (CPP) paradigm with multiple policy agents, which comprises three key processes. (1) Policy Generation: Each agent generates its unique tool invocation policy tailored to the user's query; (2) Policy Execution: Each agent sequentially invokes relevant tools to execute its policy and explore the video content; (3) Policy Communication: During the intermediate stages of policy execution, agents interact with one another to update their respective policies. Through this collaborative framework, all agents work in tandem, dynamically refining their preferred policies based on contextual insights from peers to effectively respond to the user's query. Moreover, we equip our CPP paradigm with a concise Multi-Agent Reinforcement Learning (MARL) method. Consequently, the team of policy agents can be jointly optimized to enhance VideoChat-M1's performance, guided by both the final answer reward and intermediate collaborative process feedback. Extensive experiments demonstrate that VideoChat-M1 achieves SOTA performance across eight benchmarks spanning four tasks. Notably, on LongVideoBench, our method outperforms the SOTA model Gemini 2.5 pro by 3.6% and GPT-4o by 15.6%.",
+  "authors": [
+    "Boyu Chen",
+    "Zikang Wang",
+    "Zhengrong Yue",
+    "Kainan Yan",
+    "Chenyun Yu",
+    "Yi Huang",
+    "Zijun Liu",
+    "Yafei Wen",
+    "Xiaoxin Chen",
+    "Yang Liu",
+    "Peng Li",
+    "Yali Wang"
+  ],
+  "published": "2025-11-24T07:04:51Z",
+  "primary_category": "cs.CV",
+  "categories": [
+    "cs.CV",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2511.19524"
+}

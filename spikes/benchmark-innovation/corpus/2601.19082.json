@@ -1,0 +1,33 @@
+{
+  "arxiv_id": "2601.19082",
+  "title": "More at Stake: How Payoff and Language Shape LLM Agent Strategies in Cooperation Dilemmas",
+  "abstract": "As LLMs increasingly act as autonomous agents in interactive and multi-agent settings, understanding their strategic behavior is critical for safety, coordination, and AI-driven social and economic systems. We investigate how payoff magnitude and linguistic context shape LLM strategies in repeated social dilemmas, using a payoff-scaled Prisoner's Dilemma to isolate sensitivity to incentive strength. Across models and languages, we observe consistent behavioral patterns, including incentive-sensitive conditional strategies and cross-linguistic divergence. To interpret these dynamics, we train supervised classifiers on canonical repeated-game strategies and apply them to LLM decisions, revealing systematic, model- and language-dependent behavioral intentions, with linguistic framing sometimes matching or exceeding architectural effects. Our results provide a unified framework for auditing LLMs as strategic agents and highlight cooperation biases with direct implications for AI governance and multi-agent system design.",
+  "authors": [
+    "Trung-Kiet Huynh",
+    "Dao-Sy Duy-Minh",
+    "Thanh-Bang Cao",
+    "Phong-Hao Le",
+    "Hong-Dan Nguyen",
+    "Nguyen Lam Phu Quy",
+    "Minh-Luan Nguyen-Vo",
+    "Hong-Phat Pham",
+    "Pham Phu Hoa",
+    "Thien-Kim Than",
+    "Chi-Nguyen Tran",
+    "Huy Tran",
+    "Gia-Thoai Tran-Le",
+    "Alessio Buscemi",
+    "Le Hong Trang",
+    "The Anh Han"
+  ],
+  "published": "2026-01-27T01:36:50Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.CL",
+    "cs.GT",
+    "cs.LG",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2601.19082"
+}

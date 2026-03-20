@@ -1,0 +1,16 @@
+{
+  "arxiv_id": "2512.08737",
+  "title": "Insured Agents: A Decentralized Trust Insurance Mechanism for Agentic Economy",
+  "abstract": "The emerging \"agentic web\" envisions large populations of autonomous agents coordinating, transacting, and delegating across open networks. Yet many agent communication and commerce protocols treat agents as low-cost identities, despite the empirical reality that LLM agents remain unreliable, hallucinated, manipulable, and vulnerable to prompt-injection and tool-abuse. A natural response is \"agents-at-stake\": binding economically meaningful, slashable collateral to persistent identities and adjudicating misbehavior with verifiable evidence. However, heterogeneous tasks make universal verification brittle and centralization-prone, while traditional reputation struggles under rapid model drift and opaque internal states. We propose a protocol-native alternative: insured agents. Specialized insurer agents post stake on behalf of operational agents in exchange for premiums, and receive privileged, privacy-preserving audit access via TEEs to assess claims. A hierarchical insurer market calibrates stake through pricing, decentralizes verification via competitive underwriting, and yields incentive-compatible dispute resolution.",
+  "authors": [
+    "Botao 'Amber' Hu",
+    "Bangdao Chen"
+  ],
+  "published": "2025-12-09T15:47:16Z",
+  "primary_category": "cs.CY",
+  "categories": [
+    "cs.CY",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2512.08737"
+}

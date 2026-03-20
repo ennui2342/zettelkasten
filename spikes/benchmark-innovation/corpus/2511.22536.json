@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2511.22536",
+  "title": "A Computable Game-Theoretic Framework for Multi-Agent Theory of Mind",
+  "abstract": "Originating in psychology, $\\textit{Theory of Mind}$ (ToM) has attracted significant attention across multiple research communities, especially logic, economics, and robotics. Most psychological work does not aim at formalizing those central concepts, namely $\\textit{goals}$, $\\textit{intentions}$, and $\\textit{beliefs}$, to automate a ToM-based computational process, which, by contrast, has been extensively studied by logicians. In this paper, we offer a different perspective by proposing a computational framework viewed through the lens of game theory. On the one hand, the framework prescribes how to make boudedly rational decisions while maintaining a theory of mind about others (and recursively, each of the others holding a theory of mind about the rest); on the other hand, it employs statistical techniques and approximate solutions to retain computability of the inherent computational problem.",
+  "authors": [
+    "Fengming Zhu",
+    "Yuxin Pan",
+    "Xiaomeng Zhu",
+    "Fangzhen Lin"
+  ],
+  "published": "2025-11-27T15:13:45Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.GT",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2511.22536"
+}

@@ -1,0 +1,28 @@
+{
+  "arxiv_id": "2603.08719",
+  "title": "SiliconMind-V1: Multi-Agent Distillation and Debug-Reasoning Workflows for Verilog Code Generation",
+  "abstract": "Large language models (LLMs) have recently emerged as a promising approach for automating Verilog code generation; however, existing methods primarily emphasize syntactic correctness and often rely on commercial models or external verification tools, which introduces concerns regarding cost, data privacy, and limited guarantees of functional correctness. This work proposes a unified multi-agent framework for reasoning-oriented training data generation with integrated testbench-driven verification, enabling locally fine-tuned LLMs, SiliconMind-V1, to iteratively generate, test, and debug Register-Transfer Level (RTL) designs through test-time scaling. Experimental results on representative benchmarks (VerilogEval-v2, RTLLM-v2, and CVDP) demonstrate that the proposed approach outperforms the state-of-the-art QiMeng-CodeV-R1 in functional correctness while using fewer training resources.",
+  "authors": [
+    "Mu-Chi Chen",
+    "Yu-Hung Kao",
+    "Po-Hsuan Huang",
+    "Shao-Chun Ho",
+    "Hsiang-Yu Tsou",
+    "I-Ting Wu",
+    "En-Ming Huang",
+    "Yu-Kai Hung",
+    "Wei-Po Hsin",
+    "Cheng Liang",
+    "Chia-Heng Tu",
+    "Shih-Hao Hung",
+    "H. T. Kung"
+  ],
+  "published": "2026-02-10T06:43:20Z",
+  "primary_category": "cs.AR",
+  "categories": [
+    "cs.AR",
+    "cs.AI",
+    "cs.SE"
+  ],
+  "url": "https://arxiv.org/abs/2603.08719"
+}

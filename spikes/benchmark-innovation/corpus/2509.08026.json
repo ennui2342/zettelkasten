@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2509.08026",
+  "title": "Two-Stage Swarm Intelligence Ensemble Deep Transfer Learning (SI-EDTL) for Vehicle Detection Using Unmanned Aerial Vehicles",
+  "abstract": "This paper introduces SI-EDTL, a two-stage swarm intelligence ensemble deep transfer learning model for detecting multiple vehicles in UAV images. It combines three pre-trained Faster R-CNN feature extractor models (InceptionV3, ResNet50, GoogLeNet) with five transfer classifiers (KNN, SVM, MLP, C4.5, Naïve Bayes), resulting in 15 different base learners. These are aggregated via weighted averaging to classify regions as Car, Van, Truck, Bus, or background. Hyperparameters are optimized with the whale optimization algorithm to balance accuracy, precision, and recall. Implemented in MATLAB R2020b with parallel processing, SI-EDTL outperforms existing methods on the AU-AIR UAV dataset.",
+  "authors": [
+    "Zeinab Ghasemi Darehnaei",
+    "Mohammad Shokouhifar",
+    "Hossein Yazdanjouei",
+    "S. M. J. Rastegar Fatemi"
+  ],
+  "published": "2025-09-09T13:03:12Z",
+  "primary_category": "cs.CV",
+  "categories": [
+    "cs.CV",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2509.08026"
+}

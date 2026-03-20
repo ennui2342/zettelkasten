@@ -1,0 +1,21 @@
+{
+  "arxiv_id": "2602.03414",
+  "title": "Socratic-Geo: Synthetic Data Generation and Geometric Reasoning via Multi-Agent Interaction",
+  "abstract": "Multimodal Large Language Models (MLLMs) have significantly advanced vision-language understanding. However, even state-of-the-art models struggle with geometric reasoning, revealing a critical bottleneck: the extreme scarcity of high-quality image-text pairs. Human annotation is prohibitively expensive, while automated methods fail to ensure fidelity and training effectiveness. Existing approaches either passively adapt to available images or employ inefficient random exploration with filtering, decoupling generation from learning needs. We propose Socratic-Geo, a fully autonomous framework that dynamically couples data synthesis with model learning through multi-agent interaction. The Teacher agent generates parameterized Python scripts with reflective feedback (Reflect for solvability, RePI for visual validity), ensuring image-text pair purity. The Solver agent optimizes reasoning through preference learning, with failure paths guiding Teacher's targeted augmentation. Independently, the Generator learns image generation capabilities on accumulated \"image-code-instruction\" triplets, distilling programmatic drawing intelligence into visual generation. Starting from only 108 seed problems, Socratic-Solver achieves 49.11 on six benchmarks using one-quarter of baseline data, surpassing strong baselines by 2.43 points. Socratic-Generator achieves 42.4% on GenExam, establishing new state-of-the-art for open-source models, surpassing Seedream-4.0 (39.8%) and approaching Gemini-2.5-Flash-Image (43.1%).",
+  "authors": [
+    "Zhengbo Jiao",
+    "Shaobo Wang",
+    "Zifan Zhang",
+    "Wei Wang",
+    "Bing Zhao",
+    "Hu Wei",
+    "Linfeng Zhang"
+  ],
+  "published": "2026-02-03T11:42:25Z",
+  "primary_category": "cs.CV",
+  "categories": [
+    "cs.CV",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2602.03414"
+}

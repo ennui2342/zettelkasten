@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2602.18451",
+  "title": "Developing a Multi-Agent System to Generate Next Generation Science Assessments with Evidence-Centered Design",
+  "abstract": "Contemporary science education reforms such as the Next Generation Science Standards (NGSS) demand assessments to understand students' ability to use science knowledge to solve problems and design solutions. To elicit such higher-order ability, educators need performance-based assessments, which are challenging to develop. One solution that has been broadly adopted is Evidence-Centered Design (ECD), which emphasizes interconnected models of the learner, evidence, and tasks. Although ECD provides a framework to safeguard assessment validity, its implementation requires diverse expertise (e.g., content and assessment), which is both costly and labor-intensive. To address this challenge, this study proposed integrating the ECD framework into Multi-Agent Systems (MAS) to generate NGSS-aligned assessment items automatically. This integrated MAS system ensembles multiple large language models with varying expertise, enabling the automation of complex, multi-stage item generation workflows traditionally performed by human experts. We examined the quality of AI-generated NGSS-aligned items and compared them with human-developed items across multiple dimensions of assessment design. Results showed that AI-generated items have overall comparable quality to human-developed items in terms of alignment with NGSS three-dimensional standards and cognitive demands. Divergent patterns also emerged: AI-generated items demonstrated a distinct strength in inclusivity, while also exhibiting limitations in clarity, conciseness, and multimodal design. AI- and human-developed items both showed weaknesses in evidence collectability and student interest alignment. These findings suggest that integrating ECD into MAS can support scalable and standards-aligned assessment design, while human expertise remains essential.",
+  "authors": [
+    "Yaxuan Yang",
+    "Jongchan Park",
+    "Yifan Zhou",
+    "Xiaoming Zhai"
+  ],
+  "published": "2026-02-03T04:37:24Z",
+  "primary_category": "cs.CY",
+  "categories": [
+    "cs.CY",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2602.18451"
+}

@@ -1,0 +1,22 @@
+{
+  "arxiv_id": "2512.16167",
+  "title": "Ev-Trust: An Evolutionary Stable Trust Mechanism for Decentralized LLM-Based Multi-Agent Service Economies",
+  "abstract": "Autonomous LLM-based agents are increasingly engaging in decentralized service interactions to collaboratively execute complex tasks. However, the intrinsic instability and low-cost generativity of LLMs introduce a systemic vulnerability, where self-interested agents are incentivized to pursue short-term gains through deceptive behaviors. Such strategies can rapidly proliferate within the population and precipitate a systemic trust collapse. To address this, we propose Ev-Trust, a strategy-equilibrium trust mechanism grounded in evolutionary game theory. Ev-Trust constructs a dynamic feedback loop that couples trust evaluation with evolutionary incentives, embedding interaction history and reputation directly into the agent's expected revenue function. This mechanism fundamentally reshapes the revenue structure, converting trustworthiness into a decisive survival advantage that suppresses short-sightedness. We provide a rigorous theoretical foundation based on the Replicator Dynamics, proving the asymptotic stability of Evolutionary Stable Strategies (ESS) that favor cooperation. Experimental results indicate that Ev-Trust effectively eliminates malicious strategies and enhances collective revenue, exhibiting resilience against the invasion of mutant behaviors.",
+  "authors": [
+    "Jiye Wang",
+    "Shiduo Yang",
+    "Jiayu Qin",
+    "Jianbin Li",
+    "Yu Wang",
+    "Yuanhe Zhao",
+    "Kenan Guo"
+  ],
+  "published": "2025-12-18T04:39:13Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI",
+    "cs.GT"
+  ],
+  "url": "https://arxiv.org/abs/2512.16167"
+}

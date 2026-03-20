@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2601.06557",
+  "title": "Modeling Descriptive Norms in Multi-Agent Systems: An Auto-Aggregation PDE Framework with Adaptive Perception Kernels",
+  "abstract": "This paper presents a PDE-based auto-aggregation model for simulating descriptive norm dynamics in autonomous multi-agent systems, capturing convergence and violation through non-local perception kernels and external potential fields. Extending classical transport equations, the framework represents opinion popularity as a continuous distribution, enabling direct interactions without Bayesian guessing of beliefs. Applied to a real-world COVID-19 dataset from a major medical center, the experimental results demonstrate that: when clinical guidelines serve as a top-down constraint mechanism, it effectively generates convergence of novel descriptive norms consistent with the dataset; in the bottom-up experiment, potential field guidance successfully promotes the system's reconstruction of descriptive norms aligned with the dataset through violation-and-recoupling; whereas fully autonomous interaction leads to the emergence of multi-centric normative structures independent of the dataset.",
+  "authors": [
+    "Chao Li",
+    "Ilia Derevitskii",
+    "Sergey Kovalchuk"
+  ],
+  "published": "2026-01-10T12:53:32Z",
+  "primary_category": "eess.SY",
+  "categories": [
+    "eess.SY",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2601.06557"
+}

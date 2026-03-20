@@ -1,0 +1,11 @@
+{
+  "scenario_key": "s3",
+  "scenario_name": "Cosine Similarity \u2014 Duplicate Accumulation",
+  "bridging_text_len": 984,
+  "drafts": [
+    {
+      "title": "Similarity Metrics in Embedding-Based Retrieval Systems",
+      "body": "Cosine similarity is the dominant metric used in production embedding-based retrieval systems. It is mathematically equivalent to the normalised dot product: the dot product of two vectors divided by the product of their L2 norms. These two descriptions \u2014 \"cosine similarity\" and \"normalised dot product\" \u2014 refer to exactly the same operation, with no distinction between them. Different software frameworks simply expose the operation under different names: some label it cosine similarity (e.g., scikit-learn, sentence-transformers), while others implement it as a dot product applied to pre-normalised vectors (e.g., FAISS, the OpenAI embeddings API).\n\nA key practical optimisation follows from this equivalence: embeddings can be L2-normalised once at index time, after which plain dot product computation at search time yields cosine similarity semantics while maximising SIMD throughput. Major vector databases \u2014 including Pinecone, Weaviate, and Qdrant \u2014 perform this normalisation automatically when the cosine metric is selected, abstracting the step away from the user."
+    }
+  ]
+}

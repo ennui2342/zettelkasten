@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2509.13712",
+  "title": "Inject, Fork, Compare: Defining an Interaction Vocabulary for Multi-Agent Simulation Platforms",
+  "abstract": "LLM-based multi-agent simulations are a rapidly growing field of research, but current simulations often lack clear modes for interaction and analysis, limiting the \"what if\" scenarios researchers are able to investigate. In this demo, we define three core operations for interacting with multi-agent simulations: inject, fork, and compare. Inject allows researchers to introduce external events at any point during simulation execution. Fork creates independent timeline branches from any timestamp, preserving complete state while allowing divergent exploration. Compare facilitates parallel observation of multiple branches, revealing how different interventions lead to distinct emergent behaviors. Together, these operations establish a vocabulary that transforms linear simulation workflows into interactive, explorable spaces. We demonstrate this vocabulary through a commodity market simulation with fourteen AI agents, where researchers can inject contrasting events and observe divergent outcomes across parallel timelines. By defining these fundamental operations, we provide a starting point for systematic causal investigation in LLM-based agent simulations, moving beyond passive observation toward active experimentation.",
+  "authors": [
+    "HwiJoon Lee",
+    "Martina Di Paola",
+    "Yoo Jin Hong",
+    "Quang-Huy Nguyen",
+    "Joseph Seering"
+  ],
+  "published": "2025-09-17T05:42:36Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.HC"
+  ],
+  "url": "https://arxiv.org/abs/2509.13712"
+}

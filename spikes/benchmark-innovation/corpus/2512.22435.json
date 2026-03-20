@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2512.22435",
+  "title": "AnalogSAGE: Self-evolving Analog Design Multi-Agents with Stratified Memory and Grounded Experience",
+  "abstract": "Analog circuit design remains a knowledge- and experience-intensive process that relies heavily on human intuition for topology generation and device parameter tuning. Existing LLM-based approaches typically depend on prompt-driven netlist generation or predefined topology templates, limiting their ability to satisfy complex specification requirements. We propose AnalogSAGE, an open-source self-evolving multi-agent framework that coordinates three-stage agent explorations through four stratified memory layers, enabling iterative refinement with simulation-grounded feedback. To support reproducibility and generality, we release the source code. Our benchmark spans ten specification-driven operational amplifier design problems of varying difficulty, enabling quantitative and cross-task comparison under identical conditions. Evaluated under the open-source SKY130 PDK with ngspice, AnalogSAGE achieves a 10$\\times$ overall pass rate, a 48$\\times$ Pass@1, and a 4$\\times$ reduction in parameter search space compared with existing frameworks, demonstrating that stratified memory and grounded reasoning substantially enhance the reliability and autonomy of analog design automation in practice.",
+  "authors": [
+    "Zining Wang",
+    "Jian Gao",
+    "Weimin Fu",
+    "Xiaolong Guo",
+    "Xuan Zhang"
+  ],
+  "published": "2025-12-27T02:06:05Z",
+  "primary_category": "cs.AR",
+  "categories": [
+    "cs.AR",
+    "cs.LG"
+  ],
+  "url": "https://arxiv.org/abs/2512.22435"
+}

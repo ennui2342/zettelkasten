@@ -1,0 +1,23 @@
+{
+  "arxiv_id": "2601.21473",
+  "title": "ScaleSim: Serving Large-Scale Multi-Agent Simulation with Invocation Distance-Based Memory Management",
+  "abstract": "LLM-based multi-agent simulations are increasingly adopted across application domains, but remain difficult to scale due to GPU memory pressure. Each agent maintains private GPU-resident states, including models, prefix caches, and adapters, which quickly exhaust device memory as the agent count grows. We identify two key properties of these workloads: sparse agent activation and an estimable agent invocation order. Based on an analysis of representative workload classes, we introduce invocation distance, a unified abstraction that estimates the relative order in which agents will issue future LLM requests. Leveraging this abstraction, we present ScaleSim, a memory-efficient LLM serving system for large-scale multi-agent simulations. ScaleSim enables proactive prefetching and priority-based eviction, supports diverse agent-specific memory through a modular interface, and achieves up to 1.74x speedup over SGLang on simulation benchmarks.",
+  "authors": [
+    "Zaifeng Pan",
+    "Yipeng Shen",
+    "Zhengding Hu",
+    "Zhuang Wang",
+    "Aninda Manocha",
+    "Zheng Wang",
+    "Zhongkai Yu",
+    "Yue Guan",
+    "Yufei Ding"
+  ],
+  "published": "2026-01-29T09:52:16Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.DC"
+  ],
+  "url": "https://arxiv.org/abs/2601.21473"
+}

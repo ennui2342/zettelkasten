@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2509.05651",
+  "title": "Orchestrator: Active Inference for Multi-Agent Systems in Long-Horizon Tasks",
+  "abstract": "Complex, non-linear tasks challenge LLM-enhanced multi-agent systems (MAS) due to partial observability and suboptimal coordination. We propose Orchestrator, a novel MAS framework that leverages attention-inspired self-emergent coordination and reflective benchmarking to optimize global task performance. Orchestrator introduces a monitoring mechanism to track agent-environment dynamics, using active inference benchmarks to optimize system behavior. By tracking agent-to-agent and agent-to-environment interaction, Orchestrator mitigates the effects of partial observability and enables agents to approximate global task solutions more efficiently. We evaluate the framework on a series of maze puzzles of increasing complexity, demonstrating its effectiveness in enhancing coordination and performance in dynamic, non-linear environments with long-horizon objectives.",
+  "authors": [
+    "Lukas Beckenbauer",
+    "Johannes-Lucas Loewe",
+    "Ge Zheng",
+    "Alexandra Brintrup"
+  ],
+  "published": "2025-09-06T09:03:36Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2509.05651"
+}

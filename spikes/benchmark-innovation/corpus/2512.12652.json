@@ -1,0 +1,15 @@
+{
+  "arxiv_id": "2512.12652",
+  "title": "Value-Aware Multiagent Systems",
+  "abstract": "This paper introduces the concept of value awareness in AI, which goes beyond the traditional value-alignment problem. Our definition of value awareness presents us with a concise and simplified roadmap for engineering value-aware AI. The roadmap is structured around three core pillars: (1) learning and representing human values using formal semantics, (2) ensuring the value alignment of both individual agents and multiagent systems, and (3) providing value-based explainability on behaviour. The paper presents a selection of our ongoing work on some of these topics, along with applications to real-life domains.",
+  "authors": [
+    "Nardine Osman"
+  ],
+  "published": "2025-12-14T11:53:36Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2512.12652"
+}

@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2602.10685",
+  "title": "Beyond Task Performance: A Metric-Based Analysis of Sequential Cooperation in Heterogeneous Multi-Agent Destructive Foraging",
+  "abstract": "This work addresses the problem of analyzing cooperation in heterogeneous multi-agent systems which operate under partial observability and temporal role dependency, framed within a destructive multi-agent foraging setting. Unlike most previous studies, which focus primarily on algorithmic performance with respect to task completion, this article proposes a systematic set of general-purpose cooperation metrics aimed at characterizing not only efficiency, but also coordination and dependency between teams and agents, fairness, and sensitivity. These metrics are designed to be transferable to different multi-agent sequential domains similar to foraging. The proposed suite of metrics is structured into three main categories that jointly provide a multilevel characterization of cooperation: primary metrics, inter-team metrics, and intra-team metrics. They have been validated in a realistic destructive foraging scenario inspired by dynamic aquatic surface cleaning using heterogeneous autonomous vehicles. It involves two specialized teams with sequential dependencies: one focused on the search of resources, and another on their destruction. Several representative approaches have been evaluated, covering both learning-based algorithms and classical heuristic paradigms.",
+  "authors": [
+    "Alejandro Mendoza Barrionuevo",
+    "Samuel Yanes Luis",
+    "Daniel Gutiérrez Reina",
+    "Sergio L. Toral Marín"
+  ],
+  "published": "2026-02-11T09:39:24Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.LG"
+  ],
+  "url": "https://arxiv.org/abs/2602.10685"
+}

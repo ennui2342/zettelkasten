@@ -1,0 +1,26 @@
+{
+  "arxiv_id": "2601.12815",
+  "title": "Multimodal Multi-Agent Empowered Legal Judgment Prediction",
+  "abstract": "Legal Judgment Prediction (LJP) aims to predict the outcomes of legal cases based on factual descriptions, serving as a fundamental task to advance the development of legal systems. Traditional methods often rely on statistical analyses or role-based simulations but face challenges with multiple allegations, diverse evidence, and lack adaptability. In this paper, we introduce JurisMMA, a novel framework for LJP that effectively decomposes trial tasks, standardizes processes, and organizes them into distinct stages. Furthermore, we build JurisMM, a large dataset with over 100,000 recent Chinese judicial records, including both text and multimodal video-text data, enabling comprehensive evaluation. Experiments on JurisMM and the benchmark LawBench validate our framework's effectiveness. These results indicate that our framework is effective not only for LJP but also for a broader range of legal applications, offering new perspectives for the development of future legal methods and datasets.",
+  "authors": [
+    "Zhaolu Kang",
+    "Junhao Gong",
+    "Qingxi Chen",
+    "Hao Zhang",
+    "Jiaxin Liu",
+    "Rong Fu",
+    "Zhiyuan Feng",
+    "Yuan Wang",
+    "Simon Fong",
+    "Kaiyue Zhou"
+  ],
+  "published": "2026-01-19T08:21:46Z",
+  "primary_category": "cs.CL",
+  "categories": [
+    "cs.CL",
+    "cs.AI",
+    "cs.CY",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2601.12815"
+}

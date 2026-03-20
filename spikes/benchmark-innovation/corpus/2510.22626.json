@@ -1,0 +1,20 @@
+{
+  "arxiv_id": "2510.22626",
+  "title": "SwiftSolve: A Self-Iterative, Complexity-Aware Multi-Agent Framework for Competitive Programming",
+  "abstract": "Correctness alone is insufficient: LLM-generated programs frequently satisfy unit tests while violating contest time or memory budgets. We present SwiftSolve, a complexity-aware multi-agent system for competitive programming that couples algorithmic planning with empirical profiling and complexity-guided repair. We frame competitive programming as a software environment where specialized agents act as programmers, each assuming roles such as planning, coding, profiling, and complexity analysis. A Planner proposes an algorithmic sketch; a deterministic Static Pruner filters high-risk plans; a Coder emits ISO C++17; a Profiler compiles and executes candidates on a fixed input-size schedule to record wall time and peak memory; and a Complexity Analyst fits log-log growth (s, R2) with an LLM fallback to assign a complexity class and dispatch targeted patches to either the Planner or Coder. Agents communicate via typed, versioned JSON; a controller enforces iteration caps and diminishing returns stopping. Evaluated on 26 problems (16 BigO, 10 Codeforces Div. 2) in a POSIX sandbox (2 s / 256-512 MB), SwiftSolve attains pass@1 = 61.54% (16/26) on the first attempt and Solved@<=3 = 80.77% with marginal latency change (mean 11.96 s to 12.66 s per attempt). Aggregate run-level success is 73.08% at 12.40 s mean. Failures are predominantly resource-bound, indicating inefficiency rather than logic errors. Against Claude Opus 4, SwiftSolve improves run-level success (73.1% vs 52.6%) at approximately 2x runtime overhead (12.4 s vs 6.8 s). Beyond correctness (pass@k), we report efficiency metrics (eff@k for runtime and memory, incidence of TLE or MLE, and complexity fit accuracy on BigO), demonstrating that profiling and complexity-guided replanning reduce inefficiency while preserving accuracy.",
+  "authors": [
+    "Adhyayan Veer Singh",
+    "Aaron Shen",
+    "Brian Law",
+    "Ahmed Ismail",
+    "Jonas Rohweder",
+    "Sean O'Brien",
+    "Kevin Zhu"
+  ],
+  "published": "2025-10-26T11:05:27Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2510.22626"
+}

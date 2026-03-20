@@ -1,0 +1,24 @@
+{
+  "arxiv_id": "2601.04651",
+  "title": "Adversarial Yet Cooperative: Multi-Perspective Reasoning in Retrieved-Augmented Language Models",
+  "abstract": "Recent advances in synergizing large reasoning models (LRMs) with retrieval-augmented generation (RAG) have shown promising results, yet two critical challenges remain: (1) reasoning models typically operate from a single, unchallenged perspective, limiting their ability to conduct deep, self-correcting reasoning over external documents, and (2) existing training paradigms rely excessively on outcome-oriented rewards, which provide insufficient signal for shaping the complex, multi-step reasoning process. To address these issues, we propose an Reasoner-Verifier framework named Adversarial Reasoning RAG (ARR). The Reasoner and Verifier engage in reasoning on retrieved evidence and critiquing each other's logic while being guided by process-aware advantage that requires no external scoring model. This reward combines explicit observational signals with internal model uncertainty to jointly optimize reasoning fidelity and verification rigor. Experiments on multiple benchmarks demonstrate the effectiveness of our method.",
+  "authors": [
+    "Can Xu",
+    "Lingyong Yan",
+    "Jiayi Wu",
+    "Haosen Wang",
+    "Shuaiqiang Wang",
+    "Yuchen Li",
+    "Jizhou Huang",
+    "Dawei Yin",
+    "Xiang Li"
+  ],
+  "published": "2026-01-08T06:57:03Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.IR",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2601.04651"
+}

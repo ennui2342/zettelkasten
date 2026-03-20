@@ -1,0 +1,23 @@
+{
+  "arxiv_id": "2509.07571",
+  "title": "Towards Generalized Routing: Model and Agent Orchestration for Adaptive and Efficient Inference",
+  "abstract": "The rapid advancement of large language models (LLMs) and domain-specific AI agents has greatly expanded the ecosystem of AI-powered services. User queries, however, are highly diverse and often span multiple domains and task types, resulting in a complex and heterogeneous landscape. This diversity presents a fundamental routing challenge: how to accurately direct each query to an appropriate execution unit while optimizing both performance and efficiency. To address this, we propose MoMA (Mixture of Models and Agents), a generalized routing framework that integrates both LLM and agent-based routing. Built upon a deep understanding of model and agent capabilities, MoMA effectively handles diverse queries through precise intent recognition and adaptive routing strategies, achieving an optimal balance between efficiency and cost. Specifically, we construct a detailed training dataset to profile the capabilities of various LLMs under different routing model structures, identifying the most suitable tasks for each LLM. During inference, queries are dynamically routed to the LLM with the best cost-performance efficiency. We also introduce an efficient agent selection strategy based on a context-aware state machine and dynamic masking. Experimental results demonstrate that the MoMA router offers superior cost-efficiency and scalability compared to existing approaches.",
+  "authors": [
+    "Xiyu Guo",
+    "Shan Wang",
+    "Chunfang Ji",
+    "Xuefeng Zhao",
+    "Wenhao Xi",
+    "Yaoyao Liu",
+    "Qinglan Li",
+    "Chao Deng",
+    "Junlan Feng"
+  ],
+  "published": "2025-09-09T10:15:42Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2509.07571"
+}

@@ -1,0 +1,20 @@
+{
+  "arxiv_id": "2602.00966",
+  "title": "Symphony-Coord: Emergent Coordination in Decentralized Agent Systems",
+  "abstract": "Multi-agent large language model systems can tackle complex multi-step tasks by decomposing work and coordinating specialized behaviors. However, current coordination mechanisms typically rely on statically assigned roles and centralized controllers. As agent pools and task distributions evolve, these design choices lead to inefficient routing, poor adaptability, and fragile fault recovery capabilities. We introduce Symphony-Coord, a decentralized multi-agent framework that transforms agent selection into an online multi-armed bandit problem, enabling roles to emerge organically through interaction. The framework employs a two-stage dynamic beacon protocol: (i) a lightweight candidate screening mechanism to limit communication and computational overhead; (ii) an adaptive LinUCB selector that routes subtasks based on context features derived from task requirements and agent states, continuously optimized through delayed end-to-end feedback. Under standard linear realizability assumptions, we provide sublinear regret bounds, indicating the system converges toward near-optimal allocation schemes. Validation through simulation experiments and real-world large language model benchmarks demonstrates that Symphony-Coord not only enhances task routing efficiency but also exhibits robust self-healing capabilities in scenarios involving distribution shifts and agent failures, achieving a scalable coordination mechanism without predefined roles.",
+  "authors": [
+    "Zhaoyang Guan",
+    "Huixi Cao",
+    "Ming Zhong",
+    "Eric Yang",
+    "Lynn Ai",
+    "Yongxin Ni",
+    "Bill Shi"
+  ],
+  "published": "2026-02-01T01:59:16Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2602.00966"
+}

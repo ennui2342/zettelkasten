@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2510.07733",
+  "title": "SurveyG: A Multi-Agent LLM Framework with Hierarchical Citation Graph for Automated Survey Generation",
+  "abstract": "Large language models (LLMs) are increasingly adopted for automating survey paper generation \\cite{wang2406autosurvey, liang2025surveyx, yan2025surveyforge,su2025benchmarking,wen2025interactivesurvey}. Existing approaches typically extract content from a large collection of related papers and prompt LLMs to summarize them directly. However, such methods often overlook the structural relationships among papers, resulting in generated surveys that lack a coherent taxonomy and a deeper contextual understanding of research progress. To address these shortcomings, we propose \\textbf{SurveyG}, an LLM-based agent framework that integrates \\textit{hierarchical citation graph}, where nodes denote research papers and edges capture both citation dependencies and semantic relatedness between their contents, thereby embedding structural and contextual knowledge into the survey generation process. The graph is organized into three layers: \\textbf{Foundation}, \\textbf{Development}, and \\textbf{Frontier}, to capture the evolution of research from seminal works to incremental advances and emerging directions. By combining horizontal search within layers and vertical depth traversal across layers, the agent produces multi-level summaries, which are consolidated into a structured survey outline. A multi-agent validation stage then ensures consistency, coverage, and factual accuracy in generating the final survey. Experiments, including evaluations by human experts and LLM-as-a-judge, demonstrate that SurveyG outperforms state-of-the-art frameworks, producing surveys that are more comprehensive and better structured to the underlying knowledge taxonomy of a field.",
+  "authors": [
+    "Minh-Anh Nguye",
+    "Minh-Duc Nguyen",
+    "Ha Lan N. T.",
+    "Kieu Hai Dang",
+    "Nguyen Tien Dong",
+    "Dung D. Le"
+  ],
+  "published": "2025-10-09T03:14:20Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2510.07733"
+}

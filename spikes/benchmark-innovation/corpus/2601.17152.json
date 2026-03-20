@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2601.17152",
+  "title": "Dynamic Role Assignment for Multi-Agent Debate",
+  "abstract": "Multi-agent large language model (LLM) and vision-language model (VLM) debate systems employ specialized roles for complex problem-solving, yet model specializations are not leveraged to decide which model should fill which role. We propose dynamic role assignment, a framework that runs a Meta-Debate to select suitable agents before the actual debate. The meta-debate has two stages: (1) proposal, where candidates provide role-tailored arguments, and (2) peer review, where proposals are scored with data and role-specific criteria to choose the best agent for each position. We evaluate our method on LLM problem solving benchmarks. Applied on top of existing debate systems, our approach consistently outperforms uniform assignments (filling all roles with the same model) by up to 74.8% and random assignments (assigning models to roles without considering their suitability) by up to 29.7%, depending on the task and the specific assignment. This work establishes a new paradigm for multi-agent system design, shifting from static agent deployment to dynamic and capability-aware selection.",
+  "authors": [
+    "Miao Zhang",
+    "Junsik Kim",
+    "Siyuan Xiang",
+    "Jian Gao",
+    "Cheng Cao"
+  ],
+  "published": "2026-01-23T20:15:29Z",
+  "primary_category": "cs.CL",
+  "categories": [
+    "cs.CL",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2601.17152"
+}

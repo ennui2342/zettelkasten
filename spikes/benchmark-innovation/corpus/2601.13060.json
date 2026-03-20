@@ -1,0 +1,33 @@
+{
+  "arxiv_id": "2601.13060",
+  "title": "MagicGUI-RMS: A Multi-Agent Reward Model System for Self-Evolving GUI Agents via Automated Feedback Reflux",
+  "abstract": "Graphical user interface (GUI) agents are rapidly progressing toward autonomous interaction and reliable task execution across diverse applications. However, two central challenges remain unresolved: automating the evaluation of agent trajectories and generating high-quality training data at scale to enable continual improvement. Existing approaches often depend on manual annotation or static rule-based verification, which restricts scalability and limits adaptability in dynamic environments. We present MagicGUI-RMS, a multi-agent reward model system that delivers adaptive trajectory evaluation, corrective feedback, and self-evolving learning capabilities. MagicGUI-RMS integrates a Domain-Specific Reward Model (DS-RM) with a General-Purpose Reward Model (GP-RM), enabling fine-grained action assessment and robust generalization across heterogeneous GUI tasks. To support reward learning at scale, we design a structured data construction pipeline that automatically produces balanced and diverse reward datasets, effectively reducing annotation costs while maintaining sample fidelity. During execution, the reward model system identifies erroneous actions, proposes refined alternatives, and continuously enhances agent behavior through an automated data-reflux mechanism. Extensive experiments demonstrate that MagicGUI-RMS yields substantial gains in task accuracy, behavioral robustness. These results establish MagicGUI-RMS as a principled and effective foundation for building self-improving GUI agents driven by reward-based adaptation.",
+  "authors": [
+    "Zecheng Li",
+    "Zhihui Cao",
+    "Wenke Huang",
+    "Yudong Zhang",
+    "Keying Qi",
+    "Rui Wang",
+    "Zeyu Zheng",
+    "Jian Zhao",
+    "Hao Zhu",
+    "Hengxin Wu",
+    "Yuran Wang",
+    "Guitao Fan",
+    "Guokun Wu",
+    "Yicong Liu",
+    "Zhilin Gao",
+    "Haikun Xu",
+    "He Yang",
+    "Minqi Xiang",
+    "Xingyu Liu",
+    "Zuojian Wang"
+  ],
+  "published": "2026-01-19T13:50:43Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2601.13060"
+}

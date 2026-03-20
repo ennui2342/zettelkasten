@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2509.09210",
+  "title": "ProgD: Progressive Multi-scale Decoding with Dynamic Graphs for Joint Multi-agent Motion Forecasting",
+  "abstract": "Accurate motion prediction of surrounding agents is crucial for the safe planning of autonomous vehicles. Recent advancements have extended prediction techniques from individual agents to joint predictions of multiple interacting agents, with various strategies to address complex interactions within future motions of agents. However, these methods overlook the evolving nature of these interactions. To address this limitation, we propose a novel progressive multi-scale decoding strategy, termed ProgD, with the help of dynamic heterogeneous graph-based scenario modeling. In particular, to explicitly and comprehensively capture the evolving social interactions in future scenarios, given their inherent uncertainty, we design a progressive modeling of scenarios with dynamic heterogeneous graphs. With the unfolding of such dynamic heterogeneous graphs, a factorized architecture is designed to process the spatio-temporal dependencies within future scenarios and progressively eliminate uncertainty in future motions of multiple agents. Furthermore, a multi-scale decoding procedure is incorporated to improve on the future scenario modeling and consistent prediction of agents' future motion. The proposed ProgD achieves state-of-the-art performance on the INTERACTION multi-agent prediction benchmark, ranking $1^{st}$, and the Argoverse 2 multi-world forecasting benchmark.",
+  "authors": [
+    "Xing Gao",
+    "Zherui Huang",
+    "Weiyao Lin",
+    "Xiao Sun"
+  ],
+  "published": "2025-09-11T07:36:54Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.RO"
+  ],
+  "url": "https://arxiv.org/abs/2509.09210"
+}

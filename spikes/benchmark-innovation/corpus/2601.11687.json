@@ -1,0 +1,15 @@
+{
+  "arxiv_id": "2601.11687",
+  "title": "Semantic Caching and Intent-Driven Context Optimization for Multi-Agent Natural Language to Code Systems",
+  "abstract": "We present a production-optimized multi-agent system designed to translate natural language queries into executable Python code for structured data analytics. Unlike systems that rely on expensive frontier models, our approach achieves high accuracy and cost efficiency through three key innovations: (1) a semantic caching system with LLM-based equivalence detection and structured adaptation hints that provides cache hit rates of 67% on production queries; (2) a dual-threshold decision mechanism that separates exact-match retrieval from reference-guided generation; and (3) an intent-driven dynamic prompt assembly system that reduces token consumption by 40-60% through table-aware context filtering. The system has been deployed in production for enterprise inventory management, processing over 10,000 queries with an average latency of 8.2 seconds and 94.3% semantic accuracy. We describe the architecture, present empirical results from production deployment, and discuss practical considerations for deploying LLM-based analytics systems at scale.",
+  "authors": [
+    "Harmohit Singh"
+  ],
+  "published": "2026-01-16T11:32:20Z",
+  "primary_category": "cs.SE",
+  "categories": [
+    "cs.SE",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2601.11687"
+}

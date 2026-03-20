@@ -1,0 +1,22 @@
+{
+  "arxiv_id": "2509.21862",
+  "title": "Reimagining Agent-based Modeling with Large Language Model Agents via Shachi",
+  "abstract": "The study of emergent behaviors in large language model (LLM)-driven multi-agent systems is a critical research challenge, yet progress is limited by a lack of principled methodologies for controlled experimentation. To address this, we introduce Shachi, a formal methodology and modular framework that decomposes an agent's policy into core cognitive components: Configuration for intrinsic traits, Memory for contextual persistence, and Tools for expanded capabilities, all orchestrated by an LLM reasoning engine. This principled architecture moves beyond brittle, ad-hoc agent designs and enables the systematic analysis of how specific architectural choices influence collective behavior. We validate our methodology on a comprehensive 10-task benchmark and demonstrate its power through novel scientific inquiries. Critically, we establish the external validity of our approach by modeling a real-world U.S. tariff shock, showing that agent behaviors align with observed market reactions only when their cognitive architecture is appropriately configured with memory and tools. Our work provides a rigorous, open-source foundation for building and evaluating LLM agents, aimed at fostering more cumulative and scientifically grounded research.",
+  "authors": [
+    "So Kuroki",
+    "Yingtao Tian",
+    "Kou Misaki",
+    "Takashi Ikegami",
+    "Takuya Akiba",
+    "Yujin Tang"
+  ],
+  "published": "2025-09-26T04:38:59Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.MA",
+    "cs.SI",
+    "econ.GN"
+  ],
+  "url": "https://arxiv.org/abs/2509.21862"
+}

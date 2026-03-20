@@ -1,0 +1,20 @@
+{
+  "arxiv_id": "2603.00349",
+  "title": "EmCoop: A Framework and Benchmark for Embodied Cooperation Among LLM Agents",
+  "abstract": "Real-world scenarios increasingly require multiple embodied agents to collaborate in dynamic environments under embodied constraints, as many tasks exceed the capabilities of any single agent. Recent advances in large language models (LLMs) enable high-level cognitive coordination through reasoning, planning, and natural language communication. However, fine-grained analyses of how such collaboration emerges, unfolds, and contributes to task success in embodied multi-agent systems are difficult to conduct with existing benchmarks. In this paper, we introduce EmCoop, a benchmark framework for studying cooperation in LLM-based embodied multi-agent systems. Our framework separates a high-level cognitive layer from a low-level embodied interaction layer, allowing us to characterize agent cooperation through their interleaved dynamics over time. Given a cooperation-constrained embodied task, we propose generalizable, process-level metrics that diagnose collaboration quality and failure modes, beyond final task success. We instantiate our framework in two embodied environments that scale to arbitrary numbers of agents and support diverse communication topologies, and use these instantiations to demonstrate how EmCoop enables systematic analysis of cooperation dynamics across team sizes and task settings. The project web page can be found at: https://happyeureka.github.io/emcoop.",
+  "authors": [
+    "Hanqing Yang",
+    "Shiyu Chen",
+    "Narjes Nourzad",
+    "Marie Siew",
+    "Jingdi Chen",
+    "Carlee Joe-Wong"
+  ],
+  "published": "2026-02-27T22:28:33Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2603.00349"
+}

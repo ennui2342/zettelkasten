@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2512.04988",
+  "title": "Strategic Self-Improvement for Competitive Agents in AI Labour Markets",
+  "abstract": "As artificial intelligence (AI) agents are deployed across economic domains, understanding their strategic behavior and market-level impact becomes critical. This paper puts forward a groundbreaking new framework that is the first to capture the real-world economic forces that shape agentic labor markets: adverse selection, moral hazard, and reputation dynamics. Our framework encapsulates three core capabilities that successful LLM-agents will need: \\textbf{metacognition} (accurate self-assessment of skills), \\textbf{competitive awareness} (modeling rivals and market dynamics), and \\textbf{long-horizon strategic planning}. We illustrate our framework through a tractable simulated gig economy where agentic Large Language Models (LLMs) compete for jobs, develop skills, and adapt their strategies under competitive pressure. Our simulations illustrate how LLM agents explicitly prompted with reasoning capabilities learn to strategically self-improve and demonstrate superior adaptability to changing market conditions. At the market level, our simulations reproduce classic macroeconomic phenomena found in human labor markets, while controlled experiments reveal potential AI-driven economic trends, such as rapid monopolization and systemic price deflation. This work provides a foundation to further explore the economic properties of AI-driven labour markets, and a conceptual framework to study the strategic reasoning capabilities in agents competing in the emerging economy.",
+  "authors": [
+    "Christopher Chiu",
+    "Simpson Zhang",
+    "Mihaela van der Schaar"
+  ],
+  "published": "2025-12-04T16:57:28Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2512.04988"
+}

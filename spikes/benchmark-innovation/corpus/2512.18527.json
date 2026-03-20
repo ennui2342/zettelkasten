@@ -1,0 +1,20 @@
+{
+  "arxiv_id": "2512.18527",
+  "title": "Detection of AI Generated Images Using Combined Uncertainty Measures and Particle Swarm Optimised Rejection Mechanism",
+  "abstract": "As AI-generated images become increasingly photorealistic, distinguishing them from natural images poses a growing challenge. This paper presents a robust detection framework that leverages multiple uncertainty measures to decide whether to trust or reject a model's predictions. We focus on three complementary techniques: Fisher Information, which captures the sensitivity of model parameters to input variations; entropy-based uncertainty from Monte Carlo Dropout, which reflects predictive variability; and predictive variance from a Deep Kernel Learning framework using a Gaussian Process classifier. To integrate these diverse uncertainty signals, Particle Swarm Optimisation is used to learn optimal weightings and determine an adaptive rejection threshold. The model is trained on Stable Diffusion-generated images and evaluated on GLIDE, VQDM, Midjourney, BigGAN, and StyleGAN3, each introducing significant distribution shifts. While standard metrics such as prediction probability and Fisher-based measures perform well in distribution, their effectiveness degrades under shift. In contrast, the Combined Uncertainty measure consistently achieves an incorrect rejection rate of approximately 70 percent on unseen generators, successfully filtering most misclassified AI samples. Although the system occasionally rejects correct predictions from newer generators, this conservative behaviour is acceptable, as rejected samples can support retraining. The framework maintains high acceptance of accurate predictions for natural images and in-domain AI data. Under adversarial attacks using FGSM and PGD, the Combined Uncertainty method rejects around 61 percent of successful attacks, while GP-based uncertainty alone achieves up to 80 percent. Overall, the results demonstrate that multi-source uncertainty fusion provides a resilient and adaptive solution for AI-generated image detection.",
+  "authors": [
+    "Rahul Yumlembam",
+    "Biju Issac",
+    "Nauman Aslam",
+    "Eaby Kollonoor Babu",
+    "Josh Collyer",
+    "Fraser Kennedy"
+  ],
+  "published": "2025-12-20T22:47:42Z",
+  "primary_category": "cs.CV",
+  "categories": [
+    "cs.CV",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2512.18527"
+}

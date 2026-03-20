@@ -1,0 +1,16 @@
+{
+  "arxiv_id": "2509.15519",
+  "title": "Fully Decentralized Cooperative Multi-Agent Reinforcement Learning is A Context Modeling Problem",
+  "abstract": "This paper studies fully decentralized cooperative multi-agent reinforcement learning, where each agent solely observes the states, its local actions, and the shared rewards. The inability to access other agents' actions often leads to non-stationarity during value function updates and relative overgeneralization during value function estimation, hindering effective cooperative policy learning. However, existing works fail to address both issues simultaneously, due to their inability to model the joint policy of other agents in a fully decentralized setting. To overcome this limitation, we propose a novel method named Dynamics-Aware Context (DAC), which formalizes the task, as locally perceived by each agent, as an Contextual Markov Decision Process, and further addresses both non-stationarity and relative overgeneralization through dynamics-aware context modeling. Specifically, DAC attributes the non-stationary local task dynamics of each agent to switches between unobserved contexts, each corresponding to a distinct joint policy. Then, DAC models the step-wise dynamics distribution using latent variables and refers to them as contexts. For each agent, DAC introduces a context-based value function to address the non-stationarity issue during value function update. For value function estimation, an optimistic marginal value is derived to promote the selection of cooperative actions, thereby addressing the relative overgeneralization issue. Experimentally, we evaluate DAC on various cooperative tasks (including matrix game, predator and prey, and SMAC), and its superior performance against multiple baselines validates its effectiveness.",
+  "authors": [
+    "Chao Li",
+    "Bingkun Bao",
+    "Yang Gao"
+  ],
+  "published": "2025-09-19T01:52:44Z",
+  "primary_category": "cs.LG",
+  "categories": [
+    "cs.LG"
+  ],
+  "url": "https://arxiv.org/abs/2509.15519"
+}

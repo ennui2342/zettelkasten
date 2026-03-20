@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2509.22698",
+  "title": "Advancing Audio-Visual Navigation Through Multi-Agent Collaboration in 3D Environments",
+  "abstract": "Intelligent agents often require collaborative strategies to achieve complex tasks beyond individual capabilities in real-world scenarios. While existing audio-visual navigation (AVN) research mainly focuses on single-agent systems, their limitations emerge in dynamic 3D environments where rapid multi-agent coordination is critical, especially for time-sensitive applications like emergency response. This paper introduces MASTAVN (Multi-Agent Scalable Transformer Audio-Visual Navigation), a scalable framework enabling two agents to collaboratively localize and navigate toward an audio target in shared 3D environments. By integrating cross-agent communication protocols and joint audio-visual fusion mechanisms, MASTAVN enhances spatial reasoning and temporal synchronization. Through rigorous evaluation in photorealistic 3D simulators (Replica and Matterport3D), MASTAVN achieves significant reductions in task completion time and notable improvements in navigation success rates compared to single-agent and non-collaborative baselines. This highlights the essential role of spatiotemporal coordination in multi-agent systems. Our findings validate MASTAVN's effectiveness in time-sensitive emergency scenarios and establish a paradigm for advancing scalable multi-agent embodied intelligence in complex 3D environments.",
+  "authors": [
+    "Hailong Zhang",
+    "Yinfeng Yu",
+    "Liejun Wang",
+    "Fuchun Sun",
+    "Wendong Zheng"
+  ],
+  "published": "2025-09-21T05:05:26Z",
+  "primary_category": "cs.RO",
+  "categories": [
+    "cs.RO",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2509.22698"
+}

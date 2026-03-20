@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2512.11179",
+  "title": "Bandwidth-constrained Variational Message Encoding for Cooperative Multi-agent Reinforcement Learning",
+  "abstract": "Graph-based multi-agent reinforcement learning (MARL) enables coordinated behavior under partial observability by modeling agents as nodes and communication links as edges. While recent methods excel at learning sparse coordination graphs-determining who communicates with whom-they do not address what information should be transmitted under hard bandwidth constraints. We study this bandwidth-limited regime and show that naive dimensionality reduction consistently degrades coordination performance. Hard bandwidth constraints force selective encoding, but deterministic projections lack mechanisms to control how compression occurs. We introduce Bandwidth-constrained Variational Message Encoding (BVME), a lightweight module that treats messages as samples from learned Gaussian posteriors regularized via KL divergence to an uninformative prior. BVME's variational framework provides principled, tunable control over compression strength through interpretable hyperparameters, directly constraining the representations used for decision-making. Across SMACv1, SMACv2, and MPE benchmarks, BVME achieves comparable or superior performance while using 67--83% fewer message dimensions, with gains most pronounced on sparse graphs where message quality critically impacts coordination. Ablations reveal U-shaped sensitivity to bandwidth, with BVME excelling at extreme ratios while adding minimal overhead.",
+  "authors": [
+    "Wei Duan",
+    "Jie Lu",
+    "En Yu",
+    "Junyu Xuan"
+  ],
+  "published": "2025-12-11T23:56:43Z",
+  "primary_category": "cs.LG",
+  "categories": [
+    "cs.LG",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2512.11179"
+}

@@ -1,0 +1,15 @@
+{
+  "arxiv_id": "2512.22171",
+  "title": "Solving Multi-Agent Multi-Goal Path Finding Problems in Polynomial Time",
+  "abstract": "In this paper, we plan missions for a fleet of agents in undirected graphs, such as grids, with multiple goals. In contrast to regular multi-agent path-finding, the solver finds and updates the assignment of goals to the agents on its own. In the continuous case for a point agent with motions in the Euclidean plane, the problem can be solved arbitrarily close to optimal. For discrete variants that incur node and edge conflicts, we show that it can be solved in polynomial time, which is unexpected, since traditional vehicle routing on general graphs is NP-hard. We implement a corresponding planner that finds conflict-free optimized routes for the agents. Global assignment strategies greatly reduce the number of conflicts, with the remaining ones resolved by elaborating on the concept of ants-on-the-stick, by solving local assignment problems, by interleaving agent paths, and by kicking agents that have already arrived out of their destinations",
+  "authors": [
+    "Stefan Edelkamp"
+  ],
+  "published": "2025-12-17T15:24:20Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2512.22171"
+}

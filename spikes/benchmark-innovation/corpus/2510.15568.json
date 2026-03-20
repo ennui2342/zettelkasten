@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2510.15568",
+  "title": "The Spark Effect: On Engineering Creative Diversity in Multi-Agent AI Systems",
+  "abstract": "Creative services teams increasingly rely on large language models (LLMs) to accelerate ideation, yet production systems often converge on homogeneous outputs that fail to meet brand or artistic expectations. Art of X developed persona-conditioned LLM agents -- internally branded as \"Sparks\" and instantiated through a library of role-inspired system prompts -- to intentionally diversify agent behaviour within a multi-agent workflow. This white paper documents the problem framing, experimental design, and quantitative evidence behind the Spark agent programme. Using an LLM-as-a-judge protocol calibrated against human gold standards, we observe a mean diversity gain of +4.1 points (on a 1-10 scale) when persona-conditioned Spark agents replace a uniform system prompt, narrowing the gap to human experts to 1.0 point. We also surface evaluator bias and procedural considerations for future deployments.",
+  "authors": [
+    "Alexander Doudkin",
+    "Anton Voelker",
+    "Friedrich von Borries"
+  ],
+  "published": "2025-10-17T11:56:18Z",
+  "primary_category": "cs.HC",
+  "categories": [
+    "cs.HC",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2510.15568"
+}

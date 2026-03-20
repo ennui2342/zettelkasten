@@ -1,0 +1,20 @@
+{
+  "arxiv_id": "2601.12939",
+  "title": "Active Inference-Driven World Modeling for Adaptive UAV Swarm Trajectory Design",
+  "abstract": "This paper proposes an Active Inference-based framework for autonomous trajectory design in UAV swarms. The method integrates probabilistic reasoning and self-learning to enable distributed mission allocation, route ordering, and motion planning. Expert trajectories generated using a Genetic Algorithm with Repulsion Forces (GA-RF) are employed to train a hierarchical World Model capturing swarm behavior across mission, route, and motion levels. During online operation, UAVs infer actions by minimizing divergence between current beliefs and model-predicted states, enabling adaptive responses to dynamic environments. Simulation results show faster convergence, higher stability, and safer navigation than Q-Learning, demonstrating the scalability and cognitive grounding of the proposed framework for intelligent UAV swarm control.",
+  "authors": [
+    "Kaleem Arshid",
+    "Ali Krayani",
+    "Lucio Marcenaro",
+    "David Martin Gomez",
+    "Carlo Regazzoni"
+  ],
+  "published": "2026-01-19T10:47:26Z",
+  "primary_category": "cs.RO",
+  "categories": [
+    "cs.RO",
+    "cs.AI",
+    "eess.SP"
+  ],
+  "url": "https://arxiv.org/abs/2601.12939"
+}

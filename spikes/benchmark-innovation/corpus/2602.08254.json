@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2602.08254",
+  "title": "SynthAgent: A Multi-Agent LLM Framework for Realistic Patient Simulation -- A Case Study in Obesity with Mental Health Comorbidities",
+  "abstract": "Simulating high-fidelity patients offers a powerful avenue for studying complex diseases while addressing the challenges of fragmented, biased, and privacy-restricted real-world data. In this study, we introduce SynthAgent, a novel Multi-Agent System (MAS) framework designed to model obesity patients with comorbid mental disorders, including depression, anxiety, social phobia, and binge eating disorder. SynthAgent integrates clinical and medical evidence from claims data, population surveys, and patient-centered literature to construct personalized virtual patients enriched with personality traits that influence adherence, emotion regulation, and lifestyle behaviors. Through autonomous agent interactions, the system simulates disease progression, treatment response, and life management across diverse psychosocial contexts. Evaluation of more than 100 generated patients demonstrated that GPT-5 and Claude 4.5 Sonnet achieved the highest fidelity as the core engine in the proposed MAS framework, outperforming Gemini 2.5 Pro and DeepSeek-R1. SynthAgent thus provides a scalable and privacy-preserving framework for exploring patient journeys, behavioral dynamics, and decision-making processes in both medical and psychological domains.",
+  "authors": [
+    "Arman Aghaee",
+    "Sepehr Asgarian",
+    "Jouhyun Jeon"
+  ],
+  "published": "2026-02-09T04:14:19Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.IR",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2602.08254"
+}

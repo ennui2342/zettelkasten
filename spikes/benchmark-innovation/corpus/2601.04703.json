@@ -1,0 +1,21 @@
+{
+  "arxiv_id": "2601.04703",
+  "title": "Beyond Monolithic Architectures: A Multi-Agent Search and Knowledge Optimization Framework for Agentic Search",
+  "abstract": "Agentic search has emerged as a promising paradigm for complex information seeking by enabling Large Language Models (LLMs) to interleave reasoning with tool use. However, prevailing systems rely on monolithic agents that suffer from structural bottlenecks, including unconstrained reasoning outputs that inflate trajectories, sparse outcome-level rewards that complicate credit assignment, and stochastic search noise that destabilizes learning. To address these challenges, we propose \\textbf{M-ASK} (Multi-Agent Search and Knowledge), a framework that explicitly decouples agentic search into two complementary roles: Search Behavior Agents, which plan and execute search actions, and Knowledge Management Agents, which aggregate, filter, and maintain a compact internal context. This decomposition allows each agent to focus on a well-defined subtask and reduces interference between search and context construction. Furthermore, to enable stable coordination, M-ASK employs turn-level rewards to provide granular supervision for both search decisions and knowledge updates. Experiments on multi-hop QA benchmarks demonstrate that M-ASK outperforms strong baselines, achieving not only superior answer accuracy but also significantly more stable training dynamics.\\footnote{The source code for M-ASK is available at https://github.com/chenyiqun/M-ASK.}",
+  "authors": [
+    "Yiqun Chen",
+    "Lingyong Yan",
+    "Zixuan Yang",
+    "Erhan Zhang",
+    "Jiashu Zhao",
+    "Shuaiqiang Wang",
+    "Dawei Yin",
+    "Jiaxin Mao"
+  ],
+  "published": "2026-01-08T08:13:27Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2601.04703"
+}

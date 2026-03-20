@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2601.08288",
+  "title": "OpenMic: A Multi-Agent-Based Stand-Up Comedy Generation System",
+  "abstract": "Chinese stand-up comedy generation goes beyond plain text generation, requiring culturally grounded humor, precise timing, stage-performance cues, and implicit multi-step reasoning. Moreover, commonly used Chinese humor datasets are often better suited for humor understanding and evaluation than for long-form stand-up generation, making direct supervision misaligned with the target task. To address these challenges, we present OpenMic, an end-to-end multi-agent system built on AutoGen that transforms a user-provided life topic into a 3-5 minute Chinese stand-up performance and further produces a narrated comedy video. OpenMic orchestrates multiple specialized agents in a multi-round iterative loop-planning to jointly optimize humor, timing, and performability. To mitigate the dataset-task mismatch, we augment generation with retrieval-augmented generation (RAG) for material grounding and idea expansion, and we fine-tune a dedicated JokeWriter to better internalize stand-up-specific setup-punchline structures and long-range callbacks.",
+  "authors": [
+    "Yuyang Wu",
+    "Hanzhong Cao",
+    "Jianhao Chen",
+    "Yufei Li"
+  ],
+  "published": "2026-01-13T07:26:23Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2601.08288"
+}

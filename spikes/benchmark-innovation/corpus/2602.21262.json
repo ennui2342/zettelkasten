@@ -1,0 +1,20 @@
+{
+  "arxiv_id": "2602.21262",
+  "title": "Under the Influence: Quantifying Persuasion and Vigilance in Large Language Models",
+  "abstract": "With increasing integration of Large Language Models (LLMs) into areas of high-stakes human decision-making, it is important to understand the risks they introduce as advisors. To be useful advisors, LLMs must sift through large amounts of content, written with both benevolent and malicious intent, and then use this information to convince a user to take a specific action. This involves two social capacities: vigilance (the ability to determine which information to use, and which to discard) and persuasion (synthesizing the available evidence to make a convincing argument). While existing work has investigated these capacities in isolation, there has been little prior investigation of how these capacities may be linked. Here, we use a simple multi-turn puzzle-solving game, Sokoban, to study LLMs' abilities to persuade and be rationally vigilant towards other LLM agents. We find that puzzle-solving performance, persuasive capability, and vigilance are dissociable capacities in LLMs. Performing well on the game does not automatically mean a model can detect when it is being misled, even if the possibility of deception is explicitly mentioned. However, LLMs do consistently modulate their token use, using fewer tokens to reason when advice is benevolent and more when it is malicious, even if they are still persuaded to take actions leading them to failure. To our knowledge, our work presents the first investigation of the relationship between persuasion, vigilance, and task performance in LLMs, and suggests that monitoring all three independently will be critical for future work in AI safety.",
+  "authors": [
+    "Sasha Robinson",
+    "Kerem Oktar",
+    "Katherine M. Collins",
+    "Ilia Sucholutsky",
+    "Kelsey R. Allen"
+  ],
+  "published": "2026-02-24T04:09:21Z",
+  "primary_category": "cs.CL",
+  "categories": [
+    "cs.CL",
+    "cs.LG",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2602.21262"
+}

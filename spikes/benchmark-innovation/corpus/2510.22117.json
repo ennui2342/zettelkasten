@@ -1,0 +1,22 @@
+{
+  "arxiv_id": "2510.22117",
+  "title": "When UAV Swarm Meets IRS: Collaborative Secure Communications in Low-altitude Wireless Networks",
+  "abstract": "Low-altitude wireless networks (LAWNs) represent a promising architecture that integrates unmanned aerial vehicles (UAVs) as aerial nodes to provide enhanced coverage, reliability, and throughput for diverse applications. However, these networks face significant security vulnerabilities from both known and potential unknown eavesdroppers, which may threaten data confidentiality and system integrity. To solve this critical issue, we propose a novel secure communication framework for LAWNs where the selected UAVs within a swarm function as a virtual antenna array (VAA), complemented by intelligent reflecting surface (IRS) to create a robust defense against eavesdropping attacks. Specifically, we formulate a multi-objective optimization problem that simultaneously maximizes the secrecy rate while minimizing the maximum sidelobe level and total energy consumption, requiring joint optimization of UAV excitation current weights, flight trajectories, and IRS phase shifts. This problem presents significant difficulties due to the dynamic nature of the system and heterogeneous components. Thus, we first transform the problem into a heterogeneous Markov decision process (MDP). Then, we propose a heterogeneous multi-agent control approach (HMCA) that integrates a dedicated IRS control policy with a multi-agent soft actor-critic framework for UAV control, which enables coordinated operation across heterogeneous network elements. Simulation results show that the proposed HMCA achieves superior performance compared to baseline approaches in terms of secrecy rate improvement, sidelobe suppression, and energy efficiency. Furthermore, we find that the collaborative and passive beamforming synergy between VAA and IRS creates robust security guarantees when the number of UAVs increases.",
+  "authors": [
+    "Jiahui Li",
+    "Xinyue Liang",
+    "Geng Sun",
+    "Hui Kang",
+    "Jiacheng Wang",
+    "Dusit Niyato",
+    "Shiwen Mao",
+    "Abbas Jamalipour"
+  ],
+  "published": "2025-10-25T02:02:14Z",
+  "primary_category": "cs.NI",
+  "categories": [
+    "cs.NI",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2510.22117"
+}

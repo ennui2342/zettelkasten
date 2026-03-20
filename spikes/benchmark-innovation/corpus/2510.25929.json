@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2510.25929",
+  "title": "Multi-Agent Reinforcement Learning for Market Making: Competition without Collusion",
+  "abstract": "Algorithmic collusion has emerged as a central question in AI: Will the interaction between different AI agents deployed in markets lead to collusion? More generally, understanding how emergent behavior, be it a cartel or market dominance from more advanced bots, affects the market overall is an important research question.   We propose a hierarchical multi-agent reinforcement learning framework to study algorithmic collusion in market making. The framework includes a self-interested market maker (Agent~A), which is trained in an uncertain environment shaped by an adversary, and three bottom-layer competitors: the self-interested Agent~B1 (whose objective is to maximize its own PnL), the competitive Agent~B2 (whose objective is to minimize the PnL of its opponent), and the hybrid Agent~B$^\\star$, which can modulate between the behavior of the other two. To analyze how these agents shape the behavior of each other and affect market outcomes, we propose interaction-level metrics that quantify behavioral asymmetry and system-level dynamics, while providing signals potentially indicative of emergent interaction patterns.   Experimental results show that Agent~B2 secures dominant performance in a zero-sum setting against B1, aggressively capturing order flow while tightening average spreads, thus improving market execution efficiency. In contrast, Agent~B$^\\star$ exhibits a self-interested inclination when co-existing with other profit-seeking agents, securing dominant market share through adaptive quoting, yet exerting a milder adverse impact on the rewards of Agents~A and B1 compared to B2. These findings suggest that adaptive incentive control supports more sustainable strategic co-existence in heterogeneous agent environments and offers a structured lens for evaluating behavioral design in algorithmic trading systems.",
+  "authors": [
+    "Ziyi Wang",
+    "Carmine Ventre",
+    "Maria Polukarov"
+  ],
+  "published": "2025-10-29T20:07:47Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2510.25929"
+}

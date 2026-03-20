@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2512.09935",
+  "title": "Exploring Health Misinformation Detection with Multi-Agent Debate",
+  "abstract": "Fact-checking health-related claims has become increasingly critical as misinformation proliferates online. Effective verification requires both the retrieval of high-quality evidence and rigorous reasoning processes. In this paper, we propose a two-stage framework for health misinformation detection: Agreement Score Prediction followed by Multi-Agent Debate. In the first stage, we employ large language models (LLMs) to independently evaluate retrieved articles and compute an aggregated agreement score that reflects the overall evidence stance. When this score indicates insufficient consensus-falling below a predefined threshold-the system proceeds to a second stage. Multiple agents engage in structured debate to synthesize conflicting evidence and generate well-reasoned verdicts with explicit justifications. Experimental results demonstrate that our two-stage approach achieves superior performance compared to baseline methods, highlighting the value of combining automated scoring with collaborative reasoning for complex verification tasks.",
+  "authors": [
+    "Chih-Han Chen",
+    "Chen-Han Tsai",
+    "Yu-Shao Peng"
+  ],
+  "published": "2025-11-29T12:39:30Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.LG"
+  ],
+  "url": "https://arxiv.org/abs/2512.09935"
+}

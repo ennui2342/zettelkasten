@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2510.20436",
+  "title": "Learning Decentralized Routing Policies via Graph Attention-based Multi-Agent Reinforcement Learning in Lunar Delay-Tolerant Networks",
+  "abstract": "We present a fully decentralized routing framework for multi-robot exploration missions operating under the constraints of a Lunar Delay-Tolerant Network (LDTN). In this setting, autonomous rovers must relay collected data to a lander under intermittent connectivity and unknown mobility patterns. We formulate the problem as a Partially Observable Markov Decision Problem (POMDP) and propose a Graph Attention-based Multi-Agent Reinforcement Learning (GAT-MARL) policy that performs Centralized Training, Decentralized Execution (CTDE). Our method relies only on local observations and does not require global topology updates or packet replication, unlike classical approaches such as shortest path and controlled flooding-based algorithms. Through Monte Carlo simulations in randomized exploration environments, GAT-MARL provides higher delivery rates, no duplications, and fewer packet losses, and is able to leverage short-term mobility forecasts; offering a scalable solution for future space robotic systems for planetary exploration, as demonstrated by successful generalization to larger rover teams.",
+  "authors": [
+    "Federico Lozano-Cuadra",
+    "Beatriz Soret",
+    "Marc Sanchez Net",
+    "Abhishek Cauligi",
+    "Federico Rossi"
+  ],
+  "published": "2025-10-23T11:13:11Z",
+  "primary_category": "stat.ML",
+  "categories": [
+    "stat.ML",
+    "cs.LG"
+  ],
+  "url": "https://arxiv.org/abs/2510.20436"
+}

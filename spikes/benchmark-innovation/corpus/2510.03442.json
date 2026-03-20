@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2510.03442",
+  "title": "The Argument is the Explanation: Structured Argumentation for Trust in Agents",
+  "abstract": "Humans are black boxes -- we cannot observe their neural processes, yet society functions by evaluating verifiable arguments. AI explainability should follow this principle: stakeholders need verifiable reasoning chains, not mechanistic transparency. We propose using structured argumentation to provide a level of explanation and verification neither interpretability nor LLM-generated explanation is able to offer. Our pipeline achieves state-of-the-art 94.44 macro F1 on the AAEC published train/test split (5.7 points above prior work) and $0.81$ macro F1, $\\sim$0.07 above previous published results with comparable data setups, for Argumentative MicroTexts relation classification, converting LLM text into argument graphs and enabling verification at each inferential step. We demonstrate this idea on multi-agent risk assessment using the Structured What-If Technique, where specialized agents collaborate transparently to carry out risk assessment otherwise achieved by humans alone. Using Bipolar Assumption-Based Argumentation, we capture support/attack relationships, thereby enabling automatic hallucination detection via fact nodes attacking arguments. We also provide a verification mechanism that enables iterative refinement through test-time feedback without retraining. For easy deployment, we provide a Docker container for the fine-tuned AMT model, and the rest of the code with the Bipolar ABA Python package on GitHub.",
+  "authors": [
+    "Ege Cakar",
+    "Per Ola Kristensson"
+  ],
+  "published": "2025-10-03T19:04:15Z",
+  "primary_category": "cs.LG",
+  "categories": [
+    "cs.LG",
+    "cs.AI",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2510.03442"
+}

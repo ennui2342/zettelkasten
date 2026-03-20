@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2601.00538",
+  "title": "Parametrized Sharing for Multi-Agent Hybrid DRL for Multiple Multi-Functional RISs-Aided Downlink NOMA Networks",
+  "abstract": "Multi-functional reconfigurable intelligent surface (MF-RIS) is conceived to address the communication efficiency thanks to its extended signal coverage from its active RIS capability and self-sustainability from energy harvesting (EH). We investigate the architecture of multi-MF-RISs to assist non-orthogonal multiple access (NOMA) downlink networks. We formulate an energy efficiency (EE) maximization problem by optimizing power allocation, transmit beamforming and MF-RIS configurations of amplitudes, phase-shifts and EH ratios, as well as the position of MF-RISs, while satisfying constraints of available power, user rate requirements, and self-sustainability property. We design a parametrized sharing scheme for multi-agent hybrid deep reinforcement learning (PMHRL), where the multi-agent proximal policy optimization (PPO) and deep-Q network (DQN) handle continuous and discrete variables, respectively. The simulation results have demonstrated that proposed PMHRL has the highest EE compared to other benchmarks, including cases without parametrized sharing, pure PPO and DQN. Moreover, the proposed multi-MF-RISs-aided downlink NOMA achieves the highest EE compared to scenarios of no-EH/amplification, traditional RISs, and deployment without RISs/MF-RISs under different multiple access.",
+  "authors": [
+    "Chi-Te Kuo",
+    "Li-Hsiang Shen",
+    "Jyun-Jhe Huang"
+  ],
+  "published": "2026-01-02T02:44:30Z",
+  "primary_category": "eess.SP",
+  "categories": [
+    "eess.SP",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2601.00538"
+}

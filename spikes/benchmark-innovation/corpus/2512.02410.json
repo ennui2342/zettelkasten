@@ -1,0 +1,20 @@
+{
+  "arxiv_id": "2512.02410",
+  "title": "Decentralized Multi-Agent System with Trust-Aware Communication",
+  "abstract": "The emergence of Large Language Models (LLMs) is rapidly accelerating the development of autonomous multi-agent systems (MAS), paving the way for the Internet of Agents. However, traditional centralized MAS architectures present significant challenges, including single points of failure, vulnerability to censorship, inherent scalability limitations, and critical trust issues. We propose a novel Decentralized Multi-Agent System (DMAS) architecture designed to overcome these fundamental problems by enabling trust-aware, scalable, and censorship-resistant interactions among autonomous agents. Our DMAS features a decentralized agent runtime underpinned by a blockchain-based architecture. We formalize a trust-aware communication protocol that leverages cryptographic primitives and on-chain operations to provide security properties: verifiable interaction cycles, communication integrity, authenticity, non-repudiation, and conditional confidentiality, which we further substantiate through a comprehensive security analysis. Our performance analysis validates the DMAS as a scalable and efficient solution for building trustworthy multi-agent systems.",
+  "authors": [
+    "Yepeng Ding",
+    "Ahmed Twabi",
+    "Junwei Yu",
+    "Lingfeng Zhang",
+    "Tohru Kondo",
+    "Hiroyuki Sato"
+  ],
+  "published": "2025-12-02T04:39:12Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.CR"
+  ],
+  "url": "https://arxiv.org/abs/2512.02410"
+}

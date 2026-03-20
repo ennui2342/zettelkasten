@@ -1,0 +1,20 @@
+{
+  "arxiv_id": "2509.24088",
+  "title": "CORRECT: COndensed eRror RECognition via knowledge Transfer in multi-agent systems",
+  "abstract": "Multi-agent systems (MAS) are increasingly capable of tackling complex real-world tasks, yet their reliance on inter-agent coordination, tool use, and long-horizon reasoning makes error recognition particularly challenging. Minor errors can propagate across agents, escalating into task failures while producing long, intertwined execution trajectories that impose significant costs for both human developers and automated systems to debug and analyze. Our key insight is that, despite surface differences in failure trajectories (e.g., logs), MAS errors often recur with similar structural patterns. This paper presents CORRECT, the first lightweight, training-free framework that leverages an online cache of distilled error schemata to recognize and transfer knowledge of failure structures across new requests. This cache-based reuse allows LLMs to perform targeted error localization at inference time, avoiding the need for expensive retraining while adapting to dynamic MAS deployments in subseconds. To support rigorous study in this domain, we also introduce CORRECT-Error, a large-scale dataset of over 2,000 annotated trajectories collected through a novel error-injection pipeline guided by real-world distributions, and further validated through human evaluation to ensure alignment with natural failure patterns. Experiments across seven diverse MAS applications show that CORRECT improves step-level error localization up to 19.8% over existing advances while at near-zero overhead, substantially narrowing the gap between automated and human-level error recognition.",
+  "authors": [
+    "Yifan Yu",
+    "Moyan Li",
+    "Shaoyuan Xu",
+    "Jinmiao Fu",
+    "Xinhai Hou",
+    "Fan Lai",
+    "Bryan Wang"
+  ],
+  "published": "2025-09-28T21:47:20Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2509.24088"
+}

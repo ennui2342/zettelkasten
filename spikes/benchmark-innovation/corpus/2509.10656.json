@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2509.10656",
+  "title": "Self-Supervised Goal-Reaching Results in Multi-Agent Cooperation and Exploration",
+  "abstract": "For groups of autonomous agents to achieve a particular goal, they must engage in coordination and long-horizon reasoning. However, designing reward functions to elicit such behavior is challenging. In this paper, we study how self-supervised goal-reaching techniques can be leveraged to enable agents to cooperate. The key idea is that, rather than have agents maximize some scalar reward, agents aim to maximize the likelihood of visiting a certain goal. This problem setting enables human users to specify tasks via a single goal state rather than implementing a complex reward function. While the feedback signal is quite sparse, we will demonstrate that self-supervised goal-reaching techniques enable agents to learn from such feedback. On MARL benchmarks, our proposed method outperforms alternative approaches that have access to the same sparse reward signal as our method. While our method has no explicit mechanism for exploration, we observe that self-supervised multi-agent goal-reaching leads to emergent cooperation and exploration in settings where alternative approaches never witness a single successful trial.",
+  "authors": [
+    "Chirayu Nimonkar",
+    "Shlok Shah",
+    "Catherine Ji",
+    "Benjamin Eysenbach"
+  ],
+  "published": "2025-09-12T19:35:20Z",
+  "primary_category": "cs.LG",
+  "categories": [
+    "cs.LG",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2509.10656"
+}

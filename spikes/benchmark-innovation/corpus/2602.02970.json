@@ -1,0 +1,15 @@
+{
+  "arxiv_id": "2602.02970",
+  "title": "Co2PO: Coordinated Constrained Policy Optimization for Multi-Agent RL",
+  "abstract": "Constrained multi-agent reinforcement learning (MARL) faces a fundamental tension between exploration and safety-constrained optimization. Existing leading approaches, such as Lagrangian methods, typically rely on global penalties or centralized critics that react to violations after they occur, often suppressing exploration and leading to over-conservatism. We propose Co2PO, a novel MARL communication-augmented framework that enables coordination-driven safety through selective, risk-aware communication. Co2PO introduces a shared blackboard architecture for broadcasting positional intent and yield signals, governed by a learned hazard predictor that proactively forecasts potential violations over an extended temporal horizon. By integrating these forecasts into a constrained optimization objective, Co2PO allows agents to anticipate and navigate collective hazards without the performance trade-offs inherent in traditional reactive constraints. We evaluate Co2PO across a suite of complex multi-agent safety benchmarks, where it achieves higher returns compared to leading constrained baselines while converging to cost-compliant policies at deployment. Ablation studies further validate the necessity of risk-triggered communication, adaptive gating, and shared memory components.",
+  "authors": [
+    "Shrenik Patel",
+    "Christine Truong"
+  ],
+  "published": "2026-02-03T01:09:31Z",
+  "primary_category": "cs.LG",
+  "categories": [
+    "cs.LG"
+  ],
+  "url": "https://arxiv.org/abs/2602.02970"
+}

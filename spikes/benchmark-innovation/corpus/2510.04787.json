@@ -1,0 +1,22 @@
+{
+  "arxiv_id": "2510.04787",
+  "title": "Trade in Minutes! Rationality-Driven Agentic System for Quantitative Financial Trading",
+  "abstract": "Recent advancements in large language models (LLMs) and agentic systems have shown exceptional decision-making capabilities, revealing significant potential for autonomic finance. Current financial trading agents predominantly simulate anthropomorphic roles that inadvertently introduce emotional biases and rely on peripheral information, while being constrained by the necessity for continuous inference during deployment. In this paper, we pioneer the harmonization of strategic depth in agents with the mechanical rationality essential for quantitative trading. Consequently, we present TiMi (Trade in Minutes), a rationality-driven multi-agent system that architecturally decouples strategy development from minute-level deployment. TiMi leverages specialized LLM capabilities of semantic analysis, code programming, and mathematical reasoning within a comprehensive policy-optimization-deployment chain. Specifically, we propose a two-tier analytical paradigm from macro patterns to micro customization, layered programming design for trading bot implementation, and closed-loop optimization driven by mathematical reflection. Extensive evaluations across 200+ trading pairs in stock and cryptocurrency markets empirically validate the efficacy of TiMi in stable profitability, action efficiency, and risk control under volatile market dynamics.",
+  "authors": [
+    "Zifan Song",
+    "Kaitao Song",
+    "Guosheng Hu",
+    "Ding Qi",
+    "Junyao Gao",
+    "Xiaohua Wang",
+    "Dongsheng Li",
+    "Cairong Zhao"
+  ],
+  "published": "2025-10-06T13:08:55Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2510.04787"
+}

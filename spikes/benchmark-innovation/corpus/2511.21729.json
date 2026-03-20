@@ -1,0 +1,15 @@
+{
+  "arxiv_id": "2511.21729",
+  "title": "Beyond Component Strength: Synergistic Integration and Adaptive Calibration in Multi-Agent RAG Systems",
+  "abstract": "Building reliable retrieval-augmented generation (RAG) systems requires more than adding powerful components; it requires understanding how they interact. Using ablation studies on 50 queries (15 answerable, 10 edge cases, and 25 adversarial), we show that enhancements such as hybrid retrieval, ensemble verification, and adaptive thresholding provide almost no benefit when used in isolation, yet together achieve a 95% reduction in abstention (from 40% to 2%) without increasing hallucinations. We also identify a measurement challenge: different verification strategies can behave safely but assign inconsistent labels (for example, \"abstained\" versus \"unsupported\"), creating apparent hallucination rates that are actually artifacts of labeling. Our results show that synergistic integration matters more than the strength of any single component, that standardized metrics and labels are essential for correctly interpreting performance, and that adaptive calibration is needed to prevent overconfident over-answering even when retrieval quality is high.",
+  "authors": [
+    "Jithin Krishnan"
+  ],
+  "published": "2025-11-21T07:53:56Z",
+  "primary_category": "cs.CL",
+  "categories": [
+    "cs.CL",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2511.21729"
+}

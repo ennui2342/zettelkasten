@@ -1,0 +1,26 @@
+{
+  "arxiv_id": "2511.22226",
+  "title": "Embedded Universal Predictive Intelligence: a coherent framework for multi-agent learning",
+  "abstract": "The standard theory of model-free reinforcement learning assumes that the environment dynamics are stationary and that agents are decoupled from their environment, such that policies are treated as being separate from the world they inhabit. This leads to theoretical challenges in the multi-agent setting where the non-stationarity induced by the learning of other agents demands prospective learning based on prediction models. To accurately model other agents, an agent must account for the fact that those other agents are, in turn, forming beliefs about it to predict its future behavior, motivating agents to model themselves as part of the environment. Here, building upon foundational work on universal artificial intelligence (AIXI), we introduce a mathematical framework for prospective learning and embedded agency centered on self-prediction, where Bayesian RL agents predict both future perceptual inputs and their own actions, and must therefore resolve epistemic uncertainty about themselves as part of the universe they inhabit. We show that in multi-agent settings, self-prediction enables agents to reason about others running similar algorithms, leading to new game-theoretic solution concepts and novel forms of cooperation unattainable by classical decoupled agents. Moreover, we extend the theory of AIXI, and study universally intelligent embedded agents which start from a Solomonoff prior. We show that these idealized agents can form consistent mutual predictions and achieve infinite-order theory of mind, potentially setting a gold standard for embedded multi-agent learning.",
+  "authors": [
+    "Alexander Meulemans",
+    "Rajai Nasser",
+    "Maciej Wołczyk",
+    "Marissa A. Weis",
+    "Seijin Kobayashi",
+    "Blake Richards",
+    "Guillaume Lajoie",
+    "Angelika Steger",
+    "Marcus Hutter",
+    "James Manyika",
+    "Rif A. Saurous",
+    "João Sacramento",
+    "Blaise Agüera y Arcas"
+  ],
+  "published": "2025-11-27T08:46:48Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2511.22226"
+}

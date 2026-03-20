@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2509.25651",
+  "title": "AutoLabs: Cognitive Multi-Agent Systems with Self-Correction for Autonomous Chemical Experimentation",
+  "abstract": "The automation of chemical research through self-driving laboratories (SDLs) promises to accelerate scientific discovery, yet the reliability and granular performance of the underlying AI agents remain critical, under-examined challenges. In this work, we introduce AutoLabs, a self-correcting, multi-agent architecture designed to autonomously translate natural-language instructions into executable protocols for a high-throughput liquid handler. The system engages users in dialogue, decomposes experimental goals into discrete tasks for specialized agents, performs tool-assisted stoichiometric calculations, and iteratively self-corrects its output before generating a hardware-ready file. We present a comprehensive evaluation framework featuring five benchmark experiments of increasing complexity, from simple sample preparation to multi-plate timed syntheses. Through a systematic ablation study of 20 agent configurations, we assess the impact of reasoning capacity, architectural design (single- vs. multi-agent), tool use, and self-correction mechanisms. Our results demonstrate that agent reasoning capacity is the most critical factor for success, reducing quantitative errors in chemical amounts (nRMSE) by over 85% in complex tasks. When combined with a multi-agent architecture and iterative self-correction, AutoLabs achieves near-expert procedural accuracy (F1-score > 0.89) on challenging multi-step syntheses. These findings establish a clear blueprint for developing robust and trustworthy AI partners for autonomous laboratories, highlighting the synergistic effects of modular design, advanced reasoning, and self-correction to ensure both performance and reliability in high-stakes scientific applications. Code: https://github.com/pnnl/autolabs",
+  "authors": [
+    "Gihan Panapitiya",
+    "Emily Saldanha",
+    "Heather Job",
+    "Olivia Hess"
+  ],
+  "published": "2025-09-30T01:51:46Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2509.25651"
+}

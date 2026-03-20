@@ -1,0 +1,16 @@
+{
+  "arxiv_id": "2602.01453",
+  "title": "Provable Cooperative Multi-Agent Exploration for Reward-Free MDPs",
+  "abstract": "We study cooperative multi-agent reinforcement learning in the setting of reward-free exploration, where multiple agents jointly explore an unknown MDP in order to learn its dynamics (without observing rewards). We focus on a tabular finite-horizon MDP and adopt a phased learning framework. In each learning phase, multiple agents independently interact with the environment. More specifically, in each learning phase, each agent is assigned a policy, executes it, and observes the resulting trajectory. Our primary goal is to characterize the tradeoff between the number of learning phases and the number of agents, especially when the number of learning phases is small.   Our results identify a sharp transition governed by the horizon $H$. When the number of learning phases equals $H$, we present a computationally efficient algorithm that uses only $\\tilde{O}(S^6 H^6 A / ε^2)$ agents to obtain an $ε$ approximation of the dynamics (i.e., yields an $ε$-optimal policy for any reward function). We complement our algorithm with a lower bound showing that any algorithm restricted to $ρ< H$ phases requires at least $A^{H/ρ}$ agents to achieve constant accuracy. Thus, we show that it is essential to have an order of $H$ learning phases if we limit the number of agents to be polynomial.",
+  "authors": [
+    "Idan Barnea",
+    "Orin Levy",
+    "Yishay Mansour"
+  ],
+  "published": "2026-02-01T21:44:11Z",
+  "primary_category": "cs.LG",
+  "categories": [
+    "cs.LG"
+  ],
+  "url": "https://arxiv.org/abs/2602.01453"
+}

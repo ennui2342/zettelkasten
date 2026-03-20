@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2601.02454",
+  "title": "The Rise of Agentic Testing: Multi-Agent Systems for Robust Software Quality Assurance",
+  "abstract": "Software testing has progressed toward intelligent automation, yet current AI-based test generators still suffer from static, single-shot outputs that frequently produce invalid, redundant, or non-executable tests due to the lack of execution aware feedback. This paper introduces an agentic multi-model testing framework a closed-loop, self-correcting system in which a Test Generation Agent, an Execution and Analysis Agent, and a Review and Optimization Agent collaboratively generate, execute, analyze, and refine tests until convergence. By using sandboxed execution, detailed failure reporting, and iterative regeneration or patching of failing tests, the framework autonomously improves test quality and expands coverage. Integrated into a CI/CD-compatible pipeline, it leverages reinforcement signals from coverage metrics and execution outcomes to guide refinement. Empirical evaluations on microservice based applications show up to a 60% reduction in invalid tests, 30% coverage improvement, and significantly reduced human effort compared to single-model baselines demonstrating that multi-agent, feedback-driven loops can evolve software testing into an autonomous, continuously learning quality assurance ecosystem for self-healing, high-reliability codebases.",
+  "authors": [
+    "Saba Naqvi",
+    "Mohammad Baqar",
+    "Nawaz Ali Mohammad"
+  ],
+  "published": "2026-01-05T18:20:14Z",
+  "primary_category": "cs.SE",
+  "categories": [
+    "cs.SE",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2601.02454"
+}

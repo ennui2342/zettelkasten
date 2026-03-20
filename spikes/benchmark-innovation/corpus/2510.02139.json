@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2510.02139",
+  "title": "BioinfoMCP: A Unified Platform Enabling MCP Interfaces in Agentic Bioinformatics",
+  "abstract": "Bioinformatics tools are essential for complex computational biology tasks, yet their integration with emerging AI-agent frameworks is hindered by incompatible interfaces, heterogeneous input-output formats, and inconsistent parameter conventions. The Model Context Protocol (MCP) provides a standardized framework for tool-AI communication, but manually converting hundreds of existing and rapidly growing specialized bioinformatics tools into MCP-compliant servers is labor-intensive and unsustainable. Here, we present BioinfoMCP, a unified platform comprising two components: BioinfoMCP Converter, which automatically generates robust MCP servers from tool documentation using large language models, and BioinfoMCP Benchmark, which systematically validates the reliability and versatility of converted tools across diverse computational tasks. We present a platform of 38 MCP-converted bioinformatics tools, extensively validated to show that 94.7% successfully executed complex workflows across three widely used AI-agent platforms. By removing technical barriers to AI automation, BioinfoMCP enables natural-language interaction with sophisticated bioinformatics analyses without requiring extensive programming expertise, offering a scalable path to intelligent, interoperable computational biology.",
+  "authors": [
+    "Florensia Widjaja",
+    "Zhangtianyi Chen",
+    "Juexiao Zhou"
+  ],
+  "published": "2025-10-02T15:47:59Z",
+  "primary_category": "q-bio.QM",
+  "categories": [
+    "q-bio.QM",
+    "cs.AI",
+    "cs.LG",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2510.02139"
+}

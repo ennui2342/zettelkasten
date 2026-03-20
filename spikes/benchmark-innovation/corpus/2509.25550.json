@@ -1,0 +1,20 @@
+{
+  "arxiv_id": "2509.25550",
+  "title": "Unifying Agent Interaction and World Information for Multi-agent Coordination",
+  "abstract": "This work presents a novel representation learning framework, *interaction-world* latent (IWoL), to facilitate *team coordination* in multi-agent reinforcement learning (MARL). Building effective representation for team coordination is a challenging problem, due to the intricate dynamics emerging from multi-agent interaction and incomplete information induced by local observations. Our key insight is to construct a learnable representation space that jointly captures inter-agent relations and task-specific world information by directly modeling communication protocols. This representation enables fully decentralized execution with implicit coordination while avoiding the drawbacks of explicit message passing, for example, slower decision-making, vulnerability to malicious attackers, and sensitivity to bandwidth limitations. In practice, our representation can be used not only as an implicit latent for each agent, but also as an explicit message for communication. Across four challenging MARL benchmarks, we evaluate both variants and show that IWoL provides a simple yet powerful key for team coordination. Moreover, we demonstrate that our representation can be combined with existing MARL algorithms to further enhance their performance.",
+  "authors": [
+    "Dongsu Lee",
+    "Daehee Lee",
+    "Yaru Niu",
+    "Honguk Woo",
+    "Amy Zhang",
+    "Ding Zhao"
+  ],
+  "published": "2025-09-29T22:13:39Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.LG"
+  ],
+  "url": "https://arxiv.org/abs/2509.25550"
+}

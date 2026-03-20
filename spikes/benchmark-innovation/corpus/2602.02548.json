@@ -1,0 +1,22 @@
+{
+  "arxiv_id": "2602.02548",
+  "title": "ToolTok: Tool Tokenization for Efficient and Generalizable GUI Agents",
+  "abstract": "Existing GUI agent models relying on coordinate-based one-step visual grounding struggle with generalizing to varying input resolutions and aspect ratios. Alternatives introduce coordinate-free strategies yet suffer from learning under severe data scarcity. To address the limitations, we propose ToolTok, a novel paradigm of multi-step pathfinding for GUI agents, where operations are modeled as a sequence of progressive tool usage. Specifically, we devise tools aligned with human interaction habits and represent each tool using learnable token embeddings. To enable efficient embedding learning under limited supervision, ToolTok introduces a semantic anchoring mechanism that grounds each tool with semantically related concepts as natural inductive bias. To further enable a pre-trained large language model to progressively acquire tool semantics, we construct an easy-to-hard curriculum consisting of three tasks: token definition question-answering, pure text-guided tool selection, and simplified visual pathfinding. Extensive experiments on multiple benchmarks show that ToolTok achieves superior performance among models of comparable scale (4B) and remains competitive with a substantially larger model (235B). Notably, these results are obtained using less than 1% of the training data required by other post-training approaches. In addition, ToolTok demonstrates strong generalization across unseen scenarios. Our training & inference code is open-source at https://github.com/ZephinueCode/ToolTok.",
+  "authors": [
+    "Xiaoce Wang",
+    "Guibin Zhang",
+    "Junzhe Li",
+    "Jinzhe Tu",
+    "Chun Li",
+    "Ming Li"
+  ],
+  "published": "2026-01-30T08:38:05Z",
+  "primary_category": "cs.LG",
+  "categories": [
+    "cs.LG",
+    "cs.AI",
+    "cs.CV",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2602.02548"
+}

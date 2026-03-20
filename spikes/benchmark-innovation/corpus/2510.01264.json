@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2510.01264",
+  "title": "A Framework for Scalable Heterogeneous Multi-Agent Adversarial Reinforcement Learning in IsaacLab",
+  "abstract": "Multi-Agent Reinforcement Learning (MARL) is central to robotic systems cooperating in dynamic environments. While prior work has focused on these collaborative settings, adversarial interactions are equally critical for real-world applications such as pursuit-evasion, security, and competitive manipulation. In this work, we extend the IsaacLab framework to support scalable training of adversarial policies in high-fidelity physics simulations. We introduce a suite of adversarial MARL environments featuring heterogeneous agents with asymmetric goals and capabilities. Our platform integrates a competitive variant of Heterogeneous Agent Reinforcement Learning with Proximal Policy Optimization (HAPPO), enabling efficient training and evaluation under adversarial dynamics. Experiments across several benchmark scenarios demonstrate the framework's ability to model and train robust policies for morphologically diverse multi-agent competition while maintaining high throughput and simulation realism. Code and benchmarks are available at: https://github.com/DIRECTLab/IsaacLab-HARL .",
+  "authors": [
+    "Isaac Peterson",
+    "Christopher Allred",
+    "Jacob Morrey",
+    "Mario Harper"
+  ],
+  "published": "2025-09-26T03:16:48Z",
+  "primary_category": "cs.LG",
+  "categories": [
+    "cs.LG",
+    "cs.RO"
+  ],
+  "url": "https://arxiv.org/abs/2510.01264"
+}

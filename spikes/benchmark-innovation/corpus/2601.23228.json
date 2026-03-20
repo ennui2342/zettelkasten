@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2601.23228",
+  "title": "Scaling Multiagent Systems with Process Rewards",
+  "abstract": "While multiagent systems have shown promise for tackling complex tasks via specialization, finetuning multiple agents simultaneously faces two key challenges: (1) credit assignment across agents, and (2) sample efficiency of expensive multiagent rollouts. In this work, we propose finetuning multiagent systems with per-action process rewards from AI feedback (MAPPA) to address both. Through assigning credit to individual agent actions rather than only at task completion, MAPPA enables fine-grained supervision without ground truth labels while extracting maximal training signal from each rollout. We demonstrate our approach on competition math problems and tool-augmented data analysis tasks. On unseen math problems, MAPPA achieves +5.0--17.5pp on AIME and +7.8--17.2pp on AMC. For data analysis tasks, our method improves success rate by +16.7pp while quality metrics improve by up to 47%, validating that per-action supervision can lead to improvements across different multiagent systems on various domains. By addressing these challenges, our work takes a first step toward scaling multiagent systems for complex, long-horizon tasks with minimal human supervision.",
+  "authors": [
+    "Ed Li",
+    "Junyu Ren",
+    "Cat Yan"
+  ],
+  "published": "2026-01-30T17:55:27Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.CL",
+    "cs.ET",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2601.23228"
+}

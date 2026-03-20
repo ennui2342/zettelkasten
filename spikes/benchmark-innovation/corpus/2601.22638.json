@@ -1,0 +1,21 @@
+{
+  "arxiv_id": "2601.22638",
+  "title": "ScholarPeer: A Context-Aware Multi-Agent Framework for Automated Peer Review",
+  "abstract": "Automated peer review has evolved from simple text classification to structured feedback generation. However, current state-of-the-art systems still struggle with \"surface-level\" critiques: they excel at summarizing content but often fail to accurately assess novelty and significance or identify deep methodological flaws because they evaluate papers in a vacuum, lacking the external context a human expert possesses. In this paper, we introduce ScholarPeer, a search-enabled multi-agent framework designed to emulate the cognitive processes of a senior researcher. ScholarPeer employs a dual-stream process of context acquisition and active verification. It dynamically constructs a domain narrative using a historian agent, identifies missing comparisons via a baseline scout, and verifies claims through a multi-aspect Q&A engine, grounding the critique in live web-scale literature. We evaluate ScholarPeer on DeepReview-13K and the results demonstrate that ScholarPeer achieves significant win-rates against state-of-the-art approaches in side-by-side evaluations and reduces the gap to human-level diversity.",
+  "authors": [
+    "Palash Goyal",
+    "Mihir Parmar",
+    "Yiwen Song",
+    "Hamid Palangi",
+    "Tomas Pfister",
+    "Jinsung Yoon"
+  ],
+  "published": "2026-01-30T06:54:55Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI",
+    "cs.LG"
+  ],
+  "url": "https://arxiv.org/abs/2601.22638"
+}

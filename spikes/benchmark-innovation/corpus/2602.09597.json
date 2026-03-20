@@ -1,0 +1,15 @@
+{
+  "arxiv_id": "2602.09597",
+  "title": "Detecting radar targets swarms in range profiles with a partially complex-valued neural network",
+  "abstract": "Correctly detecting radar targets is usually challenged by clutter and waveform distortion. An additional difficulty stems from the relative proximity of several targets, the latter being perceived as a single target in the worst case, or influencing each other's detection thresholds. The negative impact of targets proximity notably depends on the range resolution defined by the radar parameters and the adaptive threshold adopted. This paper addresses the matter of targets detection in radar range profiles containing multiple targets with varying proximity and distorted echoes. Inspired by recent contributions in the radar and signal processing literature, this work proposes partially complex-valued neural networks as an adaptive range profile processing. Simulated datasets are generated and experiments are conducted to compare a common pulse compression approach with a simple neural network partially defined by complex-valued parameters. Whereas the pulse compression processes one pulse length at a time, the neural network put forward is a generative architecture going through the entire received signal in one go to generate a complete detection profile.",
+  "authors": [
+    "Martin Bauw"
+  ],
+  "published": "2026-02-10T09:49:19Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "eess.SP"
+  ],
+  "url": "https://arxiv.org/abs/2602.09597"
+}

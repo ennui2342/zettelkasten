@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2512.00249",
+  "title": "A Hierarchical Hybrid AI Approach: Integrating Deep Reinforcement Learning and Scripted Agents in Combat Simulations",
+  "abstract": "In the domain of combat simulations in support of wargaming, the development of intelligent agents has predominantly been characterized by rule-based, scripted methodologies with deep reinforcement learning (RL) approaches only recently being introduced. While scripted agents offer predictability and consistency in controlled environments, they fall short in dynamic, complex scenarios due to their inherent inflexibility. Conversely, RL agents excel in adaptability and learning, offering potential improvements in handling unforeseen situations, but suffer from significant challenges such as black-box decision-making processes and scalability issues in larger simulation environments. This paper introduces a novel hierarchical hybrid artificial intelligence (AI) approach that synergizes the reliability and predictability of scripted agents with the dynamic, adaptive learning capabilities of RL. By structuring the AI system hierarchically, the proposed approach aims to utilize scripted agents for routine, tactical-level decisions and RL agents for higher-level, strategic decision-making, thus addressing the limitations of each method while leveraging their individual strengths. This integration is shown to significantly improve overall performance, providing a robust, adaptable, and effective solution for developing and training intelligent agents in complex simulation environments.",
+  "authors": [
+    "Scotty Black",
+    "Christian Darken"
+  ],
+  "published": "2025-11-28T23:50:29Z",
+  "primary_category": "cs.LG",
+  "categories": [
+    "cs.LG",
+    "cs.AI",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2512.00249"
+}

@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2510.20218",
+  "title": "High-order Interactions Modeling for Interpretable Multi-Agent Q-Learning",
+  "abstract": "The ability to model interactions among agents is crucial for effective coordination and understanding their cooperation mechanisms in multi-agent reinforcement learning (MARL). However, previous efforts to model high-order interactions have been primarily hindered by the combinatorial explosion or the opaque nature of their black-box network structures. In this paper, we propose a novel value decomposition framework, called Continued Fraction Q-Learning (QCoFr), which can flexibly capture arbitrary-order agent interactions with only linear complexity $\\mathcal{O}\\left({n}\\right)$ in the number of agents, thus avoiding the combinatorial explosion when modeling rich cooperation. Furthermore, we introduce the variational information bottleneck to extract latent information for estimating credits. This latent information helps agents filter out noisy interactions, thereby significantly enhancing both cooperation and interpretability. Extensive experiments demonstrate that QCoFr not only consistently achieves better performance but also provides interpretability that aligns with our theoretical analysis.",
+  "authors": [
+    "Qinyu Xu",
+    "Yuanyang Zhu",
+    "Xuefei Wu",
+    "Chunlin Chen"
+  ],
+  "published": "2025-10-23T05:08:32Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2510.20218"
+}

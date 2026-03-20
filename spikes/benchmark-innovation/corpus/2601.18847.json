@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2601.18847",
+  "title": "MulVul: Retrieval-augmented Multi-Agent Code Vulnerability Detection via Cross-Model Prompt Evolution",
+  "abstract": "Large Language Models (LLMs) struggle to automate real-world vulnerability detection due to two key limitations: the heterogeneity of vulnerability patterns undermines the effectiveness of a single unified model, and manual prompt engineering for massive weakness categories is unscalable.   To address these challenges, we propose \\textbf{MulVul}, a retrieval-augmented multi-agent framework designed for precise and broad-coverage vulnerability detection. MulVul adopts a coarse-to-fine strategy: a \\emph{Router} agent first predicts the top-$k$ coarse categories and then forwards the input to specialized \\emph{Detector} agents, which identify the exact vulnerability types. Both agents are equipped with retrieval tools to actively source evidence from vulnerability knowledge bases to mitigate hallucinations.   Crucially, to automate the generation of specialized prompts, we design \\emph{Cross-Model Prompt Evolution}, a prompt optimization mechanism where a generator LLM iteratively refines candidate prompts while a distinct executor LLM validates their effectiveness. This decoupling mitigates the self-correction bias inherent in single-model optimization.   Evaluated on 130 CWE types, MulVul achieves 34.79\\% Macro-F1, outperforming the best baseline by 41.5\\%. Ablation studies validate cross-model prompt evolution, which boosts performance by 51.6\\% over manual prompts by effectively handling diverse vulnerability patterns.",
+  "authors": [
+    "Zihan Wu",
+    "Jie Xu",
+    "Yun Peng",
+    "Chun Yong Chong",
+    "Xiaohua Jia"
+  ],
+  "published": "2026-01-26T12:43:10Z",
+  "primary_category": "cs.SE",
+  "categories": [
+    "cs.SE",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2601.18847"
+}

@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2510.24671",
+  "title": "Multi-Agent Scenario Generation in Roundabouts with a Transformer-enhanced Conditional Variational Autoencoder",
+  "abstract": "With the increasing integration of intelligent driving functions into serial-produced vehicles, ensuring their functionality and robustness poses greater challenges. Compared to traditional road testing, scenario-based virtual testing offers significant advantages in terms of time and cost efficiency, reproducibility, and exploration of edge cases. We propose a Transformer-enhanced Conditional Variational Autoencoder (CVAE-T) model for generating multi-agent traffic scenarios in roundabouts, which are characterized by high vehicle dynamics and complex layouts, yet remain relatively underexplored in current research. The results show that the proposed model can accurately reconstruct original scenarios and generate realistic, diverse synthetic scenarios. Besides, two Key-Performance-Indicators (KPIs) are employed to evaluate the interactive behavior in the generated scenarios. Analysis of the latent space reveals partial disentanglement, with several latent dimensions exhibiting distinct and interpretable effects on scenario attributes such as vehicle entry timing, exit timing, and velocity profiles. The results demonstrate the model's capability to generate scenarios for the validation of intelligent driving functions involving multi-agent interactions, as well as to augment data for their development and iterative improvement.",
+  "authors": [
+    "Li Li",
+    "Tobias Brinkmann",
+    "Till Temmen",
+    "Markus Eisenbarth",
+    "Jakob Andert"
+  ],
+  "published": "2025-10-28T17:36:52Z",
+  "primary_category": "cs.RO",
+  "categories": [
+    "cs.RO",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2510.24671"
+}

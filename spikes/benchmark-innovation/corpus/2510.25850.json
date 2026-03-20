@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2510.25850",
+  "title": "Debate2Create: Robot Co-design via Multi-Agent LLM Debate",
+  "abstract": "We introduce Debate2Create (D2C), a multi-agent LLM framework that formulates robot co-design as structured, iterative debate grounded in physics-based evaluation. A design agent and control agent engage in a thesis-antithesis-synthesis loop, while pluralistic LLM judges provide multi-objective feedback to steer exploration. Across five MuJoCo locomotion benchmarks, D2C achieves up to $3.2\\times$ the default Ant score and $\\sim9\\times$ on Swimmer, outperforming prior LLM-based methods and black-box optimization. Iterative debate yields 18--35% gains over compute-matched zero-shot generation, and D2C-generated rewards transfer to default morphologies in 4/5 tasks. Our results demonstrate that structured multi-agent debate offers an effective alternative to hand-designed objectives for joint morphology-reward optimization.",
+  "authors": [
+    "Kevin Qiu",
+    "Marek Cygan"
+  ],
+  "published": "2025-10-29T18:00:16Z",
+  "primary_category": "cs.RO",
+  "categories": [
+    "cs.RO",
+    "cs.LG",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2510.25850"
+}

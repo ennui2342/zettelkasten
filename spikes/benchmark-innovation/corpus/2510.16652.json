@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2510.16652",
+  "title": "ARCO-BO: Adaptive Resource-aware COllaborative Bayesian Optimization for Heterogeneous Multi-Agent Design",
+  "abstract": "Modern scientific and engineering design increasingly involves distributed optimization, where agents such as laboratories, simulations, or industrial partners pursue related goals under differing conditions. These agents often face heterogeneities in objectives, evaluation budgets, and accessible design variables, which complicates coordination and can lead to redundancy, poor resource use, and ineffective information sharing. Bayesian Optimization (BO) is a widely used decision-making framework for expensive black box functions, but its single-agent formulation assumes centralized control and full data sharing. Recent collaborative BO methods relax these assumptions, yet they often require uniform resources, fully shared input spaces, and fixed task alignment, conditions rarely satisfied in practice. To address these challenges, we introduce Adaptive Resource Aware Collaborative Bayesian Optimization (ARCO-BO), a framework that explicitly accounts for heterogeneity in multi-agent optimization. ARCO-BO combines three components: a similarity and optima-aware consensus mechanism for adaptive information sharing, a budget-aware asynchronous sampling strategy for resource coordination, and a partial input space sharing for heterogeneous design spaces. Experiments on synthetic and high-dimensional engineering problems show that ARCO-BO consistently outperforms independent BO and existing collaborative BO via consensus approach, achieving robust and efficient performance in complex multi-agent settings.",
+  "authors": [
+    "Zihan Wang",
+    "Yi-Ping Chen",
+    "Tuba Dolar",
+    "Wei Chen"
+  ],
+  "published": "2025-10-18T22:06:10Z",
+  "primary_category": "stat.ML",
+  "categories": [
+    "stat.ML",
+    "cs.LG"
+  ],
+  "url": "https://arxiv.org/abs/2510.16652"
+}

@@ -1,0 +1,14 @@
+{
+  "arxiv_id": "2603.00121",
+  "title": "Graph-theoretic Agreement Framework for Multi-agent LLM Systems",
+  "abstract": "The shift from monolithic LLMs to distributed multi-agent architectures demands new frameworks for verifying and securing autonomous coordination. Unlike traditional multi-agent systems focused on cooperative state alignment, modern LLM patterns: multi-agent debate, constitutional oversight, helper-critic loops-rely on adversarial critique for error correction and reasoning refinement. Since LLMs are dynamical systems whose latent states are imperfectly observable from verbalized outputs, securing these networks requires understanding both macroscopic topology and microscopic agent observability. This paper establishes a rigorous graph-theoretic framework for analyzing consensus in signed, directed interaction networks, bridging graph theory and LLM reasoning by formally mapping Transformer cross-entropy log-odds to the signed Laplacian. We characterize agreement stability through structural balance theory, showing how unbalanced critique cycles produce logical frustration and persistent reasoning oscillations, and prove that unobservable latent states from hidden system prompts act as topological Trojan horses that destabilize cooperative consensus. To resolve unobservable deadlocks, we restrict interaction topologies to chordal graphs and apply matrix decomposition with Gram-Schmidt orthogonalization, proving that rank-one spectral edge perturbations deterministically break expertise symmetry by shifting eigenvalues into the stable left-half plane. Core contributions include consensus theorems, polynomial-time Perfect Elimination Ordering verification algorithms, and large-scale empirical validation on clustered ensembles of LLaMA-3, Mistral, and Gemma agents.",
+  "authors": [
+    "Muhammad Umar Javed"
+  ],
+  "published": "2026-02-23T02:30:48Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2603.00121"
+}

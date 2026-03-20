@@ -1,0 +1,22 @@
+{
+  "arxiv_id": "2601.13268",
+  "title": "Improving the Safety and Trustworthiness of Medical AI via Multi-Agent Evaluation Loops",
+  "abstract": "Large Language Models (LLMs) are increasingly applied in healthcare, yet ensuring their ethical integrity and safety compliance remains a major barrier to clinical deployment. This work introduces a multi-agent refinement framework designed to enhance the safety and reliability of medical LLMs through structured, iterative alignment. Our system combines two generative models - DeepSeek R1 and Med-PaLM - with two evaluation agents, LLaMA 3.1 and Phi-4, which assess responses using the American Medical Association's (AMA) Principles of Medical Ethics and a five-tier Safety Risk Assessment (SRA-5) protocol. We evaluate performance across 900 clinically diverse queries spanning nine ethical domains, measuring convergence efficiency, ethical violation reduction, and domain-specific risk behavior. Results demonstrate that DeepSeek R1 achieves faster convergence (mean 2.34 vs. 2.67 iterations), while Med-PaLM shows superior handling of privacy-sensitive scenarios. The iterative multi-agent loop achieved an 89% reduction in ethical violations and a 92% risk downgrade rate, underscoring the effectiveness of our approach. This study presents a scalable, regulator-aligned, and cost-efficient paradigm for governing medical AI safety.",
+  "authors": [
+    "Zainab Ghafoor",
+    "Md Shafiqul Islam",
+    "Koushik Howlader",
+    "Md Rasel Khondokar",
+    "Tanusree Bhattacharjee",
+    "Sayantan Chakraborty",
+    "Adrito Roy",
+    "Ushashi Bhattacharjee",
+    "Tirtho Roy"
+  ],
+  "published": "2026-01-19T18:10:34Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2601.13268"
+}

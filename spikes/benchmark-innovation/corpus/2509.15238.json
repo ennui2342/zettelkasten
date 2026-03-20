@@ -1,0 +1,16 @@
+{
+  "arxiv_id": "2509.15238",
+  "title": "Generating Plans for Belief-Desire-Intention (BDI) Agents Using Alternating-Time Temporal Logic (ATL)",
+  "abstract": "Belief-Desire-Intention (BDI) is a framework for modelling agents based on their beliefs, desires, and intentions. Plans are a central component of BDI agents, and define sequences of actions that an agent must undertake to achieve a certain goal. Existing approaches to plan generation often require significant manual effort, and are mainly focused on single-agent systems. As a result, in this work, we have developed a tool that automatically generates BDI plans using Alternating-Time Temporal Logic (ATL). By using ATL, the plans generated accommodate for possible competition or cooperation between the agents in the system. We demonstrate the effectiveness of the tool by generating plans for an illustrative game that requires agent collaboration to achieve a shared goal. We show that the generated plans allow the agents to successfully attain this goal.",
+  "authors": [
+    "Dylan Léveillé"
+  ],
+  "published": "2025-09-17T15:34:02Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI",
+    "cs.LO"
+  ],
+  "url": "https://arxiv.org/abs/2509.15238"
+}

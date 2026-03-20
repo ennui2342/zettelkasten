@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2509.10867",
+  "title": "Agent-based Simulation for Drone Charging in an Internet of Things Environment System",
+  "abstract": "This paper presents an agent-based simulation model for coordinating battery recharging in drone swarms, focusing on applications in Internet of Things (IoT) and Industry 4.0 environments. The proposed model includes a detailed description of the simulation methodology, system architecture, and implementation. One practical use case is explored: Smart Farming, highlighting how autonomous coordination strategies can optimize battery usage and mission efficiency in large-scale drone deployments. This work uses a machine learning technique to analyze the agent-based simulation sensitivity analysis output results.",
+  "authors": [
+    "Leonardo Grando",
+    "José Roberto Emiliano Leite",
+    "Edson Luiz Ursini"
+  ],
+  "published": "2025-09-13T15:47:08Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.NI",
+    "cs.RO"
+  ],
+  "url": "https://arxiv.org/abs/2509.10867"
+}

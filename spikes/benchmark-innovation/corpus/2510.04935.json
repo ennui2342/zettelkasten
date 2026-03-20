@@ -1,0 +1,28 @@
+{
+  "arxiv_id": "2510.04935",
+  "title": "MARS: Co-evolving Dual-System Deep Research via Multi-Agent Reinforcement Learning",
+  "abstract": "Large Reasoning Models (LRMs) face two fundamental limitations: excessive token consumption when overanalyzing simple information processing tasks, and inability to access up-to-date knowledge beyond their training data. We introduce MARS (Multi-Agent System for Deep ReSearch), a novel co-evolution framework that jointly optimizes dual cognitive systems through multi-agent reinforcement learning. Unlike prior approaches that employ fixed or independently-trained summarizers, MARS enables System 1 (fast, intuitive processing) and System 2 (deliberate reasoning) to co-adapt through shared trajectory rewards, developing complementary strategies where System 1 learns to distill information specifically useful for System 2's reasoning. We extend Group Relative Policy Optimization (GRPO) for multi-agent settings with three key innovations: (1) decoupled gradient computation ensuring proper credit assignment despite shared rewards, (2) bin-packing optimization for efficient parallel information processing, and (3) advantage-weighted balanced sampling preventing training imbalance. Extensive experiments demonstrate that MARS (8B), trained under a challenging Zero RL setting without any supervised fine-tuning, achieves 8.17% on HLE -- outperforming WebThinker (32B with SFT, 6.87%) and narrowing the gap with proprietary models like Claude 3.7 Sonnet (7.89%) -- while achieving an average gain of 8.9% across 7 knowledge-intensive tasks.",
+  "authors": [
+    "Guoxin Chen",
+    "Zile Qiao",
+    "Wenqing Wang",
+    "Donglei Yu",
+    "Xuanzhong Chen",
+    "Hao Sun",
+    "Minpeng Liao",
+    "Kai Fan",
+    "Yong Jiang",
+    "Penguin Xie",
+    "Wayne Xin Zhao",
+    "Ruihua Song",
+    "Fei Huang"
+  ],
+  "published": "2025-10-06T15:42:55Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.CL",
+    "cs.LG"
+  ],
+  "url": "https://arxiv.org/abs/2510.04935"
+}

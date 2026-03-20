@@ -1,0 +1,16 @@
+{
+  "arxiv_id": "2509.24408",
+  "title": "FuncPoison: Poisoning Function Library to Hijack Multi-agent Autonomous Driving Systems",
+  "abstract": "Autonomous driving systems increasingly rely on multi-agent architectures powered by large language models (LLMs), where specialized agents collaborate to perceive, reason, and plan. A key component of these systems is the shared function library, a collection of software tools that agents use to process sensor data and navigate complex driving environments. Despite its critical role in agent decision-making, the function library remains an under-explored vulnerability. In this paper, we introduce FuncPoison, a novel poisoning-based attack targeting the function library to manipulate the behavior of LLM-driven multi-agent autonomous systems. FuncPoison exploits two key weaknesses in how agents access the function library: (1) agents rely on text-based instructions to select tools; and (2) these tools are activated using standardized command formats that attackers can replicate. By injecting malicious tools with deceptive instructions, FuncPoison manipulates one agent s decisions--such as misinterpreting road conditions--triggering cascading errors that mislead other agents in the system. We experimentally evaluate FuncPoison on two representative multi-agent autonomous driving systems, demonstrating its ability to significantly degrade trajectory accuracy, flexibly target specific agents to induce coordinated misbehavior, and evade diverse defense mechanisms. Our results reveal that the function library, often considered a simple toolset, can serve as a critical attack surface in LLM-based autonomous driving systems, raising elevated concerns on their reliability.",
+  "authors": [
+    "Yuzhen Long",
+    "Songze Li"
+  ],
+  "published": "2025-09-29T07:56:23Z",
+  "primary_category": "cs.CR",
+  "categories": [
+    "cs.CR",
+    "cs.LG"
+  ],
+  "url": "https://arxiv.org/abs/2509.24408"
+}

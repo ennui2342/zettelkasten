@@ -1,0 +1,15 @@
+{
+  "arxiv_id": "2509.25974",
+  "title": "OpenID Connect for Agents (OIDC-A) 1.0: A Standard Extension for LLM-Based Agent Identity and Authorization",
+  "abstract": "OpenID Connect for Agents (OIDC-A) 1.0 is an extension to OpenID Connect Core 1.0 that provides a comprehensive framework for representing, authenticating, and authorizing LLM-based agents within the OAuth 2.0 ecosystem. As autonomous AI agents become increasingly prevalent in digital systems, there is a critical need for standardized protocols to establish agent identity, verify agent attestation, represent delegation chains, and enable fine-grained authorization based on agent attributes. This specification defines standard claims, endpoints, and protocols that address these requirements while maintaining compatibility with existing OAuth 2.0 and OpenID Connect infrastructure. The proposed framework introduces mechanisms for agent identity representation, delegation chain validation, attestation verification, and capability-based authorization, providing a foundation for secure and trustworthy agent-to-service interactions in modern distributed systems.",
+  "authors": [
+    "Subramanya Nagabhushanaradhya"
+  ],
+  "published": "2025-09-30T09:08:07Z",
+  "primary_category": "cs.NI",
+  "categories": [
+    "cs.NI",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2509.25974"
+}

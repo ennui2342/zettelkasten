@@ -1,0 +1,22 @@
+{
+  "arxiv_id": "2512.16279",
+  "title": "QuadSentinel: Sequent Safety for Machine-Checkable Control in Multi-agent Systems",
+  "abstract": "Safety risks arise as large language model-based agents solve complex tasks with tools, multi-step plans, and inter-agent messages. However, deployer-written policies in natural language are ambiguous and context dependent, so they map poorly to machine-checkable rules, and runtime enforcement is unreliable. Expressing safety policies as sequents, we propose \\textsc{QuadSentinel}, a four-agent guard (state tracker, policy verifier, threat watcher, and referee) that compiles these policies into machine-checkable rules built from predicates over observable state and enforces them online. Referee logic plus an efficient top-$k$ predicate updater keeps costs low by prioritizing checks and resolving conflicts hierarchically. Measured on ST-WebAgentBench (ICML CUA~'25) and AgentHarm (ICLR~'25), \\textsc{QuadSentinel} improves guardrail accuracy and rule recall while reducing false positives. Against single-agent baselines such as ShieldAgent (ICML~'25), it yields better overall safety control. Near-term deployments can adopt this pattern without modifying core agents by keeping policies separate and machine-checkable. Our code will be made publicly available at https://github.com/yyiliu/QuadSentinel.",
+  "authors": [
+    "Yiliu Yang",
+    "Yilei Jiang",
+    "Qunzhong Wang",
+    "Yingshui Tan",
+    "Xiaoyong Zhu",
+    "Sherman S. M. Chow",
+    "Bo Zheng",
+    "Xiangyu Yue"
+  ],
+  "published": "2025-12-18T07:58:40Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.CL"
+  ],
+  "url": "https://arxiv.org/abs/2512.16279"
+}

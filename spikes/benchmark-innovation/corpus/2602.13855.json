@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2602.13855",
+  "title": "From Fluent to Verifiable: Claim-Level Auditability for Deep Research Agents",
+  "abstract": "A deep research agent produces a fluent scientific report in minutes; a careful reader then tries to verify the main claims and discovers the real cost is not reading, but tracing: which sentence is supported by which passage, what was ignored, and where evidence conflicts. We argue that as research generation becomes cheap, auditability becomes the bottleneck, and the dominant risk shifts from isolated factual errors to scientifically styled outputs whose claim-evidence links are weak, missing, or misleading. This perspective proposes claim-level auditability as a first-class design and evaluation target for deep research agents, distills recurring long-horizon failure modes (objective drift, transient constraints, and unverifiable inference), and introduces the Auditable Autonomous Research (AAR) standard, a compact measurement framework that makes auditability testable via provenance coverage, provenance soundness, contradiction transparency, and audit effort. We then argue for semantic provenance with protocolized validation: persistent, queryable provenance graphs that encode claim--evidence relations (including conflicts) and integrate continuous validation during synthesis rather than after publication, with practical instrumentation patterns to support deployment at scale.",
+  "authors": [
+    "Razeen A Rasheed",
+    "Somnath Banerjee",
+    "Animesh Mukherjee",
+    "Rima Hazra"
+  ],
+  "published": "2026-02-14T19:39:15Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.IR",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2602.13855"
+}

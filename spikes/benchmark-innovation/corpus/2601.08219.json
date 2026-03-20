@@ -1,0 +1,15 @@
+{
+  "arxiv_id": "2601.08219",
+  "title": "A Preliminary Agentic Framework for Matrix Deflation",
+  "abstract": "Can a small team of agents peel a matrix apart, one rank-1 slice at a time? We propose an agentic approach to matrix deflation in which a solver Large Language Model (LLM) generates rank-1 Singular Value Decomposition (SVD) updates and a Vision Language Model (VLM) accepts or rejects each update and decides when to stop, eliminating fixed norm thresholds. Solver stability is improved through in-context learning (ICL) and types of row/column permutations that expose visually coherent structure. We evaluate on Digits ($8{\\times}8$), CIFAR-10 ($32{\\times}32$ grayscale), and synthetic ($16{\\times}16$) matrices with and without Gaussian noise. In the synthetic noisy case, where the true construction rank $k$ is known, numerical deflation provides the noise target and our best agentic configuration differs by only $1.75$ RMSE of the target. For Digits and CIFAR-10, targets are defined by deflating until the Frobenius norm reaches $10\\%$ of the original. Across all settings, our agent achieves competitive results, suggesting that fully agentic, threshold-free deflation is a viable alternative to classical numerical algorithms.",
+  "authors": [
+    "Paimon Goulart",
+    "Evangelos E. Papalexakis"
+  ],
+  "published": "2026-01-06T23:59:18Z",
+  "primary_category": "cs.LG",
+  "categories": [
+    "cs.LG"
+  ],
+  "url": "https://arxiv.org/abs/2601.08219"
+}

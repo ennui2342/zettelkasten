@@ -1,0 +1,16 @@
+{
+  "arxiv_id": "2601.15299",
+  "title": "MALTopic: Multi-Agent LLM Topic Modeling Framework",
+  "abstract": "Topic modeling is a crucial technique for extracting latent themes from unstructured text data, particularly valuable in analyzing survey responses. However, traditional methods often only consider free-text responses and do not natively incorporate structured or categorical survey responses for topic modeling. And they produce abstract topics, requiring extensive human interpretation. To address these limitations, we propose the Multi-Agent LLM Topic Modeling Framework (MALTopic). This framework decomposes topic modeling into specialized tasks executed by individual LLM agents: an enrichment agent leverages structured data to enhance textual responses, a topic modeling agent extracts latent themes, and a deduplication agent refines the results. Comparative analysis on a survey dataset demonstrates that MALTopic significantly improves topic coherence, diversity, and interpretability compared to LDA and BERTopic. By integrating structured data and employing a multi-agent approach, MALTopic generates human-readable topics with enhanced contextual relevance, offering a more effective solution for analyzing complex survey data.",
+  "authors": [
+    "Yash Sharma"
+  ],
+  "published": "2026-01-07T06:32:59Z",
+  "primary_category": "cs.CL",
+  "categories": [
+    "cs.CL",
+    "cs.IR",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2601.15299"
+}

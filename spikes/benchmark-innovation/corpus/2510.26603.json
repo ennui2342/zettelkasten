@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2510.26603",
+  "title": "Agentic AI Home Energy Management System: A Large Language Model Framework for Residential Load Scheduling",
+  "abstract": "The electricity sector transition requires substantial increases in residential demand response capacity, yet Home Energy Management Systems (HEMS) adoption remains limited by user interaction barriers requiring translation of everyday preferences into technical parameters. While large language models have been applied to energy systems as code generators and parameter extractors, no existing implementation deploys LLMs as autonomous coordinators managing the complete workflow from natural language input to multi-appliance scheduling. This paper presents an agentic AI HEMS where LLMs autonomously coordinate multi-appliance scheduling from natural language requests to device control, achieving optimal scheduling without example demonstrations. A hierarchical architecture combining one orchestrator with three specialist agents uses the ReAct pattern for iterative reasoning, enabling dynamic coordination without hardcoded workflows while integrating Google Calendar for context-aware deadline extraction. Evaluation across three open-source models using real Austrian day-ahead electricity prices reveals substantial capability differences. Llama-3.3-70B successfully coordinates all appliances across all scenarios to match cost-optimal benchmarks computed via mixed-integer linear programming, while other models achieve perfect single-appliance performance but struggle to coordinate all appliances simultaneously. Progressive prompt engineering experiments demonstrate that analytical query handling without explicit guidance remains unreliable despite models' general reasoning capabilities. We open-source the complete system including orchestration logic, agent prompts, tools, and web interfaces to enable reproducibility, extension, and future research.",
+  "authors": [
+    "Reda El Makroum",
+    "Sebastian Zwickl-Bernhard",
+    "Lukas Kranzl"
+  ],
+  "published": "2025-10-30T15:33:52Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.MA",
+    "eess.SY"
+  ],
+  "url": "https://arxiv.org/abs/2510.26603"
+}

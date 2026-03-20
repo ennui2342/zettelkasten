@@ -1,0 +1,23 @@
+{
+  "arxiv_id": "2511.06251",
+  "title": "WebVIA: A Web-based Vision-Language Agentic Framework for Interactive and Verifiable UI-to-Code Generation",
+  "abstract": "User interface (UI) development requires translating design mockups into functional code, a process that remains repetitive and labor-intensive. While recent Vision-Language Models (VLMs) automate UI-to-Code generation, they generate only static HTML/CSS/JavaScript layouts lacking interactivity. To address this, we propose WebVIA, the first agentic framework for interactive UI-to-Code generation and validation. The framework comprises three components: 1) an exploration agent to capture multi-state UI screenshots; 2) a UI2Code model that generates executable interactive code; 3) a validation module that verifies the interactivity. Experiments demonstrate that WebVIA-Agent achieves more stable and accurate UI exploration than general-purpose agents (e.g., Gemini-2.5-Pro). In addition, our fine-tuned WebVIA-UI2Code models exhibit substantial improvements in generating executable and interactive HTML/CSS/JavaScript code, outperforming their base counterparts across both interactive and static UI2Code benchmarks. Our code and models are available at \\href{https://zheny2751-dotcom.github.io/webvia.github.io/}{\\texttt{https://webvia.github.io}}.",
+  "authors": [
+    "Mingde Xu",
+    "Zhen Yang",
+    "Wenyi Hong",
+    "Lihang Pan",
+    "Xinyue Fan",
+    "Yan Wang",
+    "Xiaotao Gu",
+    "Bin Xu",
+    "Jie Tang"
+  ],
+  "published": "2025-11-09T06:58:52Z",
+  "primary_category": "cs.SE",
+  "categories": [
+    "cs.SE",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2511.06251"
+}

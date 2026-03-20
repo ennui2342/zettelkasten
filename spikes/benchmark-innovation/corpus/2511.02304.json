@@ -1,0 +1,22 @@
+{
+  "arxiv_id": "2511.02304",
+  "title": "Automata-Conditioned Cooperative Multi-Agent Reinforcement Learning",
+  "abstract": "We study the problem of learning multi-task, multi-agent policies for cooperative, temporal objectives, under centralized training, decentralized execution. In this setting, using automata to represent tasks enables the decomposition of complex tasks into simpler sub-tasks that can be assigned to agents. However, existing approaches remain sample-inefficient and are limited to the single-task case. In this work, we present Automata-Conditioned Cooperative Multi-Agent Reinforcement Learning (ACC-MARL), a framework for learning task-conditioned, decentralized team policies. We identify the main challenges to ACC-MARL's feasibility in practice, propose solutions, and prove the correctness of our approach. We further show that the value functions of learned policies can be used to assign tasks optimally at test time. Experiments show emergent task-aware, multi-step coordination among agents, e.g., pressing a button to unlock a door, holding the door, and short-circuiting tasks.",
+  "authors": [
+    "Beyazit Yalcinkaya",
+    "Marcell Vazquez-Chanlatte",
+    "Ameesh Shah",
+    "Hanna Krasowski",
+    "Sanjit A. Seshia"
+  ],
+  "published": "2025-11-04T06:37:36Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI",
+    "cs.CL",
+    "cs.FL",
+    "cs.LG"
+  ],
+  "url": "https://arxiv.org/abs/2511.02304"
+}

@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2509.05396",
+  "title": "Talk Isn't Always Cheap: Understanding Failure Modes in Multi-Agent Debate",
+  "abstract": "While multi-agent debate has been proposed as a promising strategy for improving AI reasoning ability, we find that debate can sometimes be harmful rather than helpful. Prior work has primarily focused on debates within homogeneous groups of agents, whereas we explore how diversity in model capabilities influences the dynamics and outcomes of multi-agent interactions. Through a series of experiments, we demonstrate that debate can lead to a decrease in accuracy over time - even in settings where stronger (i.e., more capable) models outnumber their weaker counterparts. Our analysis reveals that models frequently shift from correct to incorrect answers in response to peer reasoning, favoring agreement over challenging flawed reasoning. We perform additional experiments investigating various potential contributing factors to these harmful shifts - including sycophancy, social conformity, and model and task type. These results highlight important failure modes in the exchange of reasons during multi-agent debate, suggesting that naive applications of debate may cause performance degradation when agents are neither incentivised nor adequately equipped to resist persuasive but incorrect reasoning.",
+  "authors": [
+    "Andrea Wynn",
+    "Harsh Satija",
+    "Gillian Hadfield"
+  ],
+  "published": "2025-09-05T13:47:38Z",
+  "primary_category": "cs.CL",
+  "categories": [
+    "cs.CL",
+    "cs.AI",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2509.05396"
+}

@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2511.03761",
+  "title": "OptiMA: A Transaction-Based Framework with Throughput Optimization for Very Complex Multi-Agent Systems",
+  "abstract": "In recent years, the research of multi-agent systems has taken a direction to explore larger and more complex models to fulfill sophisticated tasks. We point out two possible pitfalls that might be caused by increasing complexity; susceptibilities to faults, and performance bottlenecks. To prevent the former threat, we propose a transaction-based framework to design very complex multi-agent systems (VCMAS). To address the second threat, we offer to integrate transaction scheduling into the proposed framework. We implemented both of these ideas to develop the OptiMA framework and show that it is able to facilitate the execution of VCMAS with more than a hundred agents. We also demonstrate the effect of transaction scheduling on such a system by showing improvements up to more than 16\\%. Furthermore, we also performed a theoretical analysis on the transaction scheduling problem and provided practical tools that can be used for future research on it.",
+  "authors": [
+    "Umut Çalıkyılmaz",
+    "Nitin Nayak",
+    "Jinghua Groppe",
+    "Sven Groppe"
+  ],
+  "published": "2025-11-05T10:23:24Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI",
+    "cs.DB"
+  ],
+  "url": "https://arxiv.org/abs/2511.03761"
+}

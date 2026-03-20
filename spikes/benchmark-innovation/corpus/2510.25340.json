@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2510.25340",
+  "title": "Multi-party Agent Relation Sampling for Multi-party Ad Hoc Teamwork",
+  "abstract": "Multi-agent reinforcement learning (MARl) has achieved strong results in cooperative tasks but typically assumes fixed, fully controlled teams. Ad hoc teamwork (AHT) relaxes this by allowing collaboration with unknown partners, yet existing variants still presume shared conventions. We introduce Multil-party Ad Hoc Teamwork (MAHT), where controlled agents must coordinate with multiple mutually unfamiliar groups of uncontrolled teammates. To address this, we propose MARs, which builds a sparse skeleton graph and applies relational modeling to capture cross-group dvnamics. Experiments on MPE and starCralt ll show that MARs outperforms MARL and AHT baselines while converging faster.",
+  "authors": [
+    "Beiwen Zhang",
+    "Yongheng Liang",
+    "Hejun Wu"
+  ],
+  "published": "2025-10-29T09:53:07Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2510.25340"
+}

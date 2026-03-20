@@ -1,0 +1,15 @@
+{
+  "arxiv_id": "2512.12989",
+  "title": "Quantigence: A Multi-Agent AI Framework for Quantum Security Research",
+  "abstract": "Cryptographically Relevant Quantum Computers (CRQCs) pose a structural threat to the global digital economy. Algorithms like Shor's factoring and Grover's search threaten to dismantle the public-key infrastructure (PKI) securing sovereign communications and financial transactions. While the timeline for fault-tolerant CRQCs remains probabilistic, the \"Store-Now, Decrypt-Later\" (SNDL) model necessitates immediate migration to Post-Quantum Cryptography (PQC). This transition is hindered by the velocity of research, evolving NIST standards, and heterogeneous deployment environments. To address this, we present Quantigence, a theory-driven multi-agent AI framework for structured quantum-security analysis. Quantigence decomposes research objectives into specialized roles - Cryptographic Analyst, Threat Modeler, Standards Specialist, and Risk Assessor - coordinated by a supervisory agent. Using \"cognitive parallelism,\" agents reason independently to maintain context purity while execution is serialized on resource-constrained hardware (e.g., NVIDIA RTX 2060). The framework integrates external knowledge via the Model Context Protocol (MCP) and prioritizes vulnerabilities using the Quantum-Adjusted Risk Score (QARS), a formal extension of Mosca's Theorem. Empirical validation shows Quantigence achieves a 67% reduction in research turnaround time and superior literature coverage compared to manual workflows, democratizing access to high-fidelity quantum risk assessment.",
+  "authors": [
+    "Abdulmalik Alquwayfili"
+  ],
+  "published": "2025-12-15T05:27:10Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.CR"
+  ],
+  "url": "https://arxiv.org/abs/2512.12989"
+}

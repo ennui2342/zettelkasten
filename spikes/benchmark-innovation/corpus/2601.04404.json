@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2601.04404",
+  "title": "3D-Agent:Tri-Modal Multi-Agent Collaboration for Scalable 3D Object Annotation",
+  "abstract": "Driven by applications in autonomous driving robotics and augmented reality 3D object annotation presents challenges beyond 2D annotation including spatial complexity occlusion and viewpoint inconsistency Existing approaches based on single models often struggle to address these issues effectively We propose Tri MARF a novel framework that integrates tri modal inputs including 2D multi view images textual descriptions and 3D point clouds within a multi agent collaborative architecture to enhance large scale 3D annotation Tri MARF consists of three specialized agents a vision language model agent for generating multi view descriptions an information aggregation agent for selecting optimal descriptions and a gating agent that aligns textual semantics with 3D geometry for refined captioning Extensive experiments on Objaverse LVIS Objaverse XL and ABO demonstrate that Tri MARF substantially outperforms existing methods achieving a CLIPScore of 88 point 7 compared to prior state of the art methods retrieval accuracy of 45 point 2 and 43 point 8 on ViLT R at 5 and a throughput of up to 12000 objects per hour on a single NVIDIA A100 GPU",
+  "authors": [
+    "Jusheng Zhang",
+    "Yijia Fan",
+    "Zimo Wen",
+    "Jian Wang",
+    "Keze Wang"
+  ],
+  "published": "2026-01-07T21:23:05Z",
+  "primary_category": "cs.CV",
+  "categories": [
+    "cs.CV",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2601.04404"
+}

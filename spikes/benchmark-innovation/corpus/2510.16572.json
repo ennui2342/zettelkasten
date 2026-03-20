@@ -1,0 +1,20 @@
+{
+  "arxiv_id": "2510.16572",
+  "title": "Ripple Effect Protocol: Coordinating Agent Populations",
+  "abstract": "Modern AI agents can exchange messages using protocols such as A2A and ACP, yet these mechanisms emphasize communication over coordination. As agent populations grow, this limitation produces brittle collective behavior, where individually smart agents converge on poor group outcomes. We introduce the Ripple Effect Protocol (REP), a coordination protocol in which agents share not only their decisions but also lightweight sensitivities - signals expressing how their choices would change if key environmental variables shifted. These sensitivities ripple through local networks, enabling groups to align faster and more stably than with agent-centric communication alone. We formalize REP's protocol specification, separating required message schemas from optional aggregation rules, and evaluate it across scenarios with varying incentives and network topologies. Benchmarks across three domains: (i) supply chain cascades (Beer Game), (ii) preference aggregation in sparse networks (Movie Scheduling), and (iii) sustainable resource allocation (Fishbanks) show that REP improves coordination accuracy and efficiency over A2A by 41 to 100%, while flexibly handling multimodal sensitivity signals from LLMs. By making coordination a protocol-level capability, REP provides scalable infrastructure for the emerging Internet of Agents",
+  "authors": [
+    "Ayush Chopra",
+    "Aman Sharma",
+    "Feroz Ahmad",
+    "Luca Muscariello",
+    "Vijoy Pandey",
+    "Ramesh Raskar"
+  ],
+  "published": "2025-10-18T16:38:03Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2510.16572"
+}

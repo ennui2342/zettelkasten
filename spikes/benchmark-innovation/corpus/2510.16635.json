@@ -1,0 +1,25 @@
+{
+  "arxiv_id": "2510.16635",
+  "title": "Prompt Optimization via Retrieved Reasoning Assets and Multi-Agent Analysis",
+  "abstract": "Prompt optimization has emerged as an effective alternative to retraining for improving the performance of Large Language Models (LLMs). However, most existing approaches treat evaluation as a black box, relying solely on numerical scores while offering limited insight into why a prompt succeeds or fails. They also depend heavily on trial-and-error refinements, which are difficult to interpret and control. In this paper, we introduce MA-SAPO, a Multi-Agent framework for Score-Aware Prompt Optimization. Compared to prior methods, MA-SAPO explicitly couples evaluation outcomes with structured reasoning to guide systematic edits. The framework specifically consists of two stages: during the Reasoning Phase, agents collaboratively explain metric scores, diagnose weaknesses, and synthesize targeted refinements that are stored as reusable reasoning assets; during the Test Phase, agents retrieve these assets to analyze optimized prompts and apply only evidence-grounded edits. By turning evaluation signals into interpretable reasoning chains, MA-SAPO produces prompt refinements that are more transparent, auditable, and controllable. Experiments on the HelpSteer1/2 benchmarks demonstrate consistent improvements over single-pass prompting, retrieval-augmented baselines, and prior multi-agent strategies, validating the effectiveness of our approach.",
+  "authors": [
+    "Wonduk Seo",
+    "Juhyeon Lee",
+    "Junseo Koh",
+    "Hyunjin An",
+    "Jian Park",
+    "Seunghyun Lee",
+    "Haihua Chen",
+    "Yi Bu"
+  ],
+  "published": "2025-10-18T20:21:09Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI",
+    "cs.CL",
+    "cs.HC",
+    "cs.IR"
+  ],
+  "url": "https://arxiv.org/abs/2510.16635"
+}

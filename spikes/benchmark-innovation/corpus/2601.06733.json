@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2601.06733",
+  "title": "Logic-Driven Semantic Communication for Resilient Multi-Agent Systems",
+  "abstract": "The advent of 6G networks is accelerating autonomy and intelligence in large-scale, decentralized multi-agent systems (MAS). While this evolution enables adaptive behavior, it also heightens vulnerability to stressors such as environmental changes and adversarial behavior. Existing literature on resilience in decentralized MAS largely focuses on isolated aspects, such as fault tolerance, without offering a principled unified definition of multi-agent resilience. This gap limits the ability to design systems that can continuously sense, adapt, and recover under dynamic conditions. This article proposes a formal definition of MAS resilience grounded in two complementary dimensions: epistemic resilience, wherein agents recover and sustain accurate knowledge of the environment, and action resilience, wherein agents leverage that knowledge to coordinate and sustain goals under disruptions. We formalize resilience via temporal epistemic logic and quantify it using recoverability time (how quickly desired properties are re-established after a disturbance) and durability time (how long accurate beliefs and goal-directed behavior are sustained after recovery). We design an agent architecture and develop decentralized algorithms to achieve both epistemic and action resilience. We provide formal verification guarantees, showing that our specifications are sound with respect to the metric bounds and admit finite-horizon verification, enabling design-time certification and lightweight runtime monitoring. Through a case study on distributed multi-agent decision-making under stressors, we show that our approach outperforms baseline methods. Our formal verification analysis and simulation results highlight that the proposed framework enables resilient, knowledge-driven decision-making and sustained operation, laying the groundwork for resilient decentralized MAS in next-generation communication systems.",
+  "authors": [
+    "Tamara Alshammari",
+    "Mehdi Bennis"
+  ],
+  "published": "2026-01-11T00:54:09Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI",
+    "cs.LG",
+    "cs.LO"
+  ],
+  "url": "https://arxiv.org/abs/2601.06733"
+}

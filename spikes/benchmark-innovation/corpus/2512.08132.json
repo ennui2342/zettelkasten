@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2512.08132",
+  "title": "Multi-agent learning under uncertainty: Recurrence vs. concentration",
+  "abstract": "In this paper, we examine the convergence landscape of multi-agent learning under uncertainty. Specifically, we analyze two stochastic models of regularized learning in continuous games -- one in continuous and one in discrete time with the aim of characterizing the long-run behavior of the induced sequence of play. In stark contrast to deterministic, full-information models of learning (or models with a vanishing learning rate), we show that the resulting dynamics do not converge in general. In lieu of this, we ask instead which actions are played more often in the long run, and by how much. We show that, in strongly monotone games, the dynamics of regularized learning may wander away from equilibrium infinitely often, but they always return to its vicinity in finite time (which we estimate), and their long-run distribution is sharply concentrated around a neighborhood thereof. We quantify the degree of this concentration, and we show that these favorable properties may all break down if the underlying game is not strongly monotone -- underscoring in this way the limits of regularized learning in the presence of persistent randomness and uncertainty.",
+  "authors": [
+    "Kyriakos Lotidis",
+    "Panayotis Mertikopoulos",
+    "Nicholas Bambos",
+    "Jose Blanchet"
+  ],
+  "published": "2025-12-09T00:18:19Z",
+  "primary_category": "cs.GT",
+  "categories": [
+    "cs.GT",
+    "cs.LG",
+    "math.OC"
+  ],
+  "url": "https://arxiv.org/abs/2512.08132"
+}

@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2510.15974",
+  "title": "Limits of Emergent Reasoning of Large Language Models in Agentic Frameworks for Deterministic Games",
+  "abstract": "Recent work reports that Large Reasoning Models (LRMs) undergo a collapse in performance on solving puzzles beyond certain perplexity thresholds. In subsequent discourse, questions have arisen as to whether the nature of the task muddles an evaluation of true reasoning. One potential confound is the requirement that the model keep track of the state space on its own. We provide a large language model (LLM) with an environment interface for Tower of Hanoi problems, allowing it to make a move with a tool call, provide written justification, observe the resulting state space, and reprompt itself for the next move. We observe that access to an environment interface does not delay or eradicate performance collapse. Furthermore, LLM-parameterized policy analysis reveals increasing divergence from both optimal policies and uniformly random policies, suggesting that the model exhibits mode-like collapse at each level of complexity, and that performance is dependent upon whether the mode reflects the correct solution for the problem. We suggest that a similar phenomena might take place in LRMs.",
+  "authors": [
+    "Chris Su",
+    "Harrison Li",
+    "Matheus Marques",
+    "George Flint",
+    "Kevin Zhu",
+    "Sunishchal Dev"
+  ],
+  "published": "2025-10-12T23:48:16Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2510.15974"
+}

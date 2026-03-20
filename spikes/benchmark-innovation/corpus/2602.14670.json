@@ -1,0 +1,20 @@
+{
+  "arxiv_id": "2602.14670",
+  "title": "FactorMiner: A Self-Evolving Agent with Skills and Experience Memory for Financial Alpha Discovery",
+  "abstract": "Formulaic alpha factor mining is a critical yet challenging task in quantitative investment, characterized by a vast search space and the need for domain-informed, interpretable signals. However, finding novel signals becomes increasingly difficult as the library grows due to high redundancy. We propose FactorMiner, a lightweight and flexible self-evolving agent framework designed to navigate this complex landscape through continuous knowledge accumulation. FactorMiner combines a Modular Skill Architecture that encapsulates systematic financial evaluation into executable tools with a structured Experience Memory that distills historical mining trials into actionable insights (successful patterns and failure constraints). By instantiating the Ralph Loop paradigm -- retrieve, generate, evaluate, and distill -- FactorMiner iteratively uses memory priors to guide exploration, reducing redundant search while focusing on promising directions. Experiments on multiple datasets across different assets and Markets show that FactorMiner constructs a diverse library of high-quality factors with competitive performance, while maintaining low redundancy among factors as the library scales. Overall, FactorMiner provides a practical approach to scalable discovery of interpretable formulaic alpha factors under the \"Correlation Red Sea\" constraint.",
+  "authors": [
+    "Yanlong Wang",
+    "Jian Xu",
+    "Hongkang Zhang",
+    "Shao-Lun Huang",
+    "Danny Dongning Sun",
+    "Xiao-Ping Zhang"
+  ],
+  "published": "2026-02-16T11:48:52Z",
+  "primary_category": "q-fin.TR",
+  "categories": [
+    "q-fin.TR",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2602.14670"
+}

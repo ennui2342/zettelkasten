@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2511.08710",
+  "title": "Convergence dynamics of Agent-to-Agent Interactions with Misaligned objectives",
+  "abstract": "We develop and analyze a theoretical framework for agent-to-agent interactions in a simplified in-context linear regression setting. In our model, each agent is instantiated as a single-layer transformer with linear self-attention (LSA) trained to implement gradient-descent-like updates on a quadratic regression objective from in-context examples. We then study the coupled dynamics when two such LSA agents alternately update from each other's outputs under potentially misaligned fixed objectives. Within this framework, we characterize the generation dynamics and show that misalignment leads to a biased equilibrium where neither agent reaches its target, with residual errors predictable from the objective gap and the prompt-induced geometry. We also characterize an adversarial regime where asymmetric convergence is possible: one agent reaches its objective exactly while inducing persistent bias in the other. We further contrast this fixed objective regime with an adaptive multi-agent setting, wherein a helper agent updates a turn-based objective to implement a Newton-like step for the main agent, eliminating the plateau and accelerating its convergence. Experiments with trained LSA agents, as well as black-box GPT-5-mini runs on in-context linear regression tasks, are consistent with our theoretical predictions within this simplified setting. We view our framework as a mechanistic framework that links prompt geometry and objective misalignment to stability, bias, and robustness, and as a stepping stone toward analyzing more realistic multi-agent LLM systems.",
+  "authors": [
+    "Romain Cosentino",
+    "Sarath Shekkizhar",
+    "Adam Earle"
+  ],
+  "published": "2025-11-11T19:18:55Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2511.08710"
+}

@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2511.05269",
+  "title": "TAMAS: Benchmarking Adversarial Risks in Multi-Agent LLM Systems",
+  "abstract": "Large Language Models (LLMs) have demonstrated strong capabilities as autonomous agents through tool use, planning, and decision-making abilities, leading to their widespread adoption across diverse tasks. As task complexity grows, multi-agent LLM systems are increasingly used to solve problems collaboratively. However, safety and security of these systems remains largely under-explored. Existing benchmarks and datasets predominantly focus on single-agent settings, failing to capture the unique vulnerabilities of multi-agent dynamics and co-ordination. To address this gap, we introduce $\\textbf{T}$hreats and $\\textbf{A}$ttacks in $\\textbf{M}$ulti-$\\textbf{A}$gent $\\textbf{S}$ystems ($\\textbf{TAMAS}$), a benchmark designed to evaluate the robustness and safety of multi-agent LLM systems. TAMAS includes five distinct scenarios comprising 300 adversarial instances across six attack types and 211 tools, along with 100 harmless tasks. We assess system performance across ten backbone LLMs and three agent interaction configurations from Autogen and CrewAI frameworks, highlighting critical challenges and failure modes in current multi-agent deployments. Furthermore, we introduce Effective Robustness Score (ERS) to assess the tradeoff between safety and task effectiveness of these frameworks. Our findings show that multi-agent systems are highly vulnerable to adversarial attacks, underscoring the urgent need for stronger defenses. TAMAS provides a foundation for systematically studying and improving the safety of multi-agent LLM systems.",
+  "authors": [
+    "Ishan Kavathekar",
+    "Hemang Jain",
+    "Ameya Rathod",
+    "Ponnurangam Kumaraguru",
+    "Tanuja Ganu"
+  ],
+  "published": "2025-11-07T14:30:26Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2511.05269"
+}

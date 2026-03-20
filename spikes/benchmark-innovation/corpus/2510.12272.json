@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2510.12272",
+  "title": "Heterogeneous RBCs via Deep Multi-Agent Reinforcement Learning",
+  "abstract": "Current macroeconomic models with agent heterogeneity can be broadly divided into two main groups. Heterogeneous-agent general equilibrium (GE) models, such as those based on Heterogeneous Agent New Keynesian (HANK) or Krusell-Smith (KS) approaches, rely on GE and 'rational expectations', somewhat unrealistic assumptions that make the models very computationally cumbersome, which in turn limits the amount of heterogeneity that can be modelled. In contrast, agent-based models (ABMs) can flexibly encompass a large number of arbitrarily heterogeneous agents, but typically require the specification of explicit behavioural rules, which can lead to a lengthy trial-and-error model-development process. To address these limitations, we introduce MARL-BC, a framework that integrates deep multi-agent reinforcement learning (MARL) with real business cycle (RBC) models. We demonstrate that MARL-BC can: (1) recover textbook RBC results when using a single agent; (2) recover the results of the mean-field KS model using a large number of identical agents; and (3) effectively simulate rich heterogeneity among agents, a hard task for traditional GE approaches. Our framework can be thought of as an ABM if used with a variety of heterogeneous interacting agents, and can reproduce GE results in limit cases. As such, it is a step towards a synthesis of these often opposed modelling paradigms.",
+  "authors": [
+    "Federico Gabriele",
+    "Aldo Glielmo",
+    "Marco Taboga"
+  ],
+  "published": "2025-10-14T08:26:18Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.LG",
+    "econ.TH"
+  ],
+  "url": "https://arxiv.org/abs/2510.12272"
+}

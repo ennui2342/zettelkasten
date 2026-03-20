@@ -1,0 +1,16 @@
+{
+  "arxiv_id": "2510.03772",
+  "title": "Cooperation in public goods game on regular lattices with agents changing interaction groups",
+  "abstract": "The emergence of cooperation in the groups of interacting agents is one of the most fascinating phenomena observed in many complex systems studied in social science and ecology, even in the situations where one would expect the agent to use a free-rider policy. This is especially surprising in the situation where no external mechanisms based on reputation or punishment are present. One of the possible explanations of this effect is the inhomogeneity of the various aspects of interactions, which can be used to clarify the seemingly paradoxical behavior. In this report we demonstrate that the diversity of interaction networks helps to some degree to explain the emergence of cooperation. We extend the model of spatial interaction diversity introduced in [L. Shang et al., Physica A, 593:126999 (2022)] by enabling the evaluation of the interaction groups. We show that the process of the reevaluation of the interaction group facilitates the emergence of cooperation. Furthermore, we also observe that a significant participation of agents switching their interaction neighborhoods has a negative impact on the formation of cooperation. The introduced scenario can help to understand the formation of cooperation in the systems where no additional mechanisms for controlling agents are included.",
+  "authors": [
+    "Jarosław Adam Miszczak"
+  ],
+  "published": "2025-10-04T10:42:10Z",
+  "primary_category": "physics.soc-ph",
+  "categories": [
+    "physics.soc-ph",
+    "cs.MA",
+    "nlin.AO"
+  ],
+  "url": "https://arxiv.org/abs/2510.03772"
+}

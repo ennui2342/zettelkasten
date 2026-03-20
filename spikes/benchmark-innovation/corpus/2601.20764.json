@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2601.20764",
+  "title": "Agentic Fog: A Policy-driven Framework for Distributed Intelligence in Fog Computing",
+  "abstract": "Fog and edge computing require adaptive control schemes that can handle partial observability, severe latency requirements, and dynamically changing workloads. Recent research on Agentic AI (AAI) increasingly integrates reasoning systems powered by Large Language Models; however, these tools are not applicable to infrastructure-level systems due to their high computational cost, stochastic nature, and poor formal analyzability. In this paper, a generic model, Agentic Fog (AF), is presented, in which fog nodes are represented as policy-driven autonomous agents that communicate via p2p interactions based on shared memory and localized coordination. The suggested architecture decomposes a system's goals into abstract policy guidance and formalizes decentralized fog coordination as an exact potential game. The framework is guaranteed to converge and remain stable under asynchronous updates, bounded-rational best-response dynamics, and node failures. Simulations demonstrate that the AF system achieves lower average latency and adapts more efficiently to varying demand than greedy heuristics and integer linear programming under dynamic conditions. The sensitivity analysis also demonstrates the capability to perform optimally under different memory and coordination conditions.",
+  "authors": [
+    "Saeed Akbar",
+    "Muhammad Waqas",
+    "Rahmat Ullah"
+  ],
+  "published": "2026-01-28T16:53:55Z",
+  "primary_category": "cs.DC",
+  "categories": [
+    "cs.DC",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2601.20764"
+}

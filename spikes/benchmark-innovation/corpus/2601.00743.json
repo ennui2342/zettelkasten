@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2601.00743",
+  "title": "An Agentic Framework for Neuro-Symbolic Programming",
+  "abstract": "Integrating symbolic constraints into deep learning models could make them more robust, interpretable, and data-efficient. Still, it remains a time-consuming and challenging task. Existing frameworks like DomiKnowS help this integration by providing a high-level declarative programming interface, but they still assume the user is proficient with the library's specific syntax. We propose AgenticDomiKnowS (ADS) to eliminate this dependency. ADS translates free-form task descriptions into a complete DomiKnowS program using an agentic workflow that creates and tests each DomiKnowS component separately. The workflow supports optional human-in-the-loop intervention, enabling users familiar with DomiKnowS to refine intermediate outputs. We show how ADS enables experienced DomiKnowS users and non-users to rapidly construct neuro-symbolic programs, reducing development time from hours to 10-15 minutes.",
+  "authors": [
+    "Aliakbar Nafar",
+    "Chetan Chigurupati",
+    "Danial Kamali",
+    "Hamid Karimian",
+    "Parisa Kordjamshidi"
+  ],
+  "published": "2026-01-02T16:59:39Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2601.00743"
+}

@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2509.20182",
+  "title": "Automated Multi-Agent Workflows for RTL Design",
+  "abstract": "The rise of agentic AI workflows unlocks novel opportunities for computer systems design and optimization. However, for specialized domains such as program synthesis, the relative scarcity of HDL and proprietary EDA resources online compared to more common programming tasks introduces challenges, often necessitating task-specific fine-tuning, high inference costs, and manually-crafted agent orchestration. In this work, we present VeriMaAS, a multi-agent framework designed to automatically compose agentic workflows for RTL code generation. Our key insight is to integrate formal verification feedback from HDL tools directly into workflow generation, reducing the cost of gradient-based updates or prolonged reasoning traces. Our method improves synthesis performance by 5-7% for pass@k over fine-tuned baselines, while requiring only a few hundred training examples, representing an order-of-magnitude reduction in supervision cost.",
+  "authors": [
+    "Amulya Bhattaram",
+    "Janani Ramamoorthy",
+    "Ranit Gupta",
+    "Diana Marculescu",
+    "Dimitrios Stamoulis"
+  ],
+  "published": "2025-09-24T14:44:28Z",
+  "primary_category": "cs.AR",
+  "categories": [
+    "cs.AR",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2509.20182"
+}

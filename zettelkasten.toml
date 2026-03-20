@@ -1,0 +1,14 @@
+[zettelkasten]
+notes_dir  = "zettel/knowledge2"
+index_path = "zettel/knowledge2.db"
+inbox_dir = "zettel/knowledge2-inbox"
+
+[llm]
+provider = "anthropic"
+model    = "claude-opus-4-6"
+api_key  = ""   # set via ANTHROPIC_API_KEY env var
+
+[embed]
+provider = "voyage"
+model    = "voyage-3"
+api_key  = ""   # set via VOYAGE_API_KEY env var

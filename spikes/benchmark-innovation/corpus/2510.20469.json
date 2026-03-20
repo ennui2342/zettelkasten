@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2510.20469",
+  "title": "Structures generated in a multiagent system performing information fusion in peer-to-peer resource-constrained networks",
+  "abstract": "There has recently been a major advance with respect to how information fusion is performed. Information fusion has gone from being conceived as a purely hierarchical procedure, as is the case of traditional military applications, to now being regarded collaboratively, as holonic fusion, which is better suited for civil applications and edge organizations. The above paradigm shift is being boosted as information fusion gains ground in different non-military areas, and human-computer and machine-machine communications, where holarchies, which are more flexible structures than ordinary, static hierarchies, become more widespread. This paper focuses on showing how holonic structures tend to be generated when there are constraints on resources (energy, available messages, time, etc.) for interactions based on a set of fully intercommunicating elements (peers) whose components fuse information as a means of optimizing the impact of vagueness and uncertainty present message exchanges. Holon formation is studied generically based on a multiagent system model, and an example of its possible operation is shown. Holonic structures have a series of advantages, such as adaptability, to sudden changes in the environment or its composition, are somewhat autonomous and are capable of cooperating in order to achieve a common goal. This can be useful when the shortage of resources prevents communications or when the system components start to fail.",
+  "authors": [
+    "Horacio Paggi",
+    "Juan A. Lara",
+    "Javier Soriano"
+  ],
+  "published": "2025-10-23T12:07:32Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2510.20469"
+}

@@ -1,0 +1,15 @@
+{
+  "arxiv_id": "2601.09742",
+  "title": "Adaptive Orchestration: Scalable Self-Evolving Multi-Agent Systems",
+  "abstract": "As Large Language Models (LLMs) are increasingly deployed as autonomous agents, they face a critical scalability bottleneck known as the \"Generalization-Specialization Dilemma.\" Monolithic agents equipped with extensive toolkits suffer from context pollution and attention decay, leading to hallucinations. Conversely, static multi-agent swarms introduce significant latency and resource overhead. This paper introduces a Self-Evolving Concierge System, a novel architecture utilizing a Dynamic Mixture of Experts (DMoE) approach. Unlike recent self-improving agents that rewrite their own codebase, our system preserves stability by dynamically restructuring its runtime environment: \"hiring\" specialized sub-agents based on real-time conversation analysis. We introduce an asynchronous \"Meta-Cognition Engine\" that detects capability gaps, a Least Recently Used (LRU) eviction policy for resource constraints, and a novel \"Surgical History Pruning\" mechanism to mitigate refusal bias. Experimental results demonstrate that this architecture maintains high task success rates while minimizing token consumption compared to static agent swarms.",
+  "authors": [
+    "Sathish Sampath",
+    "Anuradha Baskaran"
+  ],
+  "published": "2026-01-10T07:53:55Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2601.09742"
+}

@@ -1,0 +1,22 @@
+{
+  "arxiv_id": "2512.08629",
+  "title": "See-Control: A Multimodal Agent Framework for Smartphone Interaction with a Robotic Arm",
+  "abstract": "Recent advances in Multimodal Large Language Models (MLLMs) have enabled their use as intelligent agents for smartphone operation. However, existing methods depend on the Android Debug Bridge (ADB) for data transmission and action execution, limiting their applicability to Android devices. In this work, we introduce the novel Embodied Smartphone Operation (ESO) task and present See-Control, a framework that enables smartphone operation via direct physical interaction with a low-DoF robotic arm, offering a platform-agnostic solution. See-Control comprises three key components: (1) an ESO benchmark with 155 tasks and corresponding evaluation metrics; (2) an MLLM-based embodied agent that generates robotic control commands without requiring ADB or system back-end access; and (3) a richly annotated dataset of operation episodes, offering valuable resources for future research. By bridging the gap between digital agents and the physical world, See-Control provides a concrete step toward enabling home robots to perform smartphone-dependent tasks in realistic environments.",
+  "authors": [
+    "Haoyu Zhao",
+    "Weizhong Ding",
+    "Yuhao Yang",
+    "Zheng Tian",
+    "Linyi Yang",
+    "Kun Shao",
+    "Jun Wang"
+  ],
+  "published": "2025-12-09T14:14:37Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.CV",
+    "cs.HC"
+  ],
+  "url": "https://arxiv.org/abs/2512.08629"
+}

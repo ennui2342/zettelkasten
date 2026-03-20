@@ -1,0 +1,20 @@
+{
+  "arxiv_id": "2510.22235",
+  "title": "CGoT: A Novel Inference Mechanism for Embodied Multi-Agent Systems Using Composable Graphs of Thoughts",
+  "abstract": "The integration of self-driving cars and service robots is becoming increasingly prevalent across a wide array of fields, playing a crucial and expanding role in both industrial applications and everyday life. In parallel, the rapid advancements in Large Language Models (LLMs) have garnered substantial attention and interest within the research community. This paper introduces a novel vehicle-robot system that leverages the strengths of both autonomous vehicles and service robots. In our proposed system, two autonomous ego-vehicles transports service robots to locations within an office park, where they perform a series of tasks. The study explores the feasibility and potential benefits of incorporating LLMs into this system, with the aim of enhancing operational efficiency and maximizing the potential of the cooperative mechanisms between the vehicles and the robots. This paper proposes a novel inference mechanism which is called CGOT toward this type of system where an agent can carry another agent. Experimental results are presented to validate the performance of the proposed method.",
+  "authors": [
+    "Yixiao Nie",
+    "Yang Zhang",
+    "Yingjie Jin",
+    "Zhepeng Wang",
+    "Xiu Li",
+    "Xiang Li"
+  ],
+  "published": "2025-10-25T09:39:39Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.RO"
+  ],
+  "url": "https://arxiv.org/abs/2510.22235"
+}

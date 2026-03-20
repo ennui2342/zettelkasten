@@ -1,0 +1,22 @@
+{
+  "arxiv_id": "2511.08822",
+  "title": "Low-cost Multi-agent Fleet for Acoustic Cooperative Localization Research",
+  "abstract": "Real-world underwater testing for multi-agent autonomy presents substantial financial and engineering challenges. In this work, we introduce the Configurable Underwater Group of Autonomous Robots (CoUGARs) as a low-cost, configurable autonomous-underwater-vehicle (AUV) platform for multi-agent autonomy research. The base design costs less than $3,000 USD (as of May 2025) and is based on commercially-available and 3D-printed parts, enabling quick customization for various sensor payloads and configurations. Our current expanded model is equipped with a doppler velocity log (DVL) and ultra-short-baseline (USBL) acoustic array/transducer to support research on acoustic-based cooperative localization. State estimation, navigation, and acoustic communications software has been developed and deployed using a containerized software stack and is tightly integrated with the HoloOcean simulator. The system was tested both in simulation and via in-situ field trials in Utah lakes and reservoirs.",
+  "authors": [
+    "Nelson Durrant",
+    "Braden Meyers",
+    "Matthew McMurray",
+    "Clayton Smith",
+    "Brighton Anderson",
+    "Tristan Hodgins",
+    "Kalliyan Velasco",
+    "Joshua G. Mangelson"
+  ],
+  "published": "2025-11-11T22:37:37Z",
+  "primary_category": "cs.RO",
+  "categories": [
+    "cs.RO",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2511.08822"
+}

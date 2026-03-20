@@ -1,0 +1,20 @@
+{
+  "arxiv_id": "2511.11992",
+  "title": "Goal-Oriented Multi-Agent Reinforcement Learning for Decentralized Agent Teams",
+  "abstract": "Connected and autonomous vehicles across land, water, and air must often operate in dynamic, unpredictable environments with limited communication, no centralized control, and partial observability. These real-world constraints pose significant challenges for coordination, particularly when vehicles pursue individual objectives. To address this, we propose a decentralized Multi-Agent Reinforcement Learning (MARL) framework that enables vehicles, acting as agents, to communicate selectively based on local goals and observations. This goal-aware communication strategy allows agents to share only relevant information, enhancing collaboration while respecting visibility limitations. We validate our approach in complex multi-agent navigation tasks featuring obstacles and dynamic agent populations. Results show that our method significantly improves task success rates and reduces time-to-goal compared to non-cooperative baselines. Moreover, task performance remains stable as the number of agents increases, demonstrating scalability. These findings highlight the potential of decentralized, goal-driven MARL to support effective coordination in realistic multi-vehicle systems operating across diverse domains.",
+  "authors": [
+    "Hung Du",
+    "Hy Nguyen",
+    "Srikanth Thudumu",
+    "Rajesh Vasa",
+    "Kon Mouzakis"
+  ],
+  "published": "2025-11-15T02:11:31Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI",
+    "cs.LG"
+  ],
+  "url": "https://arxiv.org/abs/2511.11992"
+}

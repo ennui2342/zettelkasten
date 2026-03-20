@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2510.18395",
+  "title": "Memory-Augmented State Machine Prompting: A Novel LLM Agent Framework for Real-Time Strategy Games",
+  "abstract": "This paper proposes Memory-Augmented State Machine Prompting (MASMP), a novel framework for LLM agents in real-time strategy games. Addressing key challenges like hallucinations and fragmented decision-making in existing approaches, MASMP integrates state machine prompting with memory mechanisms to unify structured actions with long-term tactical coherence. The framework features: (1) a natural language-driven state machine architecture that guides LLMs to emulate finite state machines and behavior trees through prompts, and (2) a lightweight memory module preserving strategic variables (e.g., tactics, priority units) across decision cycles. Experiments in StarCraft II demonstrate MASMP's 60% win rate against the hardest built-in AI (Lv7), vastly outperforming baselines (0%). Case studies reveal the method retains LLMs' semantic comprehension while resolving the \"Knowing-Doing Gap\" through strict state-action mapping, achieving both interpretability and FSM-like reliability. This work establishes a new paradigm for combining neural and symbolic AI in complex decision-making.",
+  "authors": [
+    "Runnan Qi",
+    "Yanan Ni",
+    "Lumin Jiang",
+    "Zongyuan Li",
+    "Kuihua Huang",
+    "Xian Guo"
+  ],
+  "published": "2025-10-21T08:15:04Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2510.18395"
+}

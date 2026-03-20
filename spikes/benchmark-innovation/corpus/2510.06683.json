@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2510.06683",
+  "title": "Distributed Algorithms for Multi-Agent Multi-Armed Bandits with Collision",
+  "abstract": "We study the stochastic Multiplayer Multi-Armed Bandit (MMAB) problem, where multiple players select arms to maximize their cumulative rewards. Collisions occur when two or more players select the same arm, resulting in no reward, and are observed by the players involved. We consider a distributed setting without central coordination, where each player can only observe their own actions and collision feedback. We propose a distributed algorithm with an adaptive, efficient communication protocol. The algorithm achieves near-optimal group and individual regret, with a communication cost of only $\\mathcal{O}(\\log\\log T)$. Our experiments demonstrate significant performance improvements over existing baselines. Compared to state-of-the-art (SOTA) methods, our approach achieves a notable reduction in individual regret. Finally, we extend our approach to a periodic asynchronous setting, proving the lower bound for this problem and presenting an algorithm that achieves logarithmic regret.",
+  "authors": [
+    "Daoyuan Zhou",
+    "Xuchuang Wang",
+    "Lin Yang",
+    "Yang Gao"
+  ],
+  "published": "2025-10-08T06:12:59Z",
+  "primary_category": "cs.LG",
+  "categories": [
+    "cs.LG"
+  ],
+  "url": "https://arxiv.org/abs/2510.06683"
+}

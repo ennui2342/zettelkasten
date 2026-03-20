@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2602.20493",
+  "title": "AWCP: A Workspace Delegation Protocol for Deep-Engagement Collaboration across Remote Agents",
+  "abstract": "The rapid evolution of Large Language Model (LLM)-based autonomous agents is reshaping the digital landscape toward an emerging Agentic Web, where increasingly specialized agents must collaborate to accomplish complex tasks. However, existing collaboration paradigms are constrained to message passing, leaving execution environments as isolated silos. This creates a context gap: agents cannot directly manipulate files or invoke tools in a peer's environment, and must instead resort to costly, error-prone environment reconstruction. We introduce the Agent Workspace Collaboration Protocol (AWCP), which bridges this gap through temporary workspace delegation inspired by the Unix philosophy that everything is a file. AWCP decouples a lightweight control plane from pluggable transport mechanisms, allowing a Delegator to project its workspace to a remote Executor, who then operates on the shared files directly with unmodified local toolchains. We provide a fully open-source reference implementation with MCP tool integration and validate the protocol through live demonstrations of asymmetric collaboration, where agents with complementary capabilities cooperate through delegated workspaces. By establishing the missing workspace layer in the agentic protocol stack, AWCP paves the way for a universally interoperable agent ecosystem in which collaboration transcends message boundaries. The protocol and reference implementation are publicly available at https://github.com/SII-Holos/awcp.",
+  "authors": [
+    "Xiaohang Nie",
+    "Zihan Guo",
+    "Youliang Chen",
+    "Yuanjian Zhou",
+    "Weinan Zhang"
+  ],
+  "published": "2026-02-24T02:49:08Z",
+  "primary_category": "cs.NI",
+  "categories": [
+    "cs.NI",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2602.20493"
+}

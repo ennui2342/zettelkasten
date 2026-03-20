@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2509.24826",
+  "title": "AIPOM: Agent-aware Interactive Planning for Multi-Agent Systems",
+  "abstract": "Large language models (LLMs) are being increasingly used for planning in orchestrated multi-agent systems. However, existing LLM-based approaches often fall short of human expectations and, critically, lack effective mechanisms for users to inspect, understand, and control their behaviors. These limitations call for enhanced transparency, controllability, and human oversight. To address this, we introduce AIPOM, a system supporting human-in-the-loop planning through conversational and graph-based interfaces. AIPOM enables users to transparently inspect, refine, and collaboratively guide LLM-generated plans, significantly enhancing user control and trust in multi-agent workflows. Our code and demo video are available at https://github.com/megagonlabs/aipom.",
+  "authors": [
+    "Hannah Kim",
+    "Kushan Mitra",
+    "Chen Shen",
+    "Dan Zhang",
+    "Estevam Hruschka"
+  ],
+  "published": "2025-09-29T14:12:06Z",
+  "primary_category": "cs.HC",
+  "categories": [
+    "cs.HC",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2509.24826"
+}

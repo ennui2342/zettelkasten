@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2509.14803",
+  "title": "OnlineMate: An LLM-Based Multi-Agent Companion System for Cognitive Support in Online Learning",
+  "abstract": "In online learning environments, students often lack personalized peer interactions, which are crucial for cognitive development and learning engagement. Although previous studies have employed large language models (LLMs) to simulate interactive learning environments, these interactions are limited to conversational exchanges, failing to adapt to learners' individualized cognitive and psychological states. As a result, students' engagement is low and they struggle to gain inspiration. To address this challenge, we propose OnlineMate, a multi-agent learning companion system driven by LLMs integrated with Theory of Mind (ToM). OnlineMate simulates peer-like roles, infers learners' psychological states such as misunderstandings and confusion during collaborative discussions, and dynamically adjusts interaction strategies to support higher-order thinking. Comprehensive evaluations, including simulation-based experiments, human assessments, and real classroom trials, demonstrate that OnlineMate significantly promotes deep learning and cognitive engagement by elevating students' average cognitive level while substantially improving emotional engagement scores.",
+  "authors": [
+    "Xian Gao",
+    "Zongyun Zhang",
+    "Ting Liu",
+    "Yuzhuo Fu"
+  ],
+  "published": "2025-09-18T09:56:45Z",
+  "primary_category": "cs.CY",
+  "categories": [
+    "cs.CY",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2509.14803"
+}

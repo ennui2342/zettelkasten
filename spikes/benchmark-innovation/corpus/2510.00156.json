@@ -1,0 +1,21 @@
+{
+  "arxiv_id": "2510.00156",
+  "title": "AuditAgent: Expert-Guided Multi-Agent Reasoning for Cross-Document Fraudulent Evidence Discovery",
+  "abstract": "Financial fraud detection in real-world scenarios presents significant challenges due to the subtlety and dispersion of evidence across complex, multi-year financial disclosures. In this work, we introduce a novel multi-agent reasoning framework AuditAgent, enhanced with auditing domain expertise, for fine-grained evidence chain localization in financial fraud cases. Leveraging an expert-annotated dataset constructed from enforcement documents and financial reports released by the China Securities Regulatory Commission, our approach integrates subject-level risk priors, a hybrid retrieval strategy, and specialized agent modules to efficiently identify and aggregate cross-report evidence. Extensive experiments demonstrate that our method substantially outperforms General-Purpose Agent paradigm in both recall and interpretability, establishing a new benchmark for automated, transparent financial forensics. Our results highlight the value of domain-specific reasoning and dataset construction for advancing robust financial fraud detection in practical, real-world regulatory applications.",
+  "authors": [
+    "Songran Bai",
+    "Bingzhe Wu",
+    "Yiwei Zhang",
+    "Chengke Wu",
+    "Xiaolong Zheng",
+    "Yaze Yuan",
+    "Ke Wu",
+    "Jianqiang Li"
+  ],
+  "published": "2025-09-30T18:26:44Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2510.00156"
+}

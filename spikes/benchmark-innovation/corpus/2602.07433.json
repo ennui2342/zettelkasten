@@ -1,0 +1,20 @@
+{
+  "arxiv_id": "2602.07433",
+  "title": "Multi-Agent Systems Shape Social Norms for Prosocial Behavior Change",
+  "abstract": "Social norm interventions are used promote prosocial behaviors by highlighting prevalent actions, but their effectiveness is often limited in heterogeneous populations where shared understandings of desirable behaviors are lacking. This study explores whether multi-agent systems can establish \"virtual social norms\" to encourage donation behavior. We conducted an online experiment where participants interacted with a group of agents to discuss donation behaviors. Changes in perceived social norms, conformity, donation behavior, and user experience were measured pre- and postdiscussion. Results show that multi-agent interactions effectively increased perceived social norms and donation willingness. Notably, in-group agents led to stronger perceived social norms, higher conformity, and greater donation increases compared to out-group agents. Our findings demonstrate the potential of multi-agent systems for creating social norm interventions and offer insights into leveraging social identity dynamics to promote prosocial behavior in virtual environments.",
+  "authors": [
+    "Yibin Feng",
+    "Tianqi Song",
+    "Yugin Tan",
+    "Zicheng Zhu",
+    "Yi-Chieh Lee"
+  ],
+  "published": "2026-02-07T08:23:54Z",
+  "primary_category": "cs.HC",
+  "categories": [
+    "cs.HC",
+    "cs.AI",
+    "cs.CY"
+  ],
+  "url": "https://arxiv.org/abs/2602.07433"
+}

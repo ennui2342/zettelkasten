@@ -1,0 +1,20 @@
+{
+  "arxiv_id": "2509.24047",
+  "title": "Optimism as Risk-Seeking in Multi-Agent Reinforcement Learning",
+  "abstract": "Risk sensitivity has become a central theme in reinforcement learning (RL), where convex risk measures and robust formulations provide principled ways to model preferences beyond expected return. Recent extensions to multi-agent RL (MARL) have largely emphasized the risk-averse setting, prioritizing robustness to uncertainty. In cooperative MARL, however, such conservatism often leads to suboptimal equilibria, and a parallel line of work has shown that optimism can promote cooperation. Existing optimistic methods, though effective in practice, are typically heuristic and lack theoretical grounding. Building on the dual representation for convex risk measures, we propose a principled framework that interprets risk-seeking objectives as optimism. We introduce optimistic value functions, which formalize optimism as divergence-penalized risk-seeking evaluations. Building on this foundation, we derive a policy-gradient theorem for optimistic value functions, including explicit formulas for the entropic risk/KL-penalty setting, and develop decentralized optimistic actor-critic algorithms that implement these updates. Empirical results on cooperative benchmarks demonstrate that risk-seeking optimism consistently improves coordination over both risk-neutral baselines and heuristic optimistic methods. Our framework thus unifies risk-sensitive learning and optimism, offering a theoretically grounded and practically effective approach to cooperation in MARL.",
+  "authors": [
+    "Runyu Zhang",
+    "Na Li",
+    "Asuman Ozdaglar",
+    "Jeff Shamma",
+    "Gioele Zardini"
+  ],
+  "published": "2025-09-28T19:44:59Z",
+  "primary_category": "cs.LG",
+  "categories": [
+    "cs.LG",
+    "eess.SY",
+    "math.OC"
+  ],
+  "url": "https://arxiv.org/abs/2509.24047"
+}

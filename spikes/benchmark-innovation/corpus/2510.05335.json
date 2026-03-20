@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2510.05335",
+  "title": "Biomedical reasoning in action: Multi-agent System for Auditable Biomedical Evidence Synthesis",
+  "abstract": "We present M-Reason, a demonstration system for transparent, agent-based reasoning and evidence integration in the biomedical domain, with a focus on cancer research. M-Reason leverages recent advances in large language models (LLMs) and modular agent orchestration to automate evidence retrieval, appraisal, and synthesis across diverse biomedical data sources. Each agent specializes in a specific evidence stream, enabling parallel processing and fine-grained analysis. The system emphasizes explainability, structured reporting, and user auditability, providing complete traceability from source evidence to final conclusions. We discuss critical tradeoffs between agent specialization, system complexity, and resource usage, as well as the integration of deterministic code for validation. An open, interactive user interface allows researchers to directly observe, explore and evaluate the multi-agent workflow. Our evaluation demonstrates substantial gains in efficiency and output consistency, highlighting M-Reason's potential as both a practical tool for evidence synthesis and a testbed for robust multi-agent LLM systems in scientific research, available at https://m-reason.digitalecmt.com.",
+  "authors": [
+    "Oskar Wysocki",
+    "Magdalena Wysocka",
+    "Mauricio Jacobo",
+    "Harriet Unsworth",
+    "André Freitas"
+  ],
+  "published": "2025-10-06T19:57:29Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2510.05335"
+}

@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2512.02814",
+  "title": "Radiologist Copilot: An Agentic Framework Orchestrating Specialized Tools for Reliable Radiology Reporting",
+  "abstract": "In clinical practice, radiology reporting is an essential yet complex, time-intensive, and error-prone task, particularly for 3D medical images. Existing automated approaches based on medical vision-language models primarily focus on isolated report generation. However, real-world radiology reporting extends far beyond report writing, which requires meticulous image observation and interpretation, appropriate template selection, and rigorous quality control to ensure adherence to clinical standards. This multi-stage, planning-intensive workflow fundamentally exceeds the capabilities of single-pass models. To bridge this gap, we propose Radiologist Copilot, an agentic system that autonomously orchestrates specialized tools to complete the entire radiology reporting workflow rather than isolated report writing. Radiologist Copilot enables region image localization and region analysis planning to support detailed visual reasoning, adopts strategic template selection for standardized report writing, and incorporates dedicated report quality control via quality assessment and feedback-driven iterative refinement. By integrating localization, interpretation, template selection, report composition, and quality control, Radiologist Copilot delivers a comprehensive and clinically aligned radiology reporting workflow. Experimental results demonstrate that it significantly outperforms state-of-the-art methods, supporting radiologists throughout the entire radiology reporting process. The code will be released upon acceptance.",
+  "authors": [
+    "Yongrui Yu",
+    "Zhongzhen Huang",
+    "Linjie Mu",
+    "Shaoting Zhang",
+    "Xiaofan Zhang"
+  ],
+  "published": "2025-12-02T14:25:05Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2512.02814"
+}

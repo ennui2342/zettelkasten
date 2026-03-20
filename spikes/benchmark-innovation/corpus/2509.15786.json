@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2509.15786",
+  "title": "Building Data-Driven Occupation Taxonomies: A Bottom-Up Multi-Stage Approach via Semantic Clustering and Multi-Agent Collaboration",
+  "abstract": "Creating robust occupation taxonomies, vital for applications ranging from job recommendation to labor market intelligence, is challenging. Manual curation is slow, while existing automated methods are either not adaptive to dynamic regional markets (top-down) or struggle to build coherent hierarchies from noisy data (bottom-up). We introduce CLIMB (CLusterIng-based Multi-agent taxonomy Builder), a framework that fully automates the creation of high-quality, data-driven taxonomies from raw job postings. CLIMB uses global semantic clustering to distill core occupations, then employs a reflection-based multi-agent system to iteratively build a coherent hierarchy. On three diverse, real-world datasets, we show that CLIMB produces taxonomies that are more coherent and scalable than existing methods and successfully capture unique regional characteristics. We release our code and datasets at https://anonymous.4open.science/r/CLIMB.",
+  "authors": [
+    "Nan Li",
+    "Bo Kang",
+    "Tijl De Bie"
+  ],
+  "published": "2025-09-19T09:17:48Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.IR"
+  ],
+  "url": "https://arxiv.org/abs/2509.15786"
+}

@@ -1,0 +1,16 @@
+{
+  "arxiv_id": "2601.12886",
+  "title": "Communication Methods in Multi-Agent Reinforcement Learning",
+  "abstract": "Multi-agent reinforcement learning is a promising research area that extends established reinforcement learning approaches to problems formulated as multi-agent systems. Recently, a multitude of communication methods have been introduced to this field to address problems such as partially observable environments, non-stationarity, and exponentially growing action spaces. Communication further enables efficient cooperation among all agents interacting in an environment. This work aims at providing an overview of communication techniques in multi-agent reinforcement learning. By an in-depth analysis of 29 publications on this topic, the strengths and weaknesses of explicit, implicit, attention-based, graph-based, and hierarchical/role-based communication are evaluated. The results of this comparison show that there is no general, optimal communication framework for every problem. On the contrary, the choice of communication depends heavily on the problem at hand. The comparison also highlights the importance of communication methods with low computational overhead to enable scalability to environments where many agents interact. Finally, the paper discusses current research gaps, emphasizing the need for standardized benchmarking of system-level metrics and improved robustness under realistic communication conditions to enhance the real-world applicability of these approaches.",
+  "authors": [
+    "Christoph Wittner"
+  ],
+  "published": "2026-01-19T09:39:00Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI",
+    "cs.LG"
+  ],
+  "url": "https://arxiv.org/abs/2601.12886"
+}

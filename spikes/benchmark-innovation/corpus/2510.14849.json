@@ -1,0 +1,21 @@
+{
+  "arxiv_id": "2510.14849",
+  "title": "Multi Agent Switching Mode Controller for Sound Source localization",
+  "abstract": "Source seeking is an important topic in robotic research, especially considering sound-based sensors since they allow the agents to locate a target even in critical conditions where it is not possible to establish a direct line of sight. In this work, we design a multi- agent switching mode control strategy for acoustic-based target localization. Two scenarios are considered: single source localization, in which the agents are driven maintaining a rigid formation towards the target, and multi-source scenario, in which each agent searches for the targets independently from the others.",
+  "authors": [
+    "Marcello Sorge",
+    "Nicola Cigarini",
+    "Riccardo Lorigiola",
+    "Giulia Michieletto",
+    "Andrea Masiero",
+    "Angelo Cenedese",
+    "Alberto Guarnieri"
+  ],
+  "published": "2025-10-16T16:21:14Z",
+  "primary_category": "cs.RO",
+  "categories": [
+    "cs.RO",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2510.14849"
+}

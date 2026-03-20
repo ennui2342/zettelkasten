@@ -1,0 +1,15 @@
+{
+  "arxiv_id": "2512.06396",
+  "title": "AgenticCyber: A GenAI-Powered Multi-Agent System for Multimodal Threat Detection and Adaptive Response in Cybersecurity",
+  "abstract": "The increasing complexity of cyber threats in distributed environments demands advanced frameworks for real-time detection and response across multimodal data streams. This paper introduces AgenticCyber, a generative AI powered multi-agent system that orchestrates specialized agents to monitor cloud logs, surveillance videos, and environmental audio concurrently. The solution achieves 96.2% F1-score in threat detection, reduces response latency to 420 ms, and enables adaptive security posture management using multimodal language models like Google's Gemini coupled with LangChain for agent orchestration. Benchmark datasets, such as AWS CloudTrail logs, UCF-Crime video frames, and UrbanSound8K audio clips, show greater performance over standard intrusion detection systems, reducing mean time to respond (MTTR) by 65% and improving situational awareness. This work introduces a scalable, modular proactive cybersecurity architecture for enterprise networks and IoT ecosystems that overcomes siloed security technologies with cross-modal reasoning and automated remediation.",
+  "authors": [
+    "Shovan Roy"
+  ],
+  "published": "2025-12-06T10:59:21Z",
+  "primary_category": "cs.CR",
+  "categories": [
+    "cs.CR",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2512.06396"
+}

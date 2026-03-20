@@ -1,0 +1,26 @@
+{
+  "arxiv_id": "2512.07849",
+  "title": "AI Urban Scientist: Multi-Agent Collaborative Automation for Urban Research",
+  "abstract": "Urban research aims to understand how cities operate and evolve as complex adaptive systems. With the rapid growth of urban data and analytical methodologies, the central challenge of the field has shifted from data availability to the integration of heterogeneous data into coherent, verifiable urban knowledge through multidisciplinary approaches. Recent advances in AI, particularly the emergence of large language models (LLMs), have enabled the development of AI scientists capable of autonomous reasoning, hypothesis generation, and data-driven experimentation, demonstrating substantial potential for autonomous urban research. However, most general-purpose AI systems remain misaligned with the domain-specific knowledge, methodological conventions, and inferential standards required in urban studies. Here, we introduce the AI Urban Scientist, a knowledge-driven multi-agent framework designed to support autonomous urban research. Grounded in hypotheses, peer-review feedback, datasets, and research methodologies distilled from large-scale prior studies, the system constructs structured domain knowledge that guides LLM-based agents to automatically generate hypotheses, identify and integrate multi-source urban datasets, conduct empirical analyses and simulations, and iteratively refine analytical methods. Through this process, the framework synthesizes new insights in urban science and accelerates the urban research lifecycle.",
+  "authors": [
+    "Tong Xia",
+    "Jiankun Zhang",
+    "Ruiwen You",
+    "Ao Xu",
+    "Linghao Zhang",
+    "Tengyao Tu",
+    "Jingzhi Wang",
+    "Jinghua Piao",
+    "Yunke Zhang",
+    "Fengli Xu",
+    "Yong Li"
+  ],
+  "published": "2025-11-26T01:17:35Z",
+  "primary_category": "cs.CY",
+  "categories": [
+    "cs.CY",
+    "cs.CL",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2512.07849"
+}

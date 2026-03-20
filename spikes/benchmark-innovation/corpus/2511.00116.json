@@ -1,0 +1,26 @@
+{
+  "arxiv_id": "2511.00116",
+  "title": "LC-Opt: Benchmarking Reinforcement Learning and Agentic AI for End-to-End Liquid Cooling Optimization in Data Centers",
+  "abstract": "Liquid cooling is critical for thermal management in high-density data centers with the rising AI workloads. However, machine learning-based controllers are essential to unlock greater energy efficiency and reliability, promoting sustainability. We present LC-Opt, a Sustainable Liquid Cooling (LC) benchmark environment, for reinforcement learning (RL) control strategies in energy-efficient liquid cooling of high-performance computing (HPC) systems. Built on the baseline of a high-fidelity digital twin of Oak Ridge National Lab's Frontier Supercomputer cooling system, LC-Opt provides detailed Modelica-based end-to-end models spanning site-level cooling towers to data center cabinets and server blade groups. RL agents optimize critical thermal controls like liquid supply temperature, flow rate, and granular valve actuation at the IT cabinet level, as well as cooling tower (CT) setpoints through a Gymnasium interface, with dynamic changes in workloads. This environment creates a multi-objective real-time optimization challenge balancing local thermal regulation and global energy efficiency, and also supports additional components like a heat recovery unit (HRU). We benchmark centralized and decentralized multi-agent RL approaches, demonstrate policy distillation into decision and regression trees for interpretable control, and explore LLM-based methods that explain control actions in natural language through an agentic mesh architecture designed to foster user trust and simplify system management. LC-Opt democratizes access to detailed, customizable liquid cooling models, enabling the ML community, operators, and vendors to develop sustainable data center liquid cooling control solutions.",
+  "authors": [
+    "Avisek Naug",
+    "Antonio Guillen",
+    "Vineet Kumar",
+    "Scott Greenwood",
+    "Wesley Brewer",
+    "Sahand Ghorbanpour",
+    "Ashwin Ramesh Babu",
+    "Vineet Gundecha",
+    "Ricardo Luna Gutierrez",
+    "Soumyendu Sarkar"
+  ],
+  "published": "2025-10-31T03:04:14Z",
+  "primary_category": "cs.LG",
+  "categories": [
+    "cs.LG",
+    "cs.AI",
+    "cs.MA",
+    "eess.SY"
+  ],
+  "url": "https://arxiv.org/abs/2511.00116"
+}

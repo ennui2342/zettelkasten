@@ -1,0 +1,22 @@
+{
+  "arxiv_id": "2601.15109",
+  "title": "An Agentic Operationalization of DISARM for FIMI Investigation on Social Media",
+  "abstract": "The interoperability of data and intelligence across allied partners and their respective end-user groups is considered a foundational enabler of the collective defense capability -- both conventional and hybrid -- of NATO countries. Foreign Information Manipulation and Interference (FIMI) and related hybrid activities are conducted across various societal dimensions and infospheres, posing an ever greater challenge to threat characterization, sustained situational awareness, and response coordination. Recent advances in AI have further reduced the cost of AI-augmented trolling and interference activities, such as through the generation and amplification of manipulative content. Despite the introduction of the DISARM framework as a standardized metadata and analytical framework for FIMI, operationalizing it at the scale of social media remains a challenge. We propose a framework-agnostic, agent-based operationalization of DISARM to investigate FIMI on social media. We develop an agent coordination pipeline in which specialized agentic AI components collaboratively (1) detect candidate manipulative behaviors and (2) map these behaviors onto standard DISARM taxonomies in a transparent manner. We evaluate the approach on two real-world datasets annotated by domain practitioners. Our results show that the approach is effective in scaling the predominantly manual and heavily interpretive work of FIMI analysis -- including uncovering more than 30 previously undetected Russian bot accounts during manual analysis -- and provides a direct contribution to enhancing situational awareness and data interoperability in the context of operating in media- and information-rich settings.",
+  "authors": [
+    "Kevin Tseng",
+    "Juan Carlos Toledano",
+    "Bart De Clerck",
+    "Yuliia Dukach",
+    "Phil Tinn"
+  ],
+  "published": "2026-01-21T15:50:13Z",
+  "primary_category": "cs.SI",
+  "categories": [
+    "cs.SI",
+    "cs.AI",
+    "cs.CY",
+    "cs.HC",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2601.15109"
+}

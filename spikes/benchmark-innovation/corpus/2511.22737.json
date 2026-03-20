@@ -1,0 +1,20 @@
+{
+  "arxiv_id": "2511.22737",
+  "title": "Agentic AI Framework for Individuals with Disabilities and Neurodivergence: A Multi-Agent System for Healthy Eating, Daily Routines, and Inclusive Well-Being",
+  "abstract": "The paper presents a detailed Agentic Artificial Intelligence (AI) model that would enable people with disabilities and neurodivergence to lead healthier lives and have more regular days. The system will use a multi-layer structure; it will include an Application and Interface Layer, an Agents Layer, and a Data Source Layer to provide adaptive, transparent, and inclusive support. Fundamentally, a hybrid reasoning engine will synchronize four special-purpose agents, which include: a personalized-nutrition-based, called a Meal Planner Agent; an adaptive-scheduling-based, called a Reminder Agent; interactive assistance during grocery shopping and cooking, called a Food Guidance Agent; and a continuous-intake-and-physiological-tracking, called a Monitoring Agent. All the agents interact through a central communicative system called the Blackboard/Event Bus, which allows autonomous interaction and real-time feedback loops with multimedia user interfaces. Privacy-sensitive data sources, including electronic health records (EHRs), nutritional databases, wearable sensors, and smart kitchen Internet of Things, are also included in the framework and placed into a policy-controlled layer, which ensures data safety and compliance with consent. Collaborative care and clinician dashboards allow common supervision, and discussable artificial intelligence (XAI) modules give brief explanations of why a decision was made, making users responsible and reliant. The proposed agentic AI framework is an extension beyond traditional assistive systems since it incorporates inclusiveness, personalization, and accessibility at all levels. It displays the intersection of multi-agent reasoning, multi-modal interfaces, and human-centered design that will enable the development of autonomy, health, and digital equity among people with disabilities and neurodivergence.",
+  "authors": [
+    "Salman Jan",
+    "Toqeer Ali Syed",
+    "Gohar Ali",
+    "Ali Akarma",
+    "Mohammad Riyaz Belgaum",
+    "Ahmad Ali"
+  ],
+  "published": "2025-11-27T20:08:12Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.HC"
+  ],
+  "url": "https://arxiv.org/abs/2511.22737"
+}

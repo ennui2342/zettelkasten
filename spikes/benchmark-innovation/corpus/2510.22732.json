@@ -1,0 +1,28 @@
+{
+  "arxiv_id": "2510.22732",
+  "title": "WebATLAS: An LLM Agent with Experience-Driven Memory and Action Simulation",
+  "abstract": "Large Language Model (LLM) web agents often struggle with long-horizon web navigation and web task completion in new websites, producing inefficient action sequences unless fine-tuned on environment-specific data. We show that experience-driven memory, combined with look-ahead action simulation, is sufficient for LLM agents to adapt to unseen web environments by remembering past failures and predicting the consequences of future actions. We introduce WebATLAS (Actor-Critic Task-completion with Look-ahead Action Simulation), a memory-augmented LLM web agent that learns a lightweight internal model of the environment from interaction experience and performs hypothetical action rollouts before acting in the real world. WebATLAS builds a persistent cognitive map via curiosity-driven exploration, stores interaction outcomes as experience-based memory, and evaluates candidate actions in cognitive space using a planner--simulator--critic loop. This enables the agent to reuse past experience, avoid previously unsuccessful behaviors, and generate more efficient plans. We evaluate WebATLAS on the WebArena-Lite benchmark for autonomous web navigation and demonstrate a success rate of 63%, outperforming the previous state-of-the-art at 53.9%. Unlike previous systems, our modular architecture requires no website-specific LLM fine-tuning. Ablation studies confirm that experience-driven memory, look-ahead action simulation, and hierarchical replanning play complementary roles in enabling robust, training-free web agents.",
+  "authors": [
+    "Jiali Cheng",
+    "Anjishnu Kumar",
+    "Roshan Lal",
+    "Rishi Rajasekaran",
+    "Hani Ramezani",
+    "Omar Zia Khan",
+    "Oleg Rokhlenko",
+    "Sunny Chiu-Webster",
+    "Gang Hua",
+    "Hadi Amiri"
+  ],
+  "published": "2025-10-26T16:03:39Z",
+  "primary_category": "cs.LG",
+  "categories": [
+    "cs.LG",
+    "cs.AI",
+    "cs.CL",
+    "cs.IR",
+    "cs.MA",
+    "cs.RO"
+  ],
+  "url": "https://arxiv.org/abs/2510.22732"
+}

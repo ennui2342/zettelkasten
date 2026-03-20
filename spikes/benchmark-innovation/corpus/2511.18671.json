@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2511.18671",
+  "title": "Multi-Agent Cross-Entropy Method with Monotonic Nonlinear Critic Decomposition",
+  "abstract": "Cooperative multi-agent reinforcement learning (MARL) commonly adopts centralized training with decentralized execution (CTDE), where centralized critics leverage global information to guide decentralized actors. However, centralized-decentralized mismatch (CDM) arises when the suboptimal behavior of one agent degrades others' learning. Prior approaches mitigate CDM through value decomposition, but linear decompositions allow per-agent gradients at the cost of limited expressiveness, while nonlinear decompositions improve representation but require centralized gradients, reintroducing CDM. To overcome this trade-off, we propose the multi-agent cross-entropy method (MCEM), combined with monotonic nonlinear critic decomposition (NCD). MCEM updates policies by increasing the probability of high-value joint actions, thereby excluding suboptimal behaviors. For sample efficiency, we extend off-policy learning with a modified k-step return and Retrace. Analysis and experiments demonstrate that MCEM outperforms state-of-the-art methods across both continuous and discrete action benchmarks.",
+  "authors": [
+    "Yan Wang",
+    "Ke Deng",
+    "Yongli Ren"
+  ],
+  "published": "2025-11-24T01:04:42Z",
+  "primary_category": "cs.LG",
+  "categories": [
+    "cs.LG",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2511.18671"
+}

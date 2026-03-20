@@ -1,0 +1,15 @@
+{
+  "arxiv_id": "2511.19562",
+  "title": "Trust-Based Social Learning for Communication (TSLEC) Protocol Evolution in Multi-Agent Reinforcement Learning",
+  "abstract": "Emergent communication in multi-agent systems typically occurs through independent learning, resulting in slow convergence and potentially suboptimal protocols. We introduce TSLEC (Trust-Based Social Learning with Emergent Communication), a framework where agents explicitly teach successful strategies to peers, with knowledge transfer modulated by learned trust relationships. Through experiments with 100 episodes across 30 random seeds, we demonstrate that trust-based social learning reduces episodes-to-convergence by 23.9% (p < 0.001, Cohen's d = 1.98) compared to independent emergence, while producing compositional protocols (C = 0.38) that remain robust under dynamic objectives (Phi > 0.867 decoding accuracy). Trust scores strongly correlate with teaching quality (r = 0.743, p < 0.001), enabling effective knowledge filtering. Our results establish that explicit social learning fundamentally accelerates emergent communication in multi-agent coordination.",
+  "authors": [
+    "Abraham Itzhak Weinberg"
+  ],
+  "published": "2025-11-24T15:31:51Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2511.19562"
+}

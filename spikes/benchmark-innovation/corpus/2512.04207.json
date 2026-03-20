@@ -1,0 +1,22 @@
+{
+  "arxiv_id": "2512.04207",
+  "title": "Orchestrator Multi-Agent Clinical Decision Support System for Secondary Headache Diagnosis in Primary Care",
+  "abstract": "Unlike most primary headaches, secondary headaches need specialized care and can have devastating consequences if not treated promptly. Clinical guidelines highlight several 'red flag' features, such as thunderclap onset, meningismus, papilledema, focal neurologic deficits, signs of temporal arteritis, systemic illness, and the 'worst headache of their life' presentation. Despite these guidelines, determining which patients require urgent evaluation remains challenging in primary care settings. Clinicians often work with limited time, incomplete information, and diverse symptom presentations, which can lead to under-recognition and inappropriate care. We present a large language model (LLM)-based multi-agent clinical decision support system built on an orchestrator-specialist architecture, designed to perform explicit and interpretable secondary headache diagnosis from free-text clinical vignettes. The multi-agent system decomposes diagnosis into seven domain-specialized agents, each producing a structured and evidence-grounded rationale, while a central orchestrator performs task decomposition and coordinates agent routing. We evaluated the multi-agent system using 90 expert-validated secondary headache cases and compared its performance with a single-LLM baseline across two prompting strategies: question-based prompting (QPrompt) and clinical practice guideline-based prompting (GPrompt). We tested five open-source LLMs (Qwen-30B, GPT-OSS-20B, Qwen-14B, Qwen-8B, and Llama-3.1-8B), and found that the orchestrated multi-agent system with GPrompt consistently achieved the highest F1 scores, with larger gains in smaller models. These findings demonstrate that structured multi-agent reasoning improves accuracy beyond prompt engineering alone and offers a transparent, clinically aligned approach for explainable decision support in secondary headache diagnosis.",
+  "authors": [
+    "Xizhi Wu",
+    "Nelly Estefanie Garduno-Rapp",
+    "Justin F Rousseau",
+    "Mounika Thakkallapally",
+    "Hang Zhang",
+    "Yuelyu Ji",
+    "Shyam Visweswaran",
+    "Yifan Peng",
+    "Yanshan Wang"
+  ],
+  "published": "2025-12-03T19:26:12Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2512.04207"
+}

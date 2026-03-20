@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2602.21020",
+  "title": "Matching Multiple Experts: On the Exploitability of Multi-Agent Imitation Learning",
+  "abstract": "Multi-agent imitation learning (MA-IL) aims to learn optimal policies from expert demonstrations of interactions in multi-agent interactive domains. Despite existing guarantees on the performance of the resulting learned policies, characterizations of how far the learned polices are from a Nash equilibrium are missing for offline MA-IL. In this paper, we demonstrate impossibility and hardness results of learning low-exploitable policies in general $n$-player Markov Games. We do so by providing examples where even exact measure matching fails, and demonstrating a new hardness result on characterizing the Nash gap given a fixed measure matching error. We then show how these challenges can be overcome using strategic dominance assumptions on the expert equilibrium. Specifically, for the case of dominant strategy expert equilibria, assuming Behavioral Cloning error $ε_{\\text{BC}}$, this provides a Nash imitation gap of $\\mathcal{O}\\left(nε_{\\text{BC}}/(1-γ)^2\\right)$ for a discount factor $γ$. We generalize this result with a new notion of best-response continuity, and argue that this is implicitly encouraged by standard regularization techniques.",
+  "authors": [
+    "Antoine Bergerault",
+    "Volkan Cevher",
+    "Negar Mehr"
+  ],
+  "published": "2026-02-24T15:38:11Z",
+  "primary_category": "cs.LG",
+  "categories": [
+    "cs.LG",
+    "cs.GT",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2602.21020"
+}

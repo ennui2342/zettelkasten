@@ -1,0 +1,25 @@
+{
+  "arxiv_id": "2602.18962",
+  "title": "NeuroWise: A Multi-Agent LLM \"Glass-Box\" System for Practicing Double-Empathy Communication with Autistic Partners",
+  "abstract": "The double empathy problem frames communication difficulties between neurodivergent and neurotypical individuals as arising from mutual misunderstanding, yet most interventions focus on autistic individuals. We present NeuroWise, a multi-agent LLM-based coaching system that supports neurotypical users through stress visualization, interpretation of internal experiences, and contextual guidance. In a between-subjects study (N=30), NeuroWise was rated as helpful by all participants and showed a significant condition-time effect on deficit-based attributions (p=0.02): NeuroWise users reduced deficit framing, while baseline users shifted toward blaming autistic \"deficits\" after difficult interactions. NeuroWise users also completed conversations more efficiently (37% fewer turns, p=0.03). These findings suggest that AI-based interpretation can support attributional change by helping users recognize communication challenges as mutual.",
+  "authors": [
+    "Albert Tang",
+    "Yifan Mo",
+    "Jie Li",
+    "Yue Su",
+    "Mengyuan Zhang",
+    "Sander L. Koole",
+    "Koen Hindriks",
+    "Jiahuan Pei"
+  ],
+  "published": "2026-02-21T21:54:43Z",
+  "primary_category": "cs.HC",
+  "categories": [
+    "cs.HC",
+    "cs.AI",
+    "cs.CY",
+    "cs.IR",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2602.18962"
+}

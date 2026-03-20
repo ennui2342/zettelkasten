@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2511.18604",
+  "title": "An Analysis of Constraint-Based Multi-Agent Pathfinding Algorithms",
+  "abstract": "This study informs the design of future multi-agent pathfinding (MAPF) and multi-robot motion planning (MRMP) algorithms by guiding choices based on constraint classification for constraint-based search algorithms. We categorize constraints as conservative or aggressive and provide insights into their search behavior, focusing specifically on vanilla Conflict-Based Search (CBS) and Conflict-Based Search with Priorities (CBSw/P). Under a hybrid grid-roadmap representation with varying resolution, we observe that aggressive (priority constraint) formulations tend to solve more instances as agent count or resolution increases, whereas conservative (motion constraint) formulations yield stronger solution quality when both succeed. Findings are synthesized in a decision flowchart, aiding users in selecting suitable constraints. Recommendations extend to Multi-Robot Motion Planning (MRMP), emphasizing the importance of considering topological features alongside problem, solution, and representation features. A comprehensive exploration of the study, including raw data and map performance, is available in our public GitHub Repository: https://GitHub.com/hannahjmlee/constraint-mapf-analysis",
+  "authors": [
+    "Hannah Lee",
+    "James D. Motes",
+    "Marco Morales",
+    "Nancy M. Amato"
+  ],
+  "published": "2025-11-23T20:11:47Z",
+  "primary_category": "cs.RO",
+  "categories": [
+    "cs.RO",
+    "cs.AI",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2511.18604"
+}

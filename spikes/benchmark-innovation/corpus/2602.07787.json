@@ -1,0 +1,21 @@
+{
+  "arxiv_id": "2602.07787",
+  "title": "Do Multi-Agents Dream of Electric Screens? Achieving Perfect Accuracy on AndroidWorld Through Task Decomposition",
+  "abstract": "We present Minitap, a multi-agent system that achieves 100% success on the AndroidWorld benchmark, the first to fully solve all 116 tasks and surpassing human performance (80%). We first analyze why single-agent architectures fail: context pollution from mixed reasoning traces, silent text input failures undetected by the agent, and repetitive action loops without escape. Minitap addresses each failure through targeted mechanisms: cognitive separation across six specialized agents, deterministic post-validation of text input against device state, and meta-cognitive reasoning that detects cycles and triggers strategy changes. Ablations show multi-agent decomposition contributes +21 points over single-agent baselines; verified execution adds +7 points; meta-cognition adds +9 points. We release Minitap as open-source software. https://github.com/minitap-ai/mobile-use",
+  "authors": [
+    "Pierre-Louis Favreau",
+    "Jean-Pierre Lo",
+    "Clement Guiguet",
+    "Charles Simon-Meunier",
+    "Nicolas Dehandschoewercker",
+    "Allen G. Roush",
+    "Judah Goldfeder",
+    "Ravid Shwartz-Ziv"
+  ],
+  "published": "2026-02-08T03:02:13Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2602.07787"
+}

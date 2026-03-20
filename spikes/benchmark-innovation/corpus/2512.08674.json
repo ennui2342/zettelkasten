@@ -1,0 +1,42 @@
+{
+  "arxiv_id": "2512.08674",
+  "title": "Multi-Agent Intelligence for Multidisciplinary Decision-Making in Gastrointestinal Oncology",
+  "abstract": "Multimodal clinical reasoning in the field of gastrointestinal (GI) oncology necessitates the integrated interpretation of endoscopic imagery, radiological data, and biochemical markers. Despite the evident potential exhibited by Multimodal Large Language Models (MLLMs), they frequently encounter challenges such as context dilution and hallucination when confronted with intricate, heterogeneous medical histories. In order to address these limitations, a hierarchical Multi-Agent Framework is proposed, which emulates the collaborative workflow of a human Multidisciplinary Team (MDT). The system attained a composite expert evaluation score of 4.60/5.00, thereby demonstrating a substantial improvement over the monolithic baseline. It is noteworthy that the agent-based architecture yielded the most substantial enhancements in reasoning logic and medical accuracy. The findings indicate that mimetic, agent-based collaboration provides a scalable, interpretable, and clinically robust paradigm for automated decision support in oncology.",
+  "authors": [
+    "Rongzhao Zhang",
+    "Junqiao Wang",
+    "Shuyun Yang",
+    "Mouxiao Bian",
+    "Chihao Zhang",
+    "Dongyang Wang",
+    "Qiujuan Yan",
+    "Yun Zhong",
+    "Yuwei Bai",
+    "Guanxu Zhu",
+    "Kangkun Mao",
+    "Miao Wang",
+    "Chao Ding",
+    "Renjie Lu",
+    "Lei Wang",
+    "Lei Zheng",
+    "Tao Zheng",
+    "Xi Wang",
+    "Zhuo Fan",
+    "Bing Han",
+    "Meiling Liu",
+    "Luyi Jiang",
+    "Dongming Shan",
+    "Wenzhong Jin",
+    "Jiwei Yu",
+    "Zheng Wang",
+    "Jie Xu",
+    "Meng Luo"
+  ],
+  "published": "2025-12-09T14:56:40Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2512.08674"
+}

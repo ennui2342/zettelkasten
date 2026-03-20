@@ -1,0 +1,20 @@
+{
+  "arxiv_id": "2510.22422",
+  "title": "Group size effects and collective misalignment in LLM multi-agent systems",
+  "abstract": "Multi-agent systems of large language models (LLMs) are rapidly expanding across domains, introducing dynamics not captured by single-agent evaluations. Yet, existing work has mostly contrasted the behavior of a single agent with that of a collective of fixed size, leaving open a central question: how does group size shape dynamics? Here, we move beyond this dichotomy and systematically explore outcomes across the full range of group sizes. We focus on multi-agent misalignment, building on recent evidence that interacting LLMs playing a simple coordination game can generate collective biases absent in individual models. First, we show that collective bias is a deeper phenomenon than previously assessed: interaction can amplify individual biases, introduce new ones, or override model-level preferences. Second, we demonstrate that group size affects the dynamics in a non-linear way, revealing model-dependent dynamical regimes. Finally, we develop a mean-field analytical approach and show that, above a critical population size, simulations converge to deterministic predictions that expose the basins of attraction of competing equilibria. These findings establish group size as a key driver of multi-agent dynamics and highlight the need to consider population-level effects when deploying LLM-based systems at scale.",
+  "authors": [
+    "Ariel Flint",
+    "Luca Maria Aiello",
+    "Romualdo Pastor-Satorras",
+    "Andrea Baronchelli"
+  ],
+  "published": "2025-10-25T19:45:45Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI",
+    "cs.CY",
+    "physics.soc-ph"
+  ],
+  "url": "https://arxiv.org/abs/2510.22422"
+}

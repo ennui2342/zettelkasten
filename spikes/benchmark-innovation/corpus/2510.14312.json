@@ -1,0 +1,21 @@
+{
+  "arxiv_id": "2510.14312",
+  "title": "Terrarium: Revisiting the Blackboard for Multi-Agent Safety, Privacy, and Security Studies",
+  "abstract": "A multi-agent system (MAS) powered by large language models (LLMs) can automate tedious user tasks such as meeting scheduling that requires inter-agent collaboration. LLMs enable nuanced protocols that account for unstructured private data, user constraints, and preferences. However, this design introduces new risks, including misalignment and attacks by malicious parties that compromise agents or steal user data. In this paper, we propose the Terrarium framework for fine-grained study on safety, privacy, and security in LLM-based MAS. We repurpose the blackboard design, an early approach in multi-agent systems, to create a modular, configurable testbed for multi-agent collaboration. We identify key attack vectors such as misalignment, malicious agents, compromised communication, and data poisoning. We implement three collaborative MAS scenarios with four representative attacks to demonstrate the framework's flexibility. By providing tools to rapidly prototype, evaluate, and iterate on defenses and designs, Terrarium aims to accelerate progress toward trustworthy multi-agent systems.",
+  "authors": [
+    "Mason Nakamura",
+    "Abhinav Kumar",
+    "Saaduddin Mahmud",
+    "Sahar Abdelnabi",
+    "Shlomo Zilberstein",
+    "Eugene Bagdasarian"
+  ],
+  "published": "2025-10-16T05:19:13Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.CL",
+    "cs.CR"
+  ],
+  "url": "https://arxiv.org/abs/2510.14312"
+}

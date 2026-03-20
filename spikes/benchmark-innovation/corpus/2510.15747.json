@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2510.15747",
+  "title": "GLP: A Grassroots, Multiagent, Concurrent, Logic Programming Language",
+  "abstract": "Grassroots platforms are distributed systems with multiple instances that can (1) operate independently of each other and of any global resource other than the network, and (2) coalesce into ever larger instances, possibly resulting in a single global instance.   Here, we present Grassroots Logic Programs (GLP), a multiagent concurrent logic programming language designed for the implementation of grassroots platforms. We introduce the language incrementally: We recall the standard operational semantics of logic programs; introduce the operational semantics of Concurrent (single-agent) GLP as a restriction of that of LP; recall the notion of multiagent transition systems and atomic transactions; introduce the operational semantics of multiagent GLP via a multiagent transition system specified via atomic transactions; and prove multiagent GLP to be grassroots. The accompanying programming example is the grassroots social graph -- the infrastructure grassroots platform on which all others are based.   With the mathematical foundations presented here: a workstation-based implementation of Concurrent GLP was developed by AI, based on the operational semantics of Concurrent GLP; a distributed peer-to-peer smartphone-based implementation of multiagent GLP is being developed by AI, based on the operational semantics of multiagent GLP; a moded type system for GLP was implemented by AI, to facilitate the specification of GLP programs by human and AI designers, for their programming by AI; all reported in detail in companion papers.",
+  "authors": [
+    "Ehud Shapiro"
+  ],
+  "published": "2025-10-17T15:34:27Z",
+  "primary_category": "cs.PL",
+  "categories": [
+    "cs.PL",
+    "cs.CR",
+    "cs.DC",
+    "cs.LO",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2510.15747"
+}

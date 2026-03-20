@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2601.03702",
+  "title": "A Chromatographic Process Design and Optimization Platform Powered by Large Language Models: A Case Application on Extract of Ginkgo Biloba Leaf",
+  "abstract": "Chromatographic separation technology has been widely applied in pharmaceutical, chemical, and food industries due to its high efficiency. However, traditional human-dependent chromatographic process development faces challenges such as reliance on expert experience, long development cycles, and labor intensity. ChromR, a large language model (LLM)-driven platform for chromatographic process design and optimization, is presented in this work. The platform integrates ChromLLM, a domain-specific LLM trained for chromatography, along with a multi-agent system and an automated chromatographic experimental device. The multi-agent system comprises four agents: domain knowledge answering, experimental design, experimental execution, and data analysis. ChromR enables automatic completion of the entire workflow-including initial process parameter recommendation, experimental design, automated execution, data analysis, and multi-objective optimization. By utilizing ChromR, dependency on expert knowledge is effectively reduced, while labor input and development time are significantly decreased. Chromatographic purification of the extract of Ginkgo biloba leaf (EGBL) was selected as a case study. ChromR successfully developed a chromatographic process within one week that meets multiple objectives, including fraction quality and production efficiency, reducing development time to approximately one-seventh of that required by the conventional paradigm. An intelligent, automated, and universally applicable new paradigm was established for chromatographic process development.",
+  "authors": [
+    "Zhilong Tang",
+    "Shaohua Wu",
+    "Xinyan Zhao",
+    "Yu Wang",
+    "Xingchu Gong"
+  ],
+  "published": "2026-01-07T08:40:20Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2601.03702"
+}

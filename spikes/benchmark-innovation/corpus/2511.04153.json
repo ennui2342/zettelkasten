@@ -1,0 +1,23 @@
+{
+  "arxiv_id": "2511.04153",
+  "title": "BAPPA: Benchmarking Agents, Plans, and Pipelines for Automated Text-to-SQL Generation",
+  "abstract": "Text-to-SQL systems provide a natural language interface that can enable even laymen to access information stored in databases. However, existing Large Language Models (LLM) struggle with SQL generation from natural instructions due to large schema sizes and complex reasoning. Prior work often focuses on complex, somewhat impractical pipelines using flagship models, while smaller, efficient models remain overlooked. In this work, we explore three multi-agent LLM pipelines, with systematic performance benchmarking across a range of small to large open-source models: (1) Multi-agent discussion pipeline, where agents iteratively critique and refine SQL queries, and a judge synthesizes the final answer; (2) Planner-Coder pipeline, where a thinking model planner generates stepwise SQL generation plans and a coder synthesizes queries; and (3) Coder-Aggregator pipeline, where multiple coders independently generate SQL queries, and a reasoning agent selects the best query. Experiments on the Bird-Bench Mini-Dev set reveal that Multi-Agent discussion can improve small model performance, with up to 10.6% increase in Execution Accuracy for Qwen2.5-7b-Instruct seen after three rounds of discussion. Among the pipelines, the LLM Reasoner-Coder pipeline yields the best results, with DeepSeek-R1-32B and QwQ-32B planners boosting Gemma 3 27B IT accuracy from 52.4% to the highest score of 56.4%. Codes are available at https://github.com/treeDweller98/bappa-sql.",
+  "authors": [
+    "Fahim Ahmed",
+    "Md Mubtasim Ahasan",
+    "Jahir Sadik Monon",
+    "Muntasir Wahed",
+    "M Ashraful Amin",
+    "A K M Mahbubur Rahman",
+    "Amin Ahsan Ali"
+  ],
+  "published": "2025-11-06T08:00:15Z",
+  "primary_category": "cs.CL",
+  "categories": [
+    "cs.CL",
+    "cs.AI",
+    "cs.DB",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2511.04153"
+}

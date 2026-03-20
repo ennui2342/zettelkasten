@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2601.06204",
+  "title": "Cascading multi-agent anomaly detection in surveillance systems via vision-language models and embedding-based classification",
+  "abstract": "Intelligent anomaly detection in dynamic visual environments requires reconciling real-time performance with semantic interpretability. Conventional approaches address only fragments of this challenge. Reconstruction-based models capture low-level deviations without contextual reasoning, object detectors provide speed but limited semantics, and large vision-language systems deliver interpretability at prohibitive computational cost. This work introduces a cascading multi-agent framework that unifies these complementary paradigms into a coherent and interpretable architecture. Early modules perform reconstruction-gated filtering and object-level assessment, while higher-level reasoning agents are selectively invoked to interpret semantically ambiguous events. The system employs adaptive escalation thresholds and a publish-subscribe communication backbone, enabling asynchronous coordination and scalable deployment across heterogeneous hardware. Extensive evaluation on large-scale monitoring data demonstrates that the proposed cascade achieves a threefold reduction in latency compared to direct vision-language inference, while maintaining high perceptual fidelity (PSNR = 38.3 dB, SSIM = 0.965) and consistent semantic labeling. The framework advances beyond conventional detection pipelines by combining early-exit efficiency, adaptive multi-agent reasoning, and explainable anomaly attribution, establishing a reproducible and energy-efficient foundation for scalable intelligent visual monitoring.",
+  "authors": [
+    "Tayyab Rehman",
+    "Giovanni De Gasperis",
+    "Aly Shmahell"
+  ],
+  "published": "2026-01-08T11:31:47Z",
+  "primary_category": "cs.CV",
+  "categories": [
+    "cs.CV",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2601.06204"
+}

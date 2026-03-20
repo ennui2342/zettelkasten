@@ -1,0 +1,20 @@
+{
+  "arxiv_id": "2511.06396",
+  "title": "Efficient LLM Safety Evaluation through Multi-Agent Debate",
+  "abstract": "Safety evaluation of large language models (LLMs) increasingly relies on LLM-as-a-Judge frameworks, but the high cost of frontier models limits scalability. We propose a cost-efficient multi-agent judging framework that employs Small Language Models (SLMs) through structured debates among critic, defender, and judge agents. To rigorously assess safety judgments, we construct HAJailBench, a large-scale human-annotated jailbreak benchmark comprising 12,000 adversarial interactions across diverse attack methods and target models. The dataset provides fine-grained, expert-labeled ground truth for evaluating both safety robustness and judge reliability. Our SLM-based framework achieves agreement comparable to GPT-4o judges on HAJailBench while substantially reducing inference cost. Ablation results show that three rounds of debate yield the optimal balance between accuracy and efficiency. These findings demonstrate that structured, value-aligned debate enables SLMs to capture semantic nuances of jailbreak attacks and that HAJailBench offers a reliable foundation for scalable LLM safety evaluation.",
+  "authors": [
+    "Dachuan Lin",
+    "Guobin Shen",
+    "Zihao Yang",
+    "Tianrong Liu",
+    "Dongcheng Zhao",
+    "Yi Zeng"
+  ],
+  "published": "2025-11-09T14:06:55Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.CR"
+  ],
+  "url": "https://arxiv.org/abs/2511.06396"
+}

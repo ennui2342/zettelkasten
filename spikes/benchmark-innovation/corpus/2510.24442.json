@@ -1,0 +1,22 @@
+{
+  "arxiv_id": "2510.24442",
+  "title": "Law in Silico: Simulating Legal Society with LLM-Based Agents",
+  "abstract": "Since real-world legal experiments are often costly or infeasible, simulating legal societies with Artificial Intelligence (AI) systems provides an effective alternative for verifying and developing legal theory, as well as supporting legal administration. Large Language Models (LLMs), with their world knowledge and role-playing capabilities, are strong candidates to serve as the foundation for legal society simulation. However, the application of LLMs to simulate legal systems remains underexplored. In this work, we introduce Law in Silico, an LLM-based agent framework for simulating legal scenarios with individual decision-making and institutional mechanisms of legislation, adjudication, and enforcement. Our experiments, which compare simulated crime rates with real-world data, demonstrate that LLM-based agents can largely reproduce macro-level crime trends and provide insights that align with real-world observations. At the same time, micro-level simulations reveal that a well-functioning, transparent, and adaptive legal system offers better protection of the rights of vulnerable individuals.",
+  "authors": [
+    "Yiding Wang",
+    "Yuxuan Chen",
+    "Fanxu Meng",
+    "Xifan Chen",
+    "Xiaolei Yang",
+    "Muhan Zhang"
+  ],
+  "published": "2025-10-28T14:07:10Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.CL",
+    "cs.CY",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2510.24442"
+}

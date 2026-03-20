@@ -1,0 +1,22 @@
+{
+  "arxiv_id": "2510.24145",
+  "title": "From Observability Data to Diagnosis: An Evolving Multi-agent System for Incident Management in Cloud Systems",
+  "abstract": "Incident management (IM) is central to the reliability of large-scale cloud systems. Yet manual IM, where on-call engineers examine metrics, logs, and traces is labor-intensive and error-prone in the face of massive and heterogeneous observability data. Existing automated IM approaches often struggle to generalize across systems, provide limited interpretability, and incur high deployment costs, which hinders adoption in practice. In this paper, we present OpsAgent, a lightweight, self-evolving multi-agent system for IM that employs a training-free data processor to convert heterogeneous observability data into structured textual descriptions, along with a multi-agent collaboration framework that makes diagnostic inference transparent and auditable. To support continual capability growth, OpsAgent also introduces a dual self-evolution mechanism that integrates internal model updates with external experience accumulation, thereby closing the deployment loop. Comprehensive experiments on the OPENRCA benchmark demonstrate state-of-the-art performance and show that OpsAgent is generalizable, interpretable, cost-efficient, and self-evolving, making it a practically deployable and sustainable solution for long-term operation in real-world cloud systems.",
+  "authors": [
+    "Yu Luo",
+    "Jiamin Jiang",
+    "Jingfei Feng",
+    "Lei Tao",
+    "Qingliang Zhang",
+    "Xidao Wen",
+    "Yongqian Sun",
+    "Shenglin Zhang",
+    "Dan Pei"
+  ],
+  "published": "2025-10-28T07:38:15Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2510.24145"
+}

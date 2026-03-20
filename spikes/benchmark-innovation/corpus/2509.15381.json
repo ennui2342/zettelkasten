@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2509.15381",
+  "title": "Dynamic Agent Grouping ECBS: Scaling Windowed Multi-Agent Path Finding with Completeness Guarantees",
+  "abstract": "Multi-Agent Path Finding (MAPF) is the problem of finding a set of collision-free paths for a team of agents. Although several MAPF methods which solve full-horizon MAPF have completeness guarantees, very few MAPF methods that plan partial paths have completeness guarantees. Recent work introduced the Windowed Complete MAPF (WinC-MAPF) framework, which shows how windowed optimal MAPF solvers (e.g., SS-CBS) can use heuristic updates and disjoint agent groups to maintain completeness even when planning partial paths (Veerapaneni et al. 2024). A core limitation of WinC-MAPF is that they required optimal MAPF solvers. Our main contribution is to extend WinC-MAPF by showing how we can use a bounded suboptimal solver while maintaining completeness. In particular, we design Dynamic Agent Grouping ECBS (DAG-ECBS) which dynamically creates and plans agent groups while maintaining that each agent group solution is bounded suboptimal. We prove how DAG-ECBS can maintain completeness in the WinC-MAPF framework. DAG-ECBS shows improved scalability compared to SS-CBS and can outperform windowed ECBS without completeness guarantees. More broadly, our work serves as a blueprint for designing more MAPF methods that can use the WinC-MAPF framework.",
+  "authors": [
+    "Tiannan Zhang",
+    "Rishi Veerapaneni",
+    "Shao-Hung Chan",
+    "Jiaoyang Li",
+    "Maxim Likhachev"
+  ],
+  "published": "2025-09-18T19:35:54Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2509.15381"
+}

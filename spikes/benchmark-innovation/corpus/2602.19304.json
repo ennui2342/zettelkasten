@@ -1,0 +1,24 @@
+{
+  "arxiv_id": "2602.19304",
+  "title": "Safe and Interpretable Multimodal Path Planning for Multi-Agent Cooperation",
+  "abstract": "Successful cooperation among decentralized agents requires each agent to quickly adapt its plan to the behavior of other agents. In scenarios where agents cannot confidently predict one another's intentions and plans, language communication can be crucial for ensuring safety. In this work, we focus on path-level cooperation in which agents must adapt their paths to one another in order to avoid collisions or perform physical collaboration such as joint carrying. In particular, we propose a safe and interpretable multimodal path planning method, CaPE (Code as Path Editor), which generates and updates path plans for an agent based on the environment and language communication from other agents. CaPE leverages a vision-language model (VLM) to synthesize a path editing program verified by a model-based planner, grounding communication to path plan updates in a safe and interpretable way. We evaluate our approach in diverse simulated and real-world scenarios, including multi-robot and human-robot cooperation in autonomous driving, household, and joint carrying tasks. Experimental results demonstrate that CaPE can be integrated into different robotic systems as a plug-and-play module, greatly enhancing a robot's ability to align its plan to language communication from other robots or humans. We also show that the combination of the VLM-based path editing program synthesis and model-based planning safety enables robots to achieve open-ended cooperation while maintaining safety and interpretability.",
+  "authors": [
+    "Haojun Shi",
+    "Suyu Ye",
+    "Katherine M. Guerrerio",
+    "Jianzhi Shen",
+    "Yifan Yin",
+    "Daniel Khashabi",
+    "Chien-Ming Huang",
+    "Tianmin Shu"
+  ],
+  "published": "2026-02-22T18:57:07Z",
+  "primary_category": "cs.RO",
+  "categories": [
+    "cs.RO",
+    "cs.AI",
+    "cs.HC",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2602.19304"
+}

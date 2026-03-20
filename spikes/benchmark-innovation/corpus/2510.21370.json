@@ -1,0 +1,21 @@
+{
+  "arxiv_id": "2510.21370",
+  "title": "HIKMA: Human-Inspired Knowledge by Machine Agents through a Multi-Agent Framework for Semi-Autonomous Scientific Conferences",
+  "abstract": "HIKMA Semi-Autonomous Conference is the first experiment in reimagining scholarly communication through an end-to-end integration of artificial intelligence into the academic publishing and presentation pipeline. This paper presents the design, implementation, and evaluation of the HIKMA framework, which includes AI dataset curation, AI-based manuscript generation, AI-assisted peer review, AI-driven revision, AI conference presentation, and AI archival dissemination. By combining language models, structured research workflows, and domain safeguards, HIKMA shows how AI can support - not replace traditional scholarly practices while maintaining intellectual property protection, transparency, and integrity. The conference functions as a testbed and proof of concept, providing insights into the opportunities and challenges of AI-enabled scholarship. It also examines questions about AI authorship, accountability, and the role of human-AI collaboration in research.",
+  "authors": [
+    "Zain Ul Abideen Tariq",
+    "Mahmood Al-Zubaidi",
+    "Uzair Shah",
+    "Marco Agus",
+    "Mowafa Househ"
+  ],
+  "published": "2025-10-24T11:52:24Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI",
+    "cs.CL",
+    "cs.DL"
+  ],
+  "url": "https://arxiv.org/abs/2510.21370"
+}

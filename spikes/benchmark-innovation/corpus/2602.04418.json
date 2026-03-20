@@ -1,0 +1,20 @@
+{
+  "arxiv_id": "2602.04418",
+  "title": "SPEAR: An Engineering Case Study of Multi-Agent Coordination for Smart Contract Auditing",
+  "abstract": "We present SPEAR, a multi-agent coordination framework for smart contract auditing that applies established MAS patterns in a realistic security analysis workflow. SPEAR models auditing as a coordinated mission carried out by specialized agents: a Planning Agent prioritizes contracts using risk-aware heuristics, an Execution Agent allocates tasks via the Contract Net protocol, and a Repair Agent autonomously recovers from brittle generated artifacts using a programmatic-first repair policy. Agents maintain local beliefs updated through AGM-compliant revision, coordinate via negotiation and auction protocols, and revise plans as new information becomes available. An empirical study compares the multi-agent design with centralized and pipeline-based alternatives under controlled failure scenarios, focusing on coordination, recovery behavior, and resource use.",
+  "authors": [
+    "Arnab Mallick",
+    "Indraveni Chebolu",
+    "Harmesh Rana"
+  ],
+  "published": "2026-02-04T10:51:19Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI",
+    "cs.DC",
+    "cs.ET",
+    "cs.SE"
+  ],
+  "url": "https://arxiv.org/abs/2602.04418"
+}

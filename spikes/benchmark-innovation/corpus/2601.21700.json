@@ -1,0 +1,27 @@
+{
+  "arxiv_id": "2601.21700",
+  "title": "Toward Culturally Aligned LLMs through Ontology-Guided Multi-Agent Reasoning",
+  "abstract": "Large Language Models (LLMs) increasingly support culturally sensitive decision making, yet often exhibit misalignment due to skewed pretraining data and the absence of structured value representations. Existing methods can steer outputs, but often lack demographic grounding and treat values as independent, unstructured signals, reducing consistency and interpretability. We propose OG-MAR, an Ontology-Guided Multi-Agent Reasoning framework. OG-MAR summarizes respondent-specific values from the World Values Survey (WVS) and constructs a global cultural ontology by eliciting relations over a fixed taxonomy via competency questions. At inference time, it retrieves ontology-consistent relations and demographically similar profiles to instantiate multiple value-persona agents, whose outputs are synthesized by a judgment agent that enforces ontology consistency and demographic proximity. Experiments on regional social-survey benchmarks across four LLM backbones show that OG-MAR improves cultural alignment and robustness over competitive baselines, while producing more transparent reasoning traces.",
+  "authors": [
+    "Wonduk Seo",
+    "Wonseok Choi",
+    "Junseo Koh",
+    "Juhyeon Lee",
+    "Hyunjin An",
+    "Minhyeong Yu",
+    "Jian Park",
+    "Qingshan Zhou",
+    "Seunghyun Lee",
+    "Yi Bu"
+  ],
+  "published": "2026-01-29T13:31:45Z",
+  "primary_category": "cs.CL",
+  "categories": [
+    "cs.CL",
+    "cs.AI",
+    "cs.IR",
+    "cs.MA",
+    "cs.SI"
+  ],
+  "url": "https://arxiv.org/abs/2601.21700"
+}

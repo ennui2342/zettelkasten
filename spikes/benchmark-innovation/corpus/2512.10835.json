@@ -1,0 +1,15 @@
+{
+  "arxiv_id": "2512.10835",
+  "title": "Learning Controllable and Diverse Player Behaviors in Multi-Agent Environments",
+  "abstract": "This paper introduces a reinforcement learning framework that enables controllable and diverse player behaviors without relying on human gameplay data. Existing approaches often require large-scale player trajectories, train separate models for different player types, or provide no direct mapping between interpretable behavioral parameters and the learned policy, limiting their scalability and controllability. We define player behavior in an N-dimensional continuous space and uniformly sample target behavior vectors from a region that encompasses the subset representing real human styles. During training, each agent receives both its current and target behavior vectors as input, and the reward is based on the normalized reduction in distance between them. This allows the policy to learn how actions influence behavioral statistics, enabling smooth control over attributes such as aggressiveness, mobility, and cooperativeness. A single PPO-based multi-agent policy can reproduce new or unseen play styles without retraining. Experiments conducted in a custom multi-player Unity game show that the proposed framework produces significantly greater behavioral diversity than a win-only baseline and reliably matches specified behavior vectors across diverse targets. The method offers a scalable solution for automated playtesting, game balancing, human-like behavior simulation, and replacing disconnected players in online games.",
+  "authors": [
+    "Atahan Cilan",
+    "Atay Özgövde"
+  ],
+  "published": "2025-12-11T17:26:24Z",
+  "primary_category": "cs.LG",
+  "categories": [
+    "cs.LG"
+  ],
+  "url": "https://arxiv.org/abs/2512.10835"
+}

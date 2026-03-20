@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2601.09434",
+  "title": "SC-MAS: Constructing Cost-Efficient Multi-Agent Systems with Edge-Level Heterogeneous Collaboration",
+  "abstract": "Large Language Model (LLM)-based Multi-Agent Systems (MAS) enhance complex problem solving through multi-agent collaboration, but often incur substantially higher costs than single-agent systems. Recent MAS routing methods aim to balance performance and overhead by dynamically selecting agent roles and language models. However, these approaches typically rely on a homogeneous collaboration mode, where all agents follow the same interaction pattern, limiting collaboration flexibility across different roles. Motivated by Social Capital Theory, which emphasizes that different roles benefit from distinct forms of collaboration, we propose SC-MAS, a framework for constructing heterogeneous and cost-efficient multi-agent systems. SC-MAS models MAS as directed graphs, where edges explicitly represent pairwise collaboration strategies, allowing different agent pairs to interact through tailored communication patterns. Given an input query, a unified controller progressively constructs an executable MAS by selecting task-relevant agent roles, assigning edge-level collaboration strategies, and allocating appropriate LLM backbones to individual agents. Experiments on multiple benchmarks demonstrate the effectiveness of SC-MAS. In particular, SC-MAS improves accuracy by 3.35% on MMLU while reducing inference cost by 15.38%, and achieves a 3.53% accuracy gain with a 12.13% cost reduction on MBPP. These results validate the feasibility of SC-MAS and highlight the effectiveness of heterogeneous collaboration in multi-agent systems.",
+  "authors": [
+    "Di Zhao",
+    "Longhui Ma",
+    "Siwei Wang",
+    "Miao Wang",
+    "Yi Kong"
+  ],
+  "published": "2026-01-14T12:33:22Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2601.09434"
+}

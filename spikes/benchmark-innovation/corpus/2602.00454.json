@@ -1,0 +1,23 @@
+{
+  "arxiv_id": "2602.00454",
+  "title": "Cross-Modal Memory Compression for Efficient Multi-Agent Debate",
+  "abstract": "Multi-agent debate can improve reasoning quality and reduce hallucinations, but it incurs rapidly growing context as debate rounds and agent count increase. Retaining full textual histories leads to token usage that can exceed context limits and often requires repeated summarization, adding overhead and compounding information loss. We introduce DebateOCR, a cross-modal compression framework that replaces long textual debate traces with compact image representations, which are then consumed through a dedicated vision encoder to condition subsequent rounds. This design compresses histories that commonly span tens to hundreds of thousands of tokens, cutting input tokens by more than 92% and yielding substantially lower compute cost and faster inference across multiple benchmarks. We further provide a theoretical perspective showing that diversity across agents supports recovery of omitted information: although any single compressed history may discard details, aggregating multiple agents' compressed views allows the collective representation to approach the information bottleneck with exponentially high probability.",
+  "authors": [
+    "Jing Wu",
+    "Yue Sun",
+    "Tianpei Xie",
+    "Suiyao Chen",
+    "Jingyuan Bao",
+    "Yaopengxiao Xu",
+    "Gaoyuan Du",
+    "Inseok Heo",
+    "Alexander Gutfraind",
+    "Xin Wang"
+  ],
+  "published": "2026-01-31T02:02:26Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2602.00454"
+}

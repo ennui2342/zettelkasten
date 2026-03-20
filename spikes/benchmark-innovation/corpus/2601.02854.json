@@ -1,0 +1,26 @@
+{
+  "arxiv_id": "2601.02854",
+  "title": "M3MAD-Bench: Are Multi-Agent Debates Really Effective Across Domains and Modalities?",
+  "abstract": "As an agent-level reasoning and coordination paradigm, Multi-Agent Debate (MAD) orchestrates multiple agents through structured debate to improve answer quality and support complex reasoning. However, existing research on MAD suffers from two fundamental limitations: evaluations are conducted under fragmented and inconsistent settings, hindering fair comparison, and are largely restricted to single-modality scenarios that rely on textual inputs only. To address these gaps, we introduce M3MAD-Bench, a unified and extensible benchmark for evaluating MAD methods across Multi-domain tasks, Multi-modal inputs, and Multi-dimensional metrics. M3MAD-Bench establishes standardized protocols over five core task domains: Knowledge, Mathematics, Medicine, Natural Sciences, and Complex Reasoning, and systematically covers both pure text and vision-language datasets, enabling controlled cross-modality comparison. We evaluate MAD methods on nine base models spanning different architectures, scales, and modality capabilities. Beyond accuracy, M3MAD-Bench incorporates efficiency-oriented metrics such as token consumption and inference time, providing a holistic view of performance--cost trade-offs. Extensive experiments yield systematic insights into the effectiveness, robustness, and efficiency of MAD across text-only and multimodal scenarios. We believe M3MAD-Bench offers a reliable foundation for future research on standardized MAD evaluation. The code is available at http://github.com/liaolea/M3MAD-Bench.",
+  "authors": [
+    "Ao Li",
+    "Jinghui Zhang",
+    "Luyu Li",
+    "Yuxiang Duan",
+    "Lang Gao",
+    "Mingcai Chen",
+    "Weijun Qin",
+    "Shaopeng Li",
+    "Fengxian Ji",
+    "Ning Liu",
+    "Lizhen Cui",
+    "Xiuying Chen",
+    "Yuntao Du"
+  ],
+  "published": "2026-01-06T09:33:48Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2601.02854"
+}

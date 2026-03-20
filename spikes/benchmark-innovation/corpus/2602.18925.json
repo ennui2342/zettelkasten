@@ -1,0 +1,16 @@
+{
+  "arxiv_id": "2602.18925",
+  "title": "A potentialization algorithm for games with applications to multi-agent learning in repeated games",
+  "abstract": "We investigate an algorithm that assigns to any game in normal form an approximating game that admits an ordinal potential function. Due to the properties of potential games, the algorithm equips every game with a surrogate reward structure that allows efficient multi-agent learning. Numerical simulations using the replicator dynamics show that 'potentialization' guarantees convergence to stable agent behavior.",
+  "authors": [
+    "Philipp Lakheshar",
+    "Sharwin Rezagholi"
+  ],
+  "published": "2026-02-21T18:33:04Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.GT"
+  ],
+  "url": "https://arxiv.org/abs/2602.18925"
+}

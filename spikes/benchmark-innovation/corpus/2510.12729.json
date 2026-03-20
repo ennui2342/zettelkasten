@@ -1,0 +1,15 @@
+{
+  "arxiv_id": "2510.12729",
+  "title": "Characterizing Agent-Based Model Dynamics via $ε$-Machines and Kolmogorov-Style Complexity",
+  "abstract": "We propose a two-level information-theoretic framework for characterizing the informational organization of Agent-Based Model (ABM) dynamics within the broader paradigm of Complex Adaptive Systems (CAS). At the macro level, a pooled $\\varepsilon$-machine is reconstructed as a reference model summarizing the system-wide informational regime. At the micro level, $\\varepsilon$-machines are reconstructed for each caregiver--elder dyad and variable, complemented by algorithm-agnostic Kolmogorov-style measures, including normalized LZ78 complexity and bits per symbol from lossless compression. The resulting feature set, $\\{h_μ, C_μ, E, \\mathrm{LZ78}, \\mathrm{bps}\\}$, enables distributional analysis, stratified comparisons, and unsupervised clustering across agents and scenarios. Empirical results show that coupling $\\varepsilon$-machines with compression diagnostics yields a coherent picture of where predictive information resides in the caregiving ABM. Global reconstructions provide a memoryless baseline ($L{=}0$ under coarse symbolizations), whereas per-dyad models reveal localized structure, particularly for walkability under ordinal encodings ($m{=}3$). Compression metrics corroborate these patterns: dictionary compressors agree on algorithmic redundancy, while normalized LZ78 captures statistical novelty. Socioeconomic variables display cross-sectional heterogeneity and near-memoryless dynamics, whereas spatial interaction induces bounded temporal memory and recurrent regimes. The framework thus distinguishes semantic organization (predictive causation and memory) from syntactic simplicity (description length) and clarifies how emergence manifests at different system layers. It is demonstrated on a caregiver--elder case study with dyad-level $\\varepsilon$-machine reconstructions and compression-based diagnostics.",
+  "authors": [
+    "Roberto Garrone"
+  ],
+  "published": "2025-10-14T17:08:46Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.IT"
+  ],
+  "url": "https://arxiv.org/abs/2510.12729"
+}

@@ -1,0 +1,20 @@
+{
+  "arxiv_id": "2602.00035",
+  "title": "Asynchronous MultiAgent Reinforcement Learning for 5G Routing under Side Constraints",
+  "abstract": "Networks in the current 5G and beyond systems increasingly carry heterogeneous traffic with diverse quality-of-service constraints, making real-time routing decisions both complex and time-critical. A common approach, such as a heuristic with human intervention or training a single centralized RL policy or synchronizing updates across multiple learners, struggles with scalability and straggler effects. We address this by proposing an asynchronous multi-agent reinforcement learning (AMARL) framework in which independent PPO agents, one per service, plan routes in parallel and commit resource deltas to a shared global resource environment. This coordination by state preserves feasibility across services and enables specialization for service-specific objectives. We evaluate the method on an O-RAN like network simulation using nearly real-time traffic data from the city of Montreal. We compared against a single-agent PPO baseline. AMARL achieves a similar Grade of Service (acceptance rate) (GoS) and end-to-end latency, with reduced training wall-clock time and improved robustness to demand shifts. These results suggest that asynchronous, service-specialized agents provide a scalable and practical approach to distributed routing, with applicability extending beyond the O-RAN domain.",
+  "authors": [
+    "Sebastian Racedo",
+    "Brigitte Jaumard",
+    "Oscar Delgado",
+    "Meysam Masoudi"
+  ],
+  "published": "2026-01-18T18:38:37Z",
+  "primary_category": "cs.NI",
+  "categories": [
+    "cs.NI",
+    "cs.DC",
+    "cs.LG",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2602.00035"
+}

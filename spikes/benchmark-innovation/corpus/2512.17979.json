@@ -1,0 +1,21 @@
+{
+  "arxiv_id": "2512.17979",
+  "title": "Adaptive Agents in Spatial Double-Auction Markets: Modeling the Emergence of Industrial Symbiosis",
+  "abstract": "Industrial symbiosis fosters circularity by enabling firms to repurpose residual resources, yet its emergence is constrained by socio-spatial frictions that shape costs, matching opportunities, and market efficiency. Existing models often overlook the interaction between spatial structure, market design, and adaptive firm behavior, limiting our understanding of where and how symbiosis arises. We develop an agent-based model where heterogeneous firms trade byproducts through a spatially embedded double-auction market, with prices and quantities emerging endogenously from local interactions. Leveraging reinforcement learning, firms adapt their bidding strategies to maximize profit while accounting for transport costs, disposal penalties, and resource scarcity. Simulation experiments reveal the economic and spatial conditions under which decentralized exchanges converge toward stable and efficient outcomes. Counterfactual regret analysis shows that sellers' strategies approach a near Nash equilibrium, while sensitivity analysis highlights how spatial structures and market parameters jointly govern circularity. Our model provides a basis for exploring policy interventions that seek to align firm incentives with sustainability goals, and more broadly demonstrates how decentralized coordination can emerge from adaptive agents in spatially constrained markets.",
+  "authors": [
+    "Matthieu Mastio",
+    "Paul Saves",
+    "Benoit Gaudou",
+    "Nicolas Verstaevel"
+  ],
+  "published": "2025-12-19T13:24:43Z",
+  "primary_category": "cs.GT",
+  "categories": [
+    "cs.GT",
+    "cs.AI",
+    "cs.MA",
+    "econ.GN",
+    "stat.AP"
+  ],
+  "url": "https://arxiv.org/abs/2512.17979"
+}

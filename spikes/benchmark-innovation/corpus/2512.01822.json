@@ -1,0 +1,30 @@
+{
+  "arxiv_id": "2512.01822",
+  "title": "InnoGym: Benchmarking the Innovation Potential of AI Agents",
+  "abstract": "LLMs and Agents have achieved impressive progress in code generation, mathematical reasoning, and scientific discovery. However, existing benchmarks primarily measure correctness, overlooking the diversity of methods behind solutions. True innovation depends not only on producing correct answers but also on the originality of the approach. We present InnoGym, the first benchmark and framework designed to systematically evaluate the innovation potential of AI agents. InnoGym introduces two complementary metrics: performance gain, which measures improvement over the best-known solutions, and novelty, which captures methodological differences from prior approaches. The benchmark includes 18 carefully curated tasks from real-world engineering and scientific domains, each standardized through resource filtering, evaluator validation, and solution collection. In addition, we provide iGym, a unified execution environment for reproducible and long-horizon evaluations. Extensive experiments show that while some agents produce novel approaches, their lack of robustness limits performance gains. These results highlight a key gap between creativity and effectiveness, underscoring the need for benchmarks that evaluate both.",
+  "authors": [
+    "Jintian Zhang",
+    "Kewei Xu",
+    "Jingsheng Zheng",
+    "Zhuoyun Yu",
+    "Yuqi Zhu",
+    "Yujie Luo",
+    "Lanning Wei",
+    "Shuofei Qiao",
+    "Lun Du",
+    "Da Zheng",
+    "Shumin Deng",
+    "Huajun Chen",
+    "Ningyu Zhang"
+  ],
+  "published": "2025-12-01T16:03:04Z",
+  "primary_category": "cs.CL",
+  "categories": [
+    "cs.CL",
+    "cs.AI",
+    "cs.CV",
+    "cs.LG",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2512.01822"
+}

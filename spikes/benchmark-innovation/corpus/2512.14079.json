@@ -1,0 +1,22 @@
+{
+  "arxiv_id": "2512.14079",
+  "title": "Grammar Search for Multi-Agent Systems",
+  "abstract": "Automatic search for Multi-Agent Systems has recently emerged as a key focus in agentic AI research. Several prior approaches have relied on LLM-based free-form search over the code space. In this work, we propose a more structured framework that explores the same space through a fixed set of simple, composable components. We show that, despite lacking the generative flexibility of LLMs during the candidate generation stage, our method outperforms prior approaches on four out of five benchmarks across two domains: mathematics and question answering. Furthermore, our method offers additional advantages, including a more cost-efficient search process and the generation of modular, interpretable multi-agent systems with simpler logic.",
+  "authors": [
+    "Mayank Singh",
+    "Vikas Yadav",
+    "Shiva Krishna Reddy Malay",
+    "Shravan Nayak",
+    "Sai Rajeswar",
+    "Sathwik Tejaswi Madhusudhan",
+    "Eduardo Blanco"
+  ],
+  "published": "2025-12-16T04:37:07Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.CL",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2512.14079"
+}

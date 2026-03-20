@@ -1,0 +1,22 @@
+{
+  "arxiv_id": "2602.05004",
+  "title": "CoWork-X: Experience-Optimized Co-Evolution for Multi-Agent Collaboration System",
+  "abstract": "Large language models are enabling language-conditioned agents in interactive environments, but highly cooperative tasks often impose two simultaneous constraints: sub-second real-time coordination and sustained multi-episode adaptation under a strict online token budget. Existing approaches either rely on frequent in-episode reasoning that induces latency and timing jitter, or deliver post-episode improvements through unstructured text that is difficult to compile into reliable low-cost execution. We propose CoWork-X, an active co-evolution framework that casts peer collaboration as a closed-loop optimization problem across episodes, inspired by fast--slow memory separation. CoWork-X instantiates a Skill-Agent that executes via HTN (hierarchical task network)-based skill retrieval from a structured, interpretable, and compositional skill library, and a post-episode Co-Optimizer that performs patch-style skill consolidation with explicit budget constraints and drift regularization. Experiments in challenging Overcooked-AI-like realtime collaboration benchmarks demonstrate that CoWork-X achieves stable, cumulative performance gains while steadily reducing online latency and token usage.",
+  "authors": [
+    "Zexin Lin",
+    "Jiachen Yu",
+    "Haoyang Zhang",
+    "Yuzhao Li",
+    "Zhonghang Li",
+    "Yujiu Yang",
+    "Junjie Wang",
+    "Xiaoqiang Ji"
+  ],
+  "published": "2026-02-04T19:42:14Z",
+  "primary_category": "cs.CL",
+  "categories": [
+    "cs.CL",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2602.05004"
+}

@@ -1,0 +1,20 @@
+{
+  "arxiv_id": "2509.17757",
+  "title": "Multi-Agent Amodal Completion: Direct Synthesis with Fine-Grained Semantic Guidance",
+  "abstract": "Amodal completion, generating invisible parts of occluded objects, is vital for applications like image editing and AR. Prior methods face challenges with data needs, generalization, or error accumulation in progressive pipelines. We propose a Collaborative Multi-Agent Reasoning Framework based on upfront collaborative reasoning to overcome these issues. Our framework uses multiple agents to collaboratively analyze occlusion relationships and determine necessary boundary expansion, yielding a precise mask for inpainting. Concurrently, an agent generates fine-grained textual descriptions, enabling Fine-Grained Semantic Guidance. This ensures accurate object synthesis and prevents the regeneration of occluders or other unwanted elements, especially within large inpainting areas. Furthermore, our method directly produces layered RGBA outputs guided by visible masks and attention maps from a Diffusion Transformer, eliminating extra segmentation. Extensive evaluations demonstrate our framework achieves state-of-the-art visual quality.",
+  "authors": [
+    "Hongxing Fan",
+    "Lipeng Wang",
+    "Haohua Chen",
+    "Zehuan Huang",
+    "Jiangtao Wu",
+    "Lu Sheng"
+  ],
+  "published": "2025-09-22T13:20:06Z",
+  "primary_category": "cs.CV",
+  "categories": [
+    "cs.CV",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2509.17757"
+}

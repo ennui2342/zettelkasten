@@ -1,0 +1,23 @@
+{
+  "arxiv_id": "2511.10853",
+  "title": "Advanced Assistance for Traffic Crash Analysis: An AI-Driven Multi-Agent Approach to Pre-Crash Reconstruction",
+  "abstract": "Traffic collision reconstruction traditionally relies on human expertise and can be accurate, but pre-crash reconstruction is more challenging. This study develops a multi-agent AI framework that reconstructs pre-crash scenarios and infers vehicle behaviors from fragmented collision data. We propose a two-phase collaborative framework with reconstruction and reasoning stages. The system processes 277 rear-end lead vehicle deceleration (LVD) crashes from the Crash Investigation Sampling System (CISS, 2017 to 2022), integrating narrative reports, structured tabular variables, and scene diagrams. Phase I generates natural-language crash reconstructions from multimodal inputs. Phase II combines these reconstructions with Event Data Recorder (EDR) signals to (1) identify striking and struck vehicles and (2) isolate the EDR records most relevant to the collision moment, enabling inference of key pre-crash behaviors. For validation, we evaluated all LVD cases and emphasized 39 complex crashes where multiple EDR records per crash created ambiguity due to missing or conflicting data. Ground truth was set by consensus of two independent manual annotators, with a separate language model used only to flag potential conflicts for re-checking. The framework achieved 100% accuracy across 4,155 trials; three reasoning models produced identical outputs, indicating that performance is driven by the structured prompts rather than model choice. Research analysts without reconstruction training achieved 92.31% accuracy on the same 39 complex cases. Ablation tests showed that removing structured reasoning anchors reduced case-level accuracy from 99.7% to 96.5% and increased errors across multiple output dimensions. The system remained robust under incomplete inputs. This zero-shot evaluation, without domain-specific training or fine-tuning, suggests a scalable approach for AI-assisted pre-crash analysis.",
+  "authors": [
+    "Gerui Xu",
+    "Boyou Chen",
+    "Huizhong Guo",
+    "Dave LeBlanc",
+    "Arpan Kusari",
+    "Efe Yarbasi",
+    "Ananna Ahmed",
+    "Zhaonan Sun",
+    "Shan Bao"
+  ],
+  "published": "2025-11-13T23:32:25Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.HC"
+  ],
+  "url": "https://arxiv.org/abs/2511.10853"
+}

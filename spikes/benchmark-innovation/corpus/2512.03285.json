@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2512.03285",
+  "title": "A Gossip-Enhanced Communication Substrate for Agentic AI: Toward Decentralized Coordination in Large-Scale Multi-Agent Systems",
+  "abstract": "As agentic platforms scale, agents are moving beyond fixed roles and predefined toolchains, creating an urgent need for flexible and decentralized coordination. Current structured communication protocols such as direct agent-to-agent messaging or MCP-style tool calls offer reliability, but they struggle to support the emergent and swarm-like intelligence required in large adaptive systems. Distributed agents must learn continuously, share context fluidly, and coordinate without depending solely on central planners.   This paper revisits gossip protocols as a complementary substrate for agentic communication. Gossip mechanisms, long valued in distributed systems for their decentralized and fault-tolerant properties, provide scalable and adaptive diffusion of knowledge and fill gaps that structured protocols alone cannot efficiently address. However, gossip also introduces challenges, including semantic relevance, temporal staleness, and limited guarantees on action consistency in rapidly changing environments.   We examine how gossip can support context-rich state propagation, resilient coordination under uncertainty, and emergent global awareness. We also outline open problems around semantic filtering, trust, and knowledge decay. Rather than proposing a complete framework, this paper presents a research agenda for integrating gossip into multi-agent communication stacks and argues that gossip is essential for future agentic ecosystems that must remain robust, adaptive, and self-organizing as their scale and autonomy increase.",
+  "authors": [
+    "Nafiul I. Khan",
+    "Mansura Habiba",
+    "Rafflesia Khan"
+  ],
+  "published": "2025-12-02T22:50:33Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.ET"
+  ],
+  "url": "https://arxiv.org/abs/2512.03285"
+}

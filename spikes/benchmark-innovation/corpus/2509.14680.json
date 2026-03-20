@@ -1,0 +1,24 @@
+{
+  "arxiv_id": "2509.14680",
+  "title": "LEED: A Highly Efficient and Scalable LLM-Empowered Expert Demonstrations Framework for Multi-Agent Reinforcement Learning",
+  "abstract": "Multi-agent reinforcement learning (MARL) holds substantial promise for intelligent decision-making in complex environments. However, it suffers from a coordination and scalability bottleneck as the number of agents increases. To address these issues, we propose the LLM-empowered expert demonstrations framework for multi-agent reinforcement learning (LEED). LEED consists of two components: a demonstration generation (DG) module and a policy optimization (PO) module. Specifically, the DG module leverages large language models to generate instructions for interacting with the environment, thereby producing high-quality demonstrations. The PO module adopts a decentralized training paradigm, where each agent utilizes the generated demonstrations to construct an expert policy loss, which is then integrated with its own policy loss. This enables each agent to effectively personalize and optimize its local policy based on both expert knowledge and individual experience. Experimental results show that LEED achieves superior sample efficiency, time efficiency, and robust scalability compared to state-of-the-art baselines.",
+  "authors": [
+    "Tianyang Duan",
+    "Zongyuan Zhang",
+    "Songxiao Guo",
+    "Dong Huang",
+    "Yuanye Zhao",
+    "Zheng Lin",
+    "Zihan Fang",
+    "Dianxin Luan",
+    "Heming Cui",
+    "Yong Cui"
+  ],
+  "published": "2025-09-18T07:19:24Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.LG"
+  ],
+  "url": "https://arxiv.org/abs/2509.14680"
+}

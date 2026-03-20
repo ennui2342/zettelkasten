@@ -1,0 +1,22 @@
+{
+  "arxiv_id": "2512.21024",
+  "title": "Policy-Conditioned Policies for Multi-Agent Task Solving",
+  "abstract": "In multi-agent tasks, the central challenge lies in the dynamic adaptation of strategies. However, directly conditioning on opponents' strategies is intractable in the prevalent deep reinforcement learning paradigm due to a fundamental ``representational bottleneck'': neural policies are opaque, high-dimensional parameter vectors that are incomprehensible to other agents. In this work, we propose a paradigm shift that bridges this gap by representing policies as human-interpretable source code and utilizing Large Language Models (LLMs) as approximate interpreters. This programmatic representation allows us to operationalize the game-theoretic concept of \\textit{Program Equilibrium}. We reformulate the learning problem by utilizing LLMs to perform optimization directly in the space of programmatic policies. The LLM functions as a point-wise best-response operator that iteratively synthesizes and refines the ego agent's policy code to respond to the opponent's strategy. We formalize this process as \\textit{Programmatic Iterated Best Response (PIBR)}, an algorithm where the policy code is optimized by textual gradients, using structured feedback derived from game utility and runtime unit tests. We demonstrate that this approach effectively solves several standard coordination matrix games and a cooperative Level-Based Foraging environment.",
+  "authors": [
+    "Yue Lin",
+    "Shuhui Zhu",
+    "Wenhao Li",
+    "Ang Li",
+    "Dan Qiao",
+    "Pascal Poupart",
+    "Hongyuan Zha",
+    "Baoxiang Wang"
+  ],
+  "published": "2025-12-24T07:42:10Z",
+  "primary_category": "cs.GT",
+  "categories": [
+    "cs.GT",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2512.21024"
+}

@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2511.19669",
+  "title": "HeaRT: A Hierarchical Circuit Reasoning Tree-Based Agentic Framework for AMS Design Optimization",
+  "abstract": "Conventional AI-driven AMS design automation algorithms remain constrained by their reliance on high-quality datasets to capture underlying circuit behavior, coupled with poor transferability across architectures, and a lack of adaptive mechanisms. This work proposes HeaRT, a foundational reasoning engine for automation loops and a first step toward intelligent, adaptive, human-style design optimization. HeaRT consistently demonstrates reasoning accuracy >97% and Pass@1 performance >98% across our 40-circuit benchmark repository, even as circuit complexity increases, while operating at <0.5x real-time token budget of SOTA baselines. Our experiments show that HeaRT yields >3x faster convergence in both sizing and topology design adaptation tasks across diverse optimization approaches, while preserving prior design intent.",
+  "authors": [
+    "Souradip Poddar",
+    "Chia-Tung Ho",
+    "Ziming Wei",
+    "Weidong Cao",
+    "Haoxing Ren",
+    "David Z. Pan"
+  ],
+  "published": "2025-11-24T20:11:06Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2511.19669"
+}

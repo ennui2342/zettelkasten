@@ -1,0 +1,15 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+*.db
+*.db-wal
+*.db-shm
+dist/
+.pytest_cache/
+
+# Benchmark spike — generated stores, logs, working dirs
+spikes/benchmark-innovation/zettel_*/
+spikes/benchmark-innovation/logs/
+spikes/*/work/
+spikes/*/work_*/

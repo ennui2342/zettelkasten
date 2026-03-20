@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2602.02206",
+  "title": "Fat-Cat: Document-Driven Metacognitive Multi-Agent System for Complex Reasoning",
+  "abstract": "The effectiveness of LLM-based agents is often limited not by model capacity alone, but by how efficiently contextual information is utilized at runtime. Existing agent frameworks rely on rigid, syntax-heavy state representations such as nested JSON, which require models to devote a substantial portion of their limited attention to syntactic processing rather than semantic reasoning. In this paper, we propose Fat-Cat, a document-driven agent architecture that improves the signal-to-noise ratio of state management. By integrating three key components: (1) a Semantic File System that represents agent state as Markdown documents aligned with common pre-training corpora, (2) a Textual Strategy Evolution module that accumulates task-solving knowledge without parameter updates, and (3) a Closed-Loop Watcher that monitors reasoning trajectories to reduce hallucinations. Extensive reasoning, retrieval, and coding benchmarks, Fat-Cat consistently improves agent performance. It enables the Kimi-k2 model to outperform the proprietary GPT-4o baseline on HotPotQA. Replacing the document-based state with JSON leads to performance drop, while empirically validating the critical necessity of document-driven state modeling over rigid syntax. The code is available at https://github.com/answeryt/Fat-Cat.",
+  "authors": [
+    "Tong Yang",
+    "Yemin Wang",
+    "Chaoning Zhang",
+    "Aming Wu"
+  ],
+  "published": "2026-02-02T15:12:13Z",
+  "primary_category": "cs.LG",
+  "categories": [
+    "cs.LG"
+  ],
+  "url": "https://arxiv.org/abs/2602.02206"
+}

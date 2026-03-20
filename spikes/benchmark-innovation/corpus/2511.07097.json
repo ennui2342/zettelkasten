@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2511.07097",
+  "title": "Agentic AI Sustainability Assessment for Supply Chain Document Insights",
+  "abstract": "This paper presents a comprehensive sustainability assessment framework for document intelligence within supply chain operations, centered on agentic artificial intelligence (AI). We address the dual objective of improving automation efficiency while providing measurable environmental performance in document-intensive workflows. The research compares three scenarios: fully manual (human-only), AI-assisted (human-in-the-loop, HITL), and an advanced multi-agent agentic AI workflow leveraging parsers and verifiers. Empirical results show that AI-assisted HITL and agentic AI scenarios achieve reductions of up to 70-90% in energy consumption, 90-97% in carbon dioxide emissions, and 89-98% in water usage compared to manual processes. Notably, full agentic configurations, combining advanced reasoning (thinking mode) and multi-agent validation, achieve substantial sustainability gains over human-only approaches, even when resource usage increases slightly versus simpler AI-assisted solutions. The framework integrates performance, energy, and emission indicators into a unified ESG-oriented methodology for assessing and governing AI-enabled supply chain solutions. The paper includes a complete replicability use case demonstrating the methodology's application to real-world document extraction tasks.",
+  "authors": [
+    "Diego Gosmar",
+    "Anna Chiara Pallotta",
+    "Giovanni Zenezini"
+  ],
+  "published": "2025-11-10T13:38:08Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2511.07097"
+}

@@ -1,0 +1,19 @@
+{
+  "arxiv_id": "2511.22651",
+  "title": "Automated Design Optimization via Strategic Search with Large Language Models",
+  "abstract": "Traditional optimization methods excel in well-defined search spaces but struggle with design problems where transformations and design parameters are difficult to define. Large language models (LLMs) offer a promising alternative by dynamically interpreting design spaces and leveraging encoded domain knowledge. To this end, we introduce AUTO, an LLM agent framework that treats design optimization as a gradient-free search problem guided by strategic LLM reasoning. The framework employs two collaborative agents: a Strategist that selects between exploration and exploitation strategies, and an Implementor that executes detailed designs. Applied to GPU code optimization -- a domain critical to fields from machine learning to scientific computing -- AUTO generates solutions competitive with expert implementations for chemical kinetics integration and dense matrix multiplication. The framework achieves 50-70% search efficiency relative to Bayesian optimization methodologies. It completes optimizations in approximately 8 hours at an estimated cost of up to \\$159 per run, compared to an estimated cost of up to \\$480 with median-wage software developers. These findings open the door to automating design optimization in ill-defined search spaces with limited prior information.",
+  "authors": [
+    "Anthony Carreon",
+    "Vansh Sharma",
+    "Venkat Raman"
+  ],
+  "published": "2025-11-27T17:42:05Z",
+  "primary_category": "cs.LG",
+  "categories": [
+    "cs.LG",
+    "cs.AI",
+    "cs.CE",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2511.22651"
+}

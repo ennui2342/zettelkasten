@@ -1,0 +1,18 @@
+{
+  "arxiv_id": "2509.16839",
+  "title": "Roundtable Policy: Confidence-Weighted-Consensus Aggregation Improves Multi-Agent-System Reasoning",
+  "abstract": "Multi-agent systems have demonstrated exceptional performance in downstream tasks beyond diverse single agent baselines. A growing body of work has explored ways to improve their reasoning and collaboration, from vote, debate, to complex interaction protocols. However, it still remains opaque why specific choice would be preferred in multi-agent systems. Inspired by the decision-making mechanism of democratic committees and The Society of Mind, we introduce Roundtable Policy, an inference-time reasoning framework for multi-agent systems that performs inference through the weighted consensus of multiple LLMs. Through extensive experiments, we demonstrate its that this approach significantly enhances reasoning in complex heterogeneous scientific tasks. Roundtable Policy emphasizes structured and interpretable inference rather than opaque convergence, while requires only black-box access and uniform procedures, making it broadly applicable to diverse multi-agent systems.",
+  "authors": [
+    "Yu Yao",
+    "Jiayi Dong",
+    "Yang Yang",
+    "Ju Li",
+    "Yilun Du"
+  ],
+  "published": "2025-09-20T23:31:53Z",
+  "primary_category": "cs.AI",
+  "categories": [
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2509.16839"
+}

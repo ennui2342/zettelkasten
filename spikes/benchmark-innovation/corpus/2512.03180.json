@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2512.03180",
+  "title": "AGENTSAFE: A Unified Framework for Ethical Assurance and Governance in Agentic AI",
+  "abstract": "The rapid deployment of large language model (LLM)-based agents introduces a new class of risks, driven by their capacity for autonomous planning, multi-step tool integration, and emergent interactions. It raises some risk factors for existing governance approaches as they remain fragmented: Existing frameworks are either static taxonomies driven; however, they lack an integrated end-to-end pipeline from risk identification to operational assurance, especially for an agentic platform. We propose AGENTSAFE, a practical governance framework for LLM-based agentic systems. The framework operationalises the AI Risk Repository into design, runtime, and audit controls, offering a governance framework for risk identification and assurance. The proposed framework, AGENTSAFE, profiles agentic loops (plan -> act -> observe -> reflect) and toolchains, and maps risks onto structured taxonomies extended with agent-specific vulnerabilities. It introduces safeguards that constrain risky behaviours, escalates high-impact actions to human oversight, and evaluates systems through pre-deployment scenario banks spanning security, privacy, fairness, and systemic safety. During deployment, AGENTSAFE ensures continuous governance through semantic telemetry, dynamic authorization, anomaly detection, and interruptibility mechanisms. Provenance and accountability are reinforced through cryptographic tracing and organizational controls, enabling measurable, auditable assurance across the lifecycle of agentic AI systems. The key contributions of this paper are: (1) a unified governance framework that translates risk taxonomies into actionable design, runtime, and audit controls; (2) an Agent Safety Evaluation methodology that provides measurable pre-deployment assurance; and (3) a set of runtime governance and accountability mechanisms that institutionalise trust in agentic AI ecosystems.",
+  "authors": [
+    "Rafflesia Khan",
+    "Declan Joyce",
+    "Mansura Habiba"
+  ],
+  "published": "2025-12-02T19:28:23Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.ET"
+  ],
+  "url": "https://arxiv.org/abs/2512.03180"
+}

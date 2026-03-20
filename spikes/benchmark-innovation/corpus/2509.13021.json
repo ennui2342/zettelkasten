@@ -1,0 +1,21 @@
+{
+  "arxiv_id": "2509.13021",
+  "title": "xOffense: An AI-driven autonomous penetration testing framework with offensive knowledge-enhanced LLMs and multi agent systems",
+  "abstract": "This work introduces xOffense, an AI-driven, multi-agent penetration testing framework that shifts the process from labor-intensive, expert-driven manual efforts to fully automated, machine-executable workflows capable of scaling seamlessly with computational infrastructure. At its core, xOffense leverages a fine-tuned, mid-scale open-source LLM (Qwen3-32B) to drive reasoning and decision-making in penetration testing. The framework assigns specialized agents to reconnaissance, vulnerability scanning, and exploitation, with an orchestration layer ensuring seamless coordination across phases. Fine-tuning on Chain-of-Thought penetration testing data further enables the model to generate precise tool commands and perform consistent multi-step reasoning. We evaluate xOffense on two rigorous benchmarks: AutoPenBench and AI-Pentest-Benchmark. The results demonstrate that xOffense consistently outperforms contemporary methods, achieving a sub-task completion rate of 79.17%, decisively surpassing leading systems such as VulnBot and PentestGPT. These findings highlight the potential of domain-adapted mid-scale LLMs, when embedded within structured multi-agent orchestration, to deliver superior, cost-efficient, and reproducible solutions for autonomous penetration testing.",
+  "authors": [
+    "Phung Duc Luong",
+    "Le Tran Gia Bao",
+    "Nguyen Vu Khai Tam",
+    "Dong Huu Nguyen Khoa",
+    "Nguyen Huu Quyen",
+    "Van-Hau Pham",
+    "Phan The Duy"
+  ],
+  "published": "2025-09-16T12:45:45Z",
+  "primary_category": "cs.CR",
+  "categories": [
+    "cs.CR",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2509.13021"
+}

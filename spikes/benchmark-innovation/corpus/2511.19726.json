@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2511.19726",
+  "title": "An Adaptive, Data-Integrated Agent-Based Modeling Framework for Explainable and Contestable Policy Design",
+  "abstract": "Multi-agent systems often operate under feedback, adaptation, and non-stationarity, yet many simulation studies retain static decision rules and fixed control parameters. This paper introduces a general adaptive multi-agent learning framework that integrates: (i) four dynamic regimes distinguishing static versus adaptive agents and fixed versus adaptive system parameters; (ii) information-theoretic diagnostics (entropy rate, statistical complexity, and predictive information) to assess predictability and structure; (iii) structural causal models for explicit intervention semantics; (iv) procedures for generating agent-level priors from aggregate or sample data; and (v) unsupervised methods for identifying emergent behavioral regimes. The framework offers a domain-neutral architecture for analyzing how learning agents and adaptive controls jointly shape system trajectories, enabling systematic comparison of stability, performance, and interpretability across non-equilibrium, oscillatory, or drifting dynamics. Mathematical definitions, computational operators, and an experimental design template are provided, yielding a structured methodology for developing explainable and contestable multi-agent decision processes.",
+  "authors": [
+    "Roberto Garrone"
+  ],
+  "published": "2025-11-24T21:41:45Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI",
+    "cs.LG",
+    "eess.SY"
+  ],
+  "url": "https://arxiv.org/abs/2511.19726"
+}

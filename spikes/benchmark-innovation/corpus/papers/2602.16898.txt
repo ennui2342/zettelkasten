@@ -1,0 +1,341 @@
+Title: MALLVI: A Multi-Agent Framework for Integrated Generalized Robotics Manipulation
+Authors: Iman Ahmadi, Mehrshad Taji, Arad Mahdinezhad Kashani, AmirHossein Jadidi, Saina Kashani et al.
+Published: 2026-02-18
+Source: https://arxiv.org/abs/2602.16898
+ArXiv ID: 2602.16898
+
+MALLVi: A Multi-Agent Framework for Integrated Generalized Robotics Manipulation
+Abstract
+Task planning for robotic manipulation tasks using large language models (LLMs) is a relatively new phenomenon. Previous approaches have relied on training specialized models, fine-tuning pipeline components, or adapting LLMs with the setup through prompt tuning. However, many of these approaches operate in an open-loop manner and lack robust environmental feedback, making them fragile in dynamic or unstructured settings. We introduce the MALLVi Framework, a Multi-Agent Large Language and Vision framework designed to solve robotic manipulation tasks that explicitly leverages closed-loop, feedback-driven interaction with the environment. The agents are provided with an instruction in human language, along with an image of the current environment state. After thorough investigation and reasoning, MALLVi generates a series of realizable atomic instructions necessary for a supposed robot manipulator to complete the task. After extracting and executing low-level actions through the downstream agents, a Vision-Language Model (VLM) receives environmental feedback and prompts the framework either to repeat this procedure until success, or to proceed with the next atomic instruction. Rather than relying on a single monolithic model, MALLVi coordinates multiple specialized LLM agents, each responsible for a distinct component of the manipulation pipeline. Our work shows that with careful prompt engineering, the integration of four LLM agents (Decomposer, Localizer, Thinker, and Reflector) can autonomously manage all compartments of a manipulation task— namely, initial perception, object localization, reasoning, and high-level planning. Moreover, the addition of a Descriptor agent can introduce a visual memory of the initial environment state in the pipeline. Crucially, the Reflector agent enables targeted error detection and recovery by evaluating the completion or failure of each subtask and reactivating only the relevant agent, avoiding costly global replanning. We validate our framework through experiments conducted both in simulated environments using VIMABench and RLBench, and in real-world settings. Our framework handles diverse tasks, from standard manipulation benchmarks to custom user instructions. Our results demonstrate that iterative, closed-loop communication among agents significantly improves generalization and increases average success rates in zero-shot manipulation scenarios.Code available at https://github.com/iman1234ahmadi/MALLVI.
+1 Introduction
+Natural language tasks are rich, contextual, and often complicated —a simple sentence may be broken down to several smaller subtasks. With the advent of large language models (LLMs), attempts in the task-planning field for robotic manipulation have shifted to using complex language models. The question is clear: “How can we ground abstract instructions into robust, feedback-driven execution in dynamic environments?” As the scope of robotic applications expands, the core challenge has shifted: robots are no longer asked to repeat narrow, pre-programmed motions, but to understand flexible instructions and adapt to unpredictable situations. Existing methods have made progress on this front, typically following two strategies. The first learns behaviors directly from demonstrations, capturing motion trajectories with imitation or policy learning James et al. (2021); James and Davison (2021); Shridhar et al. (2022). The second relies on vision-language models (VLMs) to map natural language and visual input into actions Liu et al. (2024); Kim et al. (2024); Brohan et al. (2023; 2022). Both approaches have been effective in structured settings, but they falter when tasks involve open-vocabulary commands, new objects, or novel environments, where limited semantic understanding and adaptability restrict their use in real-world scenarios Zare et al. (2023); Sapkota et al. (2025).
+LLMs offer a promising path forward. They excel at reasoning and problem decomposition, and can translate high-level instructions into structured steps or even executable code Imani et al. (2023); Fang et al. (2024b). Frameworks that harness these capabilities demonstrate that LLMs can serve as powerful planners for robots Liang et al. (2022); Wang et al. (2024a); Fang et al. (2024a); Zawalski et al. (2024). However, these systems often operate in an open-loop manner: they generate plans once, without checking whether execution succeeds in practice. This makes them fragile in dynamic environments, where errors accumulate and hallucinations —plans that look valid in text but fail in the real world— can degrade performance Dhuliawala et al. (2023); Ali et al. (2024); Sun et al. (2024).
+Recent research has taken steps toward closing the loop by integrating visual feedback for error detection and replanning Mei et al. (2024); Pchelintsev et al. (2025); Huang et al. (2022); Skreta et al. (2024); Huang et al. (2025). Yet, most of these systems rely on a single, monolithic model, which creates bottlenecks when tasks are ambiguous or when reasoning and perception need to be specialized. Moreover, relying on unconstrained LLMs/VLMs raises safety concerns, as unchecked outputs can lead to unsafe or adversarial behaviors Zhang et al. (2025).
+In this paper, we introduce MALLVi (Fig. 1), a multi-agent framework for robotic task planning that directly addresses these challenges. Instead of relying on monolithic models, MALLVi coordinates specialized agents for perception, planning, and reflection, enabling them to collaborate through a shared state. At its core, a decomposer agent translates human prompts into atomic instructions suitable for robotic execution. Subsequent agents handle environmental understanding, object localization, and trajectory planning through a low-level motion planner. A reflector agent continuously monitors the environment via visual feedback, providing a closed-loop that identifies and reactivates only the specific failing agent for efficient error recovery. This distributed, feedback-driven design enables MALLVi to disambiguate instructions, adapt to unexpected changes, and recover from errors—capabilities essential for real-world deployment.
+Specifically, we:
+-
+•
+Propose MALLVi, a distributed framework that introduces a genuine multi-agent architecture for robotics, combining LLM-based planning with VLM-based monitoring in a self-correcting process.
+-
+•
+Highlight the novel role of a reflector agent’s targeted feedback loop, enabling reflection, error recovery, and adaptation through continuous environmental feedback.
+- •
+2 Related work
+2.1 LLMs and VLMs for Robotic Task Planning
+The use of LLMs as high-level planners for robotics has grown rapidly in recent years. Frameworks such as Code-as-Policies Liang et al. (2022) treat LLMs as translators that convert natural language into parameterized API calls or executable code. Inner Monologue Huang et al. (2022) was an early example of incorporating environmental feedback—including success and failure reports—to guide the LLM’s planning. Subsequent work, such as LLM-Planner Song et al. (2023), demonstrated few-shot planning for embodied agents by leveraging LLMs to generate sequences of pre-defined actions. Similarly, Tree-Planner Hu et al. (2024) iteratively constructs a task tree using an LLM, decomposing high-level goals into a sequence of executable subtasks.
+A central challenge in these approaches is the open-loop nature of the initial plans. To mitigate this, recent research integrates visual feedback into replanning. For example, Replan Skreta et al. (2024) combines an LLM for initial planning with a VLM to evaluate execution success, triggering replanning upon failure. ReplanVLM Mei et al. (2024) and LERa Pchelintsev et al. (2025) similarly use VLMs to detect visual errors and guide corrective action. Look Before You Leap Huang et al. (2025) leverages GPT-4V to verify pre- and post-conditions for each planned step, while CoPAL Joublin et al. (2024) introduces a self-corrective planning paradigm where the LLM critiques and refines its own actions. Despite these advances, these systems are largely monolithic and limited in modularity, often handling planning, perception, and execution in a tightly coupled manner. They typically lack task-aware decomposition and flexible perception-action pipelines.
+2.2 Multi-Agent Collaboration and Reflection
+The concept of using multiple LLM agents to collaborate, debate, or critique each other has proven effective for complex problem-solving in non-embodied settings Sprigler et al. (2024); Wang et al. (2024b). This idea is now being applied to robotics. RoCo Mandi et al. (2023) is a seminal work that introduces dialectic collaboration between multiple LLM-controlled robots for task planning.
+Recent multi-agent approaches have further advanced collaboration in planning and manipulation. Wonderful Team Wang et al. (2024c) presents a multi-agent VLLM framework where agents jointly generate action sequences from a visual scene and task description, integrating perception and planning in an end-to-end system. MALMM Singh et al. (2024) employs three LLM agents (Planner, Coder, Supervisor) to perform zero-shot block and object manipulation tasks, incorporating real-time feedback and replanning to mitigate hallucinations and adapt to unseen tasks.
+Building on prior multi-agent LLM frameworks, our work adopts a modular multi-agent approach for manipulation. Unlike previous methods, MALLVi tightly integrates perception, reasoning, and execution in a collaborative agent pipeline, enabling robust adaptation and closed-loop correction in complex environments.
+2.3 Open-Vocabulary Perception
+Robust manipulation requires not just object localization, but context-aware grounding to resolve ambiguities (e.g., “the red block” when there are multiple, referring to a past block). While foundational models like OWL-ViT Minderer et al. (2022) and Grounding Dino Liu et al. (2023) provide open-vocabulary detection, they lack situational context. Segmentation models such as the Segment Anything Model (SAM) Kirillov et al. (2023) offer general-purpose, high-quality segmentation masks across diverse object categories. These capabilities make them well-suited for downstream tasks such as grasp point extraction, where precise segmentation underpins reliable interaction. However, they do not incorporate contextual reasoning or task grounding. Approaches such as SayCan Ahn et al. (2022) address this gap by incorporating environmental cues, and recent VLMs increasingly combine perception, grounding, and reasoning in a unified framework Bai et al. (2023); Nasiriany et al. (2024). MALLVi builds on these advances by providing a modular, context-aware perception pipeline that integrates detection, segmentation, and grounding to enable precise manipulation.
+3 Methodology
+The MALLVi framework implements a multi-agent, self-correcting pipeline for robotic manipulation. Given a high-level user instruction and a real-time image of the environment, the system hierarchically decomposes tasks into atomic subtasks, grounds each to visual inputs, plans execution trajectories, and adaptively refines actions based on feedback. Specialized agents communicate through object and memory tags, with automatic retry mechanism ensuring action success.
+3.1 Multi-Agent
+Single-agent frameworks often struggle with maintaining task focus and performing sequential reasoning in complex environments. As illustrated in Fig. 2, MALLVi mitigates these limitations by assigning specialized agents to distinct execution aspects. This modular design reduces hallucinations, supports iterative refinement through closed-loop feedback, and improves overall task execution by maintaining focus and coherence.
+3.1.1 Decomposer-Descriptor Agents
+The Decomposer and Descriptor agents operate in parallel at the first stage of the MALLVi pipeline, providing complementary functions for task execution.
+The Decomposer agent converts a high-level instruction into a structured sequence of atomic subtasks. Each subtask corresponds to a primitive action in the Actor agent’s vocabulary (e.g., move, reach, push) and is annotated with memory tags containing parameters such as object identities, positions, or contextual references. Subtasks are executed sequentially, with a retry mechanism that allows failed steps to be reattempted without replanning the entire sequence. Implementation details, including subtask representation, memory tagging, and fault-tolerant execution, are provided in Appendix section A.2, and A.3.
+The Descriptor Agent generates a coarse representation of the environment using a vision-language model (VLM). It identifies objects, extracts the spatial relationships between them, and builds a spatial graph representing the scene. This graph enables the agent to reason about object configurations, constraints, and interactions, providing critical context for downstream perception, grounding, and planning agents.
+By running in parallel, the Decomposer focuses on what needs to be done (task decomposition), while the Descriptor focuses on where and how in the environment (scene representation and reasoning). Together, they align task objectives with environmental context from the outset.
+3.1.2 Localizer Agent
+-
+•
+The Perceptor agent identifies task-relevant objects from the instruction and labels non-target objects. It refines grasping strategies (as explained in the Projector tool) across multiple attempts, adapting to subtask failures and improving manipulation precision.
+-
+•
+The Grounder agent localizes objects in the image plane by integrating outputs from multiple detectors (GroundingDINO and OwlV2) to ensure reliable detection even under partial failures. Beyond simple fusion, the agent employs a confidence-based selection mechanism: for each object, it weighs predictions from each detector according to model confidence and consistency with the spatial graph provided by the Descriptor agent. This allows the Grounder to provide accurate bounding boxes for downstream planning. By combining multi-model detection and confidence weighting, the Grounder agent ensures robust, high-fidelity localization essential for manipulation in dynamic and unstructured environments.
+-
+•
+The Projector tool converts visual perception into actionable 3D grasp points, bridging the gap between scene understanding and robot execution.
+Grasp Point Extraction: Leveraging the Segment Anything Model (SAM), the agent identifies candidate grasp points on objects. Object-specific heuristics are applied to select appropriate points (e.g., edges for cylindrical objects, centers for rigid blocks). A verification step ensures that each grasp point lies within the object’s segmentation mask, enhancing reliability and precision.
+3D Projection: The extracted 2D grasp points are projected into 3D space using the depth map and the pinhole camera model. These 3D coordinates are subsequently converted into joint angles through inverse kinematics, producing executable targets for downstream planning and manipulation agents.
+By integrating grasp point extraction and 3D projection within a single module, the Projector agent provides a direct and reliable interface between visual perception and robotic action. This design enables precise and consistent generation of executable 3D targets, supports closed-loop feedback during task execution, and preserves the modularity of the MALLVi framework, allowing seamless interaction with downstream planning and manipulation agents.
+3.1.3 Thinker Agent
+The Thinker agent is an LLM responsible for translating high-level subtask information into actionable parameters for execution. It retrieves relevant objects (see section 3.1.1) and determines 3D grasp points along with any required rotations.
+For tasks without prior memory (memoryless), the Thinker selects pick-and-place positions and rotations directly from the grasp points. For atomic instructions with associated memory tags, the agent identifies either source or target objects using the stored scene representation and spatial relationships, then computes corresponding pick-and-place positions and rotations based on the scene context.
+3.1.4 Actor Agent
+The Actor agent executes the subtasks produced by the upstream agent. In both real-world deployments and benchmark scenarios, the Actor interfaces with the environment through a predefined API, receiving the action parameters from the Thinker and performing the corresponding manipulation. This modular design allows the Actor to remain agnostic to high-level reasoning or low-level motion planning while ensuring accurate execution of planned actions.
+3.1.5 Reflector Agent
+The Reflector agent is a Vision-Language Model (VLM) responsible for verifying the execution of each subtask in real time. After the Actor executes a subtask, the Reflector evaluates its success using visual feedback. Successfully completed subtasks are removed from the execution queue, while failed subtasks trigger a reattempt from the corresponding subtask. Beyond simple retries, the Reflector produces natural-language explanations for failures, updates the shared memory state, selectively reactivates the failing agent, and escalates to full scene re-evaluation when necessary. In cases of repeated failures, the Descriptor agent performs a complete scene re-analysis to update the visual memory and account for changes such as object displacement. If the subtask continues to fail after scene re-evaluation, the system infers an unrecoverable failure and terminates execution with a structured failure report. As demonstrated by the ablation results in Tables 1, 2, and 3, this iterative, closed-loop verification and recovery mechanism is essential for executing complex and sophisticated manipulation tasks. By continuously monitoring task execution and applying bounded, targeted recovery, the Reflector agent enhances reliability and generalization across diverse and dynamic manipulation scenarios, while preserving the modular design of the MALLVi framework.
+4 Experiments and Results
+We evaluate MALLVi on both real-world manipulation tasks and benchmarked scenarios from VIMABench and RLBench. These tasks were selected for their alignment with real-world deployment settings, where the agent receives natural language instructions from users and perceives the environment solely through streaming camera input.
+Real-world tasks: These are designed to reflect common robotic manipulation objectives:
+-
+•
+Place Food – tests accurate object placement.
+-
+•
+Put Shape – evaluates shape-specific placement.
+-
+•
+Stack Blocks – measures precision in stacking.
+-
+•
+Shopping List – requires sequential task execution.
+-
+•
+Put in Mug – tests fine-grained placement.
+-
+•
+Math Ops – evaluates math reasoning.
+-
+•
+Stack Cups – tests repetitive stacking skills.
+-
+•
+Rearrange Objects – requires organizing multiple objects according to instructions.
+Examples of task stages are shown in Fig. 5.
+VIMABench tasks: We selected a subset of VIMABench partitions with clear real-world analogues:
+-
+•
+Simple Manipulation – evaluates basic object handling.
+-
+•
+Novel Concepts – tests the agent’s ability to generalize to unseen object–instruction combinations.
+-
+•
+Visual Reasoning – requires reasoning under perceptual restrictions.
+-
+•
+Visual Goal Reaching – measures scene understanding and goal-directed planning.
+RLBench tasks: These tasks require diverse skill sets in simulated environments:
+-
+•
+Put in Safe – tests accurate object placement under safety constraints.
+-
+•
+Put in Drawer – assesses sequential and goal-directed manipulation.
+-
+•
+Stack Cups – evaluates repetitive stacking.
+-
+•
+Place Cups – requires fine motor control in constrained settings.
+-
+•
+Stack Blocks – measures precision and planning in multi-step tasks.
+4.1 Real-world tasks
+Real-world tasks capture conventional manipulation and reasoning skills. We reimplemented MALMM Singh et al. (2024)VoxPoser Huang et al. (2023),ReKep Huang et al. (2024) and used it as a baseline to evaluate our results in a real-world setting. As shown in Table 1, MALLVi achieves the highest success rates across all tasks, outperforming prior methods, highlighting the benefit of closed-loop, multi-agent planning in real-world settings.
+4.2 VIMABench Tasks
+VIMABench tasks emphasize spatial reasoning, attribute binding, sequential planning, and state recall. Out of the 6 partitions and 17 tasks, we evaluated 12 tasks across 4 partitions suitable for our pipeline. As shown in Table 2, MALLVi outperforms prior methods, including Wonderful Team Wang et al. (2024c), CoTDiffusion Ni et al. (2024a), and PERIA Ni et al. (2024b), achieving the highest success rates across most categories. Notably, the Reflector agent contributes to improvements in complex reasoning and goal-reaching tasks. For detailed results on each subtask, refer to Table 6.
+4.3 RLBench Tasks
+RLBench provides a large-scale benchmark for instruction-conditioned control. As a baseline, we compare MALLVi against PerAct Shridhar et al. (2022), which has been evaluated on similar tasks. Table 3 shows that MALLVi consistently outperforms all baselines across the evaluated tasks, achieving the highest success rates in every category. The ablation without the Reflector agent demonstrates lower performance, highlighting the importance of closed-loop feedback for reliable execution. Single-agent performance remains limited, further emphasizing the benefits of multi-agent coordination in complex manipulation scenarios. Further details, including additional RLBench tasks, more complex scenarios, and comparisons with MALMM and other ablations, are provided in the Appendix A.6 (Table 5).
+4.4 Ablation Studies
+To better understand the contribution of individual components, we conduct the following ablations:
+4.4.1 Single-Agent Baseline
+We collapse all functionality into a single LLM agent, removing explicit task decomposition and modular specialization. Tables 1,2, and 3 compare this baseline with our multi-agent system. The results show that, while a single agent can handle simpler tasks, it struggles with compositional reasoning and grounding. In contrast, the multi-agent system leverages specialized agents, leading to higher accuracy and greater robustness.
+4.4.2 Without Reflector
+We remove the Reflector agent, eliminating the retry mechanism. Although subtasks are still executed in sequence, no verification step is performed. Tables 1, 2, and 3 compare the system with and without the Reflector. While the pipeline remains functional without it, verification and retry significantly improve reliability and overall task success rates. This is especially apparent for complex tasks, where potential for error is higher.
+4.4.3 Open-Source Substitution
+We replace GPT-4.1-mini (the default MALLVi backbone LLM) with open source models, including Qwen Qwen et al. (2025) + Qwen-VL Qwen et al. (2025) (3B and 7B) and LLaMA 3 Grattafiori et al. (2024) + LLaMA-Vision 3.2 (8B and 11B), to evaluate performance gaps between proprietary and publicly available systems. Table 4 summarizes the results. Although open source models perform competitively on simple tasks, they underperform on compositional and multimodal tasks. However, because MALLVi separates the task into several smaller duties for each agent, the pipeline still generally demonstrates acceptable accuracy relative to model size, indicating a core strength of our approach.
+5 Conclusion
+Our MALLVi framework leverages multiple LLM agents to plan and execute robotic manipulation tasks using closed-loop environmental feedback. Although this design enables robust high-level planning and iterative task refinement, it still relies on predefined atomic actions for execution, which constrains adaptability when the robot encounters unforeseen kinematic constraints, contact dynamics, or highly dynamic environments. This limitation reflects a broader trade-off between structured multi-agent reasoning and flexible low-level control.
+Future work should explore the integration of adaptive execution mechanisms, such as reinforcement learning or imitation learning controllers, or differentiable motion planning modules. Such extensions would allow atomic actions to be adapted at deployment time, complementing the iterative reasoning and reflection already provided by the agents. In addition, incorporating more sophisticated perception and grounding modules could improve performance in tasks with novel objects, complex textures, or highly dynamic scenes.
+MALLVi demonstrates that a multi-agent, closed-loop LLM framework can autonomously manage all key aspects of manipulation tasks, from perception and reasoning to high-level planning and reflection, leading to improved generalization and success rates. By combining structured reasoning with adaptive low-level execution, future iterations of MALLVi have the potential to achieve even greater robustness and autonomy in real-world robotic manipulation.
+References
+- Do as i can, not as i say: grounding language in robotic affordances. In Conference on Robot Learning, Cited by: §2.3.
+- Robots can multitask too: integrating a memory architecture and llms for enhanced cross-task robot action generation. 2024 IEEE-RAS 23rd International Conference on Humanoid Robots (Humanoids), pp. 811–818. Cited by: §1.
+- Qwen-vl: a versatile vision-language model for understanding, localization, text reading, and beyond. Cited by: §2.3.
+- RT-2: vision-language-action models transfer web knowledge to robotic control. ArXiv abs/2307.15818. Cited by: §1.
+- RT-1: robotics transformer for real-world control at scale. ArXiv abs/2212.06817. Cited by: §1.
+- Chain-of-verification reduces hallucination in large language models. ArXiv abs/2309.11495. Cited by: §1.
+- MOKA: open-world robotic manipulation through mark-based visual prompting. Robotics: Science and Systems XX. Cited by: §1.
+- Large language models are neurosymbolic reasoners. ArXiv abs/2401.09334. Cited by: §1.
+- The llama 3 herd of models. External Links: 2407.21783, Link Cited by: §4.4.3.
+- Multiple view geometry in computer vision (2. ed.). External Links: Link Cited by: §A.9.
+- Tree-planner: efficient close-loop task planning with large language models. In The Twelfth International Conference on Learning Representations, External Links: Link Cited by: §2.1.
+- ReKep: spatio-temporal reasoning of relational keypoint constraints for robotic manipulation. ArXiv abs/2409.01652. External Links: Link Cited by: §4.1.
+- Voxposer: composable 3d value maps for robotic manipulation with language models. arXiv preprint arXiv:2307.05973. Cited by: §4.1.
+- Inner monologue: embodied reasoning through planning with language models. In 6th Annual Conference on Robot Learning, External Links: Link Cited by: §1, §2.1.
+- Look before you leap: an exploratory study of uncertainty analysis for large language models. IEEE Transactions on Software Engineering 51 (2), pp. 413–429. External Links: ISSN 2326-3881, Link, Document Cited by: §1, §2.1.
+- MathPrompter: mathematical reasoning using large language models. In Annual Meeting of the Association for Computational Linguistics, Cited by: §1.
+- Q-attention: enabling efficient learning for vision-based robotic manipulation. IEEE Robotics and Automation Letters PP, pp. 1–1. Cited by: §1.
+- RLBench: the robot learning benchmark & learning environment. IEEE Robotics and Automation Letters. Cited by: 3rd item.
+- Coarse-to-fine q-attention: efficient learning for visual robotic manipulation via discretisation. 2022 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), pp. 13729–13738. Cited by: §1.
+- VIMA: general robot manipulation with multimodal prompts. ArXiv abs/2210.03094. Cited by: 3rd item.
+- CoPAL: corrective planning of robot actions with large language models. In 2024 IEEE International Conference on Robotics and Automation (ICRA), Vol. , pp. 8664–8670. External Links: Document Cited by: §2.1.
+- OpenVLA: an open-source vision-language-action model. ArXiv abs/2406.09246. Cited by: §1.
+- Segment anything. 2023 IEEE/CVF International Conference on Computer Vision (ICCV), pp. 3992–4003. Cited by: §A.8, §2.3.
+- Language models as zero-shot trajectory generators. IEEE Robotics and Automation Letters PP, pp. 1–8. External Links: Document Cited by: §A.6.
+- Code as policies: language model programs for embodied control. 2023 IEEE International Conference on Robotics and Automation (ICRA), pp. 9493–9500. Cited by: §1, §2.1.
+- RoboMamba: efficient vision-language-action model for robotic reasoning and manipulation. In Neural Information Processing Systems, Cited by: §1.
+- Grounding dino: marrying dino with grounded pre-training for open-set object detection. arXiv preprint arXiv:2303.05499. Cited by: §2.3.
+- RoCo: dialectic multi-robot collaboration with large language models. 2024 IEEE International Conference on Robotics and Automation (ICRA), pp. 286–299. Cited by: §2.2.
+- ReplanVLM: replanning robotic tasks with visual language models. IEEE Robotics and Automation Letters 9 (11), pp. 10201–10208. External Links: Document Cited by: §1, §2.1.
+- Simple open-vocabulary object detection with vision transformers. ArXiv abs/2205.06230. Cited by: §2.3.
+- PIVOT: iterative visual prompting elicits actionable knowledge for vlms. ArXiv abs/2402.07872. Cited by: §2.3.
+- Generate subgoal images before act: unlocking the chain-of-thought reasoning in diffusion model for robot manipulation with multimodal prompts. In 2024 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), Vol. , pp. 13991–14000. External Links: Document Cited by: §4.2.
+- PERIA: perceive, reason, imagine, act via holistic language and vision planning for manipulation. In Advances in Neural Information Processing Systems, A. Globerson, L. Mackey, D. Belgrave, A. Fan, U. Paquet, J. Tomczak, and C. Zhang (Eds.), Vol. 37, pp. 17541–17571. External Links: Document, Link Cited by: §4.2.
+- LERa: replanning with visual feedback in instruction following. External Links: 2507.05135, Link Cited by: §1, §2.1.
+- Qwen2.5 technical report. External Links: 2412.15115, Link Cited by: §4.4.3.
+- Vision-language-action models: concepts, progress, applications and challenges. Cited by: §1.
+- Perceiver-actor: a multi-task transformer for robotic manipulation. ArXiv abs/2209.05451. Cited by: §1, §4.3.
+- MALMM: multi-agent large language models for zero-shot robotics manipulation. ArXiv abs/2411.17636. Cited by: §2.2, §4.1.
+- RePLan: robotic replanning with perception and language models. External Links: Link Cited by: §1, §2.1.
+- LLM-planner: few-shot grounded planning for embodied agents with large language models. In Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV), Cited by: §2.1.
+- Synergistic simulations: multi-agent problem solving with large language models. External Links: 2409.13753, Link Cited by: §2.2.
+- DaDu-e: rethinking the role of large language model in robotic computing pipeline. ArXiv abs/2412.01663. Cited by: §1.
+- Large language models for robotics: opportunities, challenges, and perspectives. ArXiv abs/2401.04334. Cited by: §1.
+- RoleLLM: benchmarking, eliciting, and enhancing role-playing abilities of large language models. In Findings of the Association for Computational Linguistics: ACL 2024, L. Ku, A. Martins, and V. Srikumar (Eds.), Bangkok, Thailand, pp. 14743–14777. External Links: Link, Document Cited by: §2.2.
+- Wonderful team: zero-shot physical task planning with visual llms. Cited by: Figure 6, §2.2, §4.2.
+- A survey of imitation learning: algorithms, recent developments, and challenges. IEEE Transactions on Cybernetics 54, pp. 7173–7186. Cited by: §1.
+- Robotic control via embodied chain-of-thought reasoning. In Conference on Robot Learning, Cited by: §1.
+- BadRobot: jailbreaking embodied LLMs in the physical world. In The Thirteenth International Conference on Learning Representations, External Links: Link Cited by: §1.
+Appendix A Appendix
+A.1 Agents
+Each agent serves a critical function in the end-to-end execution pipeline for user instructions. We demonstrate why each component is indispensable, accompanied by explaining its functionality in detail.
+Our stack uses LangGraph111link, enabling easy integration and changes, rendering ablation studies much simpler. A custom LangGraph wrapper with proper logging (for debugging purposes) was implemented. A log visualizer utilizing Dash222link serves as the primary debugging tool to visualize inter-agent interactions over time, using the log outputs from the LangGraph wrapper.
+A.2 Decomposer as the main core
+The Decomposer agent is responsible for converting high-level instructions into structured, executable sequences of subtasks, providing the critical interface between abstract task specifications and the Actor agent’s primitive actions. This appendix details the internal mechanisms, representation, and execution logic of the Decomposer.
+Subtask Generation
+Upon receiving a high-level instruction, the Decomposer generates a hierarchical sequence of subtasks. Each subtask corresponds to a primitive action in the Actor agent’s vocabulary, such as:
+-
+•
+move — navigating to a target location.
+-
+•
+reach — extending an agent manipulator toward an object.
+-
+•
+push — applying force to move an object.
+Each subtask represents an atomic unit of work that can be executed independently while preserving the logical structure of the overall task.
+Memory Tagging and Parameterization
+Subtasks are annotated with memory tags that provide all necessary execution parameters. These tags may include:
+-
+•
+Object identifiers and properties (e.g., size, type, affordances).
+-
+•
+Spatial positions and orientations.
+-
+•
+Contextual references derived from the environment or previous subtasks.
+Memory tags enable the Actor agent to resolve ambiguities, maintain task consistency, and adapt dynamically if the environment changes during execution.
+A.3 Descriptor, enabling memory utilization
+Vision-Language Model (VLM) Integration
+The Descriptor leverages a pre-trained vision-language model to interpret raw sensory input and extract semantically meaningful information. Specifically, it:
+-
+•
+Detects and classifies objects in the environment.
+-
+•
+Generates descriptive embeddings that capture object properties (e.g., type, color, size, affordances).
+-
+•
+Associates textual and visual modalities, enabling grounding of high-level instructions to perceptual features.
+Spatial Relationship Extraction
+Beyond individual object recognition, the Descriptor agent computes pairwise spatial relationships to capture the scene configuration. For each object pair, it encodes relationships such as:
+-
+•
+Relative positions (e.g., left, right, above, below).
+-
+•
+Distances and proximities.
+-
+•
+Interaction constraints (e.g., support, containment, adjacency).
+These relational encodings are essential for reasoning about feasible actions, dependencies, and constraints in the environment.
+Graph-Based Scene Representation
+The agent constructs a spatial graph where nodes correspond to detected objects and edges encode the extracted spatial relationships. This graph structure provides:
+-
+•
+A structured memory format for storing object and relational information.
+-
+•
+An interface for downstream agents to query object configurations, constraints, and potential interactions.
+-
+•
+Support for reasoning over both local neighborhoods (adjacent objects) and global scene layout.
+Memory Utilization and Agent Interaction
+The spatial graph generated by the Descriptor agent is stored in a memory-accessible format, enabling other agents to:
+-
+•
+Query the environment efficiently without repeated perception.
+-
+•
+Ground high-level instructions in the observed scene.
+-
+•
+Plan and decompose tasks based on the current state and object interactions.
+By serving as a centralized, structured memory representation, the Descriptor facilitates coordination among perception, planning, and execution agents. This agent’s prompt is shown in Fig. 10
+A.4 Thinker compilation of compartments
+The Thinker agent functions as the reasoning and compilation module that converts high-level subtask information into actionable parameters for execution. It leverages the stored scene representation, memory tags, and spatial relationships to compile task-specific parameters required by the Actor agent. This agent’s prompt is shown in Fig. 11, and 12.
+Parameterization of Subtasks
+The Thinker processes each subtask by:
+-
+•
+Contextual Analysis: It examines the subtask description alongside the stored scene graph and memory tags to understand the objects, positions, and spatial constraints relevant to the task.
+-
+•
+Action Parameter Computation: Based on the context, the agent determines the parameters needed for execution. For example, for pick-and-place subtasks, it specifies the target positions, orientations, and rotations required to complete the action in accordance with the scene layout.
+Handling Memoryless vs. Memory-Associated Tasks
+-
+•
+Memoryless Tasks: When no prior memory is associated, the Thinker collects pick-and-place parameters directly from the localizer agent’s outputs, while inferring object orientations from the task’s description.
+-
+•
+Memory-Associated Tasks: For subtasks that reference prior memory, the Thinker uses the stored scene representation and relational information to identify source or target objects. It then determines the corresponding action parameters in the context of object positions and orientations.
+Integration with Execution Agents
+The parameters generated by the Thinker are structured to interface directly with the Actor agent. Each parameterized subtask includes:
+-
+•
+Target or involved objects (via memory references).
+-
+•
+Action-specific parameters such as positions and rotations.
+-
+•
+Any context or constraints derived from the scene representation.
+A.5 Necessity of Reflection
+Uncorrected actions can significantly increase task failure rates. Without such an agent, the manipulation pipeline effectively operates in an open-loop manner. During our experiments, we observed numerous instances where the robot failed to execute generated sub-tasks due to limited joint mobility and positional inaccuracies. The VLM plays a crucial role by analyzing the scene and identifying faulty sub-tasks. This capability enables the system to reattempt execution, preventing what would otherwise be recorded as failure. Furthermore, the VLM can detect positional discrepancies between target objects and the end-effector, prompting the reasoning agent to revise pick-and-place coordinates accordingly. Details of the instructions provided to this agent can be observed in Fig. 13.
+A.6 RLBench Experiment
+Table 5 provides the full success-rate results across nine RLBench tasks evaluated over 100 repetitions. For completeness, we report the performance of our proposed MALLVi framework alongside three baselines: MALMM, the Single-Agent approach Kwon et al. (2024), and our w/o Reflector ablation. As shown, MALLVi consistently achieves the highest success rates across the majority of tasks, highlighting its robustness and strong generalization across diverse manipulation skills
+A.7 VIMABench Experimental Details
+VIMABench consists of 17 tabletop scenarios in an OpenAI Gym environment, with objects of 29 shapes, 17 colors, and 65 textures. The manipulation tasks range from simple manipulation to novel concepts and visual reasoning. An example of VIMABench execution frames and its multimodal prompts can be observed in Fig. 6.
+A.8 Optimal Grasp Point
+A robot’s end-effector requires precise coordinates for stable grasping. While bounding boxes provide object localization, simply using their center point as the grasp position proves suboptimal for many objects - particularly those with irregular shapes, surface holes, or non-uniform geometry.
+To address this limitation, we employ the Segment Anything Model (SAM) Kirillov et al. (2023) to generate precise segmentation masks for all detected objects. These binary masks accurately delineate object boundaries while excluding void regions. the objects are first categories to four classes based on their geometry : round perfect objects, rimmed ones, … and irregular shapes. for the first three categories the grasping point is assumed manually for the latter, we compute an optimal grasp position using:
+where denotes the object’s centroid, calculated as the mean position of all mask pixels, is a uniformly distributed random angle, and represents the minimal radial distance from centroid to mask boundary along direction . Refer to Fig. 7 for an example of grasping point calculation.
+Real world Task Descriptions
+Below we describe the tasks used in our real world evaluation. Each task corresponds to a realistic robotic manipulation or reasoning scenario, designed to test grounding, planning, and execution capabilities.
+Place Food
+The robot is given food items (e.g., an apple or banana) and instructed to place them in a designated location such as a plate or bowl. This task evaluates the agent’s ability to recognize semantic categories (food vs. non-food), perform spatial placement, and follow commonsense constraints (e.g., food should not be placed in inappropriate containers like shoes).
+Put Shape in Math Sorter
+In this task, the traditional shape-sorting toy is adapted for symbolic reasoning. Instead of geometric shapes (circle, square, triangle), the cutouts correspond to numbers or mathematical operators (e.g., “3”, “7”, “+”, “-”). The robot must pick the correct block, recognize its symbolic label, and insert it into the matching slot.
+This task tests the integration of symbol recognition and physical manipulation. The robot must not only align the block physically to fit the slot but also correctly ground the abstract symbol (distinguishing, for example, between a number and an operator). Errors may occur from visual misclassification of symbols, confusion between similar digits, or incorrect orientation during insertion.
+Stack Blocks
+The robot must stack a set of cubic blocks on top of each other to form a stable tower. This requires sequential action planning, stability estimation (avoiding imbalance), and careful execution. Failures typically arise from slippage or misalignment during stacking, making this a robust test of dexterity and control.
+Shopping List
+The robot is given a shopping list (e.g., “apple, orange, and milk”) and must retrieve the specified items from a set of available objects while ignoring distractors. This task evaluates multi-step reasoning, object recognition, and memory maintenance (keeping track of which items have already been collected).
+Put Object in Mug
+The robot is asked to place a small object (e.g., spoon, pen, or sugar packet) inside a mug. This requires spatial reasoning about container affordances and careful placement to avoid dropping or misaligning the object. The task is representative of daily-life kitchen or office manipulations.
+Math Operation
+In this task, arithmetic reasoning is combined with physical object manipulation. The robot is presented with blocks representing numbers (e.g., a block labeled “9” and a block labeled “4”). The instruction specifies a math operation such as “place the result of 9 plus 4”. To complete the task, the robot must:
+-
+1.
+Interpret the instruction: Identify the operands and operation (e.g., ).
+-
+2.
+Compute the result symbolically: Perform the arithmetic ().
+-
+3.
+Ground the result physically: Locate the correct answer block (“13”) from a set of candidate number blocks scattered in the workspace.
+-
+4.
+Manipulate the block: Pick up the correct block and place it in the designated answer area.
+This task evaluates the integration of symbolic reasoning (arithmetic computation) and embodied action (locating and manipulating the correct block). Errors may arise from miscalculating the arithmetic operation, failing to ground the symbolic answer in the physical workspace, or incorrectly manipulating the chosen block.
+Stack Cups
+The robot must stack a set of cups in a nested manner (placing one inside another) or create a vertical tower (placing them upright). The task requires reasoning about object affordances, hollow geometry, and symmetry constraints. Errors often occur if the robot fails to align the cup’s opening correctly.
+Rearrange Objects
+The robot is tasked with rearranging a set of objects from one spatial configuration to another (e.g., “place the book to the left of the laptop, and move the pen to the right of the notebook”). This task stresses relative spatial reasoning, planning multiple sequential moves, and avoiding collisions while repositioning objects.
+A.9 Computer Vision
+The grounders produce a bounding box in pixel space, denoted by the 2D point . However, to solve the inverse kinematics problem for robotic manipulation, the end-effector requires target coordinates in real-world 3D space, represented by . Therefore, a transformation is required to convert pixel-space coordinates into real-world coordinates, such that .
+According to the pinhole camera model Harltey and Zisserman (2006), the inverse mapping from real-world coordinates to pixel-space coordinates, denoted by , is described by the following projection equation:
+In this formulation, is the intrinsic camera matrix that describes the internal characteristics of the camera. It is given by:
+The matrix represents the rotation from the real-world coordinate frame to the camera coordinate frame. The vector represents the translation from the real-world origin to the camera origin. The scalar is a scaling factor that accounts for the axial distance from the real-world point to the camera’s principle point.
+To obtain the value, we resort to stereo vision. Stereo vision consists of two cameras with identical configurations fixed at a predetermined horizontal distance apart, both looking towards the scene. In such a setup, can be derived as:
+Where represents the baseline distance between the two cameras (measured in meters), represents the focal length (in pixels), and is the disparity (measured in pixels) between the projections of the same 3D point in both images.
+To recover the real-world position from a pixel-space point , the following equation is used:
+The intrinsic matrix , the rotation matrix , and the translation vector are obtained through standard camera calibration procedures.

@@ -1,0 +1,17 @@
+{
+  "arxiv_id": "2509.12753",
+  "title": "DeltaHedge: A Multi-Agent Framework for Portfolio Options Optimization",
+  "abstract": "In volatile financial markets, balancing risk and return remains a significant challenge. Traditional approaches often focus solely on equity allocation, overlooking the strategic advantages of options trading for dynamic risk hedging. This work presents DeltaHedge, a multi-agent framework that integrates options trading with AI-driven portfolio management. By combining advanced reinforcement learning techniques with an ensembled options-based hedging strategy, DeltaHedge enhances risk-adjusted returns and stabilizes portfolio performance across varying market conditions. Experimental results demonstrate that DeltaHedge outperforms traditional strategies and standalone models, underscoring its potential to transform practical portfolio management in complex financial environments. Building on these findings, this paper contributes to the fields of quantitative finance and AI-driven portfolio optimization by introducing a novel multi-agent system for integrating options trading strategies, addressing a gap in the existing literature.",
+  "authors": [
+    "Feliks Bańka",
+    "Jarosław A. Chudziak"
+  ],
+  "published": "2025-09-16T07:14:56Z",
+  "primary_category": "q-fin.PM",
+  "categories": [
+    "q-fin.PM",
+    "cs.LG",
+    "cs.MA"
+  ],
+  "url": "https://arxiv.org/abs/2509.12753"
+}

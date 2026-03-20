@@ -1,0 +1,21 @@
+{
+  "arxiv_id": "2509.08139",
+  "title": "SCA-LLM: Spectral-Attentive LLM-Based Wireless World Modeling for Agentic Communications",
+  "abstract": "Future AI-native wireless networks are moving from reactive optimization to agentic decision-making that can sense, predict, and plan under fast-varying channels. This calls for wireless world models that can predict and roll out channel dynamics, for which multi-step channel state information (CSI) prediction offers a practical short-horizon look-ahead. Recent advances in foundation sequence models further motivate large language models (LLMs) as general-purpose dynamics learners when suitably adapted to non-text time-series signals. However, bridging CSI to LLMs is non-trivial because an effective adapter must expose informative spectral and temporal evolution patterns, while prior designs provide limited inductive bias to capture such channel structures. To this end, we propose SCA-LLM, a spectral-attentive LLM-based wireless world modeling framework that bridges CSI to LLMs via a spectral-channel attention (SCA) adapter. Specifically, the SCA adapter performs multi-spectral representation learning to extract informative channel features and align CSI with the LLM's sequence modeling capability, enabling parameter-efficient adaptation while keeping the LLM backbone largely frozen. Extensive simulations show that SCA-LLM achieves state-of-the-art prediction performance and strong zero-shot generalization, yielding up to -2.4 dB normalized mean squared error (NMSE) advantage over the previous LLM based method. Our ablation studies further confirm the effectiveness of the proposed SCA adapter in mitigating domain mismatch.",
+  "authors": [
+    "Ke He",
+    "Le He",
+    "Lisheng Fan",
+    "Xianfu Lei",
+    "Thang X. Vu",
+    "George K. Karagiannidis",
+    "Symeon Chatzinotas"
+  ],
+  "published": "2025-09-09T20:43:12Z",
+  "primary_category": "cs.IT",
+  "categories": [
+    "cs.IT",
+    "cs.LG"
+  ],
+  "url": "https://arxiv.org/abs/2509.08139"
+}

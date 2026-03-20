@@ -1,0 +1,16 @@
+{
+  "arxiv_id": "2602.11198",
+  "title": "DDL2PropBank Agent: Benchmarking Multi-Agent Frameworks' Developer Experience Through a Novel Relational Schema Mapping Task",
+  "abstract": "Multi-agent frameworks promise to simplify LLM-driven software development, yet there is no principled way to evaluate their developer experience in a controlled setting. We introduce DDL2PropBank, a novel benchmark task that maps relational database schemas to PropBank rolesets, requiring autonomous retrieval of candidate frames and fine-grained linguistic reasoning over table names, columns, and relations. Using the Agent-as-a-Tool pattern, we implement identical agent logic across 10 frameworks and evaluate along two dimensions: (i) code complexity via static analysis, and (ii) AI-assistability -- the extent to which LLMs can autonomously generate correct, framework-specific code. Our results reveal a threefold complexity spectrum, with Pydantic AI and Agno requiring the least implementation overhead. For AI-assistability, structural alignment scores reliably proxy runtime success for frameworks with single canonical patterns, but overestimate correctness for multi-pattern frameworks. Agno emerges as the strongest overall performer, combining lowest complexity with highest structural alignment and 83% pass@1.",
+  "authors": [
+    "Shafiuddin Rehan Ahmed",
+    "Wei Wei"
+  ],
+  "published": "2026-02-03T01:10:59Z",
+  "primary_category": "cs.CL",
+  "categories": [
+    "cs.CL",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2602.11198"
+}

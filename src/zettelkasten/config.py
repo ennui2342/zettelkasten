@@ -137,6 +137,16 @@ def build_fast_llm(cfg: dict[str, Any]):
     raise ValueError(f"Unknown LLM provider {provider!r}")
 
 
+def build_tool_llm(cfg: dict[str, Any]):
+    """Instantiate a ToolLLMProvider from *cfg*."""
+    llm_cfg = cfg["llm"]
+    provider = llm_cfg.get("provider", "anthropic")
+    if provider == "anthropic":
+        from .providers import AnthropicToolLLM
+        return AnthropicToolLLM(model=llm_cfg["model"], api_key=llm_cfg["api_key"])
+    raise ValueError(f"Unknown LLM provider {provider!r}")
+
+
 def build_embed(cfg: dict[str, Any]):
     """Instantiate an EmbedProvider from *cfg*."""
     embed_cfg = cfg["embed"]

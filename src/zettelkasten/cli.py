@@ -183,6 +183,31 @@ def search(
 
 
 # ---------------------------------------------------------------------------
+# query
+# ---------------------------------------------------------------------------
+
+
+@app.command()
+def query(
+    question: str = typer.Argument(..., help="Question to answer by navigating the knowledge base."),
+    config: Optional[Path] = typer.Option(None, "--config", "-c"),
+    max_rounds: int = typer.Option(20, "--max-rounds", help="Maximum agentic loop iterations."),
+    verbose: bool = typer.Option(False, "--verbose", "-v"),
+) -> None:
+    """Answer a question by navigating the knowledge base (Iter 4 skill)."""
+    _configure_logging(verbose)
+
+    from .config import build_store, build_tool_llm, load_config
+
+    cfg = load_config(config)
+    store = build_store(cfg)
+    tool_llm = build_tool_llm(cfg)
+
+    answer = store.query(question, tool_llm, max_rounds=max_rounds)
+    console.print(answer)
+
+
+# ---------------------------------------------------------------------------
 # curate
 # ---------------------------------------------------------------------------
 

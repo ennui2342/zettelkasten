@@ -1,0 +1,109 @@
+Title: Benefits and Limitations of Communication in Multi-Agent Reasoning
+Authors: Michael Rizvi-Martel, Satwik Bhattamishra, Neil Rathi, Guillaume Rabusseau, Michael Hahn
+Published: 2025-10-14
+Source: https://arxiv.org/abs/2510.13903
+ArXiv ID: 2510.13903
+
+Benefits and Limitations of Communication in Multi-Agent Reasoning
+Abstract
+Chain-of-thought prompting has popularized step-by-step reasoning in large language models, yet model performance still degrades as problem complexity and context length grow. By decomposing difficult tasks with long contexts into shorter, manageable ones, recent multi-agent paradigms offer a promising near-term solution to this problem. However, the fundamental capacities of such systems are poorly understood. In this work, we propose a theoretical framework to analyze the expressivity of multi-agent systems. We apply our framework to three algorithmic families: state tracking, recall, and -hop reasoning. We derive bounds on (i) the number of agents required to solve the task exactly, (ii) the quantity and structure of inter-agent communication, and (iii) the achievable speedups as problem size and context scale. Our results identify regimes where communication is provably beneficial, delineate tradeoffs between agent count and bandwidth, and expose intrinsic limitations when either resource is constrained. We complement our theoretical analysis with a set of experiments on pretrained LLMs using controlled synthetic benchmarks. Empirical outcomes confirm the tradeoffs between key quantities predicted by our theory. Collectively, our analysis offers principled guidance for designing scalable multi-agent reasoning systems.
+1 Introduction
+Chain-of-thought (CoT) prompting has become the de facto standard for tackling complex reasoning problems. By encouraging models to “think step-by-step”, CoT significantly improves performance on tasks requiring mathematical and logical reasoning (Wei et al., 2022). Building on this, recent approaches view reasoning as a structured traversal over thoughts, exploring methods such as self-consistency (Wang et al., 2022), tree-of-thoughts (Yao et al., 2023), and stream-of-search (Gandhi et al., 2024). In parallel, post-training for large reasoning models (LRMs) increasingly relies on reinforcement learning over generated CoTs (OpenAI, 2025; Guo et al., 2025).
+Despite these advances, several limitations have emerged. The reasoning abilities of LRMs degrade as the complexity of problem instances increases or as the context length grows (Shojaee et al., 2025; Sun et al., 2025). To address this, new approaches based on multi-agent collaboration (e.g., Zhang et al., 2024b; Tran et al., 2025; Xiao et al., 2025; Hsu et al., 2025) decompose complex tasks into simpler subproblems, coordinating multiple agents to achieve stronger performance. These frameworks offer promising near-term solutions, yet the theoretical underpinnings of their expressive capacity remain poorly understood. While the expressive power of Transformers with CoT prompting has been studied in depth (Merrill & Sabharwal, 2023; Amiri et al., 2025), little is known about the fundamental limits and tradeoffs of communication and resource allocation in multi-agent reasoning schemes. This gap motivates the central question of our work:
+From an algorithmic perspective, are there tasks that provably benefit from communication and dynamic resource allocation in multi-agent reasoning systems?
+We address this question by proposing a theoretical framework for analyzing the expressivity of collaborative multi-agent reasoning strategies. Our analysis applies to settings where both problem complexity and context size scale, and focuses on three representative algorithmic families: state tracking, recall, and -hop reasoning. For each task family, we establish bounds on the number of agents and the quantity of communication required, and we characterize the tradeoffs between these quantities. Finally, we complement our theoretical results with empirical validation using pretrained large language models. Our contributions are as follows:
+-
+•
+We propose a formalization of multi-agent reasoning systems grounded in the rich literature on Transformer expressivity.
+-
+•
+For three distinct families of algorithmic tasks—recall, state tracking and -hop reasoning—we derive bounds on the number of agents and the communication required, highlighting the tradeoffs between these resources. These tasks capture key aspects of practical reasoning problems, making the results broadly applicable.
+-
+•
+We provide empirical validation of our theoretical insights by implementing the optimal communication protocols given by theory. Our analysis shows the performance in terms of accuracy, communication and token usage closely aligns with theoretical predictions.
+Our work focuses on Transformer-based multi-agent systems which partition an input of size equally between agents, an abstraction of many settings where multiple agents cooperate by taking responsibility for different parts of the input, such as different document chunks in long-context summarization or question answering, corpus shards or knowledge-graph subgraphs in multi-agent RAG, web pages or site sections in browser-style agents, and map–reduce pipelines where workers process disjoint partitions before a coordinator aggregates the partial results (e.g., Zhou et al., 2025; Chang et al., 2025; Zhang et al., 2024a; Guo et al., 2024; Salve et al., 2024; Yang et al., 2025b; Xiao et al., 2025; Liu et al., 2025; Xu et al., 2025).
+Our results reveal three distinct regimes for multi-agent tasks, each instantiated by natural tasks of broad relevance (Table 1). First, some tasks require almost no communication overhead even when the input is partitioned between agents, such as key-query retrieval. Second, some tasks not only allow partitioning but also benefit from it, achieving reduced wall-clock time compared to a single-agent setup; state tracking is a prime example. Finally, some tasks can be solved through partitioning but require significant communication among agents, such as reasoning over multiple hops.
+2 Model of Transformers
+We assume causally masked (decoder-only) unique hard attention Transformers (UHAT) (e.g., Hahn, 2020; Hao et al., 2022; Yang et al., 2024a; Amiri et al., 2025; Jerad et al., 2025; Bergsträßer et al., 2024), a popular abstraction where attention heads concentrate attention on the position maximizing the attention score. Analysis studies suggest that pretrained models concentrate their attention only few positions (Voita et al., 2019; Clark et al., 2019). Importantly, UHAT subsumes expressivity of ordinary softmax Transformers with fixed precision (Jerad et al., 2025), making it a plausible model of Transformers operating in the regime of long contexts and large reasoning problems.
+Each layer of a Transformer has an attention block followed by an MLP block. The attention block takes as input and applies the operation where and , where for any matrix :
+where in case of a tie, the rightmost element is selected. Multi-head attention with heads is defined as where each has its own set of parameters. The matrix projects the concatenated vector to a vector of dimension . For an input , the output of a Transformer layer is where corresponds to the function computed by the MLP. The model has access to arbitrary positional embedding vectors , for each , where is the model’s context window and denotes .
+3 Formalization of Multi-Agent Systems
+We formalize multi-agent systems as graphs, with a node representing an agent at a given timestep, and edges describing both the emission of CoT tokens, and communication between different agents. We discuss connections to applied systems in Section 3.1, and illustrate the definition in Figure 3(a).
+Definition 3.1 (Multi-agent system).
+Let be a (finite or infinite) input alphabet and an (infinite) CoT alphabet. For broad generality, depending on the task, we’re allowing both input and CoT alphabets to grow with the input length, such that and , where . We write the set of input strings as . We reserve agent identifiers .
+A multi-agent system maps strings to labeled DAGs with agents where:
+-
+1.
+Each node is uniquely labeled as , where and . Informally, it represents agent ’s state at time . For each agent , there is such that there are nodes exactly for and for no other .
+-
+2.
+We define two types of edges:
+-
+(a)
+communication edges ( from to , which represent communicating a symbol between two different agents ()
+-
+(b)
+CoT edges (), which correspond to autoregressive decoding of the model from to
+-
+(a)
+-
+3.
+Every node () has exactly one incoming edge.
+-
+4.
+Every node can have (i) no outgoing edge, (ii) one outgoing edge, (ii) outgoing edges edge with the same label to each other agent, .
+-
+5.
+One agent is designated as a manager agent.
+By definition, agents can only send or receive a single token at a time.***An extension to words of bounded length would be straightforward, but we find it easiest to formalize the setup with single-token messages. Our theoretical results hold irrespective of this choice Every agent can only receive one incoming edge at a time. Intuitively, the symbol provided by the incoming edge at time (whether it is a CoT or communication edge) is appended to the agent’s context at this time step.
+Definition 3.2 (Complexity of Multi-Agent System).
+We use the following notions to characterize the complexity of a multi-agent system:
+-
+•
+Computation depth is the length of the longest path in the graph, irrespective of edge type. We write for the maximum depth on any input of size . Computation depth is a proxy for the wall-clock time.
+-
+•
+Width of the graph corresponds to the number of agents in the system. Typically we use when the number of agents is a function of input length. As the input is partitioned into chunks of size , we consider .
+-
+•
+Size corresponds to the number of nodes in the graph. We write for the maximum size on any input of size .
+-
+•
+Communication budget is the number of nodes with an outgoing communication edge.
+We say a multi-agent system computes a function if for all , the last CoT edge of the manager agent in has the label .
+Definition 3.3 (Agent computation).
+Given a multi-agent system on input , for each agent , we construct a string . Intuitively, this is the sequence of tokens that is processed by this agent over the course of reasoning. The string is constructed as follows:
+-
+1.
+First, take the input chunk
+-
+2.
+Then append
+-
+3.
+Then traverse the nodes associated to the agent, :
+-
+(a)
+If there is an incoming communication edge , append the token .
+-
+(b)
+If there is an outgoing CoT edge , append the symbol .
+-
+(c)
+If there is an outgoing communication edge,
+-
+i.
+Either the message is sent to a single agent – in this case, append the token – or,
+-
+ii.
+the message is broadcast to all agents, append the token .
+-
+i.
+-
+(a)
+-
+4.
+We append the EOS symbol.
+We assume all tokens to be part of .†††We assume single tokens for simplicity; they could be bounded-length words without change to our results. A Transformer implements on input if and only if each of these strings fits into the Transformer’s context size, and the transformer predicts all tokens arising from outgoing edges and EOS (cases 3b,3c,4) when run autoregressively on . Intuitively, in each reasoning step, the transformer generates the next token, unless it is overridden by incoming communication.
+A protocol is expressible in UHAT if, for each input length , there is a UHAT Transformer implementing on each input with length , and the number of heads and layers are uniformly bounded across all Transformers . We do not require the width to stay bounded; e.g., growing width can allow positional encodings to keep unboundedly many positions distinct.
+The above generalizes the setup of Amiri et al. (2025) to the multi-agent setup. Requiring the system to be implemented by models with bounded layers and heads across input lengths is a very weak assumption, much weaker than the uniformity of the Transformer across input lengths often required in theoretical work on CoT (e.g., Pérez et al., 2019; Merrill & Sabharwal, 2023) – nonetheless, it allows us to prove essentially matching upper and lower bounds on the cost of multi-agent systems.

@@ -1,18 +1,16 @@
 #!/usr/bin/env python3
-"""Model test: Level 1 — SYNTHESISE vs PROCEED classification.
+"""Model test: Level 1 — SYNTHESISE vs INTEGRATE classification.
 
 Level 1 is the first node of the integration decision tree. It sees the full
 retrieval cluster and asks one question: does this draft reveal a bridging
 insight between two or more existing notes?
 
-  SYNTHESISE — bridge note warranted; fire step2 SYNTHESISE
-  PROCEED    — no bridge; pass cluster to level 2
+  SYNTHESISE — bridge note warranted; fire execute SYNTHESISE
+  INTEGRATE  — no bridge; pass cluster to level 2
   NOTHING    — draft already fully covered; exit (rare)
 
 Two prompts compared:
-  Current  — _STEP1_PROMPT (multi-way classifier; SYNTHESISE is one of six options)
-             Output mapped: SYNTHESISE → SYNTHESISE, anything else → PROCEED,
-             NOTHING → NOTHING.
+  Current   — _L1_PROMPT (SYNTHESISE / INTEGRATE / NOTHING)
   Candidate — prompts/level1.txt (focused binary: SYNTHESISE or PROCEED)
 
 Usage:
@@ -195,21 +193,14 @@ def parse_decision(raw: str) -> dict:
         return {"operation": "PARSE_ERROR", "reasoning": raw[:200], "confidence": 0.0, "target_note_ids": []}
 
 
-def normalise(op: str) -> str:
-    """Map current prompt's multi-way output to level-1 terms."""
-    if op == "SYNTHESISE":
-        return "SYNTHESISE"
-    if op == "NOTHING":
-        return "NOTHING"
-    return "PROCEED"
-
-
 def run_current(draft_text: str, cluster_text: str, llm) -> dict:
-    from zettelkasten.prompts import _STEP1_PROMPT
-    prompt = _STEP1_PROMPT.format(draft=draft_text, cluster=cluster_text)
+    from zettelkasten.prompts import _L1_PROMPT
+    prompt = _L1_PROMPT.format(draft=draft_text, cluster=cluster_text)
     raw = llm.complete(prompt, max_tokens=512, temperature=0.0)
     result = parse_decision(raw)
-    result["operation"] = normalise(result.get("operation", "PROCEED"))
+    op = result.get("operation", "INTEGRATE")
+    if op not in ("SYNTHESISE", "INTEGRATE", "NOTHING"):
+        result["operation"] = "INTEGRATE"
     return result
 
 
@@ -317,7 +308,7 @@ def main() -> None:
     print()
     print("=" * 72)
     print("Level 1 — SYNTHESISE vs INTEGRATE")
-    print("Current: _STEP1_PROMPT (multi-way, mapped)  vs  Candidate: level1.txt")
+    print("Current: _L1_PROMPT  vs  Candidate: level1.txt")
     print("=" * 72)
 
     cluster_text = load_cluster()
@@ -344,7 +335,7 @@ def main() -> None:
         print(f"  Running candidate prompt...")
         cand = run_candidate(draft_text, cluster_text, llm)
 
-        curr_op   = normalise(curr.get("operation", "?"))
+        curr_op   = curr.get("operation", "?")
         cand_op   = cand.get("operation", "?")
         if cand_op not in ("SYNTHESISE", "NOTHING"):
             cand_op = "INTEGRATE"

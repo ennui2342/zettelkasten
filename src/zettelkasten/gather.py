@@ -90,8 +90,6 @@ def gather_phase(
         sims = body_mat @ q_vec
         for eid, sim in zip(emb_ids, sims):
             s_body_query[id_to_pos[eid]] = sim
-    log.debug("gather.signal name=body_query top=%s", _top1(s_body_query, ids))
-
     # ---- Signals 2, 4, 5: LLM calls — run in parallel ----
     corpus_bodies = [n.body for n in corpus]
     with ThreadPoolExecutor(max_workers=3) as ex:
@@ -103,11 +101,8 @@ def gather_phase(
         sb_vec   = f_sb.result()   if f_sb   is not None else None
         hyde_vec = f_hyde.result() if f_hyde is not None else None
 
-    log.debug("gather.signal name=bm25_mugi_stem top=%s", _top1(s_bm25, ids))
-
     # ---- Signal 3: activation ----
     s_activation = _activation_scores(draft.id, ids, activation_scores)
-    log.debug("gather.signal name=activation top=%s", _top1(s_activation, ids))
 
     # ---- Signal 4: step_back ----
     s_step_back = np.zeros(n, dtype=np.float32)
@@ -115,7 +110,6 @@ def gather_phase(
         sims = body_mat @ _unit(sb_vec)
         for eid, sim in zip(emb_ids, sims):
             s_step_back[id_to_pos[eid]] = sim
-    log.debug("gather.signal name=step_back top=%s", _top1(s_step_back, ids))
 
     # ---- Signal 5: hyde_multi ----
     s_hyde = np.zeros(n, dtype=np.float32)
@@ -123,7 +117,12 @@ def gather_phase(
         sims = body_mat @ _unit(hyde_vec)
         for eid, sim in zip(emb_ids, sims):
             s_hyde[id_to_pos[eid]] = sim
-    log.debug("gather.signal name=hyde_multi top=%s", _top1(s_hyde, ids))
+
+    log.debug(
+        "gather.signals body_query=%s bm25=%s activation=%s step_back=%s hyde=%s",
+        _top1(s_body_query, ids), _top1(s_bm25, ids), _top1(s_activation, ids),
+        _top1(s_step_back, ids), _top1(s_hyde, ids),
+    )
 
     # ---- Blend ----
     blended = (

@@ -144,7 +144,6 @@ class ZettelkastenStore:
         from .form import form_phase
         from .gather import gather_phase
 
-        _integrate = integrate_fn or integrate_phase
         _fast = fast_llm or llm
 
         log.info("store.ingest source=%r text_len=%d", source, len(text))
@@ -156,9 +155,12 @@ class ZettelkastenStore:
             corpus = self._load_corpus()
             activation_scores = self._index.get_activation_scores(draft.id)
             cluster = gather_phase(draft, corpus, _fast, embed, activation_scores=activation_scores)
-            result = _integrate(draft, cluster, llm, fast_llm=_fast)
+            if integrate_fn is not None:
+                result = integrate_fn(draft, cluster, llm, fast_llm=_fast)
+            else:
+                result = integrate_phase(draft, cluster, llm, fast_llm=_fast, embed=embed)
 
-            self._apply_result(result, draft, cluster, embed)
+            self._apply_result(result, draft, cluster, embed, source=source)
             results.append(result)
 
         log.info("store.ingest_complete results=%d", len(results))
@@ -170,6 +172,7 @@ class ZettelkastenStore:
         draft: ZettelNote,
         cluster: list[ZettelNote],
         embed: EmbedProvider,
+        source: str | None = None,
     ) -> None:
         """Write/update notes on disk and index according to *result*."""
         op = result.operation
@@ -179,26 +182,32 @@ class ZettelkastenStore:
 
         now = datetime.now(tz=timezone.utc)
 
-        if op in ("CREATE", "STUB", "SYNTHESISE"):
+        if op in ("CREATE", "SYNTHESISE"):
             note_id = self._next_id()
+            epistemic_links = [
+                ZettelLink(target=lk["target"], rel=lk["rel"])  # type: ignore[arg-type]
+                for lk in result.links
+            ]
             note = ZettelNote(
                 id=note_id,
                 title=result.note_title or draft.title,
                 body=result.note_body or draft.body,
-                type="stub" if op == "STUB" else ("synthesised" if op == "SYNTHESISE" else "permanent"),
-                confidence=0.4 if op == "STUB" else 0.7,
+                type="synthesised" if op == "SYNTHESISE" else "permanent",
+                confidence=result.confidence,
                 salience=0.5,
                 stable=False,
                 created=now,
                 updated=now,
                 last_accessed=now,
+                sources=[source] if source else [],
+                links=epistemic_links,
             )
             vecs = embed.embed([note.body])
             note = _with_embedding(note, vecs[0])
             self.write(note)
             self._index.upsert_embedding(note.id, vecs[0])
-            self._index.record_activation_event(note_id, result.target_ids)
-            self._promote_stubs(result.target_ids, now)
+            self._index.record_activation_event(note_id, result.l1_target_ids)
+            self._promote_stubs(result.l1_target_ids, now)
             result.note_id = note_id  # type: ignore[attr-defined]
             log.info("store.wrote op=%s id=%s", op, note_id)
 
@@ -227,18 +236,17 @@ class ZettelkastenStore:
                 updated=now,
                 last_accessed=now,
                 links=existing.links,
+                sources=existing.sources,
                 embedding=existing.embedding,
             )
             vecs = embed.embed([note.body])
             note = _with_embedding(note, vecs[0])
             self.write(note)
             self._index.upsert_embedding(note.id, vecs[0])
-            if op == "UPDATE":
-                # Record activation for notes the LLM identified as interacting
-                # (target_ids[0] is the target itself; additional ids are co-interactions)
-                other_ids = [t for t in result.target_ids if t != target_id]
-                self._index.record_activation_event(target_id, other_ids)
-                self._promote_stubs(other_ids, now)
+            # Record activation against L1-identified cluster for both UPDATE and EDIT
+            l1_others = [t for t in result.l1_target_ids if t != target_id]
+            self._index.record_activation_event(target_id, l1_others)
+            self._promote_stubs(result.l1_target_ids, now)
             result.note_id = target_id  # type: ignore[attr-defined]
             log.info("store.wrote op=%s id=%s", op, target_id)
 
@@ -264,6 +272,7 @@ class ZettelkastenStore:
                 updated=now,
                 last_accessed=now,
                 links=existing.links,
+                sources=existing.sources,
             )
             # Allocate the second note's ID now so note1 can reference it correctly
             new_id = self._next_id() if (result.split_title and result.split_body) else None
@@ -293,22 +302,54 @@ class ZettelkastenStore:
                     title=result.split_title,
                     body=result.split_body,
                     type="permanent",
-                    confidence=0.7,
+                    confidence=result.confidence,
                     salience=0.5,
                     stable=False,
                     created=now,
                     updated=now,
                     last_accessed=now,
+                    sources=[source] if source else [],
                 )
                 vecs2 = embed.embed([note2.body])
                 note2 = _with_embedding(note2, vecs2[0])
                 self.write(note2)
                 self._index.upsert_embedding(note2.id, vecs2[0])
                 log.info("store.wrote op=SPLIT id=%s (second half)", new_id)
+            # Record activation for source note against L1-identified cluster
+            l1_others = [t for t in result.l1_target_ids if t != source_id]
+            self._index.record_activation_event(source_id, l1_others)
+            self._promote_stubs(result.l1_target_ids, now)
+            # Record activation for new note against source + L1 cluster
+            if new_id:
+                all_related = [source_id] + [t for t in result.l1_target_ids if t != source_id]
+                self._index.record_activation_event(new_id, all_related)
 
     # ------------------------------------------------------------------
     # search
     # ------------------------------------------------------------------
+
+    def query(
+        self,
+        question: str,
+        llm: "ToolLLMProvider",
+        *,
+        max_rounds: int = 20,
+    ) -> str:
+        """Answer *question* by navigating the store with the Iter 4 skill.
+
+        Uses an agentic loop: the LLM calls list_notes / grep_notes /
+        read_note / find_related until it has enough context to synthesise
+        an answer.  Unlike :meth:`search`, this returns a synthesised text
+        response rather than a list of notes.
+
+        *llm* must satisfy the :class:`~zettelkasten.providers.ToolLLMProvider`
+        protocol (tool-use capable).  :class:`~zettelkasten.providers.AnthropicToolLLM`
+        is the concrete implementation for the Anthropic API.
+        """
+        from .enrich import query as _query
+        from .providers import ToolLLMProvider
+
+        return _query(question, self._notes_dir, llm, max_rounds=max_rounds)
 
     def search(
         self,

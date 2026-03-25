@@ -170,3 +170,77 @@ def test_invalid_link_rel_rejected():
 def test_link_note_defaults_to_empty_string():
     link = ZettelLink(target="z20260315-002", rel="contradicts")
     assert link.note == ""
+
+
+# ---------------------------------------------------------------------------
+# sources field
+# ---------------------------------------------------------------------------
+
+
+def test_sources_defaults_to_empty_list():
+    note = make_note()
+    assert note.sources == []
+
+
+def test_round_trip_sources_empty():
+    note = make_note()
+    restored = ZettelNote.from_markdown(note.to_markdown())
+    assert restored.sources == []
+
+
+def test_round_trip_sources_populated():
+    note = make_note(sources=["https://arxiv.org/abs/2511.05269"])
+    restored = ZettelNote.from_markdown(note.to_markdown())
+    assert restored.sources == ["https://arxiv.org/abs/2511.05269"]
+
+
+def test_round_trip_sources_multiple():
+    urls = ["https://arxiv.org/abs/2511.05269", "https://arxiv.org/abs/2510.04851"]
+    note = make_note(sources=urls)
+    restored = ZettelNote.from_markdown(note.to_markdown())
+    assert restored.sources == urls
+
+
+def test_from_markdown_missing_sources_defaults_to_empty():
+    """Old notes without a sources field load cleanly."""
+    md = """\
+---
+id: z20260315-042
+type: permanent
+confidence: 0.8
+salience: 0.5
+stable: false
+created: 2026-03-15T10:00:00+00:00
+updated: 2026-03-15T10:00:00+00:00
+last_accessed: 2026-03-15T10:00:00+00:00
+links: []
+---
+# Old Note
+
+Written before sources tracking was added.
+"""
+    note = ZettelNote.from_markdown(md)
+    assert note.sources == []
+
+
+def test_from_markdown_with_sources():
+    md = """\
+---
+id: z20260315-042
+type: permanent
+confidence: 0.8
+salience: 0.5
+stable: false
+created: 2026-03-15T10:00:00+00:00
+updated: 2026-03-15T10:00:00+00:00
+last_accessed: 2026-03-15T10:00:00+00:00
+links: []
+sources:
+  - https://arxiv.org/abs/2511.05269
+---
+# Sourced Note
+
+Body text.
+"""
+    note = ZettelNote.from_markdown(md)
+    assert note.sources == ["https://arxiv.org/abs/2511.05269"]

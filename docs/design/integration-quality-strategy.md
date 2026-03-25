@@ -160,7 +160,7 @@ Each node addresses one question with limited options:
 ```
 Level 1:  Full k20 visible. Primary question: SYNTHESISE or proceed?
             SYNTHESISE — draft spans multiple notes meaningfully; create bridge
-            Proceed    — pass identified cluster to level 2
+            INTEGRATE    — pass identified cluster to level 2
             NOTHING    — available as an exit if draft is already fully covered;
                          rare in practice, not a primary decision axis
           → Activation recorded here against the identified cluster,
@@ -171,9 +171,31 @@ Level 2:  CREATE or UPDATE?
           → The currently broken decision; most important to fix
 
 Level 3:  SPLIT or EDIT?
-          → Show target note + draft only
-          → Already implemented as step1.5; refine in this context
+          → Classification: show target note ONLY (draft removed — see below)
+          → Execution: show target note + draft
+          → Already implemented as step1.5; refined per model-tests/integrate-level3
 ```
+
+**Level 3 refinements (from model-tests/integrate-level3):**
+
+- **Classification**: draft removed from the step1.5 prompt entirely. The SPLIT/EDIT
+  decision is based solely on the note's internal structure — whether it contains
+  two separable threads. Showing the draft caused false positives: when the draft
+  was off-topic, the model saw "topics differ" and chose SPLIT on a coherent
+  single-threaded note. Draft is passed through to step 2 but not shown at
+  classification. (4/4 correct after fix.)
+
+- **EDIT step 2**: label changed from "context only — do not add its content" to
+  "integrate new insights from the draft." Trusts that step 1's UPDATE routing
+  means the draft belongs in the note. Cross-topic draft content (e.g., when L2
+  makes an incorrect UPDATE decision) is woven in as a bridging insight.
+  (All EDIT cases 60–66% compression of original — healthy range.)
+
+- **SPLIT step 2**: rewritten to partition the original note's two threads rather
+  than keep note 1 intact and derive note 2 from the draft. The old "the second
+  is the newly separated topic" framing was read as "create note 2 from the draft
+  content," producing 144% combined bloat. The new framing makes explicit that
+  both notes are partitions of the original content. (Case 2: 144% → 119%.)
 
 **NOTHING at level 1**: available as an exit route, not a primary decision
 axis. Fires rarely (once observed across 20 papers). The LLM can select it
@@ -253,15 +275,44 @@ applying at the SPLIT/EDIT node, given the high downstream cost of a bad SPLIT
 
 ### 4.7 Embedding-space pre-filtering for CREATE/UPDATE
 
-Use cosine similarity between the draft embedding and the top candidate note
-embedding as a prior before the LLM CREATE/UPDATE decision:
+**Status: Not viable for this corpus. Do not implement.**
 
-- High similarity → strong UPDATE prior; present to model with UPDATE framing
-- Low similarity → strong CREATE prior; present to model with CREATE framing
-- Middle range → present as an open binary choice
+Analysis of §4.7 cosine similarity data across the full 20-paper run
+(82 drafts, 325 T scores, 979 F scores) shows no clean threshold exists:
 
-This gives the model an anchor and reduces the chance of the decision being
-swayed by irrelevant cluster content.
+| Threshold | T miss rate | F notes eliminated |
+|-----------|-------------|-------------------|
+| 0.40 | 3.4% | 12.6% |
+| 0.45 | 9.2% | 31.7% |
+| 0.50 | 19.7% | 57.5% |
+| 0.55 | 35.1% | 79.6% |
+
+To eliminate 80% of F notes requires a threshold that misses 35% of gold
+targets — not a workable trade-off at any threshold.
+
+**Why the distributions overlap so heavily:** T mean = 0.579, F mean = 0.487,
+gap ≈ 0.09. 65 of 80 drafts (81%) have at least one F note scoring above their
+lowest T note. The overlap zone [0.45–0.60] contains 51% of T scores and 47%
+of F scores — this is the normal operating range of the retrieval system.
+
+**Why the lowest T scores are structurally correct:** The 11 T scores below
+0.40 are all SYNTHESISE or cross-domain UPDATE targets — notes that are
+conceptually relevant but lexically distant from the draft (e.g. the Trilemma
+note at 0.341 for a last-mile delivery paper; Procedural Memory at 0.323 for a
+graph query paper). These are exactly the cases where multi-signal retrieval
+earns its value. A cosine pre-filter would miss the most interesting routing
+decisions in the system.
+
+**What actually works:** The +12.5pp R@10 gain from the five-signal blend over
+body-only embedding (architecture-decisions.md §2) comes from differentiating
+within this overlap zone — activation, BM25, step_back, and HyDE lift gold
+notes that body cosine alone cannot separate. Pre-filtering would reduce input
+to these signals, not complement them.
+
+The original framing — using cosine as a prior to frame the CREATE/UPDATE
+binary — remains theoretically sound but empirically unnecessary: L2 already
+receives a small cluster (3–7 notes) from L1, which is sufficient focusing
+without an additional cosine anchor.
 
 ---
 
@@ -383,19 +434,41 @@ Order matters to avoid throwaway work:
 1. ~~**Design the decision tree**~~ **COMPLETE** — nodes, information at each
    level, and operations at each level are agreed (see §4.1).
 
-2. **Model-tests for each binary node** — build the test harness and label
-   ground-truth cases before touching the implementation. Validates the design
-   early and provides a baseline accuracy measurement.
+2. ~~**Model-tests for each binary node**~~ **COMPLETE** — test harnesses built
+   and baselined for all three nodes:
+   - L1 (SYNTHESISE/INTEGRATE/NOTHING): 10-case suite, current 9/10, candidate 9/10.
+     Handoff validation added: when L1 returns INTEGRATE, its `target_note_ids`
+     includes the expected UPDATE target in 100% of checkable cases (5/5 current,
+     2/2 candidate).
+   - L2 (CREATE/UPDATE/NOTHING): 9-case suite with realistic 3–4 note clusters
+     simulating L1's filtered output. Current 5/9, candidate 7/9. Cases 2 and 3
+     (realistic cluster triggers over-synthesis) are known hard cases.
+   - L3 (EDIT/SPLIT): existing `edit-split-step15` harness. 3/3 correct.
 
-3. **Implement the decision tree** — replace the single step1 prompt. The
-   step1.5 logic (SPLIT/EDIT) becomes level 3 of the tree with a refined prompt.
+3. ~~**Implement the decision tree**~~ **COMPLETE** (v0.2.0 + activation fix) —
+   `integrate_phase` now runs L1 → L2 → step 1.5 (L3) → step 2. STUB removed
+   from routing. `IntegrationResult` carries `l1_target_ids`; activation is
+   recorded at L1 for all writing operations (CREATE, UPDATE, EDIT, SPLIT) using
+   the L1 cluster, not the L2 targets. EDIT and SPLIT previously recorded no
+   activation. All 205 unit tests pass.
 
 4. **Baseline integration test suite** — audit the current store for hot notes;
    select targeting papers; build the single-paper test harness against the
    deduplicated baseline.
 
-5. **Sequential workbench** — snapshot infrastructure, per-paper analysis
-   tooling. Build once the tree is stable and layers 1 and 2 are passing.
+5. **Sequential workbench** — `model-tests/ingestion-harness/` — snapshot
+   infrastructure, per-paper analysis tooling. CLI: `--next`, `--paper N`,
+   `--rewind N`, `--context [N]`, `--status`, `--list`. Starts from empty
+   store; takes full `notes/ + index.db` snapshot after each paper. Per-paper
+   report covers operation distribution, store deltas, confidence distribution,
+   SPLIT ratios, duplicate title detection, and §4.7 cosine similarity data.
+   `--context` emits store state + embedding-similarity pre-sort of notes for
+   human/Claude pre-run prediction (one embed call, no LLM). Full DEBUG log
+   saved per paper (anthropic/httpx/voyageai loggers suppressed). Log noise
+   reductions applied: 5 per-signal gather lines → 1 combined `gather.signals`
+   line; `integrate.execute` DEBUG removed, `body_len` promoted to INFO
+   `integrate.complete`. Self-contained: all 20 paper texts and metadata copied
+   into the harness directory.
 
 ---
 
@@ -410,25 +483,18 @@ Order matters to avoid throwaway work:
   accumulation behaviours?** Unknown without an audit. If not, a small number
   of targeted sequential checkpoints may be needed as a supplement to layer 2.
 
-- **What is the step1.5 size threshold, and should it be tuned as part of the
-  fix?** Currently fixed. A lower threshold means step1.5 fires more often on
-  smaller notes; a higher threshold means notes grow larger before any action
-  is taken. The right value may depend on the decision tree's CREATE/UPDATE
-  accuracy — a better step1 reduces how often step1.5 fires on bad UPDATEs.
+- ~~**Does cluster stability hold across operation types?**~~ **Validated** —
+  Handoff validation (L1 model-test, 7/7 INTEGRATE cases) confirmed that L1's
+  `target_note_ids` includes the expected L2 UPDATE target in 100% of cases.
+  The cluster L1 passes to L2 is appropriate for CREATE/UPDATE targeting.
+  No divergence between SYNTHESISE-focused and UPDATE-focused cluster selection
+  was observed in the test population.
 
-- **Does cluster stability hold across operation types?** Level 1 passes its
-  identified cluster (~4 notes) to level 2 on the assumption that the notes
-  relevant for SYNTHESISE evaluation are the same notes relevant for
-  CREATE/UPDATE targeting. The SYNTHESISE question favours complementary angles;
-  the UPDATE question favours overlapping content — these could surface different
-  parts of k20. If they diverge significantly in practice, level 2 may be
-  working with the wrong notes. Validate by running both levels in isolation on
-  the same papers and comparing which notes each would have selected.
-
-- **Will the decision tree produce different SYNTHESISE rates?** The current
-  architecture produces ~19 SYNTHESISEs per 20-paper run. A better-calibrated
-  SYNTHESISE/not node may raise or lower this. Whether the shift is desirable
-  requires evaluation against note quality criteria, not just operation counts.
+- **Will the decision tree produce different SYNTHESISE rates?** The original
+  single-pass architecture produced ~19 SYNTHESISEs per 20-paper run. L1's
+  isolated SYNTHESISE/INTEGRATE/NOTHING decision may calibrate differently.
+  Whether any shift is desirable requires evaluation against note quality
+  criteria on the next full ingestion run.
 
 - **What is the step1.5 size threshold, and should it be tuned as part of the
   fix?** A better CREATE/UPDATE decision at level 2 reduces how often level 3

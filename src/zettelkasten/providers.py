@@ -4,11 +4,15 @@ The library accepts any object satisfying LLMProvider or EmbedProvider.
 Concrete implementations (AnthropicLLM, VoyageEmbed) are provided for
 convenience; they require the respective SDKs to be installed.
 Mock implementations (MockLLM, MockEmbed) are available for testing.
+
+Tool-using variants (ToolLLMProvider, AnthropicToolLLM, MockToolLLM) support
+the agentic navigation loop used by ZettelkastenStore.query().
 """
 from __future__ import annotations
 
 import hashlib
-from typing import Callable, Protocol, Union, runtime_checkable
+from dataclasses import dataclass, field
+from typing import Any, Callable, Protocol, Union, runtime_checkable
 
 import numpy as np
 
@@ -77,6 +81,80 @@ class MockEmbed:
 
 
 # ---------------------------------------------------------------------------
+# Tool-use protocol (for ZettelkastenStore.query navigation)
+# ---------------------------------------------------------------------------
+
+
+@dataclass
+class ToolSpec:
+    """Specification for a single tool the LLM may call."""
+
+    name: str
+    description: str
+    parameters: dict  # JSON Schema object
+
+
+@dataclass
+class ToolCall:
+    """A single tool invocation returned by the LLM."""
+
+    id: str
+    name: str
+    input: dict[str, Any] = field(default_factory=dict)
+
+
+@runtime_checkable
+class ToolLLMProvider(Protocol):
+    """Protocol for LLMs that support tool use (function calling).
+
+    ``complete_tools`` performs a single turn of a tool-use conversation.
+    Returns ``(answer, [])`` when the LLM has finished and produced a final
+    text response, or ``(intermediate_text_or_None, tool_calls)`` when it
+    wants to invoke one or more tools before continuing.
+    """
+
+    def complete_tools(
+        self,
+        messages: list[dict],
+        tools: list[ToolSpec],
+        system: str = "",
+        *,
+        max_tokens: int,
+        temperature: float = 0.0,
+    ) -> tuple[str | None, list[ToolCall]]:
+        ...
+
+
+class MockToolLLM:
+    """Deterministic tool-use stub for tests.
+
+    Replays a scripted sequence of ``(text, tool_calls)`` tuples in order.
+    Raises ``RuntimeError`` if more turns are requested than responses provided.
+    """
+
+    def __init__(self, responses: list[tuple[str | None, list[ToolCall]]]) -> None:
+        self._responses = list(responses)
+        self._idx = 0
+
+    def complete_tools(
+        self,
+        messages: list[dict],
+        tools: list[ToolSpec],
+        system: str = "",
+        *,
+        max_tokens: int,
+        temperature: float = 0.0,
+    ) -> tuple[str | None, list[ToolCall]]:
+        if self._idx >= len(self._responses):
+            raise RuntimeError(
+                f"MockToolLLM exhausted all {len(self._responses)} scripted responses"
+            )
+        resp = self._responses[self._idx]
+        self._idx += 1
+        return resp
+
+
+# ---------------------------------------------------------------------------
 # Concrete: Anthropic
 # ---------------------------------------------------------------------------
 
@@ -102,6 +180,59 @@ class AnthropicLLM:
             messages=[{"role": "user", "content": prompt}],
         )
         return resp.content[0].text
+
+
+class AnthropicToolLLM:
+    """ToolLLMProvider backed by the Anthropic Messages API with tool use."""
+
+    def __init__(self, model: str, api_key: str) -> None:
+        try:
+            import anthropic as _anthropic
+        except ImportError as e:
+            raise ImportError(
+                "anthropic package required: pip install zettelkasten[anthropic]"
+            ) from e
+        self._client = _anthropic.Anthropic(api_key=api_key)
+        self._model = model
+
+    def complete_tools(
+        self,
+        messages: list[dict],
+        tools: list[ToolSpec],
+        system: str = "",
+        *,
+        max_tokens: int,
+        temperature: float = 0.0,
+    ) -> tuple[str | None, list[ToolCall]]:
+        tool_defs = [
+            {
+                "name": t.name,
+                "description": t.description,
+                "input_schema": t.parameters,
+            }
+            for t in tools
+        ]
+        kwargs: dict = dict(
+            model=self._model,
+            max_tokens=max_tokens,
+            temperature=temperature,
+            tools=tool_defs,
+            messages=messages,
+        )
+        if system:
+            kwargs["system"] = system
+        resp = self._client.messages.create(**kwargs)
+
+        text: str | None = None
+        tool_calls: list[ToolCall] = []
+        for block in resp.content:
+            if block.type == "text":
+                text = block.text
+            elif block.type == "tool_use":
+                tool_calls.append(
+                    ToolCall(id=block.id, name=block.name, input=dict(block.input))
+                )
+        return text, tool_calls
 
 
 # ---------------------------------------------------------------------------

@@ -1,0 +1,15 @@
+{
+  "arxiv_id": "2602.15055",
+  "title": "Beyond Context Sharing: A Unified Agent Communication Protocol (ACP) for Secure, Federated, and Autonomous Agent-to-Agent (A2A) Orchestration",
+  "abstract": "In the artificial intelligence space, as we transition from isolated large language models to autonomous agents capable of complex reasoning and tool use. While foundational architectures and local context management protocols have been established, the challenge of cross-platform, decentralized, and secure interaction remains a significant barrier to the realization of a truly Agentic Web. Building upon the foundations of AI agent architectures and the Model Context Protocol (MCP) for multi-agent coordination, this paper introduces the Agent Communication Protocol (ACP). ACP provides a standardized framework for Agent-to-Agent (AA) interaction, enabling heterogeneous agents to discover, negotiate, and execute collaborative workflows across disparate environments. We propose a federated orchestration model that integrates decentralized identity verification, semantic intent mapping, and automated service-level agreements. Our evaluation demonstrates that ACP reduces inter-agent communication latency by % while maintaining a zero-trust security posture. This work represents a critical advancement toward a scalable and interoperable ecosystem of autonomous digital entities",
+  "authors": [
+    "Naveen Kumar Krishnan"
+  ],
+  "published": "2026-02-11T17:02:12Z",
+  "primary_category": "cs.MA",
+  "categories": [
+    "cs.MA",
+    "cs.AI"
+  ],
+  "url": "https://arxiv.org/abs/2602.15055"
+}

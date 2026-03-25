@@ -16,3 +16,4 @@ spikes/*/work_*/
 
 # Model-test generated outputs
 model-tests/*/data/form_drafts/
+model-tests/baseline/results/

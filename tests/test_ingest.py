@@ -26,7 +26,7 @@ _FORM_OUTPUT = """\
 Sleep strengthens memory by consolidating neural pathways formed during learning.
 """
 
-_STEP2_OUTPUT = """\
+_EXEC_OUTPUT = """\
 ## Memory Consolidation
 
 Sleep strengthens memory by consolidating neural pathways formed during waking hours.
@@ -48,7 +48,7 @@ def _pipeline_llm(operation: str = "CREATE", target_ids: list[str] | None = None
         "NOTHING" if operation == "NOTHING" else "INTEGRATE"
     )
     # L2 operation (only reached when L1=INTEGRATE):
-    # STUB is parked — treated as CREATE; SPLIT/EDIT reach L2 as UPDATE.
+    # SPLIT/EDIT reach L2 as UPDATE; STUB is removed from the pipeline.
     _L2_OP = {
         "CREATE": "CREATE", "UPDATE": "UPDATE", "NOTHING": "NOTHING",
         "SPLIT": "UPDATE", "EDIT": "UPDATE",
@@ -86,15 +86,15 @@ def _pipeline_llm(operation: str = "CREATE", target_ids: list[str] | None = None
                 f'"reasoning": "Test decision.", '
                 f'"confidence": 0.9}}'
             )
-        # Step 2 — SPLIT needs two sections
-        if operation == "SPLIT" and "---SPLIT---" not in prompt:
+        # Step 2 — SPLIT needs two sections (all classify prompts handled above)
+        if operation == "SPLIT":
             return (
                 "## Memory Consolidation\n\nSleep strengthens memory.\n"
                 "\n---SPLIT---\n\n"
                 "## Sleep Architecture\n\nSlow-wave sleep drives consolidation."
             )
         # Step 2: produce ## Title\n\nBody
-        return _STEP2_OUTPUT
+        return _EXEC_OUTPUT
 
     return MockLLM(respond)
 
@@ -248,13 +248,13 @@ def test_ingest_nothing_does_not_write_note(tmp_path):
 
 
 # ---------------------------------------------------------------------------
-# ingest_text — new isolated topic (formerly STUB, now CREATE)
+# ingest_text — isolated new topic (CREATE)
 # ---------------------------------------------------------------------------
 
 
 def test_ingest_isolated_topic_writes_note(tmp_path):
     """Isolated new topics are handled as CREATE in the levelled decision tree.
-    STUB has been removed from the pipeline routing."""
+    Isolated new topics route to CREATE in the levelled decision tree."""
     store = ZettelkastenStore(tmp_path / "notes", tmp_path / "index.db")
     results = store.ingest_text("Obscure topic text.", _pipeline_llm("CREATE"), _EMBED)
     create_results = [r for r in results if r.operation == "CREATE"]
@@ -284,8 +284,131 @@ def test_ingest_create_records_activation_with_targets(tmp_path):
 
 
 # ---------------------------------------------------------------------------
-# ingest_text — SPLIT
+# ingest_text — EDIT activation
 # ---------------------------------------------------------------------------
+
+
+def test_ingest_edit_records_activation(tmp_path):
+    """EDIT should record co-activation against L1-identified notes."""
+    store = ZettelkastenStore(tmp_path / "notes", tmp_path / "index.db")
+    today = datetime.now(tz=timezone.utc).strftime("%Y%m%d")
+    target_id = f"z{today}-001"
+    related_id = f"z{today}-002"
+    # Large enough to trigger step1.5
+    _stored_note(store, target_id, "Memory Consolidation", "A" * 9000)
+    _stored_note(store, related_id, "Sleep Architecture", "Related content about sleep.")
+
+    llm = _pipeline_llm("EDIT", [target_id, related_id])
+    results = store.ingest_text("New content about memory.", llm, _EMBED)
+
+    note_id = results[0].note_id  # = target_id for EDIT
+    scores = store._index.get_activation_scores(note_id)
+    assert related_id in scores
+
+
+# ---------------------------------------------------------------------------
+# ingest_text — SPLIT activation
+# ---------------------------------------------------------------------------
+
+
+def test_ingest_split_records_activation_for_source(tmp_path):
+    """SPLIT source note (first half) should be co-activated with L1-identified notes."""
+    store = ZettelkastenStore(tmp_path / "notes", tmp_path / "index.db")
+    today = datetime.now(tz=timezone.utc).strftime("%Y%m%d")
+    target_id = f"z{today}-001"
+    related_id = f"z{today}-002"
+    _stored_note(store, target_id, "Memory Consolidation", "A" * 9000)
+    _stored_note(store, related_id, "Sleep Architecture", "Related content about sleep.")
+
+    llm = _pipeline_llm("SPLIT", [target_id, related_id])
+    store.ingest_text("New content about memory.", llm, _EMBED)
+
+    scores = store._index.get_activation_scores(target_id)
+    assert related_id in scores
+
+
+# ---------------------------------------------------------------------------
+# sources provenance
+# ---------------------------------------------------------------------------
+
+_SOURCE_URL = "https://arxiv.org/abs/2511.05269"
+
+
+def test_ingest_create_records_source(tmp_path):
+    store = ZettelkastenStore(tmp_path / "notes", tmp_path / "index.db")
+    results = store.ingest_text("Some text.", _pipeline_llm("CREATE"), _EMBED,
+                                source=_SOURCE_URL)
+    note_id = results[0].note_id
+    note = ZettelNote.from_markdown((tmp_path / "notes" / f"{note_id}.md").read_text())
+    assert note.sources == [_SOURCE_URL]
+
+
+def test_ingest_synthesise_records_source(tmp_path):
+    store = ZettelkastenStore(tmp_path / "notes", tmp_path / "index.db")
+    results = store.ingest_text("Some text.", _pipeline_llm("SYNTHESISE"), _EMBED,
+                                source=_SOURCE_URL)
+    note_id = results[0].note_id
+    note = ZettelNote.from_markdown((tmp_path / "notes" / f"{note_id}.md").read_text())
+    assert note.sources == [_SOURCE_URL]
+
+
+def test_ingest_split_new_note_records_source(tmp_path):
+    """The new second note produced by SPLIT should carry the source URL."""
+    store = ZettelkastenStore(tmp_path / "notes", tmp_path / "index.db")
+    today = datetime.now(tz=timezone.utc).strftime("%Y%m%d")
+    target_id = f"z{today}-001"
+    _stored_note(store, target_id, "Memory Consolidation", "A" * 9000)
+
+    llm = _pipeline_llm("SPLIT", [target_id])
+    store.ingest_text("New content.", llm, _EMBED, source=_SOURCE_URL)
+
+    # The second note from SPLIT is any note that isn't the source note
+    all_notes = list((tmp_path / "notes").glob("*.md"))
+    split_notes = [
+        ZettelNote.from_markdown(p.read_text())
+        for p in all_notes if p.stem != target_id
+    ]
+    assert len(split_notes) == 1
+    assert split_notes[0].sources == [_SOURCE_URL]
+
+
+def test_ingest_split_source_note_sources_unchanged(tmp_path):
+    """The rewritten first note from SPLIT should not gain a new source entry."""
+    store = ZettelkastenStore(tmp_path / "notes", tmp_path / "index.db")
+    today = datetime.now(tz=timezone.utc).strftime("%Y%m%d")
+    target_id = f"z{today}-001"
+    _stored_note(store, target_id, "Memory Consolidation", "A" * 9000)
+
+    llm = _pipeline_llm("SPLIT", [target_id])
+    store.ingest_text("New content.", llm, _EMBED, source=_SOURCE_URL)
+
+    source_note = ZettelNote.from_markdown(
+        (tmp_path / "notes" / f"{target_id}.md").read_text()
+    )
+    assert source_note.sources == []
+
+
+def test_ingest_update_does_not_record_source(tmp_path):
+    store = ZettelkastenStore(tmp_path / "notes", tmp_path / "index.db")
+    today = datetime.now(tz=timezone.utc).strftime("%Y%m%d")
+    existing_id = f"z{today}-001"
+    _stored_note(store, existing_id, "Memory", "Original.")
+
+    llm = _pipeline_llm("UPDATE", [existing_id])
+    store.ingest_text("New content.", llm, _EMBED, source=_SOURCE_URL)
+
+    note = ZettelNote.from_markdown(
+        (tmp_path / "notes" / f"{existing_id}.md").read_text()
+    )
+    assert note.sources == []
+
+
+def test_ingest_create_no_source_parameter_sources_empty(tmp_path):
+    store = ZettelkastenStore(tmp_path / "notes", tmp_path / "index.db")
+    results = store.ingest_text("Some text.", _pipeline_llm("CREATE"), _EMBED)
+    note_id = results[0].note_id
+    note = ZettelNote.from_markdown((tmp_path / "notes" / f"{note_id}.md").read_text())
+    assert note.sources == []
 
 
 # ---------------------------------------------------------------------------

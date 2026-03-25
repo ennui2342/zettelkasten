@@ -47,14 +47,35 @@ for r in results:
 ```
 
 Each result corresponds to one draft note extracted from the document.
-`operation` is one of `CREATE`, `UPDATE`, `EDIT`, `STUB`, `SYNTHESISE`,
-`SPLIT`, `NOTHING`.  All operations write to the corpus at ingestion time
-(`NOTHING` is a no-op).
+`operation` is one of `CREATE`, `UPDATE`, `EDIT`, `SYNTHESISE`, `SPLIT`,
+`NOTHING`.  All operations write to the corpus at ingestion time (`NOTHING`
+is a no-op).
+
+### `query(question, llm, max_rounds=20) → str`
+
+Answer a research question by navigating the store with the Iter 4 skill.
+Uses an agentic loop: the LLM calls `list_notes`, `grep_notes`, and `read_note`
+until it has enough context to synthesise a response. Notes include `## See Also`
+sections — the LLM follows those links to discover adjacent notes.
+Returns a synthesised text answer rather than a list of notes.
+
+*llm* must satisfy `ToolLLMProvider` (tool-use capable).
+Use `AnthropicToolLLM` for the Anthropic API.
+
+```python
+from zettelkasten import AnthropicToolLLM
+
+tool_llm = AnthropicToolLLM(model="claude-sonnet-4-6", api_key="...")
+answer = store.query("What are the tradeoffs between centralised and decentralised coordination?", tool_llm)
+print(answer)
+```
 
 ### `search(query, llm, embed, top_k=10) → list[ZettelNote]`
 
 Retrieve notes relevant to a free-text query using the same 5-signal Gather
-fusion used during ingestion.
+fusion used during ingestion.  Returns a ranked list of notes rather than a
+synthesised answer — use this when you want the notes themselves, not a
+generated response.
 
 ```python
 results = store.search("spaced repetition", llm, embed, top_k=10)
@@ -102,15 +123,31 @@ class EmbedProvider(Protocol):
 
 ### Concrete providers
 
-| Class | Package | Notes |
-|-------|---------|-------|
-| `AnthropicLLM(model, api_key)` | `anthropic` | Any Claude model |
-| `VoyageEmbed(model, api_key)` | `voyageai` | Validated on `voyage-3` / `voyage-3-lite` |
+| Class | Package | Protocol | Notes |
+|-------|---------|----------|-------|
+| `AnthropicLLM(model, api_key)` | `anthropic` | `LLMProvider` | Any Claude model |
+| `AnthropicToolLLM(model, api_key)` | `anthropic` | `ToolLLMProvider` | For `store.query()` |
+| `VoyageEmbed(model, api_key)` | `voyageai` | `EmbedProvider` | Validated on `voyage-3` / `voyage-3-lite` |
+
+`ToolLLMProvider` is the protocol for tool-use capable LLMs:
+
+```python
+class ToolLLMProvider(Protocol):
+    def complete_tools(
+        self,
+        messages: list[dict],
+        tools: list[ToolSpec],
+        system: str = "",
+        *,
+        max_tokens: int,
+        temperature: float = 0.0,
+    ) -> tuple[str | None, list[ToolCall]]: ...
+```
 
 ### Mock providers (testing)
 
 ```python
-from zettelkasten.providers import MockLLM, MockEmbed
+from zettelkasten.providers import MockLLM, MockEmbed, MockToolLLM, ToolCall
 
 # Fixed response
 llm = MockLLM("## Topic\n\nSome body text.")
@@ -120,6 +157,12 @@ llm = MockLLM(lambda prompt, **kw: "response based on prompt")
 
 # Deterministic unit-normalised embeddings, SHA-256 seeded
 embed = MockEmbed(dims=1024)
+
+# Scripted tool-use sequence for testing query()
+tool_llm = MockToolLLM([
+    (None, [ToolCall(id="t1", name="grep_notes", input={"pattern": "memory"})]),
+    ("Memory systems store episodic and semantic information.", []),
+])
 ```
 
 ---
@@ -131,14 +174,14 @@ Returned by `ingest_text` — one per draft note.
 ```python
 @dataclass
 class IntegrationResult:
-    operation:   str        # CREATE | UPDATE | EDIT | STUB | SYNTHESISE | SPLIT | NOTHING
-    reasoning:   str        # LLM's one-sentence rationale
-    confidence:  float      # 0–1
-    target_ids:  list[str]  # IDs of existing notes acted on
-    note_title:  str        # title of created/updated note (empty if NOTHING)
-    note_body:   str        # body  of created/updated note
-    is_curation: bool       # retained for compatibility; always False
-    note_id:     str        # ID assigned by store (empty if NOTHING)
+    operation:      str        # CREATE | UPDATE | EDIT | SYNTHESISE | SPLIT | NOTHING
+    reasoning:      str        # LLM's one-sentence rationale
+    confidence:     float      # 0–1
+    target_ids:     list[str]  # IDs of existing notes acted on (L2 targets)
+    l1_target_ids:  list[str]  # IDs identified by L1 classify (used for activation recording)
+    note_title:     str        # title of created/updated note (empty if NOTHING)
+    note_body:      str        # body  of created/updated note
+    note_id:        str        # ID assigned by store (empty if NOTHING)
 ```
 
 ---

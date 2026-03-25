@@ -1,12 +1,12 @@
-"""Tests for the Integrate phase: two-step LLM decision + execution.
+"""Tests for the Integrate phase: levelled LLM classification + execution.
 
 Decision tree:
-  L1 classify  → SYNTHESISE → step2 SYNTHESISE
+  L1 classify  → SYNTHESISE → execute SYNTHESISE
                → NOTHING    → exit
-               → INTEGRATE  → L2 classify → CREATE  → step2 CREATE
+               → INTEGRATE  → L2 classify → CREATE  → execute CREATE
                                           → NOTHING → exit
-                                          → UPDATE  → (large?) → step1.5 → step2 EDIT/SPLIT
-                                                               → step2 UPDATE
+                                          → UPDATE  → (large?) → L3 → execute EDIT/SPLIT
+                                                               → execute UPDATE
 """
 from __future__ import annotations
 
@@ -87,7 +87,7 @@ def test_integrate_phase_returns_integration_result():
 
 
 # ---------------------------------------------------------------------------
-# Operation: CREATE  (L1→INTEGRATE, L2→CREATE, step2)
+# Operation: CREATE  (L1→INTEGRATE, L2→CREATE, execute)
 # ---------------------------------------------------------------------------
 
 
@@ -104,14 +104,9 @@ def test_integrate_create_populates_title_and_body():
     assert "Active retrieval" in result.note_body
 
 
-def test_integrate_create_is_not_curation():
-    llm = _seq_llm(_L1_INTEGRATE_NONE, _L2_CREATE, _STEP2_BODY)
-    result = integrate_phase(_draft(), CLUSTER, llm)
-    assert result.is_curation is False
-
 
 # ---------------------------------------------------------------------------
-# Operation: UPDATE  (L1→INTEGRATE, L2→UPDATE, step2)
+# Operation: UPDATE  (L1→INTEGRATE, L2→UPDATE, execute)
 # ---------------------------------------------------------------------------
 
 
@@ -130,7 +125,7 @@ def test_integrate_update_populates_note_content():
 
 
 # ---------------------------------------------------------------------------
-# Operation: SYNTHESISE  (L1→SYNTHESISE, step2 — no L2 call)
+# Operation: SYNTHESISE  (L1→SYNTHESISE, execute — no L2 call)
 # ---------------------------------------------------------------------------
 
 
@@ -140,11 +135,6 @@ def test_integrate_synthesise_operation():
     assert result.operation == "SYNTHESISE"
     assert len(result.target_ids) == 2
 
-
-def test_integrate_synthesise_is_not_curation():
-    llm = _seq_llm(_L1_SYNTHESISE, _STEP2_BODY)
-    result = integrate_phase(_draft(), CLUSTER, llm)
-    assert result.is_curation is False
 
 
 # ---------------------------------------------------------------------------
@@ -171,14 +161,9 @@ def test_integrate_nothing_has_empty_note_content():
     assert result.note_body == ""
 
 
-def test_integrate_nothing_is_not_curation():
-    llm = _seq_llm(_L1_NOTHING)
-    result = integrate_phase(_draft(), CLUSTER, llm)
-    assert result.is_curation is False
-
 
 # ---------------------------------------------------------------------------
-# SPLIT — via L1→INTEGRATE, L2→UPDATE (large), step1.5→SPLIT, step2
+# SPLIT — via L1→INTEGRATE, L2→UPDATE (large), L3→SPLIT, execute
 # ---------------------------------------------------------------------------
 
 
@@ -233,7 +218,7 @@ def test_integrate_result_has_confidence():
 
 
 def test_integrate_create_makes_three_llm_calls():
-    """CREATE path: L1 INTEGRATE → L2 CREATE → step2 = 3 calls."""
+    """CREATE path: L1 INTEGRATE → L2 CREATE → execute = 3 calls."""
     calls: list = []
 
     def capture(prompt, **kw):
@@ -249,7 +234,7 @@ def test_integrate_create_makes_three_llm_calls():
 
 
 def test_integrate_update_makes_three_llm_calls():
-    """UPDATE path: L1 INTEGRATE → L2 UPDATE → step2 = 3 calls."""
+    """UPDATE path: L1 INTEGRATE → L2 UPDATE → execute = 3 calls."""
     calls: list = []
 
     def capture(prompt, **kw):
@@ -265,7 +250,7 @@ def test_integrate_update_makes_three_llm_calls():
 
 
 def test_integrate_synthesise_skips_l2():
-    """SYNTHESISE path: L1 SYNTHESISE → step2 directly = 2 calls (no L2)."""
+    """SYNTHESISE path: L1 SYNTHESISE → execute directly = 2 calls (no L2)."""
     calls: list = []
 
     def capture(prompt, **kw):
@@ -280,7 +265,7 @@ def test_integrate_synthesise_skips_l2():
 
 
 def test_integrate_nothing_at_l1_makes_one_call():
-    """NOTHING at L1: no L2, no step2 = 1 call."""
+    """NOTHING at L1: no L2, no execute = 1 call."""
     calls: list = []
 
     def capture(prompt, **kw):
@@ -308,7 +293,7 @@ def test_integrate_nothing_at_l2_makes_two_calls():
 
 
 def test_integrate_large_update_makes_four_calls():
-    """Large UPDATE path: L1 → L2 → step1.5 → step2 = 4 calls."""
+    """Large UPDATE path: L1 → L2 → L3 → execute = 4 calls."""
     large = _large_note("z20240101-001", "Large Note")
     calls: list = []
 
@@ -390,7 +375,7 @@ def test_integrate_l2_uses_low_max_tokens():
 
 
 def test_integrate_step2_update_uses_high_max_tokens():
-    """UPDATE step2 (3rd call) should use ≥ 2048 max_tokens."""
+    """UPDATE execute (3rd call) should use ≥ 2048 max_tokens."""
     calls: list[dict] = []
 
     def capture(prompt, **kw):
@@ -406,7 +391,7 @@ def test_integrate_step2_update_uses_high_max_tokens():
 
 
 def test_integrate_edit_uses_lower_max_tokens():
-    """EDIT step2 (4th call for large UPDATE) uses 2048 max_tokens."""
+    """EDIT execute (4th call for large UPDATE) uses 2048 max_tokens."""
     large = _large_note("z20240101-001", "Large Note")
     calls: list[dict] = []
 
@@ -425,12 +410,12 @@ def test_integrate_edit_uses_lower_max_tokens():
 
 
 # ---------------------------------------------------------------------------
-# Step 1.5 — EDIT/SPLIT refinement for large notes
+# L3 — EDIT/SPLIT refinement for large notes
 # ---------------------------------------------------------------------------
 
 
-def test_integrate_edit_operation_via_step15():
-    """UPDATE on a LARGE note → step1.5 EDIT → result is EDIT."""
+def test_integrate_edit_operation_via_l3():
+    """UPDATE on a LARGE note → L3 EDIT → result is EDIT."""
     large = _large_note("z20240101-001", "Large Note")
     llm = _seq_llm(
         _L1_INTEGRATE,
@@ -442,8 +427,8 @@ def test_integrate_edit_operation_via_step15():
     assert result.operation == "EDIT"
 
 
-def test_integrate_split_via_step15():
-    """UPDATE on a LARGE note → step1.5 SPLIT → result is SPLIT."""
+def test_integrate_split_via_l3():
+    """UPDATE on a LARGE note → L3 SPLIT → result is SPLIT."""
     large = _large_note("z20240101-001", "Large Note")
     split_response = (
         "## Part One\n\nActive retrieval strengthens memory."
@@ -461,8 +446,8 @@ def test_integrate_split_via_step15():
     assert result.split_title != ""
 
 
-def test_integrate_step15_not_called_for_normal_notes():
-    """UPDATE on a normal-sized note: exactly 3 LLM calls — no step1.5."""
+def test_integrate_l3_not_called_for_normal_notes():
+    """UPDATE on a normal-sized note: exactly 3 LLM calls — no L3."""
     calls: list = []
 
     def capture(prompt, **kw):
@@ -478,7 +463,7 @@ def test_integrate_step15_not_called_for_normal_notes():
 
 
 def test_integrate_step15_called_for_large_update():
-    """UPDATE on a LARGE note triggers a 4th LLM call (step1.5)."""
+    """UPDATE on a LARGE note triggers a 4th LLM call (L3)."""
     large = _large_note("z20240101-001", "Large Note")
     calls: list = []
 
@@ -510,8 +495,8 @@ def test_integrate_edit_populates_note_content():
     assert result.note_body != ""
 
 
-def test_integrate_step15_invalid_response_defaults_to_edit():
-    """Unparseable step1.5 response falls back to EDIT."""
+def test_integrate_l3_invalid_response_defaults_to_edit():
+    """Unparseable L3 response falls back to EDIT."""
     large = _large_note("z20240101-001", "Large Note")
     llm = _seq_llm(
         _L1_INTEGRATE,
@@ -521,6 +506,54 @@ def test_integrate_step15_invalid_response_defaults_to_edit():
     )
     result = integrate_phase(_draft(), [large], llm)
     assert result.operation == "EDIT"
+
+
+# ---------------------------------------------------------------------------
+# l1_target_ids — L1 cluster carried through result
+# ---------------------------------------------------------------------------
+
+
+def test_integrate_create_carries_l1_target_ids():
+    """CREATE result carries L1's target_note_ids as l1_target_ids."""
+    llm = _seq_llm(_L1_INTEGRATE, _L2_CREATE, _STEP2_BODY)
+    result = integrate_phase(_draft(), CLUSTER, llm)
+    assert result.l1_target_ids == ["z20240101-001"]
+
+
+def test_integrate_update_carries_l1_target_ids():
+    """UPDATE result carries L1's target_note_ids as l1_target_ids."""
+    llm = _seq_llm(_L1_INTEGRATE_BOTH, _L2_UPDATE, _STEP2_BODY)
+    result = integrate_phase(_draft(), CLUSTER, llm)
+    assert "z20240101-001" in result.l1_target_ids
+    assert "z20240101-002" in result.l1_target_ids
+
+
+def test_integrate_edit_carries_l1_target_ids():
+    """EDIT result carries L1's target_note_ids as l1_target_ids."""
+    large = _large_note("z20240101-001", "Large Note")
+    llm = _seq_llm(
+        _L1_INTEGRATE_BOTH,
+        _L2_UPDATE,
+        '{"operation": "EDIT", "reasoning": "Verbose.", "confidence": 0.9}',
+        _STEP2_BODY,
+    )
+    result = integrate_phase(_draft(), [large, CLUSTER[1]], llm)
+    assert "z20240101-001" in result.l1_target_ids
+    assert "z20240101-002" in result.l1_target_ids
+
+
+def test_integrate_synthesise_l1_target_ids_matches_target_ids():
+    """SYNTHESISE result: l1_target_ids matches target_ids (both come from L1)."""
+    llm = _seq_llm(_L1_SYNTHESISE, _STEP2_BODY)
+    result = integrate_phase(_draft(), CLUSTER, llm)
+    assert result.l1_target_ids == result.target_ids
+
+
+def test_integrate_nothing_l1_target_ids_populated():
+    """NOTHING result still carries L1's identified target_note_ids."""
+    llm = _seq_llm('{"operation": "NOTHING", "target_note_ids": ["z20240101-001"], "reasoning": "covered", "confidence": 0.9}')
+    result = integrate_phase(_draft(), CLUSTER, llm)
+    assert result.l1_target_ids == ["z20240101-001"]
 
 
 # ---------------------------------------------------------------------------
@@ -544,7 +577,7 @@ def test_integrate_logs_l1_decision(caplog):
         integrate_phase(_draft(), CLUSTER, llm)
 
     messages = [r.message for r in caplog.records]
-    assert any("integrate.step1_l1" in m for m in messages)
+    assert any("integrate.l1" in m for m in messages)
 
 
 def test_integrate_logs_l2_decision(caplog):
@@ -553,19 +586,19 @@ def test_integrate_logs_l2_decision(caplog):
         integrate_phase(_draft(), CLUSTER, llm)
 
     messages = [r.message for r in caplog.records]
-    assert any("integrate.step1_l2" in m for m in messages)
+    assert any("integrate.l2" in m for m in messages)
 
 
-def test_integrate_logs_step2(caplog):
+def test_integrate_logs_complete_with_body_len(caplog):
     llm = _seq_llm(_L1_INTEGRATE_NONE, _L2_CREATE, _STEP2_BODY)
-    with caplog.at_level(logging.DEBUG, logger="zettelkasten"):
+    with caplog.at_level(logging.INFO, logger="zettelkasten"):
         integrate_phase(_draft(), CLUSTER, llm)
 
     messages = [r.message for r in caplog.records]
-    assert any("integrate.step2" in m for m in messages)
+    assert any("integrate.complete" in m and "body_len" in m for m in messages)
 
 
-def test_integrate_logs_step15(caplog):
+def test_integrate_logs_l3(caplog):
     large = _large_note("z20240101-001", "Large Note")
     llm = _seq_llm(
         _L1_INTEGRATE,
@@ -577,4 +610,4 @@ def test_integrate_logs_step15(caplog):
         integrate_phase(_draft(), [large], llm)
 
     messages = [r.message for r in caplog.records]
-    assert any("integrate.step1_5" in m for m in messages)
+    assert any("integrate.l3" in m for m in messages)

@@ -275,3 +275,21 @@ links:
 ```
 
 ID format: `z{YYYYMMDD}-{seq:03d}`. Body is plain markdown following the frontmatter. Closed link vocabulary enforced at write time.
+
+---
+
+## 11. See-also link accuracy
+
+**Status:** deferred — monitor first, implement if link pollution grows.
+
+Notes written by the execute step contain `[[Title]]` wiki-links to related notes. Two failure modes were observed in the 20-paper ingestion run:
+
+1. **Hallucinated titles** — the LLM writes a plausible-sounding title that never existed (e.g. `[[Retrieval-Augmented Generation, GraphRAG, and Retrieval Corpus Governance]]` when the actual note was titled differently). Frequency: low (1 broken link in 31 notes after 20 papers).
+
+2. **Title drift** — a note's title changes through EDIT or UPDATE, making old links stale. This is structurally unavoidable without active maintenance, since notes are dynamic topics rather than stable concepts. Future splits may also make a link point to only half of what it originally referenced, with no obvious signal that the semantic justification has degraded.
+
+**Deferred approach** (implement if pollution grows): at execute time, provide the execute prompt with the list of note titles already in the retrieved cluster — the top-20 notes the LLM already has in context. This is bounded (always ≤20), free (already in context), and prevents hallucination for in-cluster links, which are the most common and most likely to be hallucinated. It does not solve cross-cluster links or drift.
+
+**Post-processing for drift:** when a note is renamed, a filename-based find-and-replace across all note bodies is straightforward and would handle simple title drift. It does not handle semantic drift caused by SPLIT or accumulation.
+
+**Experimental posture:** leave existing broken/stale links in place and observe over the next papers. The hypothesis is that future EDITs, UPDATEs, and SPLITs will either naturally correct stale links (the execute step rewrites see-also sections) or the broken links will prove harmless. If hallucinated links appear to be feeding false context into L1/L2 classification, implement the cluster-title solution at execute time. See `model-tests/ingestion-harness/ANALYSIS_GUIDE.md` for the monitoring checklist.

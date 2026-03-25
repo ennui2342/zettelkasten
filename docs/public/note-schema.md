@@ -28,9 +28,8 @@ links:
   - target: z20240115-002
     rel:    supersedes             # contradicts | supersedes | splits-from | merges-into
     note:   "Optional annotation"
-co_activations:
-  - target: z20240115-003
-    ts:     2024-01-15T11:00:00+00:00
+sources:
+  - https://arxiv.org/abs/2511.05269   # URLs of documents that gave birth to this note
 embedding:     <base64 float32 vector>   # omitted when not yet embedded
 ---
 # Note Title
@@ -59,15 +58,20 @@ Note body text…
 Semantic / topical relationships are handled by the retrieval signals; they
 are **not** stored as links.
 
-## Co-activations
+## Sources (provenance)
 
-`co_activations` is an ordered log of integration events in which this note
-appeared alongside another note.  The activation retrieval signal uses this
-history to boost notes that have historically co-appeared.
+`sources` is a list of document URLs recorded at **note birth** — that is, when
+a CREATE, SYNTHESISE, or SPLIT (second note only) operation first creates the
+note.  Subsequent UPDATEs and EDITs do not append to this list.
 
-Each entry has:
-- `target` — ID of the co-activated note
-- `ts` — ISO-8601 timestamp of the event
+The field is omitted from the YAML when empty.
+
+## Co-activation
+
+The co-activation signal is stored entirely in the SQLite index (not in the
+markdown file).  Each integration event that involves a note records which other
+notes were co-retrieved, building a small-world activation graph used by the
+retrieval pipeline.
 
 ## Embedding
 
@@ -91,9 +95,9 @@ class ZettelNote:
     created:       datetime
     updated:       datetime
     last_accessed: datetime
-    links:         list[ZettelLink]        = field(default_factory=list)
-    embedding:     Optional[np.ndarray]   = field(default=None, compare=False)
-    co_activations: list[CoActivationEvent] = field(default_factory=list)
+    links:         list[ZettelLink]       = field(default_factory=list)
+    sources:       list[str]             = field(default_factory=list)
+    embedding:     Optional[np.ndarray]  = field(default=None, compare=False)
 ```
 
 ## Round-trip

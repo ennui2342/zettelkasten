@@ -71,6 +71,7 @@ class ZettelNote:
     updated: datetime
     last_accessed: datetime
     links: list[ZettelLink] = field(default_factory=list)
+    sources: list[str] = field(default_factory=list)
     # Embedding stored in frontmatter for index rebuild; activation is runtime state in SQLite
     embedding: Optional[np.ndarray] = field(default=None, compare=False)
 
@@ -101,6 +102,8 @@ class ZettelNote:
             "last_accessed": _fmt_dt(self.last_accessed),
             "links": [link.to_dict() for link in self.links],
         }
+        if self.sources:
+            meta["sources"] = list(self.sources)
         if self.embedding is not None:
             meta["embedding"] = _vec_to_b64(self.embedding)
         post = frontmatter.Post(
@@ -118,6 +121,7 @@ class ZettelNote:
         title, body = _split_title_body(content)
 
         links = [ZettelLink.from_dict(d) for d in (post.get("links") or [])]
+        sources: list[str] = list(post.get("sources") or [])
         # co_activations was removed in favour of SQLite activation edges — silently ignored
         embedding: Optional[np.ndarray] = None
         raw_emb = post.get("embedding")
@@ -136,6 +140,7 @@ class ZettelNote:
             updated=_parse_dt(post["updated"]),
             last_accessed=_parse_dt(post["last_accessed"]),
             links=links,
+            sources=sources,
             embedding=embedding,
         )
 

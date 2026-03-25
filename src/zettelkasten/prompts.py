@@ -19,7 +19,7 @@ _NO_SOURCE_REFS = (
 )
 
 # ---------------------------------------------------------------------------
-# Shared See Also snippets (appended to relevant Step 2 prompts)
+# Shared See Also snippets (appended to relevant execute prompts)
 # ---------------------------------------------------------------------------
 
 _SEE_ALSO = (
@@ -70,12 +70,10 @@ _FORM_PROMPT = (
 )
 
 # ---------------------------------------------------------------------------
-# Integrate: Step 1 — classify
-# ---------------------------------------------------------------------------
-# Integrate: Step 1 L1 — SYNTHESISE / INTEGRATE / NOTHING
+# Integrate: L1 classify — SYNTHESISE / INTEGRATE / NOTHING
 # ---------------------------------------------------------------------------
 
-_STEP1_L1_PROMPT = """\
+_L1_PROMPT = """\
 You maintain a knowledge base of topic notes. You have a draft note and a \
 cluster of related existing notes.
 
@@ -112,10 +110,10 @@ Output JSON only. Schema:
 }}"""
 
 # ---------------------------------------------------------------------------
-# Integrate: Step 1 L2 — CREATE / UPDATE / NOTHING
+# Integrate: L2 classify — CREATE / UPDATE / NOTHING
 # ---------------------------------------------------------------------------
 
-_STEP1_L2_PROMPT = """\
+_L2_PROMPT = """\
 You maintain a knowledge base of topic notes. You have a draft note and a \
 cluster of closely related existing notes.
 
@@ -144,67 +142,30 @@ prefer CREATE.
 In target_note_ids, for UPDATE provide the single best target note ID. For \
 CREATE and NOTHING, list the most relevant cluster notes.
 
+If this draft explicitly contradicts or supersedes a claim in a cluster note \
+— not a mere difference in perspective, but a direct challenge to the note's \
+core claims or a replacement of its approach — include an epistemic link in \
+the links field. Only emit links where the relationship is unambiguous. \
+Omit the field entirely if no such relationship exists.
+
 Output JSON only. Schema:
 {{
   "operation": "UPDATE" | "CREATE" | "NOTHING",
   "target_note_ids": ["<id>"],
   "reasoning": "<one or two sentences>",
-  "confidence": <0.0 to 1.0>
+  "confidence": <0.0 to 1.0>,
+  "links": [{{"target": "<id>", "rel": "contradicts" | "supersedes"}}]
 }}"""
 
 # ---------------------------------------------------------------------------
-# Integrate: Step 1 (legacy single-pass classifier — kept for reference)
+# Integrate: L3 classify — EDIT / SPLIT
+# Fires when L2 returns UPDATE for a note above NOTE_BODY_LARGE (8,000 chars).
+# Classification shows the target note only — draft is passed through to
+# execution but NOT shown here. SPLIT/EDIT is a structural property of the
+# note itself, not a function of the draft's topic.
 # ---------------------------------------------------------------------------
 
-_STEP1_PROMPT = """\
-You maintain a knowledge base of topic notes. You have a draft note and a \
-cluster of related existing notes.
-
-Draft note:
-{draft}
-
-Existing notes in cluster:
-{cluster}
-
-Decide what action to take. Choose exactly one:
-
-- UPDATE: the draft adds to an existing note. Rewrite that note to synthesise \
-old and new — do not append.
-- CREATE: the draft covers a topic not in the cluster. Create a new note.
-- SPLIT: an existing note conflates two distinct topics that the draft \
-clarifies should be separate.
-- SYNTHESISE: the draft reveals a connection between two existing notes that \
-produces new insight neither note captures on its own. Create a new structure \
-note articulating the bridging principle. The bridge note must earn its \
-existence — use SYNTHESISE only when the relationship itself is the knowledge, \
-not merely because two things are related.
-- NOTHING: the draft is already fully covered by the existing cluster. No \
-action needed.
-- STUB: the cluster is sparse or empty — this is a new topic without an \
-established neighbourhood. Create a provisional note at low confidence.
-
-If the cluster is empty, STUB is the appropriate default unless the draft is \
-clearly a subtopic of notes in the broader knowledge base.
-
-In target_note_ids, list the existing notes that this draft directly \
-INTERACTS with — notes whose content this draft meaningfully extends, \
-challenges, or bridges. For UPDATE/SPLIT the primary operation target must \
-be listed first; for CREATE/STUB include the most relevant neighbours; for \
-SYNTHESISE include the notes being bridged.
-
-Output JSON only. Schema:
-{{
-  "operation": "<one of the six>",
-  "target_note_ids": ["<id>", ...],
-  "reasoning": "<one or two sentences>",
-  "confidence": <0.0 to 1.0>
-}}"""
-
-# ---------------------------------------------------------------------------
-# Integrate: Step 1.5 — refine UPDATE on large notes
-# ---------------------------------------------------------------------------
-
-_STEP1_5_PROMPT = """\
+_L3_PROMPT = """\
 You are reviewing an UPDATE decision for a note that has grown very large \
 ({note_size} chars). Assess whether the note should be split or compressed.
 
@@ -213,12 +174,23 @@ Note:
 
 Choose exactly one:
 
-- EDIT: the note covers one coherent topic. Compress and distil it.
-- SPLIT: the note contains two distinct topics that should each be their \
-own note. Divide it.
+- EDIT: the note covers one retrievable concept. Its sections, even if \
+numerous, are all facets of the same underlying idea and serve the same \
+reader. Compress and distil it.
+- SPLIT: the note contains two threads from genuinely different problem \
+domains that a reader would search for independently. A reader focused on \
+one thread would not necessarily want the other. Divide it so each becomes \
+a distinct retrieval target.
 
-SPLIT requires clear evidence of two separable threads within the note \
-itself. When uncertain, choose EDIT.
+SPLIT requires both of these:
+1. The two threads come from different problem domains or research \
+traditions — not merely different aspects of the same concept.
+2. Each thread would be self-contained and independently useful as a \
+standalone note.
+
+If the sections are different facets of one concept — different mechanisms, \
+applications, or elaborations of the same core idea — choose EDIT even if \
+the note covers that concept thoroughly.
 
 Output JSON only. Schema:
 {{
@@ -228,10 +200,10 @@ Output JSON only. Schema:
 }}"""
 
 # ---------------------------------------------------------------------------
-# Integrate: Step 2 — execute
+# Integrate: Execute — produce note content
 # ---------------------------------------------------------------------------
 
-_STEP2_CREATE = (
+_EXEC_CREATE = (
     "Execute a CREATE operation.\n"
     "\n"
     "Draft note (content for the new note):\n"
@@ -251,7 +223,7 @@ _STEP2_CREATE = (
     "Output only the heading and body. No frontmatter, no preamble."
 ) + _SEE_ALSO
 
-_STEP2_EDIT = (
+_EXEC_EDIT = (
     "Execute an EDIT operation on the existing note.\n"
     "\n"
     "Existing note to compress:\n"
@@ -276,7 +248,7 @@ _STEP2_EDIT = (
     "Output only the heading and body. No frontmatter, no preamble."
 )
 
-_STEP2_UPDATE = (
+_EXEC_UPDATE = (
     "Execute an UPDATE operation on the existing note.\n"
     "\n"
     "Draft note (new content to integrate):\n"
@@ -301,7 +273,7 @@ _STEP2_UPDATE = (
     "Output only the heading and body. No frontmatter, no preamble."
 ) + _SEE_ALSO
 
-_STEP2_SYNTHESISE = (
+_EXEC_SYNTHESISE = (
     "Execute a SYNTHESISE operation.\n"
     "\n"
     "Draft note (reveals the connection):\n"
@@ -325,28 +297,7 @@ _STEP2_SYNTHESISE = (
     "Output only the heading and body. No frontmatter, no preamble."
 ) + _SEE_ALSO
 
-_STEP2_STUB = (
-    "Execute a STUB operation.\n"
-    "\n"
-    "Draft note (new topic without established neighbourhood):\n"
-    "{draft}\n"
-    "\n"
-    "Create a minimal stub note. Include: concept title, 1-2 sentence definition, "
-    "and 3-5 synonyms or related terms to make the note retrievable in future. "
-    "Keep it brief but specific.\n"
-    "\n"
-    f"{_NO_SOURCE_REFS}\n"
-    "\n"
-    "Output format — a markdown heading followed by the stub body:\n"
-    "\n"
-    "## [Note title]\n"
-    "\n"
-    "[Note body]\n"
-    "\n"
-    "Output only the heading and body. No frontmatter, no preamble."
-)
-
-_STEP2_SPLIT = (
+_EXEC_SPLIT = (
     "Execute a SPLIT operation.\n"
     "\n"
     "Note to split:\n"
@@ -384,11 +335,10 @@ _STEP2_SPLIT = (
 ) + _SEE_ALSO_SPLIT
 
 # Public dict consumed by integrate.py
-STEP2_PROMPTS: dict[str, str] = {
-    "CREATE":    _STEP2_CREATE,
-    "EDIT":      _STEP2_EDIT,
-    "UPDATE":    _STEP2_UPDATE,
-    "SYNTHESISE": _STEP2_SYNTHESISE,
-    "STUB":      _STEP2_STUB,
-    "SPLIT":     _STEP2_SPLIT,
+EXEC_PROMPTS: dict[str, str] = {
+    "CREATE":     _EXEC_CREATE,
+    "EDIT":       _EXEC_EDIT,
+    "UPDATE":     _EXEC_UPDATE,
+    "SYNTHESISE": _EXEC_SYNTHESISE,
+    "SPLIT":      _EXEC_SPLIT,
 }

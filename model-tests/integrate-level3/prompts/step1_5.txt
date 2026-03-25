@@ -5,10 +5,14 @@ Note:
 
 Choose exactly one:
 
-- EDIT: the note covers one coherent topic. Compress and distil it.
-- SPLIT: the note contains two distinct topics that should each be their own note. Divide it.
+- EDIT: the note covers one retrievable concept. Its sections, even if numerous, are all facets of the same underlying idea and serve the same reader. Compress and distil it.
+- SPLIT: the note contains two threads from genuinely different problem domains that a reader would search for independently. A reader focused on one thread would not necessarily want the other. Divide it so each becomes a distinct retrieval target.
 
-SPLIT requires clear evidence of two separable threads within the note itself. When uncertain, choose EDIT.
+SPLIT requires both of these:
+1. The two threads come from different problem domains or research traditions — not merely different aspects of the same concept.
+2. Each thread would be self-contained and independently useful as a standalone note.
+
+If the sections are different facets of one concept — different mechanisms, applications, or elaborations of the same core idea — choose EDIT even if the note covers that concept thoroughly.
 
 Output JSON only. Schema:
 {{

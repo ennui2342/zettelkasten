@@ -8,12 +8,8 @@ cluster identified by level 1 (~4 notes) and decides:
   CREATE  — draft introduces a new topic; create a new note
   NOTHING — draft is already fully covered; no action needed
 
-This is the "currently broken decision" in the design doc — the existing
-single-pass step1 prompt over-fires UPDATE for adjacent but distinct topics.
-
 Two prompts compared:
-  Current   — _STEP1_PROMPT mapped to UPDATE/CREATE/NOTHING
-              (EDIT/SPLIT mapped to UPDATE; SYNTHESISE mapped to CREATE)
+  Current   — _L2_PROMPT (CREATE / UPDATE / NOTHING)
   Candidate — prompts/level2.txt (focused three-way decision)
 
 Usage:
@@ -171,20 +167,12 @@ def parse_decision(raw: str) -> dict:
         return {"operation": "PARSE_ERROR", "reasoning": raw[:200], "confidence": 0.0, "target_note_ids": []}
 
 
-def normalise_current(op: str) -> str:
-    """Map _STEP1_PROMPT multi-way output to level-2 terms."""
-    if op in ("UPDATE", "EDIT", "SPLIT"):
-        return "UPDATE"
-    if op == "NOTHING":
-        return "NOTHING"
-    return "CREATE"  # CREATE, STUB, SYNTHESISE
-
-
 def run_current(draft: str, cluster: str, llm) -> dict:
-    from zettelkasten.prompts import _STEP1_PROMPT
-    raw = llm.complete(_STEP1_PROMPT.format(draft=draft, cluster=cluster), max_tokens=512, temperature=0.0)
+    from zettelkasten.prompts import _L2_PROMPT
+    raw = llm.complete(_L2_PROMPT.format(draft=draft, cluster=cluster), max_tokens=512, temperature=0.0)
     result = parse_decision(raw)
-    result["operation"] = normalise_current(result.get("operation", "CREATE"))
+    if result.get("operation") not in ("UPDATE", "CREATE", "NOTHING"):
+        result["operation"] = "CREATE"
     return result
 
 
@@ -258,7 +246,7 @@ def main() -> None:
     print()
     print("=" * 72)
     print("Level 2 — CREATE / UPDATE / NOTHING")
-    print("Current: _STEP1_PROMPT (mapped)  vs  Candidate: level2.txt")
+    print("Current: _L2_PROMPT  vs  Candidate: level2.txt")
     print("=" * 72)
 
     results = []

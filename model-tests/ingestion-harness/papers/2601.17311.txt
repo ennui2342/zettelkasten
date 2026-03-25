@@ -1,0 +1,627 @@
+Title: Phase Transition for Budgeted Multi-Agent Synergy
+Authors: Bang Liu, Linglong Kong, Jian Pei
+Published: 2026-01-24
+Source: https://arxiv.org/abs/2601.17311
+ArXiv ID: 2601.17311
+
+Phase Transition for Budgeted Multi-Agent Synergy
+Abstract
+Multi-agent systems can improve reliability, yet under a fixed test-time budget they often help, saturate, or even collapse. We develop a deliberately minimal and calibratable theory that predicts these regimes from three binding constraints of modern agent stacks: finite context windows, lossy inter-agent communication, and shared failures among similar agents. Each leaf agent is summarized by a compute–performance scaling exponent ; communication is captured by a message-length fidelity curve ; dependence is captured by an effective shared-error correlation ; and a context window imposes hard fan-in limits that make hierarchy necessary. For binary success/failure tasks with majority aggregation, we prove a sharp phase transition for deep -ary trees with correlated inputs and lossy communication: a single scalar (combining , , and fan-in ) determines whether weak signal is amplified to a nontrivial fixed point or washed out to chance. In the amplifying regime, we derive an organization exponent and show that budgeted synergy, i.e., outperforming the best single agent under the same total budget, occurs exactly when , yielding closed-form compute allocation rules and explicit budget thresholds. We further characterize saturation via a mixing depth and provide a conservative clipped predictor that remains accurate across growth and saturation. A continuous-performance warm-up gives closed-form risks for star, chain, and tree organizations, making correlation- and communication-induced floors explicit and exposing the core design trade-offs in a smooth setting. Finally, we validate the predicted phase boundaries in controlled synthetic simulations and show how the same mechanisms explain the dominant bottlenecks reported in recent large-scale matched-budget studies of LLM agent-system scaling, including context saturation, subcritical error cascades, and diminishing returns at strong baselines.
+Keywords: Budgeted Multi-Agent Synergy, Phase Transition, Shared-failure Correlation, Communication Bottlenecks, Finite Context Windows
+1 Introduction
+Multi-agent systems are often presented as a reliability primitive: if a single agent is fallible, run many agents, let them interact, and aggregate their outputs. Under a fixed computational budget per task, however, multi-agent coordination is not reliably beneficial. The same additional agents that sometimes improve performance can also lead to saturation or even outright degradation. This paper develops a predictive theory of this brittleness: when multi-agent organization produces budgeted synergy, i.e., outperforming the best single agent under the same total computational budget, and when scaling out must fail.
+The LLM era has made this phenomenon impossible to ignore. It is now routine to instantiate multiple LLM-based agents, assign roles, and coordinate them through discussion, critique, or voting in so-called “agent societies” and orchestration frameworks (Brown et al., 2020; Yao et al., 2023; Wu et al., 2023; Li et al., 2023; Chen et al., 2024; Hong et al., 2024). The underlying intuition is classical: ensembling can reduce error (Breiman, 1996; Freund and Schapire, 1997; Dietterich, 2000), and interaction protocols such as debate or amplification aim to turn many weak judgments into a stronger one (Irving et al., 2018; Christiano et al., 2018; Du et al., 2024). At the same time, controlled matched-budget evaluations increasingly reveal strong task- and topology-dependence, including regimes in which multi-agent variants degrade once coordination overhead and information loss dominate (Kim et al., 2025).
+Our starting point is that these failures are not implementation accidents but structural consequences of a small number of constraints that repeatedly bind in modern agent stacks. First, agent errors are not independent: multiple instances derived from the same base model and prompt often share systematic failure modes, producing “groupthink” rather than error cancellation. Second, coordination is communication-limited: as systems scale, agents must compress reasoning into bounded-length messages, and the resulting information loss compounds across layers. Third, coordination is context-limited: a central aggregator cannot read arbitrarily many messages under a finite context window, so naive scale-out saturates structurally. Recent work on large-population collaboration and topology learning highlights the same bottleneck: token and context limits are frequently the binding resource (Qian et al., 2025; Zhang et al., 2024).
+Today, most agent-system design still proceeds by heuristics: choose a topology, message format, and number of agents, then iterate. In spirit, this resembles the hand-crafted feature engineering era of machine learning: powerful components exist, but system-level behavior depends on ad hoc choices and expensive trial-and-error. Our goal is to push multi-agent design toward an “agentic intelligence from first principles” approach: make the dominant constraints explicit, explain why scaling out works or fails under a fixed computational budget, and derive sharp, quantitative regime boundaries, most notably, a phase transition for budgeted multi-agent synergy.
+A minimal, calibratable coordination theory.
+We develop a deliberately small framework that isolates the coordination bottlenecks above while remaining analytically tractable. The term agent is used abstractly: a black-box solver that, given a task instance and an allocated compute budget, produces an output that another component can consume (a decision, a score, or an -token message). This deliberately includes LLM-based agents as a primary motivating instance, because (i) tokens provide a natural budget unit, (ii) finite context windows induce hard fan-in constraints, and (iii) single-agent capability is often well described by compute scaling laws (Kaplan et al., 2020; Hoffmann et al., 2022). At the same time, the abstraction is broader than LLMs: none of the results relies on language as such, only on (a) how single-agent quality scales with compute, (b) how much usable information survives bounded-length communication, and (c) how strongly agents’ failures co-move.
+By calibratable we do not mean a theory “about measurement.” We mean a coordination theory parameterized by a small set of environment-dependent effective quantities that can be estimated once (via targeted experiments) and then used to predict qualitative regimes. Concretely, the framework is driven by single-agent scaling (exponent ), communication fidelity as a function of message length (e.g., ), shared-failure correlation (), and the context window constraint (), together with a total budget that fixes the scale-up/scale-out trade-off. These parameters are not claimed to capture every detail of a real agent stack; they form a minimal interface for diagnosing which constraint is binding and for predicting when organization helps, saturates, or fails.
+Phase transition for budgeted multi-agent synergy.
+Within this framework we analyze three canonical organizations: star (central aggregation), chain (sequential handoff), and hierarchical tree. Our main results characterize when hierarchy is viable and when it is provably counterproductive. For binary success/failure tasks with majority aggregation, we prove a sharp amplification–collapse transition for deep trees: a scalar (combining communication fidelity, correlation, and fan-in) determines whether weak signal amplifies across layers or is washed out to chance, in the spirit of reconstruction thresholds in noisy broadcasting on trees (Evans et al., 2000; Mossel, 2001; Kesten and Stigum, 1966). In the amplifying regime, we derive an organization exponent governing growth with the number of leaves and show that budgeted synergy in the growth range occurs exactly when , yielding closed-form compute allocation and explicit budget thresholds. We also characterize finite-depth saturation via a nontrivial fixed point and mixing-depth guarantees. Finally, we make precise why topology becomes decisive only because constraints bind: absent context limits, central aggregation is information-dominant (data processing inequality) (Cover and Thomas, 2006), and hierarchy is valuable only insofar as it bypasses fan-in limits without crossing into the collapsing regime. Figure 1 illustrates our core contribution.
+Beyond the binary core, a continuous-performance warm-up yields closed-form risks for star/chain/tree organizations and makes correlation and communication floors explicit. We also translate theorems into design diagnostics (e.g., monotone communication design curves) and connect the predicted bottlenecks to recent controlled large-scale agent-scaling studies (Kim et al., 2025). Detailed calibration templates are collected in Appendix J.
+Methodological stance: theory vs. benchmarking.
+Our aim in this paper is to theoretically delineate regimes of behavior and identify the mechanisms that govern when multi-agent systems help, saturate, or collapse under realistic constraints. Large-scale matched-budget evaluations with real LLM agent stacks are expensive and can be confounded by prompt engineering and rapidly changing model/tool ecosystems. Accordingly, we validate the sharp regime boundaries via controlled synthetic simulations (Section 6.2) that probe the theory under its own assumptions, and we use external controlled evidence (Kim et al., 2025) to show that the bottlenecks isolated by the theory (context saturation, subcritical collapse, and diminishing returns) are salient in modern deployments.
+Organization.
+Section 2 defines the framework, measurable parameters, and the budget and context constraints. Section 3 develops the continuous warm-up. Section 4 presents the binary theory, including the phase transition, small-signal amplification, and saturation; it also compares topologies under context constraints and derives budget thresholds. Section 5 turns the theory into design diagnostics. Section 6 provides empirical touchpoints via external controlled evidence and synthetic sanity checks. We place detailed proofs and optional calibration/evaluation templates in the appendices.
+2 Framework and Measurable Parameters
+This section formalizes the abstraction used throughout the paper. We keep only three constraints that repeatedly bind in practice: finite context windows, lossy communication, and shared failures, and summarize the environment by a small set of quantities. These quantities play distinct roles: captures how a single agent improves with compute, (or ) captures what survives an -token message, and captures how correlated different agents’ errors are. Together with a total budget and a context window , they determine whether scaling out amplifies signal, saturates at a floor, or collapses.
+We model a multi-agent system as a directed acyclic computation graph. Leaf nodes (agents) produce signals about a latent task variable ; internal nodes receive messages from their children (possibly through a lossy channel) and apply an aggregation rule; the root output is the system prediction. Throughout, an agent is a black-box solver with an adjustable compute budget that emits a bounded-length output (a decision, a score, or an -token message). LLM-based agents are the primary motivating instance, but the framework only assumes a single-agent scaling curve, a communication-fidelity curve, and a shared-failure correlation.
+2.1 Tasks and performance metrics
+We study two task primitives that are deliberately simple but theoretically expressive. They are not meant to exhaust the diversity of real-world tasks; rather, they isolate the coordination bottlenecks that arise repeatedly inside more complex multi-agent pipelines. Binary success/failure captures decision-like outcomes (e.g., accept/reject, pass/fail, correctness of a proposed action), while continuous performance on captures graded judgments, scores, or calibrated estimates. Together, these two primitives cover a wide range of evaluation signals used in practice and allow clean analysis of aggregation, communication loss, and shared failures. From a theoretical standpoint, any richer task that can be decomposed into local scoring, communication, and aggregation steps must confront the same coordination constraints analyzed here.
+The continuous setting serves as a smooth warm-up where many quantities admit closed forms and correlation and communication floors are explicit. The binary setting is not a special case of the continuous one: the nonlinearity of majority vote introduces qualitatively new behavior, including a sharp amplification–collapse phase transition that has no analogue in linear aggregation. Many realistic agent workflows combine both primitives. For example, agents may exchange graded scores or confidence estimates internally, but the final system decision is binary. So analyzing both is necessary to capture the full coordination picture.
+Binary tasks.
+Let denote the ground truth. A system outputs . We measure performance through the bias
+The bias is a natural summary statistic for weak agents: it measures how far performance is above chance and composes cleanly under simple channel models and aggregation maps. This makes it particularly suitable for analyzing whether small, local improvements are amplified or destroyed by hierarchical organization.
+Continuous tasks.
+Let and a system output . We use mean squared error (MSE)
+and occasionally report a bounded performance score such as , which is monotone in . Continuous metrics capture graded information that is often exchanged within agent systems (scores, confidence levels, value estimates) and lead to linear aggregation dynamics. In this setting, the effect of correlation and communication loss appears as explicit error floors rather than phase transitions, providing intuition that complements the binary analysis.
+2.2 Single-agent capability and scaling
+Our central comparison is fixed budget: the same total computational budget can be allocated either to scale up a single agent (making one agent stronger) or to scale out across many agents (running more agents in parallel). Understanding when scale out can outperform scale up under the same budget is the core question of this paper.
+We model per-leaf compute by a single nonnegative knob , representing the share of the per-task computational budget allocated to an individual agent. In LLM-based agents, may correspond to inference tokens devoted to reasoning, the number of samples or self-consistency votes, structured test-time inference procedures (e.g., generate–select or tournament-style algorithms), the number of tool calls, or any other additive per-task resource that trades off directly against parallelism.
+We summarize the effect of per-agent compute via a single-agent scaling law. Classical scaling laws are typically reported for training loss as a function of training compute (Kaplan et al., 2020; Hoffmann et al., 2022). Here, however, we use scaling laws in a different but related sense: as an effective description of how a fixed trained agent’s test-time performance improves when allocated additional per-task computational resources. Recent work on test-time or inference-time scaling shows that such improvements can follow systematic power-law or exponential trends in appropriate regimes and metrics, including accuracy, error probability, or calibrated scores (Chen et al., ; Levi, 2025; Snell et al., 2024; Wu et al., 2025). Motivated by these findings, we treat the scaling exponent as a per-task scaling exponent governing scale up, not as a statement about retraining the model.
+For binary success/failure tasks, a leaf agent allocated compute produces a vote with bias
+where is increasing and exhibits diminishing returns. For continuous tasks, a leaf produces an estimate with conditional variance , where decreases with .
+In our main theorems, we work in a regime where these functions are well-approximated by power laws:
+with constants and a single-agent scaling exponent . Here “small-signal regime” refers to the operating range of in which (i) the local power-law approximation is accurate enough for comparison, and (ii) the induced leaf performance is not already saturated. In the binary analysis, this typically corresponds to weak leaf votes (small bias , i.e., accuracy only slightly above chance), which is precisely the regime where the majority update map is well-approximated by its derivative at the origin and where the organization exponent governs growth. In the continuous warm-up, it corresponds to the pre-saturation range where aggregation has not yet hit the communication/correlation floor. The exponent is not a universal constant: it depends on the model, prompting, tools, test-time procedure, and task family, and is intended to be measured in the operating regime of interest. Our theory does not require the power-law approximation to hold globally or asymptotically; it relies only on the existence of a local scaling exponent in the budget range where the scale-up versus scale-out comparison is made.
+2.3 Communication as a controllable lossy channel
+Agents coordinate through messages. Our analysis uses a compact abstraction of how message length affects what downstream nodes can reliably use.
+We model each edge as a channel controlled by a message length parameter (in tokens). Longer messages generally preserve more usable information, but they also cost more budget and reduce feasible fan-in under a finite context window.
+Binary: an effective bit channel.
+For binary tasks and majority-style protocols, it is natural to treat each child as intending to transmit a single bit of information (its vote or decision), encoded into a message of length . We model the receiver’s decoded bit as passing through a binary symmetric channel (BSC) with reliability :
+Equivalently, , where is an effective flip probability.
+Continuous: additive distortion.
+For continuous tasks, we model transmission as additive zero-mean distortion,
+where decreases with . This captures compression loss, imperfect interpretation, and degradation introduced by summarization or constrained prompts.
+The intent is not to claim that real messages are literally bits or Gaussian perturbations, but to represent an effective fidelity curve as a function of . In particular, or can be estimated by simple encode–decode experiments at the same message length.
+2.4 Shared-failure correlation and the model
+A key departure from idealized ensemble analyses is that agent errors are not independent, even though many ensemble gains are easiest to analyze under weak dependence assumptions (Dietterich, 2000; Germain et al., 2015). Agents instantiated from the same base model and prompt often share systematic error modes, which can dominate any aggregation gain. We capture this effect with a single, measurable correlation parameter .
+Binary: correlation of signed correctness.
+For a leaf vote , define the signed correctness variable
+Then , and we define
+estimated empirically by averaging pairwise correlations across tasks and agent instances. Here and index two agent instances whose outputs are aggregated together: for a star this is any pair of leaves; for a tree it should be interpreted as the sibling correlation at an internal node. In practice the effective correlation can depend on depth, heterogeneity, or the message schema; for tractability we treat as a depth-independent effective parameter and return to extensions in Section 7. Intuitively, corresponds to independent errors, while close to 1 indicates near-perfect groupthink.
+For analysis, we use a concrete generative model that matches this definition exactly. At each aggregation node, with probability the children share a common “mode” (their signed correctness variables are identical), and with probability they are conditionally independent given . This model produces the same pairwise correlation while remaining analytically tractable and yields a closed-form correlated aggregation map used throughout the paper.
+Continuous: correlated residuals.
+For continuous outputs , define residuals . We use the standard equal-correlation model
+which makes correlation floors explicit and leads to closed-form recursions in Section 3. The same can be estimated by pairwise residual correlations.
+Why a single parameter is useful.
+Real systems may have richer dependence structure than a single coefficient. The intent here is not to model all dependence, but to isolate the dominant failure direction: shared errors. As we show later, this single parameter already shifts phase boundaries and imposes aggregation floors that are otherwise difficult to diagnose.
+2.5 Budget and context constraints
+Our central comparison is fixed-budget: a multi-agent system should be judged against the best single-agent baseline under the same total cost. We therefore make computation and communication costs explicit.
+Budget.
+Let denote the total available budget. In token-based LLM systems, a natural accounting unit is tokens, including both generated tokens and tokens processed as input. Our theory is compatible with other budget units (time, API cost, calls), as long as they are additive and comparable across designs.
+We separate two costs:
+-
+•
+Leaf computation: each leaf agent is allocated compute .
+-
+•
+Communication: each edge transmits a message of length tokens.
+To keep the model simple, we account a per-edge cost proportional to . A useful approximation in token-based systems is
+representing tokens produced by the sender and tokens read by the receiver.
+Context window as a fan-in constraint.
+Let denote the maximum number of tokens that an internal node can read and process. If each incoming message has length , then any aggregation node can read at most
+This inequality is the reason depth matters: a star is capped by leaves, while a tree can scale to leaves by distributing the fan-in constraint across levels.
+Topology-specific cost summaries.
+Let be the number of leaves. Under the accounting above:
+-
+•
+Star: , with feasibility constraint .
+-
+•
+Chain: for length , (assuming each handoff step runs an agent with compute x, e.g., one model call), with feasibility constraint (usually nonbinding).
+-
+•
+Tree: for a full -ary tree of depth with leaves, the number of edges is
+so . It is convenient to write this as a per-leaf cost:
+subject to the fan-in feasibility . Alternative accounting (templating overheads, parsing costs, asymmetric protocols) rescales and can be treated as an implementation constant.
+This approximation isolates the basic trade-off: increasing can improve fidelity, but it also increases coordination cost and reduces the number of leaves affordable under .
+2.6 Topologies and protocols
+A topology specifies how information flows; a protocol specifies what each node does with the information it receives. We keep protocols deliberately simple to make the effect of constraints and scaling transparent. In particular, we focus on three canonical organizations that recur in practice and isolate the key trade-offs: star, chain, and hierarchical tree (Figure 1).
+Star.
+Leaves transmit their outputs directly to a central aggregator. Star avoids multi-hop loss, but it concentrates fan-in at one node and therefore saturates at leaves regardless of budget.
+Chain.
+Outputs are passed sequentially through steps. Chains avoid fan-in bottlenecks but repeatedly retransmit information; without new evidence injected along the path, each step can only preserve or degrade the signal.
+Hierarchical tree.
+A tree distributes aggregation across many small nodes. Each internal node aggregates child messages and forwards a summary upward, enforcing locally and enabling many more leaves. The cost is multi-hop communication and repeated aggregation, so performance hinges on whether amplification dominates compounding loss and correlation.
+Why focus on star, chain, and tree?
+These motifs capture the dominant structural trade-offs induced by finite context and imperfect coordination. Star minimizes depth but is capped by a global fan-in constraint . Chain removes fan-in limits but maximizes the number of lossy transmissions. Trees are the simplest family that bypasses the fan-in cap ( locally) while still aggregating many signals; this is precisely the setting in which phase transitions and budget thresholds emerge.
+It is also useful to view more general feed-forward organizations through these motifs. With a finite context window, every node can only aggregate a bounded number of incoming messages, i.e., each local computation is an in-star with fan-in at most . Globally, any connected directed acyclic communication graph contains a spanning arborescence that routes leaf information to the output; star and chain are the two extreme cases (depth versus fan-in ), and bounded-fan-in trees are the minimal structure that scales beyond the star’s context cap. Additional edges or multi-round interaction are valuable mainly when they effectively change the measurable parameters, for example by improving effective fidelity through redundancy or by reducing effective correlation through independent verification, rather than by rerouting the same information along multiple dependent paths. Figure 2 illustrates this reduction from general DAGs to a spanning arborescence.
+Aggregation rules.
+We analyze majority vote at internal nodes for binary tasks (ties are avoided by choosing odd fan-in) and averaging for continuous tasks (the MSE-optimal linear unbiased aggregator under equal-variance equal-correlation assumptions). More sophisticated protocols (critique, verification, debate) can be interpreted in our framework as mechanisms that effectively increase communication fidelity or reduce shared-error correlation. We return to this connection in the discussion.
+2.7 What is measurable and how to measure it
+The framework is parameterized by a small set of environment-dependent quantities. Table 1 summarizes their meaning and outlines how one might estimate them in a specific model–task setting. These estimates are optional: the theoretical results that follow hold given , , and the communication curves, while calibration is a way to connect the regime predictions back to concrete agent stacks at a coarse level.
+3 Continuous Warm-up: Averaging Under Correlation and Communication Noise
+We begin with a continuous-performance setting in which agents estimate a scalar target and performance is measured by mean squared error (MSE). This warm-up makes the basic organization trade-offs transparent in closed form: averaging reduces independent noise, shared errors impose floors, and communication loss introduces additional distortion. Throughout we adopt the framework of Section 2 and use averaging at internal nodes, which is the natural choice under squared loss and symmetric noise assumptions.
+Although we phrase the warm-up as each leaf producing an estimate of the same latent , it should be read as an abstraction of role-specialized pipelines. A child agent may solve a subtask and transmit an -token message; denotes the effective scalar contribution about the downstream target that the parent can decode from that message. Role heterogeneity then enters through the effective parameters ( and or ); we return to richer semantics and extensions in Section 7.
+3.1 Model assumptions for the continuous setting
+This warm-up instantiates the continuous-task primitive from Section 2 using the communication and shared-failure models already defined in Sections 2.3 and 2.4. The only additional assumptions are that leaf estimates are (approximately) unbiased and admit a compute-dependent MSE description.
+Let denote the latent target and let each leaf output an estimate . To keep the warm-up focused on organization rather than estimator bias, we assume conditional unbiasedness,
+Write the residual , so , and summarize leaf quality by the MSE
+which depends on the per-leaf compute allocation . In the operating range where we compare scale up versus scale out, we use the scaling approximation
+with constants and (Section 2.2).
+Communication follows the additive distortion model from Section 2.3, with message length ; we treat edge distortions as independent across edges and independent of .
+Within any aggregation group, residuals are modeled by the equal-correlation structure from Section 2.4: for children ,
+where is the shared-failure correlation parameter.
+Finally, an internal node with fan-in outputs the average of its received inputs,
+Under these symmetry assumptions, averaging is the MSE-optimal linear unbiased aggregator.
+3.2 Closed-form risk for star, chain, and tree
+We now derive exact MSE expressions (or recursions) for the three canonical topologies. These formulas already reveal three key messages: star saturates under context constraints, chains compound loss, and trees trade scale for multi-hop noise.
+Star.
+Consider a star with leaves feeding a single aggregator. Each leaf sends a length- message, so the aggregator is feasible only if . Let denote the leaf MSE (for a given compute allocation ) and let denote the pairwise residual correlation within this aggregation group. After one hop, each received estimate has residual , with
+The star output is the average of the received values, so the MSE is
+If could grow arbitrarily, the channel noise term would vanish. However, correlation produces an irreducible floor:
+Thus, even perfect communication cannot eliminate a globally shared residual component. In practice, the context constraint prevents from growing with budget once is fixed, which is why star organizations often stop improving beyond a modest scale.
+Chain.
+Consider a chain of length , where an estimate is handed off sequentially through communication steps, each of length , without introducing new independent evidence. Starting from a leaf estimate with MSE , each hop adds independent distortion variance . Thus,
+Equation (14) isolates the unavoidable cost of multi-hop relay communication: if intermediate nodes primarily re-encode the same information (no new independent evidence), each hop injects distortion and MSE grows linearly in . Pipeline-style chains can still be beneficial when each stage performs additional computation or incorporates new information; in that case, the estimation error may decrease across stages, but the same term captures a communication bottleneck that accumulates with depth and must be outweighed by per-stage gains.
+Hierarchical tree.
+Consider a full -ary tree with depth , where each internal node averages its children. Let denote the MSE of a node output at level (leaves are ; the root is ). We assume that at each aggregation node, the child residuals satisfy the equal-correlation model (11) with coefficient , and that channel noise on incoming edges is independent.
+A parent receives from each child, so each received residual has variance , while covariances remain because the channel noises are independent. Averaging (12) yields the recursion
+Unrolling gives the closed form
+The coefficient when , so the first term shrinks exponentially in depth. This is the statistical benefit of hierarchy: averaging repeatedly reduces the variance of what is being passed upward. The second term is the cost: each level injects fresh communication distortion, which accumulates into an error floor described next.
+3.3 Saturation floors and mixing depth
+Equation (16) exposes a sharp and practical phenomenon: deeper trees do not improve indefinitely. Even if leaves become arbitrarily accurate, repeated communication loss produces a floor. Figure 4 illustrates the typical behavior: shrinks rapidly with depth at first (roughly at rate ) and then saturates at the floor determined by , , and .
+Tree floor.
+For we have , and therefore as . Taking limits in (16) yields
+This expression cleanly separates the levers available to a designer:
+-
+•
+Increasing message length decreases , lowering the floor.
+-
+•
+Increasing fan-in lowers the floor approximately as , but is limited by .
+-
+•
+Reducing shared correlation lowers the floor and also accelerates convergence (since decreases).
+Mixing depth.
+The recursion (15) is linear, so convergence to the floor is explicit:
+Thus, to achieve a relative tolerance when , it suffices to choose
+Equation (19) is the continuous analogue of the “mixing depth” results we prove for binary trees later. It is also a direct design rule: beyond a certain depth, additional leaves yield negligible improvement unless the designer reduces the floor by improving communication or reducing correlation.
+A note on when deeper is worse.
+If leaves are already more accurate than the floor (i.e., ), then (16) implies that increasing depth moves error upward toward . In that regime, deeper hierarchies are counterproductive unless they come with reduced or reduced . This observation will reappear in the binary setting as a saturation effect: once the system has reached its fixed point, additional scale should be spent on changing the communication or correlation regime rather than adding depth.
+3.4 Scale-out versus scale-up under a fixed budget
+The closed forms above become design tools once we connect them to budget. We use the budget model from Section 2.5, where each leaf receives compute and each edge uses message length . For a full -ary tree of depth with leaves, the total cost is approximately
+so the number of leaves is , and depth is .
+A growth-regime approximation.
+When the tree has not yet hit the communication floor, the dominant term in (16) is the shrinking term . Using and with
+we obtain the approximation
+The exponent quantifies how efficiently scaling out reduces error in the continuous setting. If , then and , recovering the familiar averaging benefit. As increases, approaches 1 and approaches 0, reflecting that shared residuals diminish the value of adding more agents.
+Compute allocation and a simple threshold.
+Substituting and into (21) yields
+For a fixed budget , minimizing this expression over reduces to minimizing . A short calculus argument shows a qualitative threshold:
+-
+•
+If , there is a unique interior optimum
+In this regime, scale-out and scale-up should be balanced: make agents strong enough that their improvement exponent is not wasted, but keep them weak enough that adding more of them leverages the organization exponent .
+-
+•
+If , the objective decreases as increases, suggesting that under the growth approximation it is better to spend budget on fewer stronger agents rather than more weaker ones. Correlation and context constraints tend to push systems into this regime by reducing (via higher ) or restricting , which increases communication overhead and raises the floor , shortening the growth regime.
+This is the continuous analogue of our main binary condition developed later: synergy from scaling out appears only when the organization exponent exceeds the single-agent scaling exponent.
+How the floor changes the budget story.
+The growth approximation (21) cannot hold indefinitely because of the communication floor . Once the predicted approaches , additional budget spent on more leaves or more depth yields diminishing returns. At that point, the effective levers are no longer and , but and diversity (which affect and ). This conclusion will reappear in the binary setting through fixed-point saturation and mixing depth.
+3.5 Design implications and a bridge to the binary analysis
+The continuous warm-up already exposes the structural trade-offs we will reuse in the binary theory. Absent a binding context constraint, star aggregation is information-dominant because it avoids multi-hop loss; trees are useful primarily as a way to bypass the fan-in limit by enforcing locally, at the cost of repeated communication. Both correlation and communication loss induce explicit performance floors, so scale-out can stall early when is large or messages are too short. In the growth regime under a fixed budget, the key comparison is exponent versus exponent: whether the organization exponent beats the single-agent scaling exponent.
+The binary case is qualitatively different. Because majority vote is nonlinear, it can fundamentally change how errors propagate under repeated aggregation. Section 4 analyzes this effect and shows that hierarchical organization exhibits a sharp amplification–collapse transition on success/failure tasks.
+4 Binary Core: Majority Aggregation and Phase Transitions
+We begin by characterizing how one majority layer transforms weak bias, then incorporate correlated errors and lossy communication to obtain a phase transition and budget-relevant exponents for deep trees.
+4.1 Majority maps and correlated aggregation
+The central object in the binary analysis is the one-step aggregation map that describes how an internal node transforms the biases of its child votes into an output bias.
+Majority aggregation map.
+Let be an odd integer and let be i.i.d. child votes with
+Equivalently, is correct with probability . Define the majority vote
+where ties are impossible because is odd; even can be handled by specifying a tie-breaking rule (e.g., random) with only minor notational changes. For the same reason, we will assume an odd in our future sections. The induced majority map is the bias at the output:
+The function summarizes the effect of one noiseless majority aggregation step on the bias.
+Lemma 1 (Basic properties of the majority map)
+For odd , the map satisfies:
+-
+1.
+is odd and increasing, with and .
+-
+2.
+is concave on .
+-
+3.
+The derivative at the origin is
+Lemma 1 is standard for majority maps; we provide a self-contained proof in Appendix A. The quantity is especially important. It is the linear gain of the majority when the inputs are only slightly better than chance. As increases, grows sublinearly (in fact on the order of ), so increasing fan-in yields diminishing marginal amplification. Figure 5 visualizes for several fan-ins, highlighting its concavity and the increasing (but sublinear) small-signal gain .
+A tractable shared-failure model.
+To capture groupthink, we need a model in which child votes are positively correlated. We use the following local generative model, which matches a measurable correlation coefficient and yields a closed-form aggregation rule.
+Definition 2 (-shared correlation model)
+Fix a target bias and correlation strength . Conditional on , the child votes are generated as follows: with probability , all children share a common vote where ; with probability , the votes are i.i.d. with .
+This model has two practical advantages. First, equals the pairwise correlation of signed correctness. Let . Then for any , so can be estimated from logs as described in Section 2.4. Second, the induced aggregation map is explicit. Figure 6 provides an intuition for the mixture: with probability the children act as a single shared voter (groupthink), and with probability they behave as independent voters.
+Lemma 3 (Correlated majority map under the -shared model)
+Under Definition 2, the output bias of majority aggregation is
+In particular, is increasing and concave on , and
+Lemma 3 is immediate from the mixture construction: in the shared mode, majority returns the same vote (bias ); in the independent mode, it returns . The key design message is already visible in (27): increasing moves closer to the identity map, weakening amplification and making deep organization harder.
+4.2 Phase transition in deep trees:
+We now incorporate communication and study deep trees. Consider a homogeneous -ary tree in which every internal node aggregates child votes by majority, and every edge transmits a message of length tokens. Communication is modeled as an effective bit channel with reliability (Section 2.3): if a child vote has bias , then the parent receives a vote with bias .
+One-layer bias recursion.
+Let denote the bias of a node at depth from the leaves (so leaves are ). After one hop, each child vote’s marginal bias is attenuated to . We model the received votes entering each majority gate by the -shared model (Definition 2) with this marginal bias and within-group correlation . (Any additional dependence induced by shared message templates or decoding is absorbed into the effective .) Under this abstraction, the bias evolves as
+The map is increasing, concave on , and satisfies .
+The effective gain .
+The local behavior of near the origin is governed by the derivative
+We interpret as the effective per-layer gain on weak signal. If leaf votes are only slightly better than random, then one layer of aggregation and communication multiplies their bias by approximately . This single scalar already suggests a threshold: if , weak signal shrinks from layer to layer; if , it grows.
+The next theorem shows that this intuition is exact at the level of global dynamics: determines whether deep trees amplify accuracy or collapse to chance.
+Theorem 4 (Phase transition for deep majority trees)
+Figure 7 illustrates the two regimes: when the recursion map lies below the diagonal and collapses to , while when the map crosses the diagonal at a stable fixed point , yielding amplification followed by saturation.
+Proof sketch.
+Because is concave with , the ratio is nonincreasing on . Its limit at the origin is . If , then for all , so the recursion is monotone decreasing and must converge to a fixed point; the only possibility is 0. If , then , while with strict inequality when . By monotonicity of , there is a unique where , yielding a unique . The sign of implies the recursion moves toward from any starting point. Full details are given in Appendix C.
+Connection to reconstruction thresholds.
+In the classical broadcasting problem on trees with a binary symmetric channel (BSC) of second eigenvalue , the Kesten–Stigum condition characterizes when the root remains reconstructable from the leaves (it is tight for the two-state symmetric model and, more generally, gives the Kesten–Stigum bound for Bayes-optimal reconstruction) (Kesten and Stigum, 1966; Evans et al., 2000; Mossel, 2001). Our condition plays an analogous role for the specific majority-based recursion under our correlated-input model and effective reliability : it is exactly the linear gain of the update map at the origin. We emphasize that is estimator-dependent (majority rather than Bayes-optimal) and explicitly incorporates shared failures through .
+What the threshold means in practice.
+Theorem 4 clarifies why adding hierarchical structure is risky. In a supercritical regime, a tree can turn many weak votes into a strong decision and is robust to depth until it saturates. In a subcritical regime, depth destroys information: the system becomes less reliable as it grows. Both correlation () and short messages (small ) push downward, making collapse more likely. This matches the practitioner experience that groupthink and aggressive compression are the two most common reasons multi-agent scaling fails.
+4.3 Small-signal amplification and the organization exponent
+The phase transition determines whether deep organization is viable at all. When it is viable (), the next question is how fast accuracy can grow with the number of leaves. This is where a simple exponent emerges.
+Linear regime and a global upper bound.
+Concavity of implies a strong inequality: the tangent line at the origin upper-bounds the entire map on ,
+Thus, for a depth- tree,
+This bound is informative even when : it tells us that exponential growth in depth is the fastest possible behavior in the small-signal regime.
+To complement (31) we also need a lower bound showing that the upper bound is tight when signals remain small. Because is differentiable at 0, its local behavior is well-approximated by its derivative.
+Theorem 5 (Small-signal amplification band)
+Fix odd , , and channel reliability . Let and . For any , there exists such that for all ,
+Consequently, if , then the depth- recursion satisfies
+Proof sketch.
+The organization exponent.
+For a full -ary tree of depth , the number of leaves is . Theorem 5 implies that in the growth regime (before saturation),
+We call the organization exponent. It converts the per-layer gain into a statement about how performance scales with the number of leaves under hierarchical aggregation.
+This exponent is the main interface between organization and budget. Later, in Section 4.5, we compare to the single-agent scaling exponent to decide whether scale-out can beat scale-up under a fixed budget. At this stage, the key point is conceptual: increases with better communication (), decreases with shared failures (), and is limited by fan-in through .
+4.4 Saturation and finite-depth guarantees: and clipped objectives
+Small-signal amplification does not continue forever. Bias is bounded by 1, and communication loss and correlation prevent arbitrarily deep trees from achieving perfect accuracy unless the channel is lossless. Theorem 4 already tells us that in the supercritical regime the recursion converges to a fixed point . In practice, we need two additional pieces of information: how quickly approaches , and how to build a design objective that remains accurate across both growth and saturation regimes.
+Mixing depth.
+Because is concave and , the slope at the fixed point satisfies , with strict inequality whenever or . This creates a locally contracting region around , which implies geometric convergence once the recursion enters that region.
+Theorem 6 (Finite-depth convergence to the fixed point)
+Assume and . Let be the unique fixed point of from Theorem 4. For any , there exists a finite depth such that
+whenever . Moreover, can be chosen to scale as
+with constants depending only on .
+Proof sketch.
+Write the recursion as with and a stable fixed point when . There are two phases. First, while remains in the small-signal band, Theorem 5 gives , so reaching a constant-sized neighborhood of takes steps. Second, stability implies ; by continuity there exists a neighborhood below on which , so the recursion is a contraction and the error shrinks geometrically, reaching relative error in additional steps. Appendix E provides an explicit construction and constants.
+A clipped objective for design.
+The results above suggest a simple approximation that is both interpretable and safe: use the small-signal prediction when it is below the saturation point, and clip it at otherwise:
+The clipped objective captures the two dominant regimes with a single expression. In the common small-signal regime , concavity yields the global upper bound , while Theorem 5 guarantees that tracks the growth term when . Theorem 6 guarantees that tracks the saturation term when and depth exceeds .
+Design takeaway.
+Equation (35) makes a practical point precise. In the supercritical regime, adding depth and leaves helps only until the system approaches . Beyond that point, additional budget should be spent on changing itself, which requires improving communication fidelity (increasing by using longer messages) or reducing shared-error correlation (increasing diversity or adding verification). In the subcritical regime, adding depth is actively harmful; the only viable route to scale-out is to move the system across the threshold by improving , reducing , or increasing fan-in within the context constraint.
+Section 4.5 uses the organization exponent , the threshold , and the clipped objective (35) to derive topology and budget phase diagrams under context limits. Section 5 turns these results into a theory-guided design algorithm that outputs monotone communication design curves and compute allocations under a fixed budget.
+4.5 Topology and Budget Phase Diagrams
+Building on the binary recursion and organization exponent from Section 4, we translate the layer-wise results into system-level guidance under a fixed budget and context window . We ask when a context-limited star is feasible, when hierarchy is necessary, and when scaling out can beat scaling up before saturation. The resulting regimes can be summarized as phase diagrams in the measurable environment parameters , , and (Section 2), together with the context constraint .
+4.5.1 Star as an upper bound without constraints
+A recurring empirical pattern is that hierarchies sometimes outperform naive centralization. It is tempting to interpret this as “hierarchy is intrinsically better.” Without constraints, that interpretation is false. A star is not merely a particular topology; it is the topology that gives the decision rule access to all leaf information in a single place. Any hierarchy that compresses information on the way up can only discard information, not create it (Cover and Thomas, 2006).
+We formalize this point in an intentionally general way, independent of the details of the aggregation rule.
+Proposition 7 (Centralization dominates under unlimited context)
+Let denote the collection of all leaf messages (or leaf outputs) generated in response to a task with truth label . Consider any multi-agent protocol on any directed acyclic topology such that the root ultimately observes a variable that is a (possibly randomized) function of with randomness independent of . Then for any loss ,
+In particular, a centralized decision rule that has access to cannot perform worse than any rule that only sees .
+Proof.
+Let collect the protocol’s internal randomness, independent of , so that . Any rule induces a (possibly randomized) rule ; hence predictors based on are a subset of predictors based on (and thus no better than those based on ), proving the risk inequality.
+Proposition 7 is not an endorsement of star in constrained settings. It is a sanity check: hierarchies are only needed because some constraint makes full centralization infeasible or too expensive. In this paper, the dominant such constraint is the context window , which caps the fan-in of any node (Section 2.5). Once binds, a star can only incorporate a bounded number of leaves regardless of budget, and that is precisely where hierarchy becomes a meaningful design choice.
+4.5.2 Why chains degrade without new evidence
+Chains are appealing in practice because they resemble deliberation: one agent’s output becomes the next agent’s input. However, in our framework a chain does not introduce new independent evidence; it only retransmits and transforms what already exists. Under lossy communication, repeated retransmission compounds loss.
+This is explicit in both settings. In the continuous warm-up, (14) shows MSE increases linearly with chain length. In the binary setting, the effect is even simpler.
+Proposition 8 (Bias decays along a chain under lossy communication)
+Consider a chain of length in which a single leaf vote with bias is transmitted through independent communication steps, each with reliability , and no new independent evidence enters the chain. Then the final bias is
+Consequently, if and , then .
+Proof.
+Each hop multiplies bias by by the channel model in Section 2.3.
+Design takeaway.
+A relay-only chain strictly attenuates signal (Proposition 8); it helps only when intermediate steps add new evidence (tools, retrieval, verification) rather than passing along the same information. We therefore focus on star versus tree as the two scalable evidence-aggregation strategies under context limits.
+4.5.3 Context-limited star versus hierarchical trees
+The context window turns Proposition 7 from a theoretical upper bound into a practical obstacle. A star aggregator that receives messages of length must read roughly tokens, so feasibility requires
+For fixed , is a constant independent of budget. Thus, once a star uses as many leaves as it can fit in context, additional budget cannot increase the number of incorporated leaves. The only remaining levers are to strengthen each leaf (increase ) or to increase message length (increase ) at the cost of reducing .
+A hierarchical tree avoids the global cap (36) by enforcing the context constraint locally. If each internal node has fan-in and reads messages of length , feasibility requires
+but the number of leaves can grow as with depth . In other words, a tree converts a global bottleneck ( at one node) into many local bottlenecks ( at many nodes). Figure 8 illustrates this trade-off: the star saturates early due to context limits, while the tree can continue scaling until it reaches its fixed-point ceiling .
+This benefit is real only if information survives the hierarchy. The binary phase transition from Section 4.2 provides the feasibility condition: a deep tree can only maintain nontrivial accuracy when
+Even when , deeper trees saturate at a fixed point , so trees should be viewed as a tool for scaling up to a regime of strong performance, not for unlimited improvement.
+4.5.4 Budget thresholds for synergy: conditions on and
+The layer-wise analysis of Section 4 yields an organization exponent that governs how signal grows with depth before saturation. Here we translate that picture into a fixed-budget comparison: under the same total budget , when can scaling out with a tree outperform scaling up a single agent?
+Setup (growth regime).
+Assume the per-leaf scaling curve admits a local exponent in the operating range (Section 2.2), so that when leaf bias is small. In the amplification band of Theorem 5 (i.e., before the recursion approaches ), a depth- full -ary tree satisfies
+where is defined in (29) and as in (34). With the tree budget model from Section 2.5, we have , giving the growth surrogate
+We use (41) only as a pre-saturation diagnostic; in Section 4.4 we clip predictions at the fixed point .
+Proof sketch.
+Synergy against a single agent.
+Interpretation.
+Equation (45) makes the trade-off explicit: synergy is harder when coordination is expensive (large ) or when only barely exceeds . Saturation can truncate the growth regime, but the threshold still indicates whether a budget window exists in which scale-out should help before the fixed point dominates.
+4.5.5 A universal upper bound on amplification exponents
+The organization exponent governs how quickly a majority-vote hierarchy can amplify weak signal as the number of leaves grows. It is therefore important to understand its fundamental limits. Perhaps surprisingly, the majority family admits a clean and universal upper bound: no choice of fan-in can make exceed in the binary model with one-bit messages.
+Theorem 11 (A universal bound: )
+For every odd , the majority map satisfies
+Consequently, for any and any ,
+Proof sketch.
+Phase-diagram summary and implications.
+The preceding results collapse topology choice into a small set of quantitative checks. Under context constraints, deep trees are only viable in the supercritical regime (otherwise bias collapses to chance as depth grows). In the growth regime, budgeted synergy against scale-up further requires , equivalently (Section 4.5.4). Within one-bit majority-vote hierarchies we also have the universal cap (Theorem 11), which explains why scale-out is fragile on some tasks: if , exponent-level synergy is impossible without richer communication, heterogeneity that lowers the effective , or protocols that change the effective aggregation map. Even when , gains persist only until saturation at ; beyond that point, additional budget is typically better spent improving fidelity (larger , hence larger ) or reducing shared failures (smaller ) than on additional depth. Figure 9 summarizes these regimes, and Section 5 turns the checks into concrete design diagnostics within the model.
+5 Design Diagnostics Within the Model
+The results so far characterize when different organizations can help under a fixed budget: a context-limited star saturates (Section 4.5.3), chains compound loss (Section 4.5.2), and trees are viable only in the supercritical regime with small-signal growth governed by an organization exponent (Section 4). Here we translate these results into design diagnostics within the model: given a budget , a context window , and a small set of effective environment quantities, we ask whether hierarchy is feasible, whether scale-out can outpace scale-up before saturation, and which constraint is binding when it cannot. For LLM-based agent systems, the knobs correspond to token allocations: per-leaf reasoning/compute and inter-agent message length . The abstraction is deliberately coarse, so the goal is regime prediction and diagnostic guidance, not a faithful end-to-end optimizer for any particular agent stack.
+Under a budget and context window , we parameterize a tree design by
+and ask how to choose these quantities to maximize the model-predicted performance subject to feasibility. The inner problem chooses for fixed ; the outer problem trades off communication quality and coordination cost by selecting as a function of . A key structural takeaway is monotonicity: in the growth regime, the budget-optimal message length can be chosen nondecreasing in , yielding efficient design curves rather than expensive search. We focus on binary success/failure tasks, where hierarchies can either amplify or collapse; the continuous setting admits analogous (and smoother) diagnostics via the closed-form recursions of Section 3.
+5.1 Compute allocation in the growth regime
+Fix a feasible fan-in and message length with . Let be defined as in (29), and write the associated organization exponent as . In the supercritical regime and before saturation, the binary small-signal prediction takes the growth form (41). Theorem 9 yields a closed-form compute allocation (eq. (42)) and an optimized growth curve (eq. (43)) whenever . If , the growth surrogate favors spending budget to scale up rather than scale out.
+Given a budget , we then allocate
+and cap using the mixing-depth guarantee (Theorem 6) when operating near saturation.
+5.2 Monotone communication design: why increases with budget
+Compute allocation solves only the inner problem. We still need to choose message length , which trades off two effects: increasing improves communication fidelity and thus increases the gain (raising the exponent ), but increasing also increases the coordination cost , reducing the number of leaves we can afford.
+A natural design question is whether there is structure in the budget-dependent solution. The answer is yes: in the growth regime, the optimal message length is monotone in the budget. This formalizes a useful heuristic in the model: as you spend more, the optimal design communicates less aggressively compressed information.
+A growth-regime objective indexed by .
+Fix fan-in and consider the feasible message set
+For each , define the growth-optimal prediction from Theorem 9,
+We only consider candidates with and since only these can outpace scale-up in exponent terms in the growth regime.
+Theorem 12 (Monotone message-length design in the growth regime)
+Fix fan-in and correlation . Assume is strictly increasing in and is nondecreasing in . Let
+where the maximization ranges over candidates satisfying and . Then for any , there exists an optimal selection such that
+Equivalently, can be chosen as a nondecreasing function of .
+Why this holds.
+Taking logs of (49) yields
+where does not depend on . Thus, for fixed , each message length defines a line in with slope . Because increases with , the slopes are increasing in . When choosing among lines with increasing slopes, the maximizing line index can only move in one direction as increases. A full proof, stated in terms of increasing differences and upper envelopes, is given in Appendix I.
+What the theorem does and does not claim.
+Theorem 12 is a statement about the growth-regime objective for a fixed fan-in . It does not assert global monotonicity when the optimal fan-in itself changes with budget, nor does it rely on the saturation fixed point . In practice, once a design approaches saturation, increasing often remains beneficial because it increases and improves , but the theorem is intentionally limited to a regime where the approximation is provably accurate.
+5.3 A linear-time envelope algorithm for design curves
+The envelope view in Figure 10 yields an efficient algorithm for generating design curves. For a fixed fan-in , we want to compute for a range of budgets, without brute-force search over all at every .
+Lines and intersections.
+Let . For each feasible with and , define
+where is the intercept from (49). The maximizer of over is the envelope. Because is increasing in , the envelope can be computed by a standard monotone upper-hull procedure: maintain a stack of candidate lines and the -values where one line overtakes the previous one.
+Given two lines and with , their intersection occurs at
+If a newly added line overtakes the previous line earlier than the previous line overtook its predecessor, then the previous line is never optimal and can be removed. This is the same geometric logic used in convex-hull tricks for dynamic programming.
+Complexity and usage.
+For a fixed fan-in , the feasible message set has size . Algorithm 1 scans candidates in increasing (equivalently increasing slope ) and builds the upper envelope with a stack in which each candidate line is pushed once and popped at most once. Thus, envelope construction takes time and memory. Given budgets , the optimal choices can then be returned in additional time by a single pass over the envelope breakpoints. To obtain a global design curve, we run Algorithm 1 for each odd with (equivalently since ), and then select the best per budget using the clipped objective described next.
+5.4 Putting the diagnostics together
+We now combine compute allocation, monotone communication design, and saturation into a compact workflow. The inputs are a budget , a context window , and a small set of estimated effective quantities, in particular , , and (Section 2.7). The output is a model-based prediction and a set of diagnostics (which constraint is binding), rather than a claim that the abstraction optimizes real agent stacks end-to-end. Figure 11 summarizes the workflow of design-diagnostics.
+Compare against centralization.
+For message length , a star can include at most leaves. When the budget regime of interest does not push beyond this cap, centralization is the natural baseline: it aggregates in one hop and avoids multi-hop loss (Proposition 7). When binds, additional budget cannot increase the number of incorporated leaves in a star, and hierarchy becomes the only way to expose more parallel evidence under the same per-node context limit.
+Screen tree candidates and allocate compute.
+For each odd fan-in and each feasible with , compute and . Discard candidates with , which collapse in depth (Theorem 4). For exponent-level budgeted synergy in the growth regime, also discard . For remaining candidates, set the per-leaf compute to the closed form in (42) (Theorem 9) and choose the implied leaf count and depth via (48), with depth interpreted through the mixing-depth guarantee of Theorem 6. For fixed , Algorithm 1 yields the monotone budget-indexed communication curve , so the outer search can be performed efficiently.
+Clip by saturation.
+In the supercritical regime, the binary recursion converges to a fixed point (computed by iterating ). To avoid extrapolating the growth law beyond its range, we evaluate a design using the clipped prediction from Section 4.4:
+At each budget , we compare this clipped tree prediction to the best feasible star and to the single-agent baseline under the same budget.
+Interpretation as diagnostics.
+These checks separate four common reasons why scaling out fails: context saturation of a star ( caps centralization), subcriticality (), exponent mismatch (), and saturation ( close to ). When performance plateaus, the theory points to two levers: improve effective communication fidelity (larger at the same cost) or reduce shared failures (smaller via diversity or verification), rather than increasing depth.
+Continuous tasks.
+The same workflow applies in the continuous warm-up with replaced by and replaced by the explicit error floor in (17).
+6 Empirical Touchpoints
+This paper is primarily theoretical: our goal is to explain why budgeted multi-agent scaling amplifies in some regimes and collapses in others, and to make the relevant regime boundaries explicit. Accordingly, we keep the empirical component modest. We (i) connect our bottlenecks and regime predictions to recent large-scale matched-budget evaluations reported elsewhere, and (ii) provide a minimal synthetic sanity check that recovers the predicted amplification boundary under the assumed model.
+6.1 Theoretical Mechanisms in Recent Large-Scale Studies
+Large-scale matched-budget evaluations are computationally prohibitive for academic groups, but recent industrial studies provide high-fidelity data that validates our theoretical predictions. Most notably, Kim et al. (2025) conducted an extensive evaluation of scaling laws for agent systems across multiple benchmarks and architectures. Their empirical findings align closely with the qualitative regime boundaries derived in our framework:
+-
+•
+Context saturation and coordination overhead. Kim et al. (2025) observe that simply concatenating agent traces can degrade performance on tool-heavy tasks when coordination overhead consumes the context window. In our framework, this corresponds to the bottleneck: once a centralized aggregator becomes context-saturated, adding agents can dilute usable signal.
+-
+•
+Saturation at strong baselines. They report diminishing (and sometimes negative) returns once the single-agent baseline is already strong. This is consistent with our fixed-point analysis: once a hierarchy approaches its saturation point , marginal gains from adding depth or leaves are small; improvement requires changing effective parameters (better or smaller ), not more aggregation.
+-
+•
+Shared failures and error cascades. They emphasize that agents can share failure modes and that naive aggregation can amplify errors, while more structured coordination can mitigate this. In our framework, shared failures are summarized by : higher pushes downward and can drive hierarchies into the subcritical regime where depth washes out information.
+By providing the mathematical derivation for these empirically observed regimes, our theory explains why scaling fails when it does, suggesting that future improvements must come from altering the effective parameters, specifically increasing or decreasing , rather than simply adding more agents.
+6.2 Synthetic sanity check: recovering the amplification boundary
+Synthetic experiments provide a controlled setting where the ground-truth parameters are known and the phase boundary can be probed directly. Our goal here is not to optimize absolute performance, but to verify that the qualitative prediction, i.e., amplification versus collapse governed by , is recovered under the generative model analyzed in Section 4.
+We include one lightweight Monte Carlo study under the -shared binary model. We fix , , , sweep , and compare the recursion prediction at depths to Monte Carlo estimates (). Figure 12 shows close agreement and a sharpening transition around the predicted boundary .
+For continuous tasks, the same role can be played by a simple correlated-Gaussian generator, where the closed-form expressions of Section 3.2 make correlation and communication floors explicit.
+7 Discussion and Limitations
+We asked when scaling out a budgeted multi-agent system yields synergy and when it fails. The framework is intentionally minimal: it treats an agent as a black-box solver with an allocated compute budget, models inter-agent communication as a controllable lossy channel, and summarizes shared failures through an effective correlation parameter. This minimalism makes the regime boundaries transparent, but it also defines what the theory does and does not claim.
+While our results provide a rigorous asymptotic foundation for agent scaling, the practical utility of these bounds hinges on the empirical estimation of the shared-failure correlation and the organization exponent . In practice, serves as a ‘homogeneity metric’ for a given model ensemble; a high suggests that the agents are inheriting the same inductive biases or training data flaws, thereby collapsing the effective fan-in . Future work should focus on developing diagnostic probes—short, high-entropy test batteries—to calibrate these parameters for specific LLM families. By doing so, the Phase Transition can be transformed from a theoretical threshold into a real-time ‘stopping rule’ for determining whether further tree depth will yield diminishing returns or catastrophic signal decay.
+Relationship to prior results
+Our binary phase transition echoes reconstruction thresholds for broadcasting on trees (Kesten and Stigum, 1966; Evans et al., 2000; Mossel, 2001), where information can or cannot propagate from leaves to the root depending on a single scalar. Two differences are central for agent-system design. First, our “channel” is partly under design control: message length trades off fidelity against budget and context constraints, so the relevant threshold depends on an explicit communication choice. Second, we couple propagation to a fixed-budget allocation problem: an amplifiable hierarchy is synergistic only when its organization exponent outpaces single-agent scaling.
+Recent work offers complementary perspectives on information flow in agent systems. He et al. (2025) cast agentic architectures as compressor–predictor pairs and propose mutual information between context and compression as a task-independent proxy for information survival; their finding that scaling the compressor can dominate scaling the predictor aligns with our emphasis on communication fidelity as a first-order bottleneck, though our framework adds explicit budget constraints and multi-hop aggregation structure. Li (2026) study skill selection in single-agent systems and observe a phase transition: selection accuracy remains stable up to a critical library size then drops sharply, with semantic confusability among skills playing a central role. This echoes our amplification–collapse dichotomy, but at a different interface: where we model information loss across agents, they model selection confusion within a single agent’s skill routing. Together, these results suggest that sharp thresholds, whether in inter-agent communication, intra-agent skill selection, or hierarchical aggregation, may be a recurring motif in bounded-resource AI systems.
+What the framework explains (and what it does not)
+The framework is designed to explain qualitative regime changes that are otherwise hard to diagnose: why stars saturate under context limits, why chains compound loss, why trees can either amplify or collapse depending on , and why correlated failures impose floors that make large ensembles behave like “one agent with shared blind spots.” It also clarifies what additional sophistication must accomplish: any useful complexity must effectively increase communication fidelity, reduce shared failures, or relax the fan-in constraint.
+At the same time, the model is not a faithful simulator of real agent stacks. Parameters such as and are effective summaries that can vary with depth, prompts, tools, and task difficulty; real communication is far richer than a one-bit abstraction; and practical budget accounting can differ across implementations. For these reasons, we view the theory as a coordination diagnostic, i.e., predicting which constraint is binding and which direction should help, rather than as a source of precise point predictions. Crucially, the alignment between our derived bottlenecks and independent large-scale observations (Kim et al., 2025) suggests that the effective parameters defined here capture the structural essence of the scaling problem, rendering the theory robust to changes in the underlying base models.
+How stronger protocols fit the framework
+Protocols such as debate, critique, verification, or self-consistency can be interpreted as mechanisms that change the effective parameters of the model (Irving et al., 2018; Christiano et al., 2018; Du et al., 2024; Wang et al., 2023). For example, structured verification can reduce effective shared failures (), while richer message schemas can improve effective fidelity (); both, however, typically increase coordination cost. The theory suggests a concrete way to evaluate such protocols: measure how much they move the effective bottlenecks per unit budget, and check whether they move the system across the supercritical boundary or the synergy boundary .
+Extensions beyond our scope
+Several extensions are natural. Allowing heterogeneity across leaves (different models, prompts, or tools) makes and scaling task- and agent-dependent; a tractable next step is to treat as depth-dependent or to model mixtures of agent types. More general graphs and multi-round interaction can be analyzed by unrolling protocols into computation graphs, but doing so requires accounting for how added edges change effective dependence as well as cost. Finally, our strongest binary bounds rely on one-bit-style messages and majority aggregation; allowing richer messages or confidence reports changes the amplification map and may relax universal exponent limits. In all cases, the guiding principle remains the same: additional structure helps only insofar as it relaxes the binding constraints (context, communication loss, or shared failures) under a fixed budget.
+8 Conclusion
+Multi-agent systems can exhibit synergy, but under a fixed budget scaling out is not monotone: it can help, saturate, or collapse. We argued that these outcomes become predictable once we make the binding constraints explicit: finite context windows, lossy communication, and shared failures, and summarize an environment by a small set of measurable effective parameters. In a continuous warm-up we derived closed-form risks for star/chain/tree organizations and exposed correlation and communication floors. For binary success/failure tasks, we proved a sharp amplification–collapse phase transition for deep majority trees and characterized the resulting fixed-point saturation and mixing depth. In the amplifying regime we introduced an organization exponent governing small-signal growth and showed that budgeted synergy in the growth range occurs exactly when , yielding closed-form compute allocation and explicit budget thresholds. We also translated these results into simple design diagnostics within the model. The broader message is that topology is not magic. Hierarchies are useful because context limits can make full centralization infeasible, and they succeed only when communication is sufficiently faithful and shared failures are sufficiently weak. We hope this work helps move agent-system design from ad hoc heuristics toward principled, testable coordination theories.
+Acknowledgments and Disclosure of Funding
+The authors gratefully acknowledge funding from Canada CIFAR AI Chair Program and the Canada NSERC Discovery Grant program.
+Proof Roadmap and Dependency Graph
+This appendix provides self-contained proofs for the main theoretical statements in the paper. For convenience, we list where each result is proved:
+-
+•
+Lemma 1 (properties of the majority map): Appendix A.
+-
+•
+Lemma 3 (closed form under the -shared model): Appendix B.
+-
+•
+Theorem 4 (phase transition for deep majority trees): Appendix C.
+- •
+-
+•
+Theorem 6 (finite-depth convergence / mixing depth): Appendix E.
+- •
+-
+•
+Theorem 11 (universal upper bound ): Appendix H.
+- •
+Appendix G collects derivations for the continuous warm-up, and Appendix J provides experimental templates for estimating the effective parameters.
+Appendix A Properties of Majority Maps
+Throughout, let be an odd integer and write with . For , define and recall the majority map
+A.1 A derivative identity for binomial tails
+We start with a calculus identity that makes monotonicity and concavity transparent.
+Lemma 13 (Derivative of the symmetric binomial tail)
+Let and define
+Then is differentiable on and
+Proof Differentiate term-by-term for . Using the identity and , we obtain
+Summing over telescopes: the negative term at index cancels the positive term at index . Only the first positive term (at ) remains, yielding
+A.2 Proof of Lemma 1
+Proof [Proof of Lemma 1] We prove each item.
+(1) Oddness, monotonicity, and endpoints.
+Let . Flipping the sign of the bias corresponds to sending , i.e., swapping “correct” and “incorrect” votes. By symmetry of the binomial distribution,
+so , hence is odd. Also and are immediate from the definition.
+To see that is increasing on , note that is increasing and, for fixed and threshold , the binomial tail is increasing. Formally, Lemma 13 gives on , hence is nondecreasing and so is .
+(2) Concavity on .
+(3) Derivative at the origin.
+A useful corollary: majority improves independent votes.
+Concavity on with and implies for all , with strict inequality for because is strictly concave (for ). We use this fact in Appendix C when treating the case.
+Appendix B Correlated Aggregation via the -Shared Model
+Recall Definition 2. Let denote signed correctness.
+B.1 Relationship to pairwise correlation
+Lemma 14 (Pairwise correlation equals )
+Under Definition 2, for any ,
+Proof By construction, for every , so . Moreover,
+Thus , and dividing by yields .
+B.2 Proof of Lemma 3
+Proof [Proof of Lemma 3] Condition on the mixture event in Definition 2. With probability , all child votes equal a common with , and majority returns , hence output bias . With probability , the votes are i.i.d. with bias , so the output bias is by definition. Taking expectation over the mixture yields
+which is (26).
+Since is increasing and concave on (Lemma 1), the mixture is also increasing and concave on .
+Differentiating at the origin gives (27).
+Appendix C Binary Phase Transition Proofs
+We prove Theorem 4. Throughout, fix odd , , and , and define
+By Lemma 1 and Lemma 3, is continuous, increasing, and concave on , with . Because and is strictly concave on , the map is strictly concave on .
+C.1 A ratio monotonicity lemma
+Lemma 15 (Concavity implies decreasing ratio)
+Let be concave with . Then the ratio is nonincreasing on .
+Proof Fix . Concavity gives
+Dividing by yields .
+C.2 Proof of Theorem 4
+Proof [Proof of Theorem 4] Let as in (29). Define . Since is concave, is concave (and in fact strictly concave on ) with and .
+(1) Subcritical collapse: .
+If , then . Because is concave and , for any we have the supporting-line bound
+Thus on . The recursion is therefore monotone nonincreasing and bounded below by 0, hence it converges to some . By continuity of , the limit is a fixed point: , i.e., .
+We now show . If , then and for all . Concavity then forces for all : indeed, for any ,
+while also , hence . This contradicts strict concavity of on unless . Therefore .
+(2) Supercritical amplification: .
+Assume , so and hence for all sufficiently small . Next, we show that , with strict inequality when . Indeed,
+If , then so . If , then and (majority cannot be perfectly correct when each vote has bias ), hence , so .
+Since is continuous, , for small , and , there exists at least one root with , i.e., . Uniqueness follows from strict concavity: if there were two distinct roots in , then would have to be linear on the interval between them, contradicting strict concavity. Thus the fixed point is unique.
+We now show global convergence to for any . By Lemma 15, the ratio is nonincreasing on . Because and , we have for and for . Equivalently,
+If , then is strictly increasing and bounded above by , hence converges to some ; by continuity, is a fixed point, so . If , then is strictly decreasing and bounded below by , hence converges to a fixed point , again forcing . This proves for all .
+Finally, the statements about follow from the above boundary cases:
+if , then and the unique positive fixed point is ;
+if , then so .
+A stability fact used later.
+At the attracting fixed point , we necessarily have . Indeed, since and is concave with for , the tangent line at must have strictly negative slope: , i.e., . We use this to obtain geometric convergence in Appendix E.
+Appendix D Small-Signal Bounds and Budget Thresholds
+D.1 Linear-band bounds and proof of Theorem 5
+Recall , which is concave on with and derivative .
+Lemma 16 (Tangent upper bound at the origin)
+If is concave on and differentiable at , then
+Proof
+For concave functions, every tangent line is a global upper bound.
+In particular, differentiability at implies that the affine function supports at , hence upper-bounds on .
+D.2 Closed-form compute allocation and proof of Theorem 9
+We treat the growth-regime surrogate objective in (41) as an exact function of for fixed , ignoring multiplicative constants independent of :
+Taking logs gives
+Proof [Proof of Theorem 9] Differentiate :
+If , the unique critical point is at , which is (42). A second derivative check shows it is a maximizer:
+because at we have . Equivalently, is strictly concave around .
+If , then for all , so the growth surrogate is nondecreasing in .
+Under the budget constraint with , the maximum feasible is on the order of (corresponding to ), i.e., “scale up rather than scale out.”
+D.3 Proof of Corollary 10
+D.4 A remark on the regime
+When , the growth surrogate cannot deliver an exponent advantage over the single-agent curve. More precisely, optimizing (41) over yields a prediction that scales at most as (and typically prefers ). This is the sense in which the condition is necessary for scale-out exponent gains in the growth regime.
+Appendix E Saturation and Mixing Depth
+We prove Theorem 6. Assume the supercritical regime , so by Theorem 4 there is a unique attracting fixed point and for every .
+E.1 Two-phase mixing analysis and proof of Theorem 6
+Proof [Proof of Theorem 6] If , then for all (the recursion is monotone decreasing toward from above), and therefore holds for every with . We therefore focus on the case , where .
+Phase I: reaching a constant fraction of .
+Define for , which is continuous on and nonincreasing by Lemma 15. Because and for , pick any reference level (e.g., ) and set
+For any , monotonicity of gives , hence . As long as , we therefore have , and by induction
+Thus the hitting time
+satisfies
+with constants depending only on (hence on ).
+Phase II: geometric contraction near .
+As noted at the end of Appendix C, we have . By continuity of and compactness, there exists and a constant such that
+Once , define the gap . By the mean value theorem, for each with there exists such that
+Iterating yields . In particular, once we have reached , to ensure it suffices that
+where the constant depends on and the initial gap bound .
+Combining phases.
+Since , the time to go from to is finite and depends only on ; absorb it into constants. Combining the bounds gives a depth
+with constants depending only on , such that for all .
+This establishes the claimed scaling.
+E.2 Clipped objectives and approximation guarantees
+The clipped proxy in (35) is most naturally interpreted for the regime , which includes the small-signal settings used in Section 4.5.4. In that case, monotonicity and Theorem 4 imply for all , while Lemma 16 implies . Therefore , justifying the global upper bound claim in Section 4.4. Theorems 5 and 6 provide matching lower bounds in the growth and saturation regimes, respectively.
+Appendix F Topology Comparison Proofs
+F.1 Star upper bounds under context constraints
+A star node that reads tokens per leaf can aggregate at most leaves within a context budget . This is the sense in which a star saturates under a finite context window: beyond , additional leaves cannot be included without increasing (which changes both cost and fidelity).
+F.2 Proof of Proposition 7
+Proof [Proof of Proposition 7]
+Any predictor induces a predictor on via composition , where denotes any protocol randomness (assumed independent of ).
+Therefore, the set of predictors measurable with respect to is a subset of those measurable with respect to , implying the optimal risk using is no larger than the optimal risk using .
+F.3 Proof of Proposition 8
+F.4 Tree vs. star dominance beyond a threshold
+The comparison between a context-limited star and a supercritical tree in Section 4.5 is driven by two facts: (i) the star cannot use more than leaves for fixed , hence eventually must spend additional budget on scale-up (which grows like in the small-signal regime), while (ii) a tree with exponent admits a growth regime with scaling (Appendix D) before saturating at (Appendix E). This yields a provable intermediate budget range where trees can dominate under context constraints, formalized through the sufficient condition in Corollary 10.
+Appendix G Continuous Extension Proofs
+This appendix derives the closed-form mean-squared error (MSE) recursions used in the continuous warm-up (Section 3). Throughout, let be the ground truth and suppose each leaf outputs with , , and for .
+G.1 Star, chain, and tree recursions
+Star.
+In the star topology, each leaf transmits over the additive channel of Section 3, so the aggregator receives with and , independent across leaves and independent of the leaf errors . The aggregator outputs the average of the received messages,
+Because and are independent and mean-zero, the MSE is
+which is (13).
+Chain.
+Tree.
+For a -ary tree, each internal node averages the received child messages. Under the edge channel model of Section 3, child transmits and the parent receives , where and , independent across edges and independent of estimation errors. If the child errors have variance and pairwise correlation , then averaging the child errors yields variance (the same computation as the star with ). Averaging the independent channel noises adds variance . Thus the recursion is
+which is (15). Solving this affine recursion gives (16), and taking yields the floor (17).
+G.2 Mixing depth in the continuous recursion
+Appendix H Universal Upper Bound on Amplification Exponents
+We prove Theorem 11.
+H.1 A standard bound on the central binomial coefficient
+The proof relies on the classical inequality
+which we derive here from an integral bound (avoiding asymptotic approximations).
+Lemma 17 (Central binomial coefficient bound)
+For every integer , .
+Proof Let . A standard integration-by-parts recursion gives with , hence
+Equivalently,
+H.2 Proof of Theorem 11
+Proof [Proof of Theorem 11] Let with . By Lemma 1,
+Applying Lemma 17 yields
+Since and , we have , proving (46).
+For the second claim, note that and because .
+Therefore , and .
+Appendix I Monotone Design Curves and Envelope Algorithm
+I.1 Increasing differences and proof of Theorem 12
+Fix fan-in and consider feasible . For each feasible that passes the screening conditions and , define
+as in (50)–(49). By assumption, is strictly increasing in , hence so is , and therefore is strictly increasing in .
+Lemma 18 (Single-crossing / increasing differences)
+For any , the difference is strictly increasing in .
+Proof Compute
+Because , the coefficient of is positive, so the difference is strictly increasing in .
+Proof [Proof of Theorem 12] Let and define the argmax correspondence
+By finiteness of , is nonempty. We show that the minimal selection is nondecreasing in , which implies the theorem.
+Take and let and . Suppose for contradiction that . Optimality gives
+Adding these inequalities yields
+On the other hand, Lemma 18 with and implies
+which rearranges to
+contradicting (59).
+Therefore , i.e., is nondecreasing.
+Translating back from proves that an optimal message length can be chosen nondecreasing in .
+I.2 Upper-envelope construction and correctness of Algorithm 1
+We sketch a standard correctness argument for the stack-based envelope construction used in Algorithm 1. Consider a finite family of lines with strictly increasing slopes . Define the upper envelope .
+Lemma 19 (Envelope structure for increasing slopes)
+If are strictly increasing, then there exist indices and breakpoints such that for every ,
+That is, the maximizing index is nondecreasing in and changes only at increasing intersection points.
+Proof
+For any pair , the difference is an increasing affine function of (because ).
+Therefore, the set where dominates is either empty or a half-line , where is their intersection.
+This single-crossing property implies the argmax index over is nondecreasing in , and the envelope is piecewise linear with breakpoints at pairwise intersections.
+Algorithm 1 is a constructive implementation of Lemma 19. Processing lines in increasing slope order, it maintains a stack of candidate lines and the associated increasing breakpoints . When a new line is added, if its intersection with the current top occurs to the left of the top’s activation breakpoint, then the top line is never maximal and is removed. Because each line is pushed and popped at most once, the construction runs in linear time. The resulting stack and breakpoint list exactly encode the envelope , and the associated maximizing message length is the piecewise-constant function in Theorem 12.
+Appendix J Calibration and evaluation templates
+This appendix collects optional templates for estimating the effective parameters of the framework in a given agent stack and for running small diagnostic evaluations. Because the main paper is theoretical and the modeling assumptions are deliberately simplified, these templates are intended primarily to support qualitative regime checks (e.g., whether is supercritical, or whether saturation is communication- versus correlation-limited), rather than to provide a faithful simulator of all real-world effects.
+J.1 Calibration protocol: estimating , / , and
+This subsection operationalizes the “measurable parameters” promise from Section 2.7. The goal is not to fit a complicated model, but to obtain stable estimates that are accurate enough to place the system in the correct qualitative regime of the phase diagram.
+Single-agent scaling ().
+Fix a leaf-agent template (model, prompt, tools) and define a compute knob (e.g., reasoning tokens, number of samples, number of tool calls). Evaluate the leaf agent on calibration tasks at a grid (roughly log-spaced).
+For binary tasks, estimate accuracy and convert to bias . Fit a power law on a small-signal window where is positive and not saturated, e.g.,
+with chosen so that for task-appropriate constants . Report (and optionally ) with bootstrap confidence intervals over tasks. For continuous tasks, estimate and fit over a range where scaling is stable.
+Communication fidelity () or distortion ().
+Communication is calibrated with a purpose-built transmission task that isolates encoding/decoding from problem solving, using the same message schema and truncation rules as the target pipeline.
+For binary tasks, sample uniformly, ask a sender to encode into at most tokens, and ask a receiver to decode from the message alone. The empirical flip rate yields . For continuous tasks, sample , transmit under an -token constraint, decode , and estimate .
+Shared-failure correlation ().
+Correlation should be measured at the level where aggregation occurs (siblings), since that is the dependence that limits cancellation. On tasks with ground truth , run leaf agents (different randomness and/or prompts). For binary tasks define signed correctness , compute pairwise sample correlations across tasks
+and aggregate
+For continuous tasks, use residuals and compute residual correlations analogously. In practice it can be informative to stratify tasks by difficulty (e.g., baseline accuracy bins), since may increase on harder tasks.
+Budget accounting and effective context.
+Finally, record realized costs: tokens generated and tokens read (including system prompts, tool outputs, and formatting overhead), and verify the effective context window after templating. This prevents a common pitfall: attributing gains to “topology” when the true driver is uneven budget usage.
+J.2 LLM diagnostic template: context limits, correlation floors, and saturation
+The synthetic setting checks internal consistency under the assumed generative models. The more important question is whether the framework remains useful as an engineering diagnostic when agents are real LLM instances with non-Gaussian errors and prompt effects. Our aim here is therefore qualitative: do calibrated parameters correctly identify which lever is binding and which intervention should help?
+We recommend using at least one binary family with unambiguous correctness (e.g., multiple-choice, exact-answer math, pass/fail tests) and one continuous family with graded scores (e.g., rubric grading or scalar estimation with known targets), since the framework makes distinct predictions in each. Implement single-agent, star, tree (and optionally chain) pipelines under matched realized budgets, standardizing prompts and message schemas across topologies. For stars, feasibility is ; for trees, feasibility is , with depth and leaf count chosen using the design rules in Section 5.
+In this setting, the most useful validations are diagnostic. First, under fixed , the best feasible star should saturate in effective parallelism once hits , so additional budget primarily benefits scale-up. Second, measured should help explain why naive voting sometimes fails: high predicts limited aggregation gains even with many agents. Third, the calibrated quantity should act as a feasibility check for trees: when , deeper hierarchies should become unstable or drift toward chance; when , trees should amplify and then saturate. Finally, when performance plateaus with depth or budget, the framework predicts that further gains come primarily from improving communication fidelity (longer messages, better schemas) or reducing shared failures (diversity, verification), rather than adding depth.
+Diagnostic interventions (compact ablations).
+Three inexpensive interventions connect the theory’s parameters to practice under matched budgets: varying message length (trading off against coordination cost), injecting diversity to reduce (e.g., prompt, model, temperature, tool-policy variation or explicit verification roles), and swapping topology (single, star, chain, tree) under fixed schemas. When these interventions move or in the expected direction, the phase-diagram predictions provide testable hypotheses about whether amplification becomes feasible and whether scale-out can outpace scale-up before saturation.
+Logging and reproducibility.
+For each run, log realized tokens per node, realized message lengths, and outputs at each level (or hashes if privacy is needed). These logs enable post hoc estimation of , auditing of budget fairness, and direct diagnosis of failure modes such as repeated identical errors.
+These templates are meant to support qualitative diagnostics: whether context is binding, whether measured correlation suggests limited gains, and whether the calibrated places a hierarchy in the amplifying or collapsing regime. In that sense, the phase diagrams and design curves from Sections 4.5–5 provide concrete hypotheses about which organization should help under matched budgets and which lever (communication fidelity versus shared-failure reduction) is most likely to matter when it does not. Establishing quantitative predictiveness in realistic deployments, where prompts, tools, and dependence structure may drift with depth and task difficulty, is an important direction for future work.
+References
+- Bagging predictors. Machine Learning 24 (2), pp. 123–140. External Links: Document, Link Cited by: §1.
+- Language models are few-shot learners. In Advances in Neural Information Processing Systems, H. Larochelle, M. Ranzato, R. Hadsell, M.F. Balcan, and H. Lin (Eds.), Vol. 33, pp. 1877–1901. External Links: Link Cited by: §1.
+- AgentVerse: facilitating multi-agent collaboration and exploring emergent behaviors. In International Conference on Learning Representations, External Links: Link Cited by: §1.
+- [4] Provable scaling laws for the test-time compute of large language models. In The Thirty-ninth Annual Conference on Neural Information Processing Systems, Cited by: §2.2.
+- Supervising strong learners by amplifying weak experts. CoRR abs/1810.08575. External Links: Document, Link Cited by: §1, §7.
+- Elements of information theory. 2 edition, Wiley-Interscience. External Links: ISBN 978-0471241959 Cited by: §1, §4.5.1.
+- Ensemble methods in machine learning. In Multiple Classifier Systems, Lecture Notes in Computer Science, Vol. 1857, pp. 1–15. External Links: Document, Link Cited by: §1, §2.4.
+- Improving factuality and reasoning in language models through multiagent debate. In International Conference on Machine Learning, External Links: Link Cited by: §1, §7.
+- Broadcasting on trees and the Ising model. The Annals of Applied Probability 10 (2), pp. 410–433. External Links: Document, Link Cited by: §1, §4.2, §7.
+- A decision-theoretic generalization of on-line learning and an application to boosting. Journal of Computer and System Sciences 55 (1), pp. 119–139. External Links: Document, Link Cited by: §1.
+- Risk bounds for the majority vote: from a pac-bayesian analysis to a learning algorithm. Journal of Machine Learning Research 16 (26), pp. 787–860. External Links: Link Cited by: §2.4.
+- An information theoretic perspective on agentic system design. arXiv preprint arXiv:2512.21720. Cited by: §7.
+- Training compute-optimal large language models. In Proceedings of the 36th International Conference on Neural Information Processing Systems, NIPS ’22, Red Hook, NY, USA. External Links: ISBN 9781713871088 Cited by: §1, §2.2.
+- MetaGPT: meta programming for a multi-agent collaborative framework. In International Conference on Learning Representations, B. Kim, Y. Yue, S. Chaudhuri, K. Fragkiadaki, M. Khan, and Y. Sun (Eds.), Vol. 2024, pp. 23247–23275. External Links: Link Cited by: §1.
+- AI safety via debate. CoRR abs/1805.00899. External Links: Document, Link Cited by: §1, §7.
+- Scaling laws for neural language models. CoRR abs/2001.08361. External Links: Document, Link Cited by: §1, §2.2.
+- Additional Limit Theorems for Indecomposable Multidimensional Galton-Watson Processes. The Annals of Mathematical Statistics 37 (6), pp. 1463 – 1481. External Links: Document, Link Cited by: §1, §4.2, §7.
+- Towards a science of scaling agent systems. arXiv preprint arXiv:2512.08296. External Links: Link, Document Cited by: §1, §1, §1, 1st item, §6.1, §7.
+- A simple model of inference scaling laws. In ICLR 2025 Workshop on Deep Generative Model in Machine Learning: Theory, Principle and Efficacy, Cited by: §2.2.
+- CAMEL: communicative agents for “mind” exploration of large language model society. In Advances in Neural Information Processing Systems, Vol. 36, pp. 51991–52008. External Links: Link Cited by: §1.
+- When single-agent with skills replace multi-agent systems and when they fail. arXiv preprint arXiv:2601.04748. Cited by: §7.
+- Reconstruction on Trees: Beating the Second Eigenvalue. The Annals of Applied Probability 11 (1), pp. 285 – 300. External Links: Document, Link Cited by: §1, §4.2, §7.
+- Scaling large language model-based multi-agent collaboration. In International Conference on Learning Representations, External Links: Link Cited by: §1.
+- Scaling llm test-time compute optimally can be more effective than scaling model parameters. arXiv preprint arXiv:2408.03314. Cited by: §2.2.
+- Self-consistency improves chain of thought reasoning in language models. In International Conference on Learning Representations, External Links: Link Cited by: §7.
+- AutoGen: enabling next-gen llm applications via multi-agent conversation. arXiv preprint arXiv:2308.08155. External Links: Link, Document Cited by: §1.
+- Inference scaling laws: an empirical analysis of compute-optimal inference for llm problem-solving. In The Thirteenth International Conference on Learning Representations, Cited by: §2.2.
+- ReAct: synergizing reasoning and acting in language models. In International Conference on Learning Representations, External Links: Link Cited by: §1.
+- G-designer: architecting multi-agent communication topologies via graph neural networks. arXiv preprint arXiv:2410.11782. External Links: Link, Document Cited by: §1.

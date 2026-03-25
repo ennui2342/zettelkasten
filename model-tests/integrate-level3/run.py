@@ -229,13 +229,11 @@ def parse_decision(raw: str) -> dict:
 
 def run_current(note, draft, llm) -> dict:
     """Current _STEP1_5_PROMPT from prompts.py."""
-    from zettelkasten.prompts import _STEP1_5_PROMPT
+    from zettelkasten.prompts import _L3_PROMPT
     target_text = f"id: {note.id}\n## {note.title}\n\n{note.body}"
-    draft_text = f"## {draft.title}\n\n{draft.body}"
-    prompt = _STEP1_5_PROMPT.format(
+    prompt = _L3_PROMPT.format(
         note_size=len(note.body),
         target=target_text,
-        draft=draft_text,
     )
     raw = llm.complete(prompt, max_tokens=256, temperature=0.0)
     result = parse_decision(raw)
@@ -274,8 +272,8 @@ def _parse_title_body(raw: str) -> tuple[str, str]:
 
 def run_step2_current(note, draft, llm) -> tuple[str, str]:
     """Run current _STEP2_EDIT from prompts.py."""
-    from zettelkasten.prompts import STEP2_PROMPTS
-    template = STEP2_PROMPTS["EDIT"]
+    from zettelkasten.prompts import EXEC_PROMPTS
+    template = EXEC_PROMPTS["EDIT"]
     targets_text = f"id: {note.id}\n## {note.title}\n\n{note.body}"
     draft_text = f"## {draft.title}\n\n{draft.body}"
     prompt = template.format(targets=targets_text, draft=draft_text)

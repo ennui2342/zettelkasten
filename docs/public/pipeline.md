@@ -97,48 +97,51 @@ from zettelkasten.integrate import integrate_phase
 result = integrate_phase(draft, cluster, llm)
 ```
 
-### Step 1 — Classify (`temperature=0`, `max_tokens=512`)
+The integration pipeline runs a three-level decision tree.  Each level is a
+focused classification against a narrowing view of the corpus.
 
-The LLM receives the draft and the cluster and returns JSON:
-```json
-{
-  "operation":       "UPDATE",
-  "target_note_ids": ["z20240101-001"],
-  "reasoning":       "Draft adds new mechanism to an existing note.",
-  "confidence":      0.85
-}
-```
+### L1 — Primary classification (`temperature=0`, `max_tokens=512`)
 
-**Operations:**
+The full k20 cluster is visible.  One question: is this draft a cross-note
+synthesis, or should it be routed to L2?
 
-| Operation | When to use | Ingestion? |
-|-----------|-------------|-----------|
-| `CREATE` | New topic, not in cluster | ✓ |
-| `UPDATE` | Draft extends an existing note (note is below size ceiling) | ✓ |
-| `EDIT` | Existing note has grown verbose; compress without adding content | ✓ (via step 1.5) |
-| `STUB` | New topic, no established neighbourhood | ✓ |
-| `SYNTHESISE` | Draft reveals bridging principle between two notes | ✓ |
-| `NOTHING` | Draft already fully covered | ✓ (no-op) |
-| `SPLIT` | One cluster note conflates two topics | ✓ (via step 1.5) |
+| Decision | When | Next |
+|----------|------|------|
+| `SYNTHESISE` | Draft reveals a bridging concept spanning two or more cluster notes | Execute (step 2) |
+| `INTEGRATE` | Draft should extend or update the corpus | Pass cluster to L2 |
+| `NOTHING` | Draft already fully covered by existing notes | Done (no-op) |
 
-`EDIT` is never returned directly by step 1 — it is produced by step 1.5 (see below).
-`SPLIT` is produced by step 1.5 when a large UPDATE target genuinely conflates two topics.
+Returns JSON including `target_note_ids` — the subset of cluster notes L1
+considers relevant (~4 notes on average).  **Activation is recorded here**
+against this cluster for all writing operations (CREATE, UPDATE, EDIT, SPLIT),
+regardless of what L2 or L3 subsequently decide.
 
-### Step 1.5 — Large-note refinement (`temperature=0`, `max_tokens=256`)
+### L2 — CREATE or UPDATE (`temperature=0`, `max_tokens=512`)
 
-After step 1, if the operation is `UPDATE` and the target note exceeds
-`NOTE_BODY_LARGE` (8 000 chars), a focused second classification call asks:
+Receives the ~4-note cluster identified by L1.  One question: new topic or
+extension of an existing one?
 
-> Should this note be **EDIT**ed (same topic, compress) or **SPLIT** (genuinely
-> two topics)?
+| Decision | When |
+|----------|------|
+| `CREATE` | Draft introduces a topic not covered by the cluster |
+| `UPDATE` | Draft extends an existing cluster note |
+| `NOTHING` | Draft already covered (rare; primary exit is L1) |
 
-The step 1.5 prompt contains only the large target note and the draft — no
-other cluster notes.  The result (`EDIT` or `SPLIT`) replaces the step 1
-`UPDATE` decision before step 2 runs.  If the response is unparseable, `EDIT`
-is used as the safe default (prefer compression over structural surgery).
+### L3 — EDIT or SPLIT (`temperature=0`, `max_tokens=256`)
 
-This avoids silent truncation: a `max_tokens=4096` UPDATE on a 21 000-char
-note would be cut mid-sentence.
+Fires when L2 returns `UPDATE` and the target note exceeds `NOTE_BODY_LARGE`
+(8 000 chars).  The classification prompt shows **only the target note** — the
+draft is excluded to avoid false positives where off-topic drafts cause SPLIT
+on coherent single-threaded notes.  The draft is passed through to step 2 but
+not shown at classification.
+
+| Decision | When |
+|----------|------|
+| `EDIT` | Note is about one topic; integrate new insights from the draft |
+| `SPLIT` | Note contains two genuinely separable threads |
+
+If the response is unparseable, `EDIT` is the safe default (prefer compression
+over structural surgery).
 
 ### Step 2 — Execute (`temperature=0.3`)
 
@@ -163,30 +166,24 @@ salience, links, embedding, co_activations).  The LLM never writes frontmatter.
 | `SYNTHESISE` | 4096 | New structure note |
 | `SPLIT` | 4096 | Producing two notes |
 | `CREATE` | 2048 | Fresh notes are shorter |
-| `STUB` | 2048 | Minimal stubs |
 
 ### After integration
 
-For `CREATE`, `STUB`, `SYNTHESISE`:
+For `CREATE`, `SYNTHESISE`:
 - A new `ZettelNote` is created with a fresh `_next_id()` ID.
-- Co-activation events are added linking the new note to `target_ids`.
-- The body is embedded and stored (frontmatter + index).
+- Co-activation events are added linking the new note to the L1 cluster.
+- The body is embedded and stored.
 
-For `UPDATE`:
+For `UPDATE`, `EDIT`:
 - The existing note's title and body are replaced.
-- Co-activation events are added for the other cluster members in context.
-- The embedding is recomputed.
-
-For `EDIT`:
-- The existing note's title and body are replaced with the compressed version.
-- **No co-activation events are added** — EDIT is a compression pass, not an
-  integration event.
+- Co-activation events reference the L1 cluster (activation recorded at L1).
 - The embedding is recomputed.
 
 For `SPLIT`:
-- The original note is rewritten as the primary split topic.
-- A new note is created for the secondary topic with a fresh `_next_id()` ID.
-- `splits-from` provenance links are added to both resulting notes.
+- The original note is rewritten with the first thread; a new note is created
+  for the second thread with a fresh `_next_id()` ID.
+- Both notes are partitions of the original content.
+- Co-activation events are recorded for both notes against the L1 cluster.
 
 ---
 
@@ -209,4 +206,4 @@ scores, effectively implementing a form of memory for retrieval.
 | Form | spike2 | Single-shot approach wins; CARPAS count-first eliminated |
 | Gather retrieval | retrieval-workbench | R@10=0.667, MRR=0.844 (held-out n=60) |
 | Integrate decision | spike3 | 85% correct classification, 100% consistent across runs |
-| E2E pipeline | spike-e2e | All ingestion operations confirmed; SPLIT fires via step 1.5 on large notes |
+| E2E pipeline | spike-e2e | All ingestion operations confirmed; SPLIT fires via L3 on large notes |

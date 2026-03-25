@@ -105,11 +105,10 @@ signal.  If `activation top=none` appears, the corpus has no co-activation
 history yet (normal for a new knowledge base).
 
 **Is Integrate making sensible decisions?**
-`integrate.step1` logs the operation and reasoning.  Frequent `NOTHING`
-decisions may indicate document content is already well covered.  Frequent
-`STUB` decisions may indicate a new domain where the corpus hasn't built up
-yet.
+`integrate.l1` logs the L1 decision (SYNTHESISE/INTEGRATE/NOTHING) and
+`integrate.l2` logs the CREATE/UPDATE decision.  Frequent `NOTHING` decisions
+may indicate document content is already well covered.
 
 **Curation opportunities?**
-`SPLIT` decisions are logged at INFO in `integrate.step1`.  These fire via
-step 1.5 when a large UPDATE target is found to conflate two distinct topics.
+`SPLIT` decisions are logged at INFO in `integrate.l3`.  These fire via L3
+when a large UPDATE target is found to contain two genuinely separable threads.

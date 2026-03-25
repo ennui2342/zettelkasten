@@ -197,19 +197,19 @@ Return JSON only: {"target_note_ids": ["id1", "id2", ...]}
 
 **Step 1 `target_note_ids` as recording source:** the notes returned in `target_note_ids` are the LLM's gold-note nominations — which existing notes this draft most directly interacts with. These are what the C-prompt activation recording should capture. The field is semantically meaningful across all operation types; the integration prompt should make this explicit.
 
-**EDIT rationale:** notes grow unboundedly through repeated UPDATEs. A 21,000-char note fed to a `max_tokens=4096` UPDATE call is silently truncated. EDIT intercepts this: Step 1.5 presents the large note with the draft and asks the LLM to choose between compression (EDIT) and structural division (SPLIT). EDIT is conservative; SPLIT is chosen only when the draft genuinely clarifies that two distinct topics are conflated.
+**EDIT rationale:** notes grow unboundedly through repeated UPDATEs. A 21,000-char note fed to a `max_tokens=4096` UPDATE call is silently truncated. EDIT intercepts this: L3 presents the large note (draft excluded from classification) and asks the LLM to choose between compression (EDIT) and structural division (SPLIT). EDIT is conservative; SPLIT is chosen only when the note itself contains two genuinely separable threads.
 
 ---
 
 ## 7. Operations: ingestion-time vs curation-only
 
-**Decision:** all operations execute at ingestion time. SPLIT fires via step 1.5 only.
+**Decision:** all operations execute at ingestion time. SPLIT fires via L3 only.
 
 | All ingestion-time | Curation-only (none currently) |
 |---|---|
-| CREATE, UPDATE, EDIT, STUB, SYNTHESISE, SPLIT, NOTHING | — |
+| CREATE, UPDATE, EDIT, SYNTHESISE, SPLIT, NOTHING | — |
 
-SPLIT fires via step 1.5 when a large UPDATE target is found to conflate two distinct topics. It does not fire from step 1 directly — Form separates topics before integration sees them, so a document arguing a note conflates two things produces two content notes that each target the conflated note with UPDATE.
+SPLIT fires via L3 when L2 returns UPDATE on a large note (> 8 000 chars) that contains two genuinely separable threads. It does not fire from L1 or L2 directly — Form separates topics before integration sees them, so a document arguing a note conflates two things produces two content notes that each target the conflated note with UPDATE.
 
 ---
 

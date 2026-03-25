@@ -189,6 +189,27 @@ zettelkasten bookmarklet --port 9000
 
 ---
 
+### `zettelkasten query QUESTION`
+
+Answer a question by navigating the knowledge base using the Iter 4 agentic
+skill.  An LLM calls `grep_notes`, `read_note`, and `list_notes` in a loop,
+following `## See Also` links until it can synthesise a complete answer.
+
+```bash
+zettelkasten query "What are the trade-offs between different retrieval strategies?"
+zettelkasten query "How does activation accumulation work?" --verbose
+zettelkasten query "..." --max-rounds 30
+```
+
+Options:
+- `--max-rounds N` — maximum agentic loop iterations before raising an error (default: 20)
+- `--config PATH`
+- `--verbose` — logs each tool call (`enrich.tool round=N name=... input=...`) so you can follow the navigation trace
+
+Uses `llm.model` from `zettelkasten.toml` (the same model as ingest, not `fast_model`).
+
+---
+
 ### `zettelkasten curate`
 
 Show pending curation recommendations (SPLIT decisions logged during

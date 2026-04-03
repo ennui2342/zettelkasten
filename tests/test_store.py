@@ -1,11 +1,11 @@
-"""Tests for ZettelkastenStore — write, update, mark_refuted, atomicity."""
+"""Tests for ZettelkastenStore — write, update, atomicity."""
 import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 
 import pytest
 
-from zettelkasten.note import ZettelLink, ZettelNote
+from zettelkasten.note import ZettelNote
 from zettelkasten.store import ZettelkastenStore
 
 # ---------------------------------------------------------------------------
@@ -27,7 +27,6 @@ def make_note(id: str = "z20260315-001", **overrides) -> ZettelNote:
         created=CREATED,
         updated=CREATED,
         last_accessed=CREATED,
-        links=[],
     )
     defaults.update(overrides)
     return ZettelNote(**defaults)
@@ -153,58 +152,6 @@ def test_update_preserves_unchanged_fields(store):
 def test_update_nonexistent_note_raises(store):
     with pytest.raises(KeyError):
         store.update("z20260315-999", body="x")
-
-
-# ---------------------------------------------------------------------------
-# mark_refuted
-# ---------------------------------------------------------------------------
-
-
-def test_mark_refuted_sets_type(store):
-    old = make_note("z20260315-001")
-    new = make_note("z20260315-002")
-    store.write(old)
-    store.write(new)
-
-    store.mark_refuted(refuted_id=old.id, successor_id=new.id)
-
-    md_file = store._notes_dir / "z20260315-001.md"
-    restored = ZettelNote.from_markdown(md_file.read_text())
-    assert restored.type == "refuted"
-
-
-def test_mark_refuted_adds_supersedes_link_on_successor(store):
-    old = make_note("z20260315-001")
-    new = make_note("z20260315-002")
-    store.write(old)
-    store.write(new)
-
-    store.mark_refuted(refuted_id=old.id, successor_id=new.id)
-
-    md_file = store._notes_dir / "z20260315-002.md"
-    restored = ZettelNote.from_markdown(md_file.read_text())
-    supersedes_links = [l for l in restored.links if l.rel == "supersedes"]
-    assert any(l.target == old.id for l in supersedes_links)
-
-
-def test_mark_refuted_updates_index(store):
-    old = make_note("z20260315-001")
-    new = make_note("z20260315-002")
-    store.write(old)
-    store.write(new)
-
-    store.mark_refuted(refuted_id=old.id, successor_id=new.id)
-
-    row = store._index.get_note_row(old.id)
-    assert row["type"] == "refuted"
-
-
-def test_mark_refuted_nonexistent_raises(store):
-    new = make_note("z20260315-002")
-    store.write(new)
-
-    with pytest.raises(KeyError):
-        store.mark_refuted(refuted_id="z20260315-999", successor_id=new.id)
 
 
 # ---------------------------------------------------------------------------

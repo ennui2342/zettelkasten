@@ -24,10 +24,6 @@ stable:        true                # false = still evolving
 created:       2024-01-15T10:00:00+00:00
 updated:       2024-01-15T10:00:00+00:00
 last_accessed: 2024-01-15T10:00:00+00:00
-links:
-  - target: z20240115-002
-    rel:    supersedes             # contradicts | supersedes | splits-from | merges-into
-    note:   "Optional annotation"
 sources:
   - https://arxiv.org/abs/2511.05269   # URLs of documents that gave birth to this note
 embedding:     <base64 float32 vector>   # omitted when not yet embedded
@@ -46,17 +42,11 @@ Note body text…
 | `refuted` | Superseded or contradicted; kept for provenance |
 | `synthesised` | Bridges two or more other notes |
 
-## Link relations (epistemic only)
+## See Also wikilinks
 
-| Rel | Meaning |
-|-----|---------|
-| `contradicts` | This note disputes the target |
-| `supersedes` | This note replaces or extends the target |
-| `splits-from` | This note was split from the target |
-| `merges-into` | This note was merged into the target |
-
-Semantic / topical relationships are handled by the retrieval signals; they
-are **not** stored as links.
+Notes may contain a `## See Also` section using `[[id|Title]]` wikilink syntax.
+These are written by the integration LLM to express connections it finds useful.
+They are not indexed or traversed algorithmically — they exist for human navigation.
 
 ## Sources (provenance)
 
@@ -88,14 +78,13 @@ class ZettelNote:
     id:            str
     title:         str
     body:          str
-    type:          Literal["permanent", "stub", "refuted", "synthesised"]
+    type:          str                    # permanent | stub | refuted | synthesised
     confidence:    float
     salience:      float
     stable:        bool
     created:       datetime
     updated:       datetime
     last_accessed: datetime
-    links:         list[ZettelLink]       = field(default_factory=list)
     sources:       list[str]             = field(default_factory=list)
     embedding:     Optional[np.ndarray]  = field(default=None, compare=False)
 ```

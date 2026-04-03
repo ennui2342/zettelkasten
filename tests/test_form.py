@@ -105,12 +105,6 @@ def test_draft_notes_have_no_embedding():
         assert draft.embedding is None
 
 
-def test_draft_notes_have_no_links():
-    llm = MockLLM(MULTI_TOPIC_RESPONSE)
-    for draft in form_phase("document", llm):
-        assert draft.links == []
-
-
 # ---------------------------------------------------------------------------
 # Robustness
 # ---------------------------------------------------------------------------

@@ -21,7 +21,6 @@ def make_note(**overrides) -> ZettelNote:
         created=CREATED,
         updated=CREATED,
         last_accessed=CREATED,
-        links=[],
     )
     defaults.update(overrides)
     return ZettelNote(**defaults)
@@ -98,11 +97,8 @@ Body text here.
 
 
 def test_full_round_trip_with_embedding():
-    from zettelkasten.note import ZettelLink
-
     vec = np.array([1.0, 2.0, 3.0], dtype=np.float32)
     note = make_note(
-        links=[ZettelLink(target="z20260315-002", rel="contradicts")],
         embedding=vec,
         stable=True,
         confidence=0.9,
@@ -110,5 +106,4 @@ def test_full_round_trip_with_embedding():
     restored = ZettelNote.from_markdown(note.to_markdown())
     assert restored.stable is True
     assert restored.confidence == pytest.approx(0.9)
-    assert len(restored.links) == 1
     assert np.allclose(restored.embedding, vec, atol=1e-6)

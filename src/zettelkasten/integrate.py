@@ -63,7 +63,6 @@ class IntegrationResult:
     split_body: str = ""
     note_id: str = ""         # ID assigned by the store after writing (set by store, not integrate)
     l1_target_ids: list[str] = field(default_factory=list)  # notes identified by L1 classify
-    links: list[dict] = field(default_factory=list)  # epistemic links [{target, rel}] from L2
 
 
 # ---------------------------------------------------------------------------
@@ -148,11 +147,6 @@ def integrate_phase(
     l2_target_ids = l2.get("target_note_ids") or []
     reasoning = l2.get("reasoning", reasoning)
     confidence = float(l2.get("confidence", confidence))
-    l2_links = [
-        lk for lk in (l2.get("links") or [])
-        if isinstance(lk, dict) and lk.get("target") and lk.get("rel") in ("contradicts", "supersedes")
-    ]
-
     log.info(
         "integrate.l2 operation=%s confidence=%.2f targets=%s reasoning=%r",
         l2_op, confidence, l2_target_ids, reasoning,
@@ -199,7 +193,6 @@ def integrate_phase(
             note_body=body,
             split_title=split_title,
             split_body=split_body,
-            links=l2_links,
         )
 
     title, body = _execute(draft, op, target_notes, llm)
@@ -213,7 +206,6 @@ def integrate_phase(
         l1_target_ids=l1_target_ids,
         note_title=title,
         note_body=body,
-        links=l2_links,
     )
 
 

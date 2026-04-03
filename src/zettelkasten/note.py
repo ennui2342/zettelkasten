@@ -6,7 +6,7 @@ import re
 import struct
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Literal, Optional
+from typing import Optional
 
 import frontmatter
 import numpy as np
@@ -16,41 +16,8 @@ import numpy as np
 # ---------------------------------------------------------------------------
 
 NOTE_TYPES = frozenset({"permanent", "stub", "refuted", "synthesised"})
-LINK_RELS = frozenset({"contradicts", "supersedes", "splits-from", "merges-into"})
 
 _ID_RE = re.compile(r"^z\d{8}-\d{3}$")
-
-
-# ---------------------------------------------------------------------------
-# ZettelLink
-# ---------------------------------------------------------------------------
-
-
-@dataclass
-class ZettelLink:
-    target: str
-    rel: Literal["contradicts", "supersedes", "splits-from", "merges-into"]
-    note: str = ""
-
-    def __post_init__(self) -> None:
-        if self.rel not in LINK_RELS:
-            raise ValueError(
-                f"Invalid rel {self.rel!r}. Must be one of: {sorted(LINK_RELS)}"
-            )
-
-    def to_dict(self) -> dict:
-        d: dict = {"target": self.target, "rel": self.rel}
-        if self.note:
-            d["note"] = self.note
-        return d
-
-    @classmethod
-    def from_dict(cls, d: dict) -> "ZettelLink":
-        return cls(
-            target=d["target"],
-            rel=d["rel"],
-            note=d.get("note", ""),
-        )
 
 
 # ---------------------------------------------------------------------------
@@ -63,14 +30,13 @@ class ZettelNote:
     id: str
     title: str
     body: str
-    type: Literal["permanent", "stub", "refuted", "synthesised"]
+    type: str  # permanent | stub | refuted | synthesised
     confidence: float
     salience: float
     stable: bool
     created: datetime
     updated: datetime
     last_accessed: datetime
-    links: list[ZettelLink] = field(default_factory=list)
     sources: list[str] = field(default_factory=list)
     # Embedding stored in frontmatter for index rebuild; activation is runtime state in SQLite
     embedding: Optional[np.ndarray] = field(default=None, compare=False)
@@ -100,7 +66,6 @@ class ZettelNote:
             "created": _fmt_dt(self.created),
             "updated": _fmt_dt(self.updated),
             "last_accessed": _fmt_dt(self.last_accessed),
-            "links": [link.to_dict() for link in self.links],
         }
         if self.sources:
             meta["sources"] = list(self.sources)
@@ -120,7 +85,6 @@ class ZettelNote:
         # Extract title from first H1
         title, body = _split_title_body(content)
 
-        links = [ZettelLink.from_dict(d) for d in (post.get("links") or [])]
         sources: list[str] = list(post.get("sources") or [])
         # co_activations was removed in favour of SQLite activation edges — silently ignored
         embedding: Optional[np.ndarray] = None
@@ -139,7 +103,6 @@ class ZettelNote:
             created=_parse_dt(post["created"]),
             updated=_parse_dt(post["updated"]),
             last_accessed=_parse_dt(post["last_accessed"]),
-            links=links,
             sources=sources,
             embedding=embedding,
         )

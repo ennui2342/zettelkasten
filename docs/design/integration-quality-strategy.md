@@ -173,10 +173,10 @@ Level 2:  CREATE or UPDATE?
 Level 3:  SPLIT or EDIT?
           → Classification: show target note ONLY (draft removed — see below)
           → Execution: show target note + draft
-          → Already implemented as step1.5; refined per model-tests/integrate-level3
+          → Already implemented as step1.5; refined per eval/integrate-level3
 ```
 
-**Level 3 refinements (from model-tests/integrate-level3):**
+**Level 3 refinements (from eval/integrate-level3):**
 
 - **Classification**: draft removed from the step1.5 prompt entirely. The SPLIT/EDIT
   decision is based solely on the note's internal structure — whether it contains
@@ -239,7 +239,7 @@ is not wasted on dominated options.
 
 ### 4.3 Independent calibration per binary node
 
-The model-tests pattern (already used for form granularity, integration
+The eval pattern (already used for form granularity, integration
 decisions, edit-split step1.5) applied to each node in the decision tree.
 For each node: build a ground-truth labelled dataset of (note, draft, cluster)
 → expected operation; measure accuracy; iterate the prompt against that dataset
@@ -322,7 +322,7 @@ Three complementary layers targeting different granularities of failure. They
 are not alternatives — accumulation failures are invisible to layer 1 and 2;
 prompt brittleness is hard to detect in layer 3.
 
-### Layer 1: Node-level unit tests (model-tests pattern)
+### Layer 1: Node-level unit tests (eval pattern)
 
 One test suite per binary node in the decision tree. Ground-truth labelled
 cases: `(note, draft, cluster) → expected operation`. Each suite is:
@@ -334,7 +334,7 @@ cases: `(note, draft, cluster) → expected operation`. Each suite is:
   against representative cases
 
 Build these **before** implementing the full decision tree so each node has its
-harness from day one. The existing model-tests for `edit-split-step15` and
+harness from day one. The existing eval for `edit-split-step15` and
 `integration-decisions` are directly extensible to cover the new tree nodes.
 
 Labelling ground truth: use the known failure cases from the 2026-03-18 run
@@ -456,7 +456,7 @@ Order matters to avoid throwaway work:
    select targeting papers; build the single-paper test harness against the
    deduplicated baseline.
 
-5. **Sequential workbench** — `model-tests/ingestion-harness/` — snapshot
+5. **Sequential workbench** — `eval/ingestion-harness/` — snapshot
    infrastructure, per-paper analysis tooling. CLI: `--next`, `--paper N`,
    `--rewind N`, `--context [N]`, `--status`, `--list`. Starts from empty
    store; takes full `notes/ + index.db` snapshot after each paper. Per-paper

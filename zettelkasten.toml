@@ -1,7 +1,10 @@
 [zettelkasten]
-notes_dir  = "zettel/knowledge2"
-index_path = "zettel/knowledge2.db"
-inbox_dir = "zettel/knowledge2-inbox"
+#notes_dir  = "zettel/knowledge2"
+#index_path = "zettel/knowledge2.db"
+#inbox_dir = "zettel/knowledge2-inbox"
+notes_dir  = "eval/ingestion-harness/store/notes"
+index_path = "eval/ingestion-harness/store/index.db"
+inbox_dir = "/tmp"
 
 [llm]
 provider = "anthropic"

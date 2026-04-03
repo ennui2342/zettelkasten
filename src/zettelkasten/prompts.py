@@ -142,19 +142,12 @@ prefer CREATE.
 In target_note_ids, for UPDATE provide the single best target note ID. For \
 CREATE and NOTHING, list the most relevant cluster notes.
 
-If this draft explicitly contradicts or supersedes a claim in a cluster note \
-— not a mere difference in perspective, but a direct challenge to the note's \
-core claims or a replacement of its approach — include an epistemic link in \
-the links field. Only emit links where the relationship is unambiguous. \
-Omit the field entirely if no such relationship exists.
-
 Output JSON only. Schema:
 {{
   "operation": "UPDATE" | "CREATE" | "NOTHING",
   "target_note_ids": ["<id>"],
   "reasoning": "<one or two sentences>",
-  "confidence": <0.0 to 1.0>,
-  "links": [{{"target": "<id>", "rel": "contradicts" | "supersedes"}}]
+  "confidence": <0.0 to 1.0>
 }}"""
 
 # ---------------------------------------------------------------------------

@@ -7,7 +7,7 @@ from pathlib import Path
 import pytest
 
 from zettelkasten.index import ZettelIndex
-from zettelkasten.note import ZettelLink, ZettelNote
+from zettelkasten.note import ZettelNote
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -28,7 +28,6 @@ def make_note(id: str = "z20260315-001", **overrides) -> ZettelNote:
         created=CREATED,
         updated=CREATED,
         last_accessed=CREATED,
-        links=[],
     )
     defaults.update(overrides)
     return ZettelNote(**defaults)
@@ -67,7 +66,6 @@ def test_initialise_creates_tables(tmp_dir):
     con.close()
 
     assert "notes" in tables
-    assert "links" in tables
     assert "embeddings" in tables
     assert "activation" in tables
 
@@ -105,36 +103,6 @@ def test_upsert_overwrites_existing(index):
     row = index.get_note_row(note.id)
     assert row["confidence"] == pytest.approx(0.95)
     assert row["stable"] == 1
-
-
-def test_upsert_note_stores_links(index):
-    note = make_note(
-        links=[ZettelLink(target="z20260315-002", rel="contradicts", note="conflict")]
-    )
-    index.upsert_note(note)
-
-    links = index.get_links(note.id)
-    assert len(links) == 1
-    assert links[0]["target_id"] == "z20260315-002"
-    assert links[0]["rel"] == "contradicts"
-    assert links[0]["note"] == "conflict"
-
-
-def test_upsert_replaces_old_links(index):
-    note = make_note(
-        links=[ZettelLink(target="z20260315-002", rel="contradicts")]
-    )
-    index.upsert_note(note)
-
-    # Re-upsert with different links
-    note2 = make_note(
-        links=[ZettelLink(target="z20260315-003", rel="supersedes")]
-    )
-    index.upsert_note(note2)
-
-    links = index.get_links(note.id)
-    assert len(links) == 1
-    assert links[0]["target_id"] == "z20260315-003"
 
 
 # ---------------------------------------------------------------------------

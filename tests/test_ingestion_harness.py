@@ -1,4 +1,4 @@
-"""Tests for model-tests/ingestion-harness/run.py helper functions."""
+"""Tests for eval/ingestion-harness/run.py helper functions."""
 from __future__ import annotations
 
 import sys
@@ -8,7 +8,7 @@ from pathlib import Path
 import pytest
 
 # Make the harness module importable from the tests/ directory
-_HARNESS_DIR = Path(__file__).parent.parent / "model-tests" / "ingestion-harness"
+_HARNESS_DIR = Path(__file__).parent.parent / "eval" / "ingestion-harness"
 if str(_HARNESS_DIR) not in sys.path:
     sys.path.insert(0, str(_HARNESS_DIR))
 

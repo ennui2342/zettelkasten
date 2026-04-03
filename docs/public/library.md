@@ -97,10 +97,6 @@ Raises `KeyError` if the note is not found.
 store.update("z20240101-001", confidence=0.9, stable=True)
 ```
 
-### `mark_refuted(refuted_id, successor_id)`
-
-Mark a note as `type="refuted"` and add a `supersedes` link on the successor.
-
 ### `rebuild_index()`
 
 Rebuilds the SQLite index from the notes directory (delegates to

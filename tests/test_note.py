@@ -3,7 +3,7 @@ from datetime import datetime, timezone
 
 import pytest
 
-from zettelkasten.note import ZettelLink, ZettelNote
+from zettelkasten.note import ZettelNote
 
 # ---------------------------------------------------------------------------
 # Fixtures
@@ -24,7 +24,6 @@ def make_note(**overrides) -> ZettelNote:
         created=CREATED,
         updated=CREATED,
         last_accessed=CREATED,
-        links=[],
     )
     defaults.update(overrides)
     return ZettelNote(**defaults)
@@ -51,16 +50,6 @@ def test_round_trip_stable_true():
     note = make_note(stable=True)
     restored = ZettelNote.from_markdown(note.to_markdown())
     assert restored.stable is True
-
-
-def test_round_trip_with_links():
-    links = [
-        ZettelLink(target="z20260315-002", rel="contradicts", note="Earlier finding"),
-        ZettelLink(target="z20260315-003", rel="supersedes"),
-    ]
-    note = make_note(links=links)
-    restored = ZettelNote.from_markdown(note.to_markdown())
-    assert restored.links == links
 
 
 def test_round_trip_preserves_multiline_body():
@@ -142,34 +131,6 @@ def test_invalid_note_type_rejected():
 
     with pytest.raises(ValueError, match="type"):
         make_note(type="")
-
-
-# ---------------------------------------------------------------------------
-# Link rel vocabulary
-# ---------------------------------------------------------------------------
-
-
-def test_valid_link_rels_accepted():
-    for rel in ("contradicts", "supersedes", "splits-from", "merges-into"):
-        ZettelLink(target="z20260315-002", rel=rel)  # should not raise
-
-
-def test_invalid_link_rel_rejected():
-    with pytest.raises(ValueError, match="rel"):
-        ZettelLink(target="z20260315-002", rel="related-to")
-
-    with pytest.raises(ValueError, match="rel"):
-        ZettelLink(target="z20260315-002", rel="supports")
-
-
-# ---------------------------------------------------------------------------
-# ZettelLink defaults
-# ---------------------------------------------------------------------------
-
-
-def test_link_note_defaults_to_empty_string():
-    link = ZettelLink(target="z20260315-002", rel="contradicts")
-    assert link.note == ""
 
 
 # ---------------------------------------------------------------------------

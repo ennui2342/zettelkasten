@@ -15,9 +15,8 @@ The distinction:
 | Intrinsic (frontmatter, travels with the file) | Runtime (SQLite only) |
 |---|---|
 | id, type, confidence, context, body | Embeddings |
-| Epistemic links (contradicts, supersedes, curation provenance) | BM25 index |
-| created, updated | Activation edges |
-| See Also wikilinks (in body) | |
+| created, updated | BM25 index |
+| See Also wikilinks (in body) | Activation edges |
 
 **Why:** if you send a zettel to someone else, they receive the knowledge. They do not receive — and should not receive — your system's learned relationship weights. Activation edges record how *this installation* has used the notes, not what the notes mean. They rebuild organically as the new system processes documents.
 
@@ -51,25 +50,17 @@ Weights tuned on 80% of 299 LLM-judged retrieval events; R@10=0.667, MRR=0.844 o
 
 **Important caveat on the activation weight:** the R@10=0.667 figure represents the *ceiling* of the activation signal — what it contributes assuming perfect recording of gold notes at integration time. The four other signals (body_query, bm25, step_back, hyde_multi) are real measurements of production behaviour. Activation's real-world contribution is lower; see §5.
 
-*Detail: `model-tests/retrieval-signals/README.md`*
+*Detail: `eval/retrieval-signals/README.md`*
 
 ---
 
-## 3. Links: epistemic only
+## 3. Links: See Also wikilinks only
 
-**Decision:** three link types, no others.
+**Decision:** no structured link types in frontmatter. Notes may contain a `## See Also` section using `[[id|Title]]` wikilink syntax in the body.
 
-| Type | Meaning | Created by |
-|------|---------|-----------|
-| `contradicts` | Conflicting claim; both notes preserved | Integration LLM |
-| `supersedes` | Replaces target after revision; target → `type: refuted` | Integration LLM |
-| `splits-from` / `merges-into` | Corpus restructuring provenance | Curation agent |
+**Why epistemic links were removed:** typed link types (`contradicts`, `supersedes`, `splits-from`/`merges-into`) were designed but removed — they never fired in practice across any ingestion run, and don't factor into retrieval. The cluster notes shown to the integration LLM omit frontmatter, so the LLM cannot read existing links anyway. Reintroduce if a concrete retrieval or curation use case emerges.
 
-No `supports`, `extends`, `related-to`, or any semantic link type.
-
-**Why:** spike 4A showed citation-style link traversal hurts retrieval — it expands clusters to 53 nodes of which only 15.6% are gold targets. Spike 4D confirmed 83% of missed connections have no link or tag signal; they are inferential, not structural. Semantic proximity is the retrieval signals' job. Typed links are reserved for relationships that embeddings cannot capture: claim conflict, revision, and curation provenance.
-
-**See Also wikilinks:** notes may contain an informal `## See Also` section using `[[note-id|Title]]` syntax. These are not epistemic links and are not in the `links:` frontmatter field. During the integrate phase, the LLM persistently generated junk sections ("Recommended Reading", hallucinated tag systems) to express connections it wanted to make. Explicitly permitting a See Also section eliminated all junk output. The link descriptions the LLM writes are high quality. Algorithmic utility of See Also links is undecided — they are not indexed or traversed.
+**Why See Also:** during the integrate phase, the LLM persistently generated junk sections ("Recommended Reading", hallucinated tag systems) to express connections it wanted to make. Explicitly permitting a `## See Also` section eliminated all junk output. The link descriptions the LLM writes are high quality. Algorithmic utility of See Also links is undecided — they are not indexed or traversed.
 
 ---
 
@@ -172,7 +163,7 @@ for row in rows:
 - Bounded growth — prune with `DELETE WHERE weight < threshold` periodically
 - Canonical edge ordering (`min/max`) ensures one row per pair, no duplicates
 
-**λ tuning:** deferred — requires benchmark ingestion ground truth with real timestamps. Run the activation variant sweep in `model-tests/retrieval-signals/tune_weights.py` Phase 3 once real-event ground truth is available.
+**λ tuning:** deferred — requires benchmark ingestion ground truth with real timestamps. Run the activation variant sweep in `eval/retrieval-signals/tune_weights.py` Phase 3 once real-event ground truth is available.
 
 **Recording prompt (C-style):**
 ```
@@ -183,7 +174,7 @@ challenges, or bridges.
 Return JSON only: {"target_note_ids": ["id1", "id2", ...]}
 ```
 
-*Detail: `model-tests/retrieval-signals/README.md`*
+*Detail: `eval/retrieval-signals/README.md`*
 
 ---
 
@@ -292,4 +283,4 @@ Notes written by the execute step contain `[[Title]]` wiki-links to related note
 
 **Post-processing for drift:** when a note is renamed, a filename-based find-and-replace across all note bodies is straightforward and would handle simple title drift. It does not handle semantic drift caused by SPLIT or accumulation.
 
-**Experimental posture:** leave existing broken/stale links in place and observe over the next papers. The hypothesis is that future EDITs, UPDATEs, and SPLITs will either naturally correct stale links (the execute step rewrites see-also sections) or the broken links will prove harmless. If hallucinated links appear to be feeding false context into L1/L2 classification, implement the cluster-title solution at execute time. See `model-tests/ingestion-harness/ANALYSIS_GUIDE.md` for the monitoring checklist.
+**Experimental posture:** leave existing broken/stale links in place and observe over the next papers. The hypothesis is that future EDITs, UPDATEs, and SPLITs will either naturally correct stale links (the execute step rewrites see-also sections) or the broken links will prove harmless. If hallucinated links appear to be feeding false context into L1/L2 classification, implement the cluster-title solution at execute time. See `eval/ingestion-harness/ANALYSIS_GUIDE.md` for the monitoring checklist.

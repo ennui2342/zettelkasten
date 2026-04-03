@@ -9,7 +9,7 @@ from typing import Any
 
 from .index import ZettelIndex
 from .integrate import IntegrationResult, integrate_phase
-from .note import ZettelLink, ZettelNote
+from .note import ZettelNote
 from .providers import EmbedProvider, LLMProvider
 
 log = logging.getLogger("zettelkasten")
@@ -87,7 +87,7 @@ class ZettelkastenStore:
                 type="permanent", confidence=max(note.confidence, 0.7),
                 salience=note.salience, stable=note.stable,
                 created=note.created, updated=now,
-                last_accessed=now, links=note.links,
+                last_accessed=now,
                 embedding=note.embedding,
             )
             self.write(upgraded)
@@ -184,10 +184,6 @@ class ZettelkastenStore:
 
         if op in ("CREATE", "SYNTHESISE"):
             note_id = self._next_id()
-            epistemic_links = [
-                ZettelLink(target=lk["target"], rel=lk["rel"])  # type: ignore[arg-type]
-                for lk in result.links
-            ]
             note = ZettelNote(
                 id=note_id,
                 title=result.note_title or draft.title,
@@ -200,7 +196,6 @@ class ZettelkastenStore:
                 updated=now,
                 last_accessed=now,
                 sources=[source] if source else [],
-                links=epistemic_links,
             )
             vecs = embed.embed([note.body])
             note = _with_embedding(note, vecs[0])
@@ -235,7 +230,6 @@ class ZettelkastenStore:
                 created=existing.created,
                 updated=now,
                 last_accessed=now,
-                links=existing.links,
                 sources=existing.sources,
                 embedding=existing.embedding,
             )
@@ -271,7 +265,6 @@ class ZettelkastenStore:
                 created=existing.created,
                 updated=now,
                 last_accessed=now,
-                links=existing.links,
                 sources=existing.sources,
             )
             # Allocate the second note's ID now so note1 can reference it correctly
@@ -287,7 +280,7 @@ class ZettelkastenStore:
                 id=note1.id, title=note1.title, body=body1, type=note1.type,
                 confidence=note1.confidence, salience=note1.salience,
                 stable=note1.stable, created=note1.created, updated=note1.updated,
-                last_accessed=note1.last_accessed, links=note1.links,
+                last_accessed=note1.last_accessed,
             )
             vecs1 = embed.embed([note1.body])
             note1 = _with_embedding(note1, vecs1[0])
@@ -380,36 +373,6 @@ class ZettelkastenStore:
             last_accessed=now,
         )
         return gather_phase(query_note, corpus, llm, embed, top_k=top_k)
-
-    # ------------------------------------------------------------------
-    # mark_refuted
-    # ------------------------------------------------------------------
-
-    def mark_refuted(self, refuted_id: str, successor_id: str) -> None:
-        """Mark a note as refuted and add a supersedes link on the successor."""
-        refuted_path = self._notes_dir / f"{refuted_id}.md"
-        successor_path = self._notes_dir / f"{successor_id}.md"
-
-        if not refuted_path.exists():
-            raise KeyError(f"Note {refuted_id!r} not found")
-        if not successor_path.exists():
-            raise KeyError(f"Note {successor_id!r} not found")
-
-        # Mark the old note as refuted
-        self.update(refuted_id, type="refuted")
-
-        # Add supersedes link on the successor (avoid duplicates)
-        successor = ZettelNote.from_markdown(successor_path.read_text(encoding="utf-8"))
-        already_linked = any(
-            l.rel == "supersedes" and l.target == refuted_id
-            for l in successor.links
-        )
-        if not already_linked:
-            new_links = list(successor.links) + [
-                ZettelLink(target=refuted_id, rel="supersedes")
-            ]
-            self.update(successor_id, links=new_links)
-
 
 # ---------------------------------------------------------------------------
 # Module-level helpers

@@ -55,14 +55,6 @@ class ZettelIndex:
                     last_accessed TEXT NOT NULL
                 );
 
-                CREATE TABLE IF NOT EXISTS links (
-                    source_id TEXT NOT NULL,
-                    target_id TEXT NOT NULL,
-                    rel       TEXT NOT NULL,
-                    note      TEXT NOT NULL DEFAULT '',
-                    PRIMARY KEY (source_id, target_id, rel)
-                );
-
                 CREATE TABLE IF NOT EXISTS embeddings (
                     note_id TEXT PRIMARY KEY,
                     vector  BLOB NOT NULL
@@ -114,13 +106,6 @@ class ZettelIndex:
                     note.last_accessed.isoformat(),
                 ),
             )
-            # Replace links for this note
-            con.execute("DELETE FROM links WHERE source_id = ?", (note.id,))
-            for link in note.links:
-                con.execute(
-                    "INSERT INTO links (source_id, target_id, rel, note) VALUES (?, ?, ?, ?)",
-                    (note.id, link.target, link.rel, link.note),
-                )
         con.close()
 
     def delete_note(self, note_id: str) -> None:
@@ -128,7 +113,6 @@ class ZettelIndex:
         con = self._connect()
         with con:
             con.execute("DELETE FROM notes WHERE id = ?", (note_id,))
-            con.execute("DELETE FROM links WHERE source_id = ? OR target_id = ?", (note_id, note_id))
             con.execute("DELETE FROM embeddings WHERE note_id = ?", (note_id,))
             con.execute("DELETE FROM activation WHERE note_a = ? OR note_b = ?", (note_id, note_id))
         con.close()
@@ -140,14 +124,6 @@ class ZettelIndex:
         ).fetchone()
         con.close()
         return dict(row) if row else None
-
-    def get_links(self, source_id: str) -> list[dict[str, Any]]:
-        con = self._connect()
-        rows = con.execute(
-            "SELECT * FROM links WHERE source_id = ?", (source_id,)
-        ).fetchall()
-        con.close()
-        return [dict(r) for r in rows]
 
     def touch_accessed(self, note_id: str, ts: datetime) -> None:
         con = self._connect()
@@ -288,7 +264,6 @@ class ZettelIndex:
                 for row in con.execute("SELECT id FROM notes").fetchall()
             }
             for stale_id in existing_ids - present_ids:
-                con.execute("DELETE FROM links WHERE source_id = ?", (stale_id,))
                 con.execute("DELETE FROM embeddings WHERE note_id = ?", (stale_id,))
                 con.execute("DELETE FROM notes WHERE id = ?", (stale_id,))
         con.close()

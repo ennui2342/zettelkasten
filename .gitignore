@@ -8,12 +8,8 @@ __pycache__/
 dist/
 .pytest_cache/
 
-# Benchmark spike — generated stores, logs, working dirs
-spikes/benchmark-innovation/zettel_*/
-spikes/benchmark-innovation/logs/
-spikes/*/work/
-spikes/*/work_*/
+spikes/
 
 # Model-test generated outputs
-model-tests/*/data/form_drafts/
-model-tests/baseline/results/
+eval/*/data/form_drafts/
+eval/baseline/results/

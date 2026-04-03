@@ -66,7 +66,6 @@ def _parse_response(response: str) -> list[ZettelNote]:
             created=now,
             updated=now,
             last_accessed=now,
-            links=[],
             embedding=None,
         )
         drafts.append(note)

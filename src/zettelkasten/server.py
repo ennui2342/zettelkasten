@@ -1,4 +1,4 @@
-"""Local HTTP ingest server for the browser bookmarklet.
+"""Local HTTP ingest server for the Chrome extension.
 
 Accepts POST /ingest with JSON {html: str, url: str}.
 Extracts text from the rendered HTML using trafilatura, then runs the
@@ -149,24 +149,3 @@ def make_server(store, llm, embed, host: str = "127.0.0.1", port: int = 7842, fa
     return ThreadingHTTPServer((host, port), handler)
 
 
-# ---------------------------------------------------------------------------
-# Bookmarklet generator
-# ---------------------------------------------------------------------------
-
-
-def bookmarklet_js(port: int = 7842) -> str:
-    """Return a ``javascript:`` bookmarklet URL that POSTs the current page."""
-    js = (
-        "(function(){"
-        "var h=document.documentElement.outerHTML,"
-        "u=document.URL;"
-        f"fetch('http://127.0.0.1:{port}/ingest',"
-        "{method:'POST',"
-        "headers:{'Content-Type':'application/json'},"
-        "body:JSON.stringify({html:h,url:u})})"
-        ".then(function(r){return r.json()})"
-        ".then(function(d){alert('\\u2705 '+d.summary)})"
-        ".catch(function(e){alert('\\u274c Ingest failed: '+e)});"
-        "})()"
-    )
-    return "javascript:" + js

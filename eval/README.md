@@ -1,4 +1,4 @@
-# Model Tests
+# Evals
 
 Tests for design decisions that are susceptible to the **bitter lesson**: choices made because the current best model needed them may become wrong as better models are released. Each test captures the decision, the baseline result, and instructions for re-running.
 
@@ -35,7 +35,7 @@ Record new baselines in `results/` with a datestamped filename.
 
 | Test | Decision | Baseline | Revisit if... |
 |------|----------|----------|---------------|
-| [`edit-split-step15/`](edit-split-step15/README.md) | Step 1.5 needed to route UPDATE→EDIT/SPLIT on large notes | Option A (modified step 1 prompt) drifted to SYNTHESISE in 2/3 cases; step 1.5 reliable | Option A correctly produces EDIT/SPLIT in all cases → remove step 1.5 |
-| [`retrieval-signals/`](retrieval-signals/README.md) | 5-signal fusion with weights body=0.45, bm25=0.27, activation=0.18, step_back=0.05, hyde=0.05 | R@10=0.667, MRR=0.844 (held-out n=60) | Retune weights with new model; compare R@10 |
-| [`integration-decisions/`](integration-decisions/README.md) | Two-step integration reliable enough for automated writes | 100% correct, 100% consistent across 14 cases × 3 runs (claude-opus-4-6) | Any case failing or inconsistent — investigate prompt/model changes |
-| [`form-granularity/`](form-granularity/README.md) | Single-shot Form wins over stepped (CARPAS count-first eliminated) | Single-shot: 4 topics, correct; Stepped: 2 topics, too coarse | Stepped produces better granularity → re-evaluate prompt design |
+| [`integrate-level1/`](integrate-level1/README.md) | L1 focused three-way classifier (SYNTHESISE / INTEGRATE / NOTHING) beats multi-way mapped prompt | 9/10 correct (haiku, 2026-03-20) | Score drops below 9/10 or SYNTHESISE/INTEGRATE boundary degrades → tune prompt |
+| [`integrate-level2/`](integrate-level2/README.md) | L2 focused three-way classifier (CREATE / UPDATE / NOTHING) beats multi-way mapped prompt | 7/9 correct; cases 2 & 3 are known hard cases (haiku, 2026-03-20) | Cases 2 and 3 start failing differently, or new failure modes appear → retune |
+| [`integrate-level3/`](integrate-level3/README.md) | L3 EDIT/SPLIT decision uses note body only (draft excluded from classification) | 4/4 correct after fix; EDIT execution compresses to 60–66% (haiku/opus, 2026-03-20) | SPLIT fires incorrectly on off-topic drafts → draft may need re-introducing |
+| [`gather/`](gather/README.md) | 5-signal fusion with weights body=0.45, bm25=0.27, activation=0.18, step_back=0.05, hyde=0.05 | R@10=0.667, MRR=0.844 (held-out n=60) | Retune weights with new model; compare R@10 |

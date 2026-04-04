@@ -20,13 +20,9 @@ def make_note(id: str = "z20260315-001", **overrides) -> ZettelNote:
         id=id,
         title="Testing Effect",
         body="Retrieving information strengthens retention.",
-        type="permanent",
         confidence=0.85,
-        salience=0.5,
-        stable=False,
         created=CREATED,
         updated=CREATED,
-        last_accessed=CREATED,
     )
     defaults.update(overrides)
     return ZettelNote(**defaults)
@@ -73,7 +69,6 @@ def test_write_indexes_note(store):
     store.write(note)
     row = store._index.get_note_row(note.id)
     assert row is not None
-    assert row["type"] == "permanent"
 
 
 def test_write_is_atomic_file_and_index_together(store):
@@ -108,11 +103,10 @@ def test_update_changes_fields(store):
     note = make_note()
     store.write(note)
 
-    store.update(note.id, confidence=0.95, stable=True)
+    store.update(note.id, confidence=0.95)
 
     row = store._index.get_note_row(note.id)
     assert row["confidence"] == pytest.approx(0.95)
-    assert row["stable"] == 1
 
 
 def test_update_rewrites_markdown_file(store):

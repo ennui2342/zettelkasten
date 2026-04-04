@@ -11,7 +11,7 @@ import pytest
 
 from zettelkasten.integrate import IntegrationResult
 from zettelkasten.providers import MockEmbed, MockLLM
-from zettelkasten.server import bookmarklet_js, make_server
+from zettelkasten.server import make_server
 
 
 # ---------------------------------------------------------------------------
@@ -244,24 +244,3 @@ def test_ingest_without_inbox_dir_does_not_save(live_server, tmp_path):
     assert not (tmp_path / "inbox").exists()
 
 
-# ---------------------------------------------------------------------------
-# bookmarklet_js
-# ---------------------------------------------------------------------------
-
-
-def test_bookmarklet_starts_with_javascript():
-    assert bookmarklet_js().startswith("javascript:")
-
-
-def test_bookmarklet_contains_port():
-    bm = bookmarklet_js(port=9999)
-    assert "9999" in bm
-
-
-def test_bookmarklet_default_port():
-    bm = bookmarklet_js()
-    assert "7842" in bm
-
-
-def test_bookmarklet_contains_fetch():
-    assert "fetch(" in bookmarklet_js()

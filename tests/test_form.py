@@ -87,12 +87,6 @@ def test_draft_notes_have_no_id():
     assert drafts[0].id == ""
 
 
-def test_draft_notes_are_stub_type():
-    llm = MockLLM(MULTI_TOPIC_RESPONSE)
-    for draft in form_phase("document", llm):
-        assert draft.type == "stub"
-
-
 def test_draft_notes_have_low_confidence():
     llm = MockLLM(MULTI_TOPIC_RESPONSE)
     for draft in form_phase("document", llm):

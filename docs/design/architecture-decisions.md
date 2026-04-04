@@ -22,7 +22,7 @@ The distinction:
 
 The rebuild story: embeddings and BM25 are derived from content and rebuildable from the filesystem. Activation edges warm up over time from new integration events. Losing the SQLite index is recoverable; losing the markdown files is not. The markdown files are the source of truth.
 
-**What this removes from frontmatter:** the `co_activations` list (previously stored per note) moves entirely to a SQLite edge table. See §5 for the new activation data model.
+**What this removes from frontmatter:** the `co_activations` list (previously stored per note) moves entirely to a SQLite edge table. See §4 for the activation data model.
 
 ---
 
@@ -50,7 +50,9 @@ Weights tuned on 80% of 299 LLM-judged retrieval events; R@10=0.667, MRR=0.844 o
 
 **Important caveat on the activation weight:** the R@10=0.667 figure represents the *ceiling* of the activation signal — what it contributes assuming perfect recording of gold notes at integration time. The four other signals (body_query, bm25, step_back, hyde_multi) are real measurements of production behaviour. Activation's real-world contribution is lower; see §5.
 
-*Detail: `eval/retrieval-signals/README.md`*
+**Rejected approach — cosine pre-filtering for CREATE/UPDATE:** analysed across 82 drafts (325 true-positive note pairs, 979 false-positive pairs). No viable threshold exists: to eliminate 80% of false-positive notes requires a threshold that misses 35% of gold targets. T mean cosine = 0.579, F mean = 0.487 — the gap is too small and the distributions overlap too heavily. The lowest true-positive scores (cosine < 0.40) are structurally correct SYNTHESISE and cross-domain UPDATE targets — the cases where multi-signal retrieval earns its value. Do not re-investigate.
+
+*Detail: `eval/gather/README.md`*
 
 ---
 
@@ -64,17 +66,9 @@ Weights tuned on 80% of 299 LLM-judged retrieval events; R@10=0.667, MRR=0.844 o
 
 ---
 
-## 4. Tags: dropped
+## 4. Activation: pairwise graph with transitive expansion
 
-**Decision:** no `tags:` field on system-generated notes.
-
-**Why:** tags are a human browsing aid. Retrieval is by embedding + BM25 + activation, none of which uses tags. LLM-generated tags are noisy and add maintenance burden with zero retrieval benefit. Human-authored notes may retain tags for UI navigation.
-
----
-
-## 5. Activation: pairwise graph with transitive expansion
-
-**Decision:** pairwise co-occurrence graph, transitive expansion enabled, C-style permissive recording prompt, stored in SQLite edge table.
+**Decision:** pairwise co-occurrence graph, transitive expansion enabled, C-style permissive recording prompt, stored in SQLite edge table. Referenced in §2 retrieval weights.
 
 ### Why pairwise over scalar
 
@@ -163,7 +157,7 @@ for row in rows:
 - Bounded growth — prune with `DELETE WHERE weight < threshold` periodically
 - Canonical edge ordering (`min/max`) ensures one row per pair, no duplicates
 
-**λ tuning:** deferred — requires benchmark ingestion ground truth with real timestamps. Run the activation variant sweep in `eval/retrieval-signals/tune_weights.py` Phase 3 once real-event ground truth is available.
+**λ tuning:** deferred — requires benchmark ingestion ground truth with real timestamps. Run the activation variant sweep in `eval/gather/tune_weights.py` Phase 3 once real-event ground truth is available.
 
 **Recording prompt (C-style):**
 ```
@@ -174,25 +168,26 @@ challenges, or bridges.
 Return JSON only: {"target_note_ids": ["id1", "id2", ...]}
 ```
 
-*Detail: `eval/retrieval-signals/README.md`*
+*Detail: `eval/gather/README.md`*
 
 ---
 
-## 6. Integration: three-step pipeline
+## 5. Integration: levelled pipeline (L1 → L2 → L3 → Execute)
 
-**Decision:** Step 1 classify → optional Step 1.5 for large notes → Step 2 execute.
+**Decision:** three classification levels feeding a single execute step.
 
-- **Step 1** (fast LLM, temperature=0, max_tokens=512): returns `{operation, target_note_ids, reasoning, confidence}` as JSON
-- **Step 1.5** (fast LLM, temperature=0, max_tokens=256): fires only when Step 1 returns UPDATE and the target note exceeds `NOTE_BODY_LARGE` (8,000 chars). Asks EDIT or SPLIT. Default on parse failure: EDIT.
-- **Step 2** (main LLM, temperature=0.3): executes the operation, writes note content
+- **L1** (fast LLM, temperature=0, max_tokens=512): classifies SYNTHESISE / INTEGRATE / NOTHING against the full top-20 cluster. Returns `{operation, target_note_ids, reasoning, confidence}`.
+- **L2** (fast LLM, temperature=0, max_tokens=512): classifies CREATE / UPDATE / NOTHING. Only reached when L1 returns INTEGRATE. Cluster is filtered to the notes L1 identified as most relevant.
+- **L3** (fast LLM, temperature=0, max_tokens=256): classifies EDIT / SPLIT. Only fires when L2 returns UPDATE and the target note exceeds `NOTE_BODY_LARGE` (8,000 chars). The draft is excluded from classification — EDIT/SPLIT is a structural property of the note itself, not a function of the incoming content. Default on parse failure: EDIT.
+- **Execute** (main LLM, temperature=0.3): writes note content for whichever operation was decided.
 
-**Step 1 `target_note_ids` as recording source:** the notes returned in `target_note_ids` are the LLM's gold-note nominations — which existing notes this draft most directly interacts with. These are what the C-prompt activation recording should capture. The field is semantically meaningful across all operation types; the integration prompt should make this explicit.
+**L1 `target_note_ids` as activation recording source:** the notes returned in `target_note_ids` are the LLM's gold-note nominations — which existing notes this draft most directly interacts with. These are what the C-prompt activation recording captures. The field is semantically meaningful across all operation types.
 
-**EDIT rationale:** notes grow unboundedly through repeated UPDATEs. A 21,000-char note fed to a `max_tokens=4096` UPDATE call is silently truncated. EDIT intercepts this: L3 presents the large note (draft excluded from classification) and asks the LLM to choose between compression (EDIT) and structural division (SPLIT). EDIT is conservative; SPLIT is chosen only when the note itself contains two genuinely separable threads.
+**EDIT rationale:** notes grow unboundedly through repeated UPDATEs. A 21,000-char note fed to a `max_tokens=4096` UPDATE call is silently truncated. EDIT intercepts this: L3 presents the large note and asks the LLM to choose between compression (EDIT) and structural division (SPLIT). EDIT is conservative; SPLIT is chosen only when the note itself contains two genuinely separable threads.
 
 ---
 
-## 7. Operations: ingestion-time vs curation-only
+## 6. Operations: ingestion-time vs curation-only
 
 **Decision:** all operations execute at ingestion time. SPLIT fires via L3 only.
 
@@ -204,11 +199,11 @@ SPLIT fires via L3 when L2 returns UPDATE on a large note (> 8 000 chars) that c
 
 ---
 
-## 7a. MERGE: deprecated from the operation vocabulary
+## 6a. MERGE: deprecated from the operation vocabulary
 
 **Decision:** MERGE removed from ingestion and the prompt vocabulary. Reintroduce only if duplicate accumulation becomes visible in operational zettels.
 
-**Rationale from experiment** (see `spikes/merge-test/`): MERGE never fired across any scenario in full-pipeline testing. Attempts to force it via prompt engineering revealed a structural reason: Form strips the "these are the same thing" framing from bridging texts before Step 1 sees them. Step 1 sees topic notes, not comparison prose. Even with prompt variants that correctly fired MERGE on raw bridging text, real Form outputs collapsed the win.
+**Rationale from experiment** (see `spikes/merge-test/`): MERGE never fired across any scenario in full-pipeline testing. Attempts to force it via prompt engineering revealed a structural reason: Form strips the "these are the same thing" framing from bridging texts before L1 sees them. L1 sees topic notes, not comparison prose. Even with prompt variants that correctly fired MERGE on raw bridging text, real Form outputs collapsed the win.
 
 **Why the corpus doesn't need MERGE:** the pipeline keeps notes clean through a different set of mechanisms that make collapse redundant:
 
@@ -222,19 +217,7 @@ Two notes covering the same concept from different framings provide two distinct
 
 ---
 
-## 8. Stub lifecycle
-
-**Decision:** stubs promote to `permanent` when retrieved into a second cluster.
-
-A stub is a placeholder for a concept the corpus recognises but cannot yet fully articulate. The natural promotion trigger is retrievability: if a stub is retrieved into a second cluster, it has proven it can be found and used, and should become `permanent`.
-
-**Current status:** promotion logic is not yet implemented. A stub that receives multiple UPDATEs remains `type: stub` indefinitely. Flag as a pipeline gap when implementing the store.
-
-**Stub creation quality:** when creating a STUB, include concept title, 1–2 sentence definition, and 3–5 synonyms/related terms. This prevents retrievally-invisible stubs — the main orphan failure mode.
-
----
-
-## 9. LLM provider abstraction
+## 7. LLM provider abstraction
 
 **Decision:** caller-supplied via protocol; library is not locked to any SDK.
 
@@ -244,32 +227,13 @@ class LLMProvider(Protocol):
                  max_tokens: int, temperature: float) -> str: ...
 ```
 
-Embedding provider follows the same pattern. The `fast_llm` parameter takes a second provider for Gather LLM calls (MuGI, step-back, HyDE) and Step 1 classification. Defaults to `llm` if not supplied.
+Embedding provider follows the same pattern. The `fast_llm` parameter takes a second provider for Gather LLM calls (MuGI, step-back, HyDE) and L1/L2/L3 classification. Defaults to `llm` if not supplied.
 
-**Model tier defaults:** Opus for Form and Integrate Step 2 (quality-critical). Haiku for Gather LLM signals and Step 1.
-
----
-
-## 10. Note schema
-
-```yaml
-id: z20260315-007
-type: permanent          # permanent | synthesised | stub | refuted
-confidence: 0.85
-context: >               # 2–3 sentence semantic positioning for retrieval
-  ...
-created: 2026-03-15T03:16:10+00:00
-updated: 2026-03-17T11:04:22+00:00
-links:
-  - id: z20260310-002
-    rel: contradicts
-```
-
-ID format: `z{YYYYMMDD}-{seq:03d}`. Body is plain markdown following the frontmatter. Closed link vocabulary enforced at write time.
+**Model tier defaults:** Opus for Form and Integrate Execute (quality-critical). Haiku for Gather LLM signals and L1/L2/L3 classification.
 
 ---
 
-## 11. See-also link accuracy
+## 8. See-also link accuracy
 
 **Status:** deferred — monitor first, implement if link pollution grows.
 
@@ -284,3 +248,5 @@ Notes written by the execute step contain `[[Title]]` wiki-links to related note
 **Post-processing for drift:** when a note is renamed, a filename-based find-and-replace across all note bodies is straightforward and would handle simple title drift. It does not handle semantic drift caused by SPLIT or accumulation.
 
 **Experimental posture:** leave existing broken/stale links in place and observe over the next papers. The hypothesis is that future EDITs, UPDATEs, and SPLITs will either naturally correct stale links (the execute step rewrites see-also sections) or the broken links will prove harmless. If hallucinated links appear to be feeding false context into L1/L2 classification, implement the cluster-title solution at execute time. See `eval/ingestion-harness/ANALYSIS_GUIDE.md` for the monitoring checklist.
+
+**Future direction:** the [Obsidian CLI](https://github.com/mscharley/obsidian-cli) could be used to resolve and validate wikilinks automatically — scanning note bodies, checking `[[id|Title]]` references against the live note graph, and flagging or repairing broken links. This would handle both hallucinated titles and title drift in one pass without requiring changes to the ingestion pipeline.

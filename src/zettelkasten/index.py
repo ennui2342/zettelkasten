@@ -1,15 +1,12 @@
-"""SQLite index for the zettelkasten — notes, links, embeddings, activation."""
+"""SQLite index for the zettelkasten — notes, activation."""
 from __future__ import annotations
 
 import math
 import sqlite3
-import struct
 from datetime import datetime, timezone
 from itertools import combinations
 from pathlib import Path
 from typing import Any
-
-import numpy as np
 
 from .note import ZettelNote
 
@@ -46,18 +43,9 @@ class ZettelIndex:
             con.executescript("""
                 CREATE TABLE IF NOT EXISTS notes (
                     id            TEXT PRIMARY KEY,
-                    type          TEXT NOT NULL,
                     confidence    REAL NOT NULL,
-                    salience      REAL NOT NULL,
-                    stable        INTEGER NOT NULL DEFAULT 0,
                     created       TEXT NOT NULL,
-                    updated       TEXT NOT NULL,
-                    last_accessed TEXT NOT NULL
-                );
-
-                CREATE TABLE IF NOT EXISTS embeddings (
-                    note_id TEXT PRIMARY KEY,
-                    vector  BLOB NOT NULL
+                    updated       TEXT NOT NULL
                 );
 
                 CREATE TABLE IF NOT EXISTS activation (
@@ -73,6 +61,14 @@ class ZettelIndex:
 
                 DROP TABLE IF EXISTS co_activations;
             """)
+            # Migrations: columns removed
+            # Migration: drop stale table and columns
+            con.execute("DROP TABLE IF EXISTS embeddings")
+            for col in ("type", "salience", "stable", "last_accessed"):
+                try:
+                    con.execute(f"ALTER TABLE notes DROP COLUMN {col}")
+                except Exception:
+                    pass  # column already absent or SQLite < 3.35
         con.close()
 
     # ------------------------------------------------------------------
@@ -84,26 +80,18 @@ class ZettelIndex:
         with con:
             con.execute(
                 """
-                INSERT INTO notes (id, type, confidence, salience, stable, created, updated, last_accessed)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                INSERT INTO notes (id, confidence, created, updated)
+                VALUES (?, ?, ?, ?)
                 ON CONFLICT(id) DO UPDATE SET
-                    type          = excluded.type,
                     confidence    = excluded.confidence,
-                    salience      = excluded.salience,
-                    stable        = excluded.stable,
                     created       = excluded.created,
-                    updated       = excluded.updated,
-                    last_accessed = excluded.last_accessed
+                    updated       = excluded.updated
                 """,
                 (
                     note.id,
-                    note.type,
                     note.confidence,
-                    note.salience,
-                    1 if note.stable else 0,
                     note.created.isoformat(),
                     note.updated.isoformat(),
-                    note.last_accessed.isoformat(),
                 ),
             )
         con.close()
@@ -113,7 +101,6 @@ class ZettelIndex:
         con = self._connect()
         with con:
             con.execute("DELETE FROM notes WHERE id = ?", (note_id,))
-            con.execute("DELETE FROM embeddings WHERE note_id = ?", (note_id,))
             con.execute("DELETE FROM activation WHERE note_a = ? OR note_b = ?", (note_id, note_id))
         con.close()
 
@@ -124,42 +111,6 @@ class ZettelIndex:
         ).fetchone()
         con.close()
         return dict(row) if row else None
-
-    def touch_accessed(self, note_id: str, ts: datetime) -> None:
-        con = self._connect()
-        with con:
-            con.execute(
-                "UPDATE notes SET last_accessed = ? WHERE id = ?",
-                (ts.isoformat(), note_id),
-            )
-        con.close()
-
-    # ------------------------------------------------------------------
-    # Embeddings
-    # ------------------------------------------------------------------
-
-    def upsert_embedding(self, note_id: str, vector: np.ndarray) -> None:
-        blob = _vec_to_blob(vector)
-        con = self._connect()
-        with con:
-            con.execute(
-                """
-                INSERT INTO embeddings (note_id, vector) VALUES (?, ?)
-                ON CONFLICT(note_id) DO UPDATE SET vector = excluded.vector
-                """,
-                (note_id, blob),
-            )
-        con.close()
-
-    def get_embedding(self, note_id: str) -> np.ndarray | None:
-        con = self._connect()
-        row = con.execute(
-            "SELECT vector FROM embeddings WHERE note_id = ?", (note_id,)
-        ).fetchone()
-        con.close()
-        if row is None:
-            return None
-        return _blob_to_vec(row["vector"])
 
     # ------------------------------------------------------------------
     # Activation
@@ -264,26 +215,10 @@ class ZettelIndex:
                 for row in con.execute("SELECT id FROM notes").fetchall()
             }
             for stale_id in existing_ids - present_ids:
-                con.execute("DELETE FROM embeddings WHERE note_id = ?", (stale_id,))
                 con.execute("DELETE FROM notes WHERE id = ?", (stale_id,))
         con.close()
 
         for note in notes:
             self.upsert_note(note)
-            if note.embedding is not None:
-                self.upsert_embedding(note.id, note.embedding)
 
 
-# ---------------------------------------------------------------------------
-# Binary helpers for vector storage
-# ---------------------------------------------------------------------------
-
-
-def _vec_to_blob(vec: np.ndarray) -> bytes:
-    arr = vec.astype(np.float32)
-    return struct.pack(f"{len(arr)}f", *arr)
-
-
-def _blob_to_vec(blob: bytes) -> np.ndarray:
-    n = len(blob) // 4
-    return np.array(struct.unpack(f"{n}f", blob), dtype=np.float32)

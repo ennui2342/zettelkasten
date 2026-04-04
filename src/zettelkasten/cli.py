@@ -176,9 +176,9 @@ def search(
         console.print("[yellow]No results found.[/yellow]")
         return
 
-    table = Table("#", "ID", "Title", "Type", "Confidence")
+    table = Table("#", "ID", "Title", "Confidence")
     for i, note in enumerate(results, 1):
-        table.add_row(str(i), note.id, note.title[:60], note.type, f"{note.confidence:.2f}")
+        table.add_row(str(i), note.id, note.title[:60], f"{note.confidence:.2f}")
     console.print(table)
 
 
@@ -329,16 +329,3 @@ def serve(
         server.server_close()
 
 
-# ---------------------------------------------------------------------------
-# bookmarklet
-# ---------------------------------------------------------------------------
-
-
-@app.command()
-def bookmarklet(
-    port: int = typer.Option(7842, "--port", "-p", help="Port the server listens on."),
-) -> None:
-    """Print the bookmarklet JavaScript for the given server port."""
-    from .server import bookmarklet_js
-
-    console.print(bookmarklet_js(port))

@@ -63,35 +63,8 @@ class ZettelkastenStore:
         return note
 
     # ------------------------------------------------------------------
-    # mark_refuted
-    # ------------------------------------------------------------------
-
-    # ------------------------------------------------------------------
     # ID generation
     # ------------------------------------------------------------------
-
-    def _promote_stubs(self, ids: list[str], now: datetime) -> None:
-        """Upgrade any stub notes in *ids* to permanent on first co-activation."""
-        for note_id in ids:
-            md_path = self._notes_dir / f"{note_id}.md"
-            if not md_path.exists():
-                continue
-            try:
-                note = ZettelNote.from_markdown(md_path.read_text(encoding="utf-8"))
-            except Exception:
-                continue
-            if note.type != "stub":
-                continue
-            upgraded = ZettelNote(
-                id=note.id, title=note.title, body=note.body,
-                type="permanent", confidence=max(note.confidence, 0.7),
-                salience=note.salience, stable=note.stable,
-                created=note.created, updated=now,
-                last_accessed=now,
-                embedding=note.embedding,
-            )
-            self.write(upgraded)
-            log.info("store.promoted_stub id=%s via co-activation", note_id)
 
     def _next_id(self) -> str:
         """Return the next available z{YYYYMMDD}-NNN ID for today."""
@@ -188,21 +161,15 @@ class ZettelkastenStore:
                 id=note_id,
                 title=result.note_title or draft.title,
                 body=result.note_body or draft.body,
-                type="synthesised" if op == "SYNTHESISE" else "permanent",
                 confidence=result.confidence,
-                salience=0.5,
-                stable=False,
                 created=now,
                 updated=now,
-                last_accessed=now,
                 sources=[source] if source else [],
             )
             vecs = embed.embed([note.body])
             note = _with_embedding(note, vecs[0])
             self.write(note)
-            self._index.upsert_embedding(note.id, vecs[0])
             self._index.record_activation_event(note_id, result.l1_target_ids)
-            self._promote_stubs(result.l1_target_ids, now)
             result.note_id = note_id  # type: ignore[attr-defined]
             log.info("store.wrote op=%s id=%s", op, note_id)
 
@@ -215,32 +182,22 @@ class ZettelkastenStore:
                 log.warning("store.update_target_missing id=%s", target_id)
                 return
             existing = ZettelNote.from_markdown(md_path.read_text(encoding="utf-8"))
-            # A stub that receives an UPDATE has sufficient neighbourhood — promote it
-            promoted_type = "permanent" if existing.type == "stub" else existing.type
-            if promoted_type != existing.type:
-                log.info("store.promoted_stub id=%s via UPDATE", target_id)
             note = ZettelNote(
                 id=existing.id,
                 title=result.note_title or existing.title,
                 body=result.note_body or existing.body,
-                type=promoted_type,
                 confidence=existing.confidence,
-                salience=existing.salience,
-                stable=existing.stable,
                 created=existing.created,
                 updated=now,
-                last_accessed=now,
                 sources=existing.sources,
                 embedding=existing.embedding,
             )
             vecs = embed.embed([note.body])
             note = _with_embedding(note, vecs[0])
             self.write(note)
-            self._index.upsert_embedding(note.id, vecs[0])
             # Record activation against L1-identified cluster for both UPDATE and EDIT
             l1_others = [t for t in result.l1_target_ids if t != target_id]
             self._index.record_activation_event(target_id, l1_others)
-            self._promote_stubs(result.l1_target_ids, now)
             result.note_id = target_id  # type: ignore[attr-defined]
             log.info("store.wrote op=%s id=%s", op, target_id)
 
@@ -258,13 +215,9 @@ class ZettelkastenStore:
                 id=source_id,
                 title=result.note_title or existing.title,
                 body=result.note_body or existing.body,
-                type=existing.type,
                 confidence=existing.confidence,
-                salience=existing.salience,
-                stable=existing.stable,
                 created=existing.created,
                 updated=now,
-                last_accessed=now,
                 sources=existing.sources,
             )
             # Allocate the second note's ID now so note1 can reference it correctly
@@ -277,15 +230,13 @@ class ZettelkastenStore:
                     f"[[{new_id}|{result.split_title}]]",
                 )
             note1 = ZettelNote(
-                id=note1.id, title=note1.title, body=body1, type=note1.type,
-                confidence=note1.confidence, salience=note1.salience,
-                stable=note1.stable, created=note1.created, updated=note1.updated,
-                last_accessed=note1.last_accessed,
+                id=note1.id, title=note1.title, body=body1,
+                confidence=note1.confidence,
+                created=note1.created, updated=note1.updated,
             )
             vecs1 = embed.embed([note1.body])
             note1 = _with_embedding(note1, vecs1[0])
             self.write(note1)
-            self._index.upsert_embedding(note1.id, vecs1[0])
             result.note_id = source_id  # type: ignore[attr-defined]
             log.info("store.wrote op=SPLIT id=%s (first half)", source_id)
             # Create a new note for the second half
@@ -294,24 +245,18 @@ class ZettelkastenStore:
                     id=new_id,
                     title=result.split_title,
                     body=result.split_body,
-                    type="permanent",
                     confidence=result.confidence,
-                    salience=0.5,
-                    stable=False,
-                    created=now,
+                            created=now,
                     updated=now,
-                    last_accessed=now,
-                    sources=[source] if source else [],
+                        sources=[source] if source else [],
                 )
                 vecs2 = embed.embed([note2.body])
                 note2 = _with_embedding(note2, vecs2[0])
                 self.write(note2)
-                self._index.upsert_embedding(note2.id, vecs2[0])
                 log.info("store.wrote op=SPLIT id=%s (second half)", new_id)
             # Record activation for source note against L1-identified cluster
             l1_others = [t for t in result.l1_target_ids if t != source_id]
             self._index.record_activation_event(source_id, l1_others)
-            self._promote_stubs(result.l1_target_ids, now)
             # Record activation for new note against source + L1 cluster
             if new_id:
                 all_related = [source_id] + [t for t in result.l1_target_ids if t != source_id]
@@ -364,13 +309,9 @@ class ZettelkastenStore:
             id="",
             title="",
             body=query,
-            type="stub",
             confidence=0.0,
-            salience=0.0,
-            stable=False,
             created=now,
             updated=now,
-            last_accessed=now,
         )
         return gather_phase(query_note, corpus, llm, embed, top_k=top_k)
 

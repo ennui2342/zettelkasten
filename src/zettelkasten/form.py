@@ -15,7 +15,7 @@ def form_phase(text: str, llm: LLMProvider) -> list[ZettelNote]:
     """Extract topic notes from *text* using a single LLM call.
 
     Returns a list of draft :class:`~zettelkasten.note.ZettelNote` objects
-    with ``id=""``, ``type="stub"``, and no embedding or links.
+    with ``id=""`` and no embedding.
     """
     log.info("form.start doc_len=%d", len(text))
 
@@ -59,13 +59,9 @@ def _parse_response(response: str) -> list[ZettelNote]:
             id="",
             title=title,
             body=body,
-            type="stub",
             confidence=0.3,
-            salience=0.5,
-            stable=False,
             created=now,
             updated=now,
-            last_accessed=now,
             embedding=None,
         )
         drafts.append(note)

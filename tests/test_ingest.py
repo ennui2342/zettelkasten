@@ -108,8 +108,8 @@ def _stored_note(store: ZettelkastenStore, id_: str, title: str, body: str) -> Z
     from zettelkasten.note import ZettelNote as ZN
     note = ZN(
         id=id_, title=title, body=body,
-        type="permanent", confidence=0.8, salience=0.5,
-        stable=True, created=_now(), updated=_now(), last_accessed=_now(),
+        confidence=0.8,
+        created=_now(), updated=_now(),
         embedding=_EMBED.embed([body])[0],
     )
     store.write(note)
@@ -192,15 +192,6 @@ def test_ingest_create_note_is_indexed(tmp_path):
     note_id = results[0].note_id
     row = store._index.get_note_row(note_id)
     assert row is not None
-
-
-def test_ingest_create_note_has_embedding(tmp_path):
-    store = ZettelkastenStore(tmp_path / "notes", tmp_path / "index.db")
-    results = store.ingest_text("Some document text.", _pipeline_llm("CREATE"), _EMBED)
-    note_id = results[0].note_id
-    # Embedding should be stored in index
-    emb = store._index.get_embedding(note_id)
-    assert emb is not None
 
 
 # ---------------------------------------------------------------------------

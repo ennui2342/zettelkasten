@@ -29,13 +29,9 @@ def _corpus_note(id_: str, title: str, body: str) -> ZettelNote:
         id=id_,
         title=title,
         body=body,
-        type="permanent",
         confidence=0.8,
-        salience=0.5,
-        stable=True,
         created=_now(),
         updated=_now(),
-        last_accessed=_now(),
         embedding=vec,
     )
 
@@ -45,13 +41,9 @@ def _draft(title: str, body: str) -> ZettelNote:
         id="",
         title=title,
         body=body,
-        type="stub",
         confidence=0.3,
-        salience=0.5,
-        stable=False,
         created=_now(),
         updated=_now(),
-        last_accessed=_now(),
     )
 
 
@@ -141,9 +133,9 @@ def test_gather_phase_corpus_without_embeddings():
     for n in CORPUS[:3]:
         no_emb_corpus.append(ZettelNote(
             id=n.id, title=n.title, body=n.body,
-            type=n.type, confidence=n.confidence, salience=n.salience,
-            stable=n.stable, created=n.created, updated=n.updated,
-            last_accessed=n.last_accessed, embedding=None,
+            confidence=n.confidence,
+            created=n.created, updated=n.updated,
+            embedding=None,
         ))
     results = gather_phase(DRAFT, no_emb_corpus, _llm(), _EMBED)
     # Should still return results (BM25 works without embeddings)
@@ -165,13 +157,9 @@ def test_gather_phase_activation_boosts_coactivated_notes():
         id=query_id,
         title="Testing",
         body="Active retrieval strengthens memory.",
-        type="stub",
         confidence=0.3,
-        salience=0.5,
-        stable=False,
         created=_now(),
         updated=_now(),
-        last_accessed=_now(),
     )
 
     # Supply activation scores pre-fetched from the index

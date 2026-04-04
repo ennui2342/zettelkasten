@@ -44,16 +44,16 @@ def _now() -> datetime:
 def _note(id_: str, title: str, body: str) -> ZettelNote:
     return ZettelNote(
         id=id_, title=title, body=body,
-        type="permanent", confidence=0.8, salience=0.5,
-        stable=True, created=_now(), updated=_now(), last_accessed=_now(),
+        confidence=0.8,
+        created=_now(), updated=_now(),
     )
 
 
 def _draft(title: str = "Active Recall", body: str = "Retrieving information leads to durable memory.") -> ZettelNote:
     return ZettelNote(
         id="", title=title, body=body,
-        type="stub", confidence=0.3, salience=0.5,
-        stable=False, created=_now(), updated=_now(), last_accessed=_now(),
+        confidence=0.3,
+        created=_now(), updated=_now(),
     )
 
 

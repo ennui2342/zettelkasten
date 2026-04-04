@@ -15,8 +15,6 @@ import numpy as np
 # Vocabulary constants
 # ---------------------------------------------------------------------------
 
-NOTE_TYPES = frozenset({"permanent", "stub", "refuted", "synthesised"})
-
 _ID_RE = re.compile(r"^z\d{8}-\d{3}$")
 
 
@@ -30,13 +28,9 @@ class ZettelNote:
     id: str
     title: str
     body: str
-    type: str  # permanent | stub | refuted | synthesised
     confidence: float
-    salience: float
-    stable: bool
     created: datetime
     updated: datetime
-    last_accessed: datetime
     sources: list[str] = field(default_factory=list)
     # Embedding stored in frontmatter for index rebuild; activation is runtime state in SQLite
     embedding: Optional[np.ndarray] = field(default=None, compare=False)
@@ -45,10 +39,6 @@ class ZettelNote:
         if self.id and not _ID_RE.match(self.id):
             raise ValueError(
                 f"Invalid id {self.id!r}. Must match z{{YYYYMMDD}}-{{seq:03d}}"
-            )
-        if self.type not in NOTE_TYPES:
-            raise ValueError(
-                f"Invalid type {self.type!r}. Must be one of: {sorted(NOTE_TYPES)}"
             )
 
     # ------------------------------------------------------------------
@@ -59,13 +49,9 @@ class ZettelNote:
         meta: dict = {
             "id": self.id,
             "title": self.title,
-            "type": self.type,
             "confidence": self.confidence,
-            "salience": self.salience,
-            "stable": self.stable,
             "created": _fmt_dt(self.created),
             "updated": _fmt_dt(self.updated),
-            "last_accessed": _fmt_dt(self.last_accessed),
         }
         if self.sources:
             meta["sources"] = list(self.sources)
@@ -96,13 +82,9 @@ class ZettelNote:
             id=post["id"],
             title=title,
             body=body,
-            type=post["type"],
             confidence=float(post["confidence"]),
-            salience=float(post["salience"]),
-            stable=bool(post["stable"]),
             created=_parse_dt(post["created"]),
             updated=_parse_dt(post["updated"]),
-            last_accessed=_parse_dt(post["last_accessed"]),
             sources=sources,
             embedding=embedding,
         )

@@ -17,13 +17,9 @@ def make_note(**overrides) -> ZettelNote:
         id="z20260315-001",
         title="Testing Effect",
         body="Retrieving information from memory strengthens retention.",
-        type="permanent",
         confidence=0.85,
-        salience=0.5,
-        stable=False,
         created=CREATED,
         updated=CREATED,
-        last_accessed=CREATED,
     )
     defaults.update(overrides)
     return ZettelNote(**defaults)
@@ -40,18 +36,6 @@ def test_round_trip_basic():
     assert restored == note
 
 
-def test_round_trip_all_note_types():
-    for t in ("permanent", "stub", "refuted", "synthesised"):
-        note = make_note(type=t)
-        assert ZettelNote.from_markdown(note.to_markdown()).type == t
-
-
-def test_round_trip_stable_true():
-    note = make_note(stable=True)
-    restored = ZettelNote.from_markdown(note.to_markdown())
-    assert restored.stable is True
-
-
 def test_round_trip_preserves_multiline_body():
     body = "First paragraph.\n\nSecond paragraph with **bold** and `code`."
     note = make_note(body=body)
@@ -62,12 +46,10 @@ def test_round_trip_preserves_timestamps():
     note = make_note(
         created=datetime(2026, 1, 1, 0, 0, 0, tzinfo=timezone.utc),
         updated=datetime(2026, 3, 10, 12, 30, 0, tzinfo=timezone.utc),
-        last_accessed=datetime(2026, 3, 15, 9, 0, 0, tzinfo=timezone.utc),
     )
     restored = ZettelNote.from_markdown(note.to_markdown())
     assert restored.created == note.created
     assert restored.updated == note.updated
-    assert restored.last_accessed == note.last_accessed
 
 
 def test_from_markdown_handwritten():
@@ -75,14 +57,9 @@ def test_from_markdown_handwritten():
     md = """\
 ---
 id: z20260315-042
-type: stub
 confidence: 0.40
-salience: 0.3
-stable: false
 created: 2026-03-15T10:00:00+00:00
 updated: 2026-03-15T10:00:00+00:00
-last_accessed: 2026-03-15T10:00:00+00:00
-links: []
 ---
 # Spaced Repetition
 
@@ -91,7 +68,6 @@ Reviewing material at expanding intervals improves long-term retention.
     note = ZettelNote.from_markdown(md)
     assert note.id == "z20260315-042"
     assert note.title == "Spaced Repetition"
-    assert note.type == "stub"
     assert note.confidence == pytest.approx(0.40)
     assert "expanding intervals" in note.body
 
@@ -118,19 +94,6 @@ def test_id_invalid_format_rejected():
 
     with pytest.raises(ValueError, match="id"):
         make_note(id="z20260315-01")  # seq only 2 digits
-
-
-# ---------------------------------------------------------------------------
-# Note type vocabulary
-# ---------------------------------------------------------------------------
-
-
-def test_invalid_note_type_rejected():
-    with pytest.raises(ValueError, match="type"):
-        make_note(type="concept")
-
-    with pytest.raises(ValueError, match="type"):
-        make_note(type="")
 
 
 # ---------------------------------------------------------------------------
@@ -167,14 +130,9 @@ def test_from_markdown_missing_sources_defaults_to_empty():
     md = """\
 ---
 id: z20260315-042
-type: permanent
 confidence: 0.8
-salience: 0.5
-stable: false
 created: 2026-03-15T10:00:00+00:00
 updated: 2026-03-15T10:00:00+00:00
-last_accessed: 2026-03-15T10:00:00+00:00
-links: []
 ---
 # Old Note
 
@@ -188,14 +146,9 @@ def test_from_markdown_with_sources():
     md = """\
 ---
 id: z20260315-042
-type: permanent
 confidence: 0.8
-salience: 0.5
-stable: false
 created: 2026-03-15T10:00:00+00:00
 updated: 2026-03-15T10:00:00+00:00
-last_accessed: 2026-03-15T10:00:00+00:00
-links: []
 sources:
   - https://arxiv.org/abs/2511.05269
 ---

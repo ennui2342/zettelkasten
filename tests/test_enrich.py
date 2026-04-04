@@ -32,13 +32,9 @@ def _make_note(
         id=note_id,
         title=title,
         body=body,
-        type="permanent",
         confidence=0.9,
-        salience=0.5,
-        stable=False,
         created=now,
         updated=now,
-        last_accessed=now,
     )
     (notes_dir / f"{note_id}.md").write_text(note.to_markdown(), encoding="utf-8")
     return note

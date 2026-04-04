@@ -21,13 +21,9 @@ def make_note(id: str = "z20260315-001", **overrides) -> ZettelNote:
         id=id,
         title="Testing Effect",
         body="Retrieving information strengthens retention.",
-        type="permanent",
         confidence=0.85,
-        salience=0.5,
-        stable=False,
         created=CREATED,
         updated=CREATED,
-        last_accessed=CREATED,
     )
     defaults.update(overrides)
     return ZettelNote(**defaults)
@@ -66,7 +62,6 @@ def test_initialise_creates_tables(tmp_dir):
     con.close()
 
     assert "notes" in tables
-    assert "embeddings" in tables
     assert "activation" in tables
 
 
@@ -89,48 +84,17 @@ def test_upsert_and_read_note(index):
     row = index.get_note_row(note.id)
     assert row is not None
     assert row["id"] == note.id
-    assert row["type"] == "permanent"
-    assert row["stable"] == 0
     assert row["confidence"] == pytest.approx(0.85)
 
 
 def test_upsert_overwrites_existing(index):
     note = make_note()
     index.upsert_note(note)
-    updated = make_note(stable=True, confidence=0.95)
+    updated = make_note(confidence=0.95)
     index.upsert_note(updated)
 
     row = index.get_note_row(note.id)
     assert row["confidence"] == pytest.approx(0.95)
-    assert row["stable"] == 1
-
-
-# ---------------------------------------------------------------------------
-# touch_accessed
-# ---------------------------------------------------------------------------
-
-
-def test_touch_accessed_updates_timestamp(index):
-    note = make_note()
-    index.upsert_note(note)
-
-    new_ts = datetime(2026, 3, 16, 8, 0, 0, tzinfo=timezone.utc)
-    index.touch_accessed(note.id, new_ts)
-
-    row = index.get_note_row(note.id)
-    assert row["last_accessed"] == new_ts.isoformat()
-
-
-def test_touch_accessed_does_not_change_other_fields(index):
-    note = make_note()
-    index.upsert_note(note)
-
-    new_ts = datetime(2026, 3, 16, 8, 0, 0, tzinfo=timezone.utc)
-    index.touch_accessed(note.id, new_ts)
-
-    row = index.get_note_row(note.id)
-    assert row["confidence"] == pytest.approx(0.85)
-    assert row["type"] == "permanent"
 
 
 # ---------------------------------------------------------------------------
@@ -181,29 +145,6 @@ def test_rebuild_from_directory_ignores_non_md_files(tmp_dir):
     db_path = tmp_dir / "index.db"
     idx = ZettelIndex(db_path)
     idx.rebuild_from_directory(notes_dir)  # should not raise
-
-
-# ---------------------------------------------------------------------------
-# Embeddings table
-# ---------------------------------------------------------------------------
-
-
-def test_upsert_embedding_and_retrieve(index):
-    import numpy as np
-
-    note = make_note()
-    index.upsert_note(note)
-
-    vec = np.array([0.1, 0.2, 0.3], dtype=np.float32)
-    index.upsert_embedding(note.id, vec)
-
-    retrieved = index.get_embedding(note.id)
-    assert retrieved is not None
-    assert np.allclose(retrieved, vec)
-
-
-def test_get_embedding_returns_none_if_missing(index):
-    assert index.get_embedding("z20260315-999") is None
 
 
 # ---------------------------------------------------------------------------

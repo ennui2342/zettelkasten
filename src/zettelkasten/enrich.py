@@ -199,8 +199,8 @@ def query(
 ) -> str:
     """Answer *question* by navigating the note store with the Iter 4 skill.
 
-    The LLM is given four tools (list_notes, grep_notes, read_note,
-    find_related) and a system prompt encoding the navigation strategy.
+    The LLM is given three tools (list_notes, grep_notes, read_note)
+    and a system prompt encoding the navigation strategy.
     The loop runs until the LLM returns a text response without tool calls,
     or until *max_rounds* is exceeded.
     """

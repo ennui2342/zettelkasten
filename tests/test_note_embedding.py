@@ -14,13 +14,9 @@ def make_note(**overrides) -> ZettelNote:
         id="z20260315-001",
         title="Testing Effect",
         body="Retrieving information strengthens retention.",
-        type="permanent",
         confidence=0.85,
-        salience=0.5,
-        stable=False,
         created=CREATED,
         updated=CREATED,
-        last_accessed=CREATED,
     )
     defaults.update(overrides)
     return ZettelNote(**defaults)
@@ -71,13 +67,9 @@ def test_old_co_activations_frontmatter_silently_ignored():
 ---
 id: z20260315-001
 title: Testing Effect
-type: permanent
 confidence: 0.85
-salience: 0.5
-stable: false
 created: 2026-03-15T10:00:00+00:00
 updated: 2026-03-15T10:00:00+00:00
-last_accessed: 2026-03-15T10:00:00+00:00
 links: []
 co_activations:
   - target: z20260315-002
@@ -100,10 +92,8 @@ def test_full_round_trip_with_embedding():
     vec = np.array([1.0, 2.0, 3.0], dtype=np.float32)
     note = make_note(
         embedding=vec,
-        stable=True,
         confidence=0.9,
     )
     restored = ZettelNote.from_markdown(note.to_markdown())
-    assert restored.stable is True
     assert restored.confidence == pytest.approx(0.9)
     assert np.allclose(restored.embedding, vec, atol=1e-6)

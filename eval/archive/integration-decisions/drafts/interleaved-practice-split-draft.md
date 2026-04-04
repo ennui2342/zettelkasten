@@ -1,9 +1,0 @@
-# Interleaved Practice
-
-Interleaved practice is the strategy of mixing different problem types or topics within a single study session, rather than completing all problems of one type before moving to the next (blocked practice). For example, a mathematics student practising interleaved problems might work on a polynomial, then a geometry problem, then a fraction, cycling across topics — rather than completing ten polynomials in a row.
-
-Counterintuitively, interleaved practice produces dramatically better performance on later tests than blocked practice, despite feeling harder and less productive during the session. In blocked practice, consecutive problems of the same type allow strategies to remain active in working memory — the learner does not need to identify the problem type or reconstruct the relevant approach, they simply apply the same procedure repeatedly. Interleaving forces the learner to identify what kind of problem they are facing and retrieve the appropriate method for each new problem, which is exactly the skill required in real testing and transfer situations.
-
-The interleaving effect is distinct from the spacing effect. Spacing concerns the timing of practice across sessions (when you practice); interleaving concerns the ordering of topics within a session (what order you practice). Both improve long-term retention, but through somewhat different mechanisms: spacing works by requiring retrieval of weakened traces; interleaving works by requiring discrimination and strategy selection between consecutive problems.
-
-The effect is particularly pronounced in mathematics and science domains, where identifying the problem type is a major component of the skill. It also applies to perceptual learning tasks: artists who study paintings interleaved across multiple styles learn to discriminate between artists more accurately than those who study all paintings from one artist before moving to the next.

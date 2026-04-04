@@ -1,9 +1,0 @@
-# Generation as the Mechanism of Deep Encoding
-
-Levels-of-processing theory explains why some encoding produces durable memories and other encoding does not: depth of semantic processing at encoding predicts long-term retention. But the theory is descriptive — it identifies that deep processing produces better memory without specifying what mechanism makes processing "deep." The generation effect fills that gap.
-
-Generation — producing information rather than receiving it — is the operational definition of deep processing. When a learner generates a response, they must activate semantic knowledge, evaluate candidates against meaning constraints, and construct a relationship between cue and target. This is precisely the "semantic processing" that levels-of-processing theory credits with superior encoding. The generation act IS deep processing, mechanistically. It is not a correlate of depth; it is the process that constitutes depth.
-
-This means the two literatures are describing the same phenomenon from different vantage points. Craik and Lockhart's levels-of-processing framework asks: what determines encoding quality? Answer: depth of semantic engagement. Slamecka and Graf's generation effect asks: what produces deep semantic engagement? Answer: generating rather than receiving information. Together they form a complete account: generating produces deep processing, and deep processing produces durable encoding.
-
-The practical corollary is that any learning activity which forces the learner to construct rather than receive — retrieval practice, elaborative interrogation, self-explanation, summarisation in their own words — achieves its effect by the same mechanism. They all require generation, which requires deep processing, which produces strong encoding. The variety of effective learning strategies reduces to a single underlying principle: produce, don't consume.

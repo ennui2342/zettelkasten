@@ -13,9 +13,9 @@ git clone https://github.com/ennui2342/zettelkasten
 cd zettelkasten
 make install          # uv sync with all extras
 
-cp .env.example .env  # add your API keys
-
 uv run zettelkasten init ./my-knowledge-base
+cd my-knowledge-base
+# edit zettelkasten.toml to add your API keys, then:
 uv run zettelkasten ingest article.md
 uv run zettelkasten search "spaced repetition"
 uv run zettelkasten query "How does spaced repetition work?"

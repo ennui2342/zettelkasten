@@ -49,9 +49,4 @@ Notes grow through successive passes and are never simply appended to — the co
 
 ## Documentation
 
-- [`docs/library.md`](docs/library.md) — Python API reference
-- [`docs/cli.md`](docs/cli.md) — CLI reference
-- [`docs/pipeline.md`](docs/pipeline.md) — pipeline detail (Form → Gather → Integrate)
-- [`docs/enrichment.md`](docs/enrichment.md) — query and enrichment (how `store.query()` works)
-- [`docs/note-schema.md`](docs/note-schema.md) — note format
-- [`docs/design/design-principles.md`](docs/design/design-principles.md) — design rationale
+- [`docs/index.md`](docs/index.md) — Project documentation

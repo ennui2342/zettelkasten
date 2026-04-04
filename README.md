@@ -9,15 +9,16 @@ The corpus is a directory of plain markdown files. Each note covers one topic, w
 ## Quick start
 
 ```bash
-pip install zettelkasten[anthropic,voyage]
+git clone https://github.com/ennui2342/zettelkasten
+cd zettelkasten
+make install          # uv sync with all extras
 
-# Initialise a knowledge base
-zettelkasten init ./my-knowledge-base
+cp .env.example .env  # add your API keys
 
-# Edit zettelkasten.toml to add your API keys, then:
-zettelkasten ingest article.md
-zettelkasten search "spaced repetition"
-zettelkasten query "How does spaced repetition work?"
+uv run zettelkasten init ./my-knowledge-base
+uv run zettelkasten ingest article.md
+uv run zettelkasten search "spaced repetition"
+uv run zettelkasten query "How does spaced repetition work?"
 ```
 
 Or via the Python API:

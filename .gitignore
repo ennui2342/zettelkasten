@@ -14,7 +14,7 @@ spikes/
 eval/
 docs/archive/
 eval/archive/
-zettelkasten/
+/zettelkasten/
 
 # Model-test generated outputs
 eval/*/data/form_drafts/

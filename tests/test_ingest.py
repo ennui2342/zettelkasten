@@ -403,6 +403,28 @@ def test_ingest_create_no_source_parameter_sources_empty(tmp_path):
 
 
 # ---------------------------------------------------------------------------
+# ingestion counter
+# ---------------------------------------------------------------------------
+
+
+def test_ingest_increments_ingestion_count(tmp_path):
+    """Each ingest_text call increments the ingestion counter by exactly one."""
+    store = ZettelkastenStore(tmp_path / "notes", tmp_path / "index.db")
+    assert store._index.get_ingestion_count() == 0
+    store.ingest_text("First paper.", _pipeline_llm("CREATE"), _EMBED)
+    assert store._index.get_ingestion_count() == 1
+    store.ingest_text("Second paper.", _pipeline_llm("CREATE"), _EMBED)
+    assert store._index.get_ingestion_count() == 2
+
+
+def test_ingest_nothing_still_increments_count(tmp_path):
+    """NOTHING operations still count as an ingestion event."""
+    store = ZettelkastenStore(tmp_path / "notes", tmp_path / "index.db")
+    store.ingest_text("Irrelevant text.", _pipeline_llm("NOTHING"), _EMBED)
+    assert store._index.get_ingestion_count() == 1
+
+
+# ---------------------------------------------------------------------------
 # search
 # ---------------------------------------------------------------------------
 

@@ -63,6 +63,7 @@ def test_initialise_creates_tables(tmp_dir):
 
     assert "notes" in tables
     assert "activation" in tables
+    assert "meta" in tables
 
 
 def test_initialise_is_idempotent(tmp_dir):
@@ -148,6 +149,36 @@ def test_rebuild_from_directory_ignores_non_md_files(tmp_dir):
 
 
 # ---------------------------------------------------------------------------
+# ingestion counter
+# ---------------------------------------------------------------------------
+
+
+def test_get_ingestion_count_starts_at_zero(index):
+    assert index.get_ingestion_count() == 0
+
+
+def test_increment_ingestion_count(index):
+    index.increment_ingestion_count()
+    assert index.get_ingestion_count() == 1
+    index.increment_ingestion_count()
+    assert index.get_ingestion_count() == 2
+
+
+def test_activation_stores_ingestion_at_not_updated(tmp_dir):
+    db_path = tmp_dir / "index.db"
+    idx = ZettelIndex(db_path)
+    idx.initialise()
+    idx.record_activation_event("z20260315-001", ["z20260315-002"])
+
+    con = sqlite3.connect(db_path)
+    cols = {row[1] for row in con.execute("PRAGMA table_info(activation)").fetchall()}
+    con.close()
+
+    assert "ingestion_at" in cols
+    assert "updated" not in cols
+
+
+# ---------------------------------------------------------------------------
 # activation table
 # ---------------------------------------------------------------------------
 
@@ -181,6 +212,28 @@ def test_activation_accumulates(index):
     index.record_activation_event("z20260315-001", ["z20260315-002"])
     scores = index.get_activation_scores("z20260315-001")
     assert scores["z20260315-002"] > 1.5  # two events, weight > 1
+
+
+def test_activation_decays_after_ingestion_events(index):
+    """Weight decays by factor^n after n ingestion events without reinforcement."""
+    index.record_activation_event("z20260315-001", ["z20260315-002"])
+    # Simulate 10 ingestion events passing without re-activating the edge
+    for _ in range(10):
+        index.increment_ingestion_count()
+    scores = index.get_activation_scores("z20260315-001", factor=0.5)
+    # After 10 events at factor=0.5: 1.0 * 0.5^10 ≈ 0.001
+    assert scores["z20260315-002"] == pytest.approx(0.5**10, rel=1e-6)
+
+
+def test_activation_asymptotes_under_constant_reinforcement(index):
+    """Constant activation converges to 1/(1-factor), not infinity."""
+    factor = 0.9
+    ceiling = 1.0 / (1 - factor)  # = 10.0
+    for _ in range(50):
+        index.increment_ingestion_count()
+        index.record_activation_event("z20260315-001", ["z20260315-002"], factor=factor)
+    scores = index.get_activation_scores("z20260315-001", factor=factor)
+    assert scores["z20260315-002"] == pytest.approx(ceiling, rel=0.01)
 
 
 def test_activation_delete_note_clears_edges(index):

@@ -10,6 +10,7 @@
 | [enrichment.md](enrichment.md) | Query and enrichment — how `store.query()` works |
 | [note-schema.md](note-schema.md) | ZettelNote schema and markdown format |
 | [monitoring.md](monitoring.md) | Structured logging and observability |
+| [activation.md](activation.md) | Activation network — co-occurrence graph, event-based decay |
 
 ## Design
 

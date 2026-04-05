@@ -136,6 +136,7 @@ class ZettelkastenStore:
             self._apply_result(result, draft, cluster, embed, source=source)
             results.append(result)
 
+        self._index.increment_ingestion_count()
         log.info("store.ingest_complete results=%d", len(results))
         return results
 
